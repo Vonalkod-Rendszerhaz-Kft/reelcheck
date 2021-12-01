@@ -1,0 +1,66 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Membership.Areas.UserAdministration.Models;
+
+@model CreateUserViewModel
+
+@{
+    ViewBag.Title = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.CreateNewUser)));
+}
+
+@section Styles {
+    <link href="@Url.Content(Constants.AREA_CONTENTPATH + "MvcMembership.css")" rel="stylesheet" type="text/css" />
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title mvcMembership">@ViewBag.Title</h1>
+    </div>
+    <div class="card-body mvcMembership-account">
+        @using (Html.BeginForm("CreateUser", Constants.CONTROLLER_UA))
+        {
+            @Html.ValidationSummary(true)
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Username)
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", required = "" })
+                        @Html.ValidationMessageFor(m => m.Username)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email"})
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+                <div class="col-8">
+                    <h3 class="mvcMembership">@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.AvailableRoleGroups)))</h3>
+                    @for (var i = 0; (Model.UserRoleGroups != null && i < Model.UserRoleGroups.Count); i++)
+                    {
+                        var role = Model.UserRoleGroups.ElementAt(i);
+                        <div>
+                            <input name="UserRoleGroups[@i].Key" type="hidden" value="@role.Key" />
+                            <label>@Html.CheckBox("UserRoleGroups[" + i + "].Value", role.Value) @role.Key</label>
+                        </div>
+                    }
+
+                    <p>
+                        <input type="submit" class="btn btn-success" value="@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.Common.Create)))" />
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

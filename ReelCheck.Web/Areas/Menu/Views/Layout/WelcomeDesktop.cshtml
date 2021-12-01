@@ -1,0 +1,12 @@
+﻿@model WelcomeModel
+
+@{
+    ViewBag.Title = Model.AppSetting.ProductName;
+}
+<div class="row my-2">
+    <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3">
+        @Html.Partial(Global.VIEW_LANGUAGESELECTION, new LanguageSelectionModel { TitleStyle = "color:black;" } )
+    </div>
+    <div class="col-sm-6 col-md-7 col-lg-8 col-xl-9">
+    </div>
+</div>

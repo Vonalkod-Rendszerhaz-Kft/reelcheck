@@ -1,0 +1,189 @@
+﻿@using Vrh.Web.Membership;
+
+@model LoginLogoutModel
+@{
+    // A weblap eléréséhez használható osztálynév
+    string loginform = "loginform";
+
+    // inputok azonosítói
+    string loginusername = "loginusername";
+    string loginpassword = "loginpassword";
+    string loginremember = "loginremember";
+    string loginother = "loginother";
+    string loginbase = "loginbase";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    IHtmlString headLogout = Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.Logout)));
+    <div class="my-2 @(loginform)">
+        <h1>@(headLogout)</h1>
+        <div class="alert alert-dark"><strong>@(User.Identity.Name)</strong></div>
+        <button type="button" class="btn btn-success" onclick="lgnlgt.PushLogout();">@(headLogout)</button>
+    </div>
+}
+else
+{
+    string headLogin = Model.Trans(typeof(WordCodes.MvcMembership.User.LogIn));
+    string phUserName = Model.Trans(typeof(WordCodes.MvcMembership.User.UserName));
+    string phPassword = Model.Trans(typeof(WordCodes.MvcMembership.User.Password));
+    string labelRemember = Model.Trans(typeof(WordCodes.MvcMembership.Labels.RememberMe));
+    <div class="my-2 @(loginform)">
+        <h1>@Html.Raw(headLogin)</h1>
+        <div class="form-group">
+            <input id="@(loginusername)" class="form-control" type="text"
+                   placeholder="@Html.Raw(phUserName)" required
+                   oninvalid="this.setCustomValidity('@(Model.Trans(typeof(WordCodes.MvcMembership.Messages.PleaseEnterUsername)))');"
+                   oninput="this.setCustomValidity('');" />
+        </div>
+        <div class="form-group">
+            <input id="@(loginpassword)" class="form-control" type="password" placeholder="@Html.Raw(phPassword)" />
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="@(loginremember)" />
+            <label class="custom-control-label" for="@(loginremember)">@Html.Raw(labelRemember)</label>
+        </div>
+        <div class="form-row align-items-center">
+            <div class="col-auto mt-2">
+                <button type="button" class="btn btn-success" onclick="lgnlgt.PushLogin();">@Html.Raw(headLogin)</button>
+            </div>
+            @if (Model.Membership.LoginOther != null)
+            {
+                <div class="col-auto mt-2">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input"
+                               id="@(loginother)" name="logintype"
+                               title="@(Model.LoginOtherTitle)"
+                               checked>
+                        <label class="custom-control-label" for="@(loginother)" title="@(Model.LoginOtherTitle)">
+                            @(Model.Membership.LoginOther.Label)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-auto mt-2">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input"
+                               id="@(loginbase)" name="logintype"
+                               title="@(Model.LoginBaseTitle)">
+                        <label class="custom-control-label" for="@(loginbase)" title="@(Model.LoginBaseTitle)">
+                            @(Model.Membership.LoginBase.Label)
+                        </label>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@Scripts.Render(Constants.AREA_SCRIPTSPATH + "LogInOut.js")
+<script type="text/javascript">
+    /**
+     * A LogInOutScript (LoginLogout.js) számára küldendő értékek prototípusa
+     * Ezeket a kódban állandóként (constansként) érdemes kezelni.
+     */
+    function ExportToLogInOut() {
+        'use strict';
+
+        this.BootboxId = '@(Model.BootboxId)';
+        this.IsUserAuthenticated = @(User.Identity.IsAuthenticated ? "true" : "false");
+
+        this.Id = {
+            UserName: '#@(loginusername)',
+            Password: '#@(loginpassword)',
+            Remember: '#@(loginremember)',
+            Other: '#@(loginother)',
+            Base: '#@(loginbase)',
+        };
+        this.LoginBase = {
+            UserName: new String(),
+            Password: new String(),
+            Remember: false,
+            Type: @((int)Model.Membership.LoginBase.Type), @* !!!url - nél pont fontos a Html.Raw, hogy ne csináljon az "&" - ből "@amp;" - t!!! *@
+            UrlAfterLogin: '@Html.Raw(String.IsNullOrWhiteSpace(Model.Membership.LoginBase.AfterLogin) ? "" : Url.Content(Model.Membership.LoginBase.AfterLogin))',
+            IsReloadLogin: @(Model.Membership.LoginBase.IsReloadLogin.ToString().ToLower()),
+        };
+        this.Login = {
+            UserName: new String(),
+            Password: new String(),
+            Remember: false,
+            Type: @((int)Model.Membership.LoginBase.Type), @* !!!url - nél pont fontos a Html.Raw, hogy ne csináljon az "&" - ből "@amp;" - t!!! *@
+            UrlAfterLogin: '@Html.Raw(String.IsNullOrWhiteSpace(Model.Membership.LoginBase.AfterLogin) ? "" : Url.Content(Model.Membership.LoginBase.AfterLogin))',
+            IsReloadLogin: @(Model.Membership.LoginBase.IsReloadLogin.ToString().ToLower()),
+        };
+        this.LoginOther = {
+            UserName: new String(),
+            Password: new String(),
+            Remember: false,
+            @if (Model.Membership.LoginOther == null)
+            {
+                <text>
+                Type: -1,
+                UrlAfterLogin: '',
+                IsReloadLogin: true,
+                IsReloadLogout: true
+                </text>
+            }
+            else
+            {
+                <text>
+                Type: @((int)Model.Membership.LoginOther.Type), @* !!!url-nél pont fontos a Html.Raw, hogy ne csináljon az "&" - ből "@amp;" - t!!! *@
+                UrlAfterLogin: '@Html.Raw(String.IsNullOrWhiteSpace(Model.Membership.LoginOther.AfterLogin) ? "" : Url.Content(Model.Membership.LoginBase.AfterLogin))',
+                IsReloadLogin: @(Model.Membership.LoginOther.IsReloadLogin.ToString().ToLower()),
+                IsReloadLogout: @(Model.Membership.LoginOther.IsReloadLogout.ToString().ToLower())
+                </text>
+            }
+        };
+        this.LoginTypes = {
+            AD: @((int)LoginTypes.AD),
+            ADPrefix: '@(LoginTypes.AD)_',
+            Integrated: @((int)LoginTypes.Integrated),
+            WebReq: @((int)LoginTypes.WebReq),
+            WebReqPrefix: '@(LoginTypes.WebReq)_',
+        };
+        this.Logout = {
+            UrlBeforeLogout: '@Html.Raw(String.IsNullOrWhiteSpace(Model.Membership.LoginBase.BeforeLogout) ? "" : Url.Content(Model.Membership.LoginBase.BeforeLogout))',
+            IsReloadLogout: @(Model.Membership.LoginBase.IsReloadLogout.ToString().ToLower()),
+        };
+
+        this.RoleGroups = new Array();
+        @if (Model.Membership.WebReqOption.RoleGroups != null && Model.Membership.WebReqOption.RoleGroups.Any()) {
+            foreach(KeyValuePair < string, string > kvp in Model.Membership.WebReqOption.RoleGroups)
+            {
+                <text>this.RoleGroups.push(['@kvp.Key', '@kvp.Value']);</text>
+            }
+        }
+
+        this.Message = {
+            AfterLoginUnsuccessful: '@(Model.Trans(typeof(WordCodes.MvcMembership.Messages.AfterLoginUnsuccessful)))',
+            PleaseEnterUsername: '@(Model.Trans(typeof(WordCodes.MvcMembership.Messages.PleaseEnterUsername)))',
+            ResponseIncorrect: '@(Model.Trans(typeof(WordCodes.MvcMembership.Messages.RemoteLoginResponseIncorrect)))<br />',
+            RemoteRoleGroupNotTranslated: '@(Model.Trans(typeof(WordCodes.MvcMembership.Messages.RemoteRoleGroupNotTranslated)))',
+        };
+        this.Title = {
+            Response: '@(Model.Trans(typeof(WordCodes.MvcMembership.Titles.RemoteLoginResponse)))<br /><br />',
+        };
+        this.Url = {
+            LoginJSON: '@Url.Content("~/UserAdministration/Account/LoginJSON")',
+            LoginRemote: '@Url.Content("~/UserAdministration/Account/LoginRemote")',
+            LogoutJSON: '@Url.Content("~/UserAdministration/Account/LogoutJSON")',
+        };
+        this.WebReqResponse = {
+            FIELD_STATUS: '@WebReqResponse.FIELD_STATUS',
+            FIELD_LEVEL: '@WebReqResponse.FIELD_LEVEL',
+            FIELD_MSG: '@WebReqResponse.FIELD_MSG',
+        };
+        this.WebReq = {
+            RequestTemplate: '@(Model.Membership.WebReqOption != null && Model.Membership.WebReqOption.RequestTemplate != null ? Model.Membership.WebReqOption.RequestTemplate : "")',
+            Url: '@(Model.Membership.WebReqOption != null && Model.Membership.WebReqOption.Url != null ? Url.Content(Model.Membership.WebReqOption.Url) : "")',
+            IsFromServer: @(Model.Membership.WebReqOption.IsFromServer.ToString().ToLower()),
+        };
+        this.WebReqVars = {
+            USERNAME: '@(WebReqVars.Get(WebReqVars.USERNAME))',
+            PASSWORD: '@(WebReqVars.Get(WebReqVars.PASSWORD))',
+        };
+    } // ExportToLogInOut function END
+
+    /*##### GLOBALS #####*/
+    var lgnlgt = new LogInOutScripts(new ExportToLogInOut());
+    /*##### GLOBALS END #####*/
+</script>

@@ -1,0 +1,41 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+
+@model Vrh.Web.Membership.Areas.UserAdministration.Models.IndexViewModel
+
+@{
+    ViewBag.Title = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.UserManagement)));
+}
+
+@section Styles {
+    <link href="@Url.Content(Constants.AREA_CONTENTPATH + "MvcMembership.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content(Constants.AREA_CONTENTPATH + "PagedList.css")" rel="stylesheet" type="text/css" />
+}
+
+@if (!Model.IsRolesEnabled)
+{
+    <p class="mvcMembership-warning">
+        WARNING: Your Role Provider is currently disabled - any user may currently visit
+        this page.<br />
+        Change &lt;roleManager enabled="false"&gt; to &lt;roleManager enabled="true"&gt;
+        in your web.config file.</p>
+}
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title mvcMembership">@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.SearchUser)))</h1>
+    </div>
+    <div class="card-body">
+        <form method="get" class="form-inline mvcMembership-searchForm">
+            <div class="form-group mb-2">
+                <label for="search" class="mr-2">@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.UserNameOrEmailAddress)))</label>
+                <input type="text" name="search" value="@Model.Search" class="form-control mr-2" />
+            </div>
+            <button type="submit" class="btn btn-success mb-2">@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.Search)))</button>
+        </form>
+        <div class="mvcMembership">
+            @if (Model.Users.Count == 0)
+            {
+                <p>@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.NoSuchUser)))</p>
+            }
+        </div>
+    </div>
+</div>

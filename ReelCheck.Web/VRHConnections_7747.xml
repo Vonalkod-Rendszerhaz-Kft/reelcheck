@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<connectionStrings>
+	<connectionString ConfigEditRef="Database" name="Database">
+		<Element name="Data Source">.</Element>
+		<Element name="Initial Catalog">ReelCheck</Element>
+		<Element name="user id">sa</Element>
+		<Element name="password">vrh</Element>
+		<Element name="multipleactiveresultsets">True</Element>
+	</connectionString>
+</connectionStrings>

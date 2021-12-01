@@ -1,0 +1,15 @@
+﻿@using Vrh.Web.I18N.Areas.MultiLanguageManager.Controllers;
+@using Vrh.Web.Common.Lib;
+
+@model DeleteLanguageModel
+
+@if (Model != null)
+{
+    @Html.Partial("ValidationSummary")
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.LanguageToBeDeleted)
+        @Html.DropDownListFor(x => x.LanguageToBeDeleted, Model.LanguageToBeDeletedCodeList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.LanguageToBeDeleted)
+    </div>
+}

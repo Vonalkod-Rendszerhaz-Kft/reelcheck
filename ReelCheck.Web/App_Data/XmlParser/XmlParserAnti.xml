@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XmlParserConfiguration LCID="en-US" NameSeparator="@@">
+  <XmlParser>
+	<!--
+	<XmlVar Name="ALMDBCONNECTIONSTRING">data source=192.168.77.150\SQLExpress;initial catalog=LearALM;user id=sa;password=Vrh@54321;MultipleActiveResultSets=True;App=EntityFramework;</XmlVar>
+    <XmlVar Name="ALMREDISSERVERIP">192.168.77.150</XmlVar>
+    <XmlVar Name="ALMREDISSERVERPORT">6379</XmlVar>
+	-->
+	<XmlVar Name="LOCALHOSTIP">localhost</XmlVar>
+	<XmlVar Name="REDISSERVERIP">localhost</XmlVar>
+    <XmlVar Name="REDISSERVERPORT">6379</XmlVar>
+    <XmlVar Name="REDISCONNECTIONSTRING">@REDISSERVERIP@:@REDISSERVERPORT@</XmlVar>
+	<XmlVar Name="REELCHECKDBCONNECTIONSTRING">data source=REELCHECK;initial catalog=REELCHECK;user id=sa;password=vrh;MultipleActiveResultSets=True;App=EntityFramework;</XmlVar>
+	<!--XmlVar Name="APPROOTPATH">d:/VRH/git/Delphi.ReelCheck</XmlVar-->
+	<XmlVar Name="APPROOTPATH">d:\Google Drive\!Dev\VRH\ReelCheck\</XmlVar>
+	<XmlVar Name="BACKUPROOTPATH">C:/DelphiREELCHECKBackups</XmlVar>
+    <XmlVar Name="APPDATA">@APPROOTPATH@/ReelCheck.Web/App_Data</XmlVar>
+	<XmlVar Name="APPDATAWebcommon">@APPROOTPATH@/wwwroot_COMMON/App_Data</XmlVar>
+	<XmlVar Name="URLHEADWebcommon">http://192.168.77.47/Webcommon</XmlVar>
+    <XmlVar Name="URLHEADReelCheck">http://192.168.77.47/ReelCheck</XmlVar>
+	<XmlVar Name="MENUXML">file=@APPDATA@\Menu\Menu.xml</XmlVar>
+	<XmlVar Name="MATRIX2DXML">file=@APPDATA@\WebMonitor\Matrix2D.xml</XmlVar>
+
+	<XmlVar Name="BUTTONGROUP_Interventions" LCID="hu-HU">Beavatkozások</XmlVar>
+	<XmlVar Name="BUTTONGROUP_Interventions" LCID="en-US">Interventions</XmlVar>
+	<XmlVar Name="BUTTONGROUP_InterventionsOther" LCID="hu-HU">Egyéb beavatkozások</XmlVar>
+	<XmlVar Name="BUTTONGROUP_InterventionsOther" LCID="en-US">Other interventions</XmlVar>
+	<XmlVar Name="BUTTONGROUP_MonitorScreens" LCID="hu-HU">Monitor képernyők</XmlVar>
+	<XmlVar Name="BUTTONGROUP_MonitorScreens" LCID="en-US">Monitor screens</XmlVar>
+	<XmlVar Name="BUTTONTEXT_ChangeMonitorScreen" LCID="hu-HU">Monitor képernyő váltása</XmlVar>
+	<XmlVar Name="BUTTONTEXT_ChangeMonitorScreen" LCID="en-US">Change monitor screen</XmlVar>
+	<XmlVar Name="BUTTONTEXT_Reprint" LCID="hu-HU">Újra-nyomtatás</XmlVar>
+	<XmlVar Name="BUTTONTEXT_Reprint" LCID="en-US">Re-print</XmlVar>
+	<XmlVar Name="BUTTONTEXT_Noprint" LCID="hu-HU">Nyomtatás kimarad</XmlVar>
+	<XmlVar Name="BUTTONTEXT_Noprint" LCID="en-US">Skip-print</XmlVar>
+	<XmlVar Name="BUTTONTEXT_Recheck" LCID="hu-HU">Újra-ellenőrzés</XmlVar>
+	<XmlVar Name="BUTTONTEXT_Recheck" LCID="en-US">Re-check</XmlVar>
+	<XmlVar Name="BUTTONTEXT_ManualON" LCID="hu-HU">Kézi olvasás BE</XmlVar>
+	<XmlVar Name="BUTTONTEXT_ManualON" LCID="en-US">Manual ON</XmlVar>
+	<XmlVar Name="BUTTONTEXT_ManualOFF" LCID="hu-HU">Kézi olvasás KI</XmlVar>
+	<XmlVar Name="BUTTONTEXT_ManualOFF" LCID="en-US">Manual OFF</XmlVar>
+	<XmlVar Name="BUTTONTEXT_GoldenSampleON" LCID="hu-HU">Aranyminta INDÍT</XmlVar>
+	<XmlVar Name="BUTTONTEXT_GoldenSampleON" LCID="en-US">GoldenSample START</XmlVar>
+	<XmlVar Name="BUTTONTEXT_GoldenSampleOFF" LCID="hu-HU">Aranyminta LEÁLLÍT</XmlVar>
+	<XmlVar Name="BUTTONTEXT_GoldenSampleOFF" LCID="en-US">GoldenSample STOP</XmlVar>
+	<XmlVar Name="BUTTONTEXT_GoldenSampleSETDUE" LCID="hu-HU">Aranyminta esedékes BE</XmlVar>
+	<XmlVar Name="BUTTONTEXT_GoldenSampleSETDUE" LCID="en-US">GoldenSample due ON</XmlVar>
+	<XmlVar Name="BUTTONTEXT_GoldenSampleDUESKIP" LCID="hu-HU">Aranyminta esedékes KI</XmlVar>
+	<XmlVar Name="BUTTONTEXT_GoldenSampleDUESKIP" LCID="en-US">GoldenSample due OFF</XmlVar>
+	<XmlVar Name="BUTTONTEXT_MonitorNormal" LCID="hu-HU">Monitor - normál</XmlVar>
+	<XmlVar Name="BUTTONTEXT_MonitorNormal" LCID="en-US">Monitor - normal</XmlVar>
+	<XmlVar Name="BUTTONTEXT_MonitorIV" LCID="hu-HU">Monitor - beavatkozásokkal</XmlVar>
+	<XmlVar Name="BUTTONTEXT_MonitorIV" LCID="en-US">Monitor - with interventions</XmlVar>
+	<XmlVar Name="BUTTONTEXT_OFF" LCID="hu-HU">KI</XmlVar>
+	<XmlVar Name="BUTTONTEXT_OFF" LCID="en-US">OFF</XmlVar>
+	<XmlVar Name="VISIBLEDISABLEDITEMS">True</XmlVar>
+	<XmlVar Name="MenuPageBehavior">Accordion</XmlVar>
+	<XmlVar Name="GROUPSTYLE">background-color:transparent;color:orange;font-size:1.5vmax;font-weight:bold;</XmlVar>
+	<XmlVar Name="STYLE_HIGHLITED">background-color:transparent;color:white;line-height:200%;font-size:1.2vmax;font-weight:bold;</XmlVar>
+	<XmlVar Name="BUTTONSTYLE">width:5vmax;color:black;font-weight:bold;text-align:center;box-shadow:2vmax 1vmax 3vmax 1vmax;text-shadow:0vmax 0vmax 0vmax;border-radius:5vmax;</XmlVar>
+	<XmlVar Name="BUTTONSTYLE_THIN">@BUTTONSTYLE@;font-size:2vmax;padding: 0.5vmax  0.5vmax  0.5vmax  0.5vmax;line-height: 4vmax;</XmlVar>
+	<XmlVar Name="BUTTONSTYLE_THICK">@BUTTONSTYLE@;font-size:2vmax;padding: 1vmax 2vmax 1vmax 2vmax;line-height: 6vmax;</XmlVar>
+	<XmlVar Name="STYLE_SELECTED">background-color:grey;color:lightgrey;</XmlVar>
+	<XmlVar Name="STYLE_HOVER">background-color: black;color: white;text-shadow:1vmax 1vmax 2vmax;</XmlVar>
+	<XmlVar Name="ITEMSTYLE">background-color:transparent;color:lightgray;font-size:1vmax;</XmlVar>
+	<XmlVar Name="DISABLEDSTYLE">@INVISIBLE@;background-color:transparent;color:dimgray;font-style:italic;</XmlVar>
+	<XmlVar Name="DEFAULTSTYLE">background-color:transparent;color:lightgray;font-size: 1vmax;</XmlVar>
+	<XmlVar Name="INVISIBLE">display:none;</XmlVar>
+	<XmlVar Name="MENUCREATEROLES">true</XmlVar>
+	<XmlVar Name="MENUCREATEWORDCODES">true</XmlVar>
+	
+    <XmlVar Name="VAR1">
+      <Value>one</Value>
+    </XmlVar>
+    <XmlVar Name="VAR2">two</XmlVar>
+    <XmlVar Name="VAR3">
+      <Conditions>
+        <Condition Type="equal" Test="@VAR1@" With="one">
+          four
+          <Conditions>
+            <Condition Type="equal" Test="@VAR1@" With="xxx">xxx</Condition>
+            <Condition Type="equal" Test="@VAR1@" With="one">five</Condition>
+          </Conditions>
+        </Condition>
+      </Conditions>
+      three
+    </XmlVar>
+    <XmlVar Name="VAR4">#VAR1#+one is equal two</XmlVar>
+    <ConnectionString Name="cstr">
+      Data Source=(local)\SQLEXPRESS;Initial Catalog=LearALM;Integrated Security=SSPI;multipleactiveresultsets=True;
+    </ConnectionString>
+	<ConnectionString Name="anticstr">
+      Data Source=(local)\SQLEXPRESS;Initial Catalog=LearALM;Integrated Security=SSPI;MultipleActiveResultSets=True;App=EntityFramework;
+    </ConnectionString>
+  </XmlParser>
+  
+  <Configurations>
+    <Configuration Name="Menu" File="~/App_Data/Menu/Menu.xml" Element="MainMenu"/>
+    <Configuration Name="DataToRedisConfig" File="@APPROOTPATH@\AppContainer\VrhDataToRedis\DataToRedis.Config.xml" Element="DataToRedisConfig" />
+    <Configuration Name="LABELINT" File="~/App_Data/WebMonitor/Matrix2D.xml" Element="Matrix2DDefinitions" />
+  </Configurations>
+</XmlParserConfiguration>

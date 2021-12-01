@@ -1,0 +1,69 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+
+@model  LanguageSelectionModel
+
+@if (Model.Languages != null && Model.Languages.Any())
+{
+    SelectListItem lang1 = null, lang2 = null;
+    <div class="border-top border-secondary mt-3">
+        <h1 style="@(Model.TitleStyle)">@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.LanguageSelection)))</h1>
+
+        @foreach (SelectListItem item in Model.Languages)
+        {
+            if (lang1 == null)
+            {
+                lang1 = item;
+                continue;
+            }
+            else
+            {
+                lang2 = item;
+            }
+            <div class="row mb-2">
+                <div class="col" onclick="languageChange('@(lang1.Value)');" style="cursor:pointer;">
+                    <img src="~/Areas/Menu/Images/Flags/@(lang1.Value)_flag.gif" alt="" />
+                    <div class="text-secondary" id="@(lang1.Value)">@(lang1.Text)</div>
+                </div>
+                <div class="col" onclick="languageChange('@(lang2.Value)');" style="cursor:pointer;">
+                    <img src="~/Areas/Menu/Images/Flags/@(lang2.Value)_flag.gif" alt="" />
+                    <div class="text-secondary" id="@(lang2.Value)">@(lang2.Text)</div>
+                </div>
+            </div>
+            lang1 = null;
+            lang2 = null;
+        }
+    </div>
+    <script>
+        $(function () {
+            $('div#@(Model.CurrentLCID)').css('font-weight','bold');
+        });
+
+        var isReload = @(Model.IsReload ? "true" : "false")
+        function languageChange(lcid) {
+            var thisfn = 'Menu.LanguageSelection.cshtml: languageChange function: ';
+            console.log(thisfn + 'lcid=', lcid);
+            $.ajax({
+                url: '@Html.Raw(Url.Action("LanguageChange", "Layout", new { area = "Menu" }))',
+                type: 'post',
+                contenttype: 'application/json',
+                datatype: 'json',
+                data: { lcid: lcid },
+                success: function (rijson) {
+                    if (rijson.ReturnValue !== 0) {
+                        bootbox.alert(rijson.ReturnMessage);
+                    } else {
+                        if (isReload) {
+                            location.reload();
+                        } else {
+                            $('div.text-secondary').css('font-weight','normal');
+                            $('div#'+lcid).css('font-weight','bold');
+                        }
+                    }
+                },
+                error: function (jqXHR, exception) {
+                    console.log(thisfn + 'Ajax hívás sikertelen! ', jqXHR.responseText);
+                }
+            });
+        }
+    </script>
+}

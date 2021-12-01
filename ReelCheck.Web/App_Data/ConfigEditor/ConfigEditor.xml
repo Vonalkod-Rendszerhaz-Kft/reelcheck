@@ -1,0 +1,354 @@
+﻿<ConfigEditor>
+  <XmlParser>
+    <XmlVar Name="ALMRoot">D:\ALM</XmlVar>
+    <XmlVar Name="AppData">D:\ALM\wwwroot\App_Data</XmlVar>
+    <XmlVar Name="Validate_Bool">^[Tt][Rr][Uu][Ee]$|^[Ff][Aa][Ll][Ss][Ee]$</XmlVar>
+    <XmlVar Name="Validate_LCID">^[a-z]{2}-[A-Z]{2}$</XmlVar>
+  </XmlParser>
+  <General>
+    <DisplayMissingItems>true</DisplayMissingItems>
+    <EnableEditDisplayName>true</EnableEditDisplayName>
+    <EnableXmlVarEdit>true</EnableXmlVarEdit>
+    <PrefixForSaving>LearALM-ETALON</PrefixForSaving>
+    <UseWordCode>true</UseWordCode>
+    <UseXPath>false</UseXPath>
+    <WordCodePrefix>ConfigEditor.xml</WordCodePrefix>
+    <XmlParserEnabled>false</XmlParserEnabled>
+  </General>
+  <ConfigXmls>
+    <ConfigXml Id="MvcMenu" Xml="@AppData@/MvcMenu/MvcMenu.xml" />
+    <ConfigXml Id="WPGdef" Xml="file=@AppData@/WebMonitor/WorkPlaceGroupDefinition.xml;root=@AppData@/XmlParser/XmlParser.xml" 
+               XmlParserEnabled="true"/>
+    <ConfigXml Id="ConfigEditor" Xml="file=@AppData@/ConfigEditor/ConfigEditor_hu-HU.xml" XmlParserEnabled="true"/>
+    <ConfigXml Id="TrendDiagram" Xml="@AppData@/WebMonitor/TrendDiagram.xml" />
+    <ConfigXml Id="Matrix1D" Xml="@AppData@/WebMonitor/Matrix1D_hu-HU.xml" />
+    <ConfigXml Id="Matrix2D" Xml="@AppData@/WebMonitor/Matrix2D_hu-HU.xml" />
+    <ConfigXml Id="WEBconfig" Xml="@ALMRoot@/wwwroot/Web.config" />
+    <ConfigXml Id="DCASEMONConfig" Xml="@ALMRoot@/VRH.Log4Pro.DataControllerASEMON/VRH.Log4Pro.DataController.WindowsService.exe.config" />
+    <ConfigXml Id="DCConfig" Xml="@ALMRoot@/VRH.Log4Pro.DataController/VRH.Log4Pro.DataController.WindowsService.exe.config" />
+    <ConfigXml Id="DEVparmsWPWF" Xml="@ALMRoot@/VRH.Log4Pro.DataController/DeviceAssignments.xml" />
+    <ConfigXml Id="DEVparmsASEMON" Xml="@ALMRoot@/VRH.Log4Pro.DataControllerASEMON/DeviceAssignments.xml" />
+    <ConfigXml Id="ASEMonitorASEMON" Xml="@ALMRoot@/VRH.Log4Pro.DataControllerASEMON/WP-ASEMonitors.xml" />
+    <ConfigXml Id="IVconnOut" Xml="@ALMRoot@/VRH.Log4Pro.DataController/ivConnectorOut.xml" />
+    <ConfigXml Id="WPparams" Xml="@ALMRoot@/VRH.Log4Pro.DataController/WP-parameters.xml" />
+    <ConfigXml Id="WFparams" Xml="@ALMRoot@/VRH.Log4Pro.DataController/WF-parameters.xml" />
+    <ConfigXml Id="MWconfig" Xml="@ALMRoot@/VRH.Middleware/config.xml" />
+    <ConfigXml Id="ConStrings" Xml="@ALMRoot@/wwwroot/ConnectionStrings.config" />
+    <ConfigXml Id="VRHConStrings" Xml="@ALMRoot@/wwwroot/VRHConnections.xml" />
+    <ConfigXml Id="Reports" Xml="@AppData@/Reports/Reports.xml" />
+    <ConfigXml Id="Queries" Xml="@AppData@/Queries/Queries.xml" />
+    <ConfigXml Id="ILOGTXT" Xml="@ALMRoot@/VRH.iLogger\Plugins/VRH.Common.iLogger.TextPlugin.dll.config" />
+    <ConfigXml Id="SERVSCRCONF" Xml="@ALMRoot@/SERVICESCRIPTS/ServiceScriptsConfig.xml" />
+    <ConfigXml Id="SCH" Xml="@AppData@/iScheduler/iScheduler.xml" />
+    <ConfigXml Id="SCHREP" Xml="@AppData@/iScheduler/iSchedulerReport.xml" />
+  </ConfigXmls>
+  <SettingMainGroups>
+    <SettingMainGroup Id="GS" Title="Konfigurációs beállítások" Type="General">
+      <SettingGroup Id="GENERAL" Heading="Általános beállítások">
+        <Help>
+          Az alkalmazás általános paraméterei. Az alkalmazás neve a CongigEditor program "Paraméterek mentése" 
+          funkciójában előállított ZIP file nevében szerepel.\n
+          A használható nyelvkódok: magyar=hu-HU,id=1038=0x040e; US-angol=en-US,id=1033=0x0409 (más kódok is létezhetnek a rendszerben).\n\n
+          A paraméterek:\n
+          &gt;&gt;&gt; ApplicationName=az alkalmazás neve\n
+          &gt;&gt;&gt; LanguageCodeASE=a szerelősori terminálokon (ASE) használt  alapértelmezett nyelv.\n
+          &gt;&gt;&gt; LanguageCodeWEB=a WEB felület alapértelmezett nyelve.\n
+          &gt;&gt;&gt; WEBusername=DTM Web alkalmazás által használt Windows felhasználó neve.\n
+          &gt;&gt;&gt; WEBuserPassword=DTM Web alkalmazás által használt Windows felhasználó jelszava.\n
+          &gt;&gt;&gt; DisplayMissingItems=True: A hiányzó elemek megjelenítése a ConfigEditor programban !!!NotFound!!! 
+          tartalommal (használja ezt teszteléskor).\n
+          &gt;&gt;&gt; DisplayMissingItems=False: A hiányzó elemek nem kerülnek megjelenítésre a ConfigEditor programban 
+          (állítsa False értékre a használat során).\n
+          &gt;&gt;&gt; LanguageChangeAtLoginOnly=True: nyelváltás csak a login képernyőn lehetséges, egyebként minden képernyőn.
+        </Help>
+        <Settings>
+          <Setting Path="ConfigEditor|ApplicationName" 
+                   DisplayName="Alkalmazás neve"
+                   XmlId="ConfigEditor" Validate="^\S*$"/>
+          <!--Setting XmlId="DCConfig" Path="configuration/applicationSettings/DTM.ServiceLangHelper.ServiceLangHelperSettings/setting|name=LanguageCode/value"
+            Name="LanguageCodeASE" DisplayName="ASE felület alapértelmezett nyelv" SettingDescription="Munkahelyek alapértelmezett nyelve (hu-HU formában)."/-->
+          <Setting Path="wpparameters/DefaultLanguage|value" 
+                   DisplayName="ASE felület alapértelmezett nyelv"
+                   XmlId="ASEMonitorASEMON" Name="LanguageCodeASE" Validate="@Validate_LCID@" />
+          <Setting Path="configuration/appSettings/add|key=MultiLanguageManagerDefaultLanguageCode|value" 
+                   DisplayName="WEB felület alapértelmezett nyelv" 
+                   Name="LanguageCodeWEB" XmlId="WEBconfig" Validate="@Validate_LCID@" />
+          <Setting Path="configuration/system.web/identity|userName" 
+                   DisplayName="WEB felület Windows felhasználó neve"
+                   Name="WebUserName" XmlId="WEBconfig" />
+          <Setting Path="configuration/system.web/identity|password" 
+                   DisplayName="WEB felület Windows felhasználó jelszó"
+                   Name="WebUserPassword" XmlId="WEBconfig" Validate="" />
+          <Setting Path="ConfigEditor/General/DisplayMissingItems" 
+                   DisplayName="Hiányzó elemek megjelenítése"
+                   XmlId="ConfigEditor" Validate="@Validate_Bool@" />
+          <Setting Path="menu/general/LanguageChangeAtLoginOnly" 
+                   DisplayName="Nyelvváltás csak a login képernyőn" 
+                   XmlId="MvcMenu" Validate="@Validate_Bool@" />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="REPORTS" Heading="Riport beállítások">
+        <Help>Az alkalmazás riport beállításai. Ha túl sok adat van a rendszerben, akkor nagyobb várakozási késleltetés értékekre lehet szükség, viszont nagyobb késletetési érték esetén az esetleges kapcsolódási hibákat jelző hibaüzenetek csak később jelennek meg.\n\nA paraméterek:\n>>> SQLTimeout=az az időzítés érték (másodpercben), amit a kliens oldal vár az SQL szerver válaszára</Help>
+        <Settings>
+          <Setting Path="configuration/appSettings/add|key=SQLCommandTimeout|value" Name="SQLTimeout" XmlId="WEBconfig" DisplayName="Riport SQL kapcsolódási időzítés (mp)" SettingDescription="Riport SQL kapcsolódási időzítés (mp)." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="SCHREPORTS" Heading="Scheduled report settings">
+        <Help></Help>
+        <Settings>
+          <Setting Path="iScheduler/MonitorService/CheckInterval" Name="CheckInterval" XmlId="SCH" DisplayName="Lejárt ütemezések ellenőrzési gyakoriság (perc)" SettingDescription="Lejárt ütemezések ellenőrzési gyakoriság (perc)." />
+          <Setting Path="iScheduler/MonitorService/ResponseTimeout" Name="ResponseTimeoutSch" XmlId="SCH" DisplayName="Ütemezés végrehajtásakor válaszra várakozás (másodperc)" SettingDescription="Ütemezés végrehajtásakor válaszra várakozás (másodperc)." />
+          <Setting Path="iSchedulerReport/PackageExecute/ResponseTimeout" Name="ResponseTimeoutSchRep" XmlId="SCHREP" DisplayName="Riport csomag végrehajtásakor válaszra várakozás (másodperc)" SettingDescription="Riport csomag végrehajtásakor válaszra várakozás (másodperc)." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="SCHTASKS" Heading="Ütemezett feladatok">
+        <Help></Help>
+        <Settings>
+          <Setting Path="ServiceScriptsConfig/ScheduledTasks/ScheduledTask|Name=*|Schedule" XmlId="SERVSCRCONF" DisplayName="* ütemezése" SettingDescription="Feladat#* ütemezése." />
+          <Setting Path="ServiceScriptsConfig/ScheduledTasks/ScheduledTask|Name=*|Afterinstallenable" XmlId="SERVSCRCONF" DisplayName="* alapértelmezett állapota (működik/nem működik)" SettingDescription="Feladat#* alapértelmezett állapota (működik/nem működik)." />
+          <Setting Path="ServiceScriptsConfig/ScheduledTasks/ScheduledTask|Name=*|Afterinstallrun" XmlId="SERVSCRCONF" DisplayName="* alapértelmezett állapota (fut/nem fut)" SettingDescription="Feladat#* alapértelmezett állapota (fut/nem fut)." />
+          <Setting Path="ServiceScriptsConfig/ScheduledTasks/ScheduledTask|Name=*|Commandname" XmlId="SERVSCRCONF" DisplayName="* feladat logikai neve" SettingDescription="Feladat#* logikai neve." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="SCHCOMMS" Heading="Service parancsok">
+        <Help></Help>
+        <Settings>
+          <Setting Path="ServiceScriptsConfig/Commands/Command|Name=*|Script" XmlId="SERVSCRCONF" DisplayName="* Powershell script file neve" SettingDescription="* Powershell script file neve." />
+          <Setting Path="ServiceScriptsConfig/Commands/Command|Name=*|Function" XmlId="SERVSCRCONF" DisplayName="* Powershell függvény neve" SettingDescription="* Powershell script file neve." />
+          <Setting Path="ServiceScriptsConfig/Commands/Command|Name=*|Parameters" XmlId="SERVSCRCONF" DisplayName="* paraméterei" SettingDescription="* Powershell script paraméterei." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="SENSORS" Heading="Szenzor beállítások" XmlId="WPparams">
+        <Help>Itt lehet a szerelősor ASE terminál szenzor vagy nyomógomb eseményeit a DTM/ALM rendszer eseményeihez hozzárendelni. Az ASE terminálnak 8 szenzora és két nyomógombja van. A szenzorok számozása balról jobbra történik. A szenzor hozzárendelés egy számérték megadását jelenti, amelyeket binárisan megjelenítve az 1-es értékű bit jelöli a definíció által jelzett szenzort (pl. a számérték=2 binárisan 00000010, ami a 7-as szenzort jelöli; a számérték=8 binárisan 00001000, ami az 5-as szenzort jelöli).\n\nA paraméterek (DTM/ALM ASE események):\n>>> diCYCLE=a ciklus esemény neve (azt jelzi, hogy egy szerelőtábla elhaladt)\n>>> diON=a gép bekapcsolás esemény neve (azt jelenti, hogy a gyártósor elkezd működni)\n>>> dSiIV1/2/3/4=egyéb szenzorokhoz rendelhető események neve\n>>> dBiIV1/2=egyéb nyomógombokhoz rendelhető események neve\n\nMinden eseményhez definiálni kell a következőket:\n>>> ASEname=Start vagy End (csak olyan ASEname adható meg, amilyen az ASE terminál adatok között is szerepel)\n>>> type=sensor vagy button (ASE szenzorhoz, vagy nyomógombhoz van kapcsolva az esemény)\n>>> value=a szenzor/nyomógomb száma\n>>> edge=az eseményt kiváltó jelváltozás (01=alacsonyról magasba, 10=magasból alacsonyra).</Help>
+        <Settings>
+          <Setting Path="events/event|name=*|ase" Name="ASEname" DisplayName="* forrása" SettingDescription="Szenzor/nyomógomb forrása." />
+          <Setting Path="events/event|name=*|type" DisplayName="* típusa" SettingDescription="Szenzor/nyomógomb típusa." />
+          <Setting Path="events/event|name=*|value" DisplayName="* sorszáma" SettingDescription="Szenzor/nyomógomb sorszáma." />
+          <Setting Path="events/event|name=*|edge" DisplayName="* változás" SettingDescription="Szenzor/nyomógomb jelváltozás." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="BEEPS" Heading="Hangjelzés definíciók" XmlId="WPparams">
+        <Help>A rendszerben eseményekhez hangjelzések rendelhetők hozzá, ezek definiálhatók ebben a blokkban.\n\nMindegyik hangjelzés sorozatra vonatkozóan meg kell adni a következő adatokat:\n>>> Duration=a hangjelzés sorozat hossza, ha üres, akkor leállításig\n>>> Repeat=a hangjelzés sorozat ismétléseinek száma\n>>> BeepVolume=a hangjelzés sorozatot alkoztó sípjelek hangereje(1-50)\n>>> BeepFrequency=sípjelek frekvenciája (javasolt: 1500-3000Hertz)\n>>> BeepLen=Sípjelek hossza (mp/100)\n>>> InterBeepGap=visszajelzés sípjelek közötti szünet hossza (mp/10)\n>>> NumOfBeeps=visszajelzés sípjelek száma</Help>
+        <Settings>
+          <Setting Path="wpparameters/AudibleOutputs/AudibleOutput|name=*|Duration" DisplayName="*" SettingDescription="Hangjelzés hossza" />
+          <Setting Path="wpparameters/AudibleOutputs/AudibleOutput|name=*|Repeat" DisplayName="*" SettingDescription="Ismétlések száma" />
+          <Setting Path="wpparameters/AudibleOutputs/AudibleOutput|name=*/BeepSequence|BeepFrequency" DisplayName="*" SettingDescription="Sípjel frekvencia" />
+          <Setting Path="wpparameters/AudibleOutputs/AudibleOutput|name=*/BeepSequence|BeepVolume" DisplayName="*" SettingDescription="Sípjel hangerő" />
+          <Setting Path="wpparameters/AudibleOutputs/AudibleOutput|name=*/BeepSequence|BeepLen" DisplayName="*" SettingDescription="Sípjel hossza" />
+          <Setting Path="wpparameters/AudibleOutputs/AudibleOutput|name=*/BeepSequence|InterBeepGap" DisplayName="*" SettingDescription="Sípjelek közti szünet" />
+          <Setting Path="wpparameters/AudibleOutputs/AudibleOutput|name=*/BeepSequence|NumOfBeeps" DisplayName="*" SettingDescription="Sípjelek száma" />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="ASELOGIN" Heading="ASE terminálon való bejelentkezés" XmlId="WPparams">
+        <Help>A szerelősorhoz kihelyezett ASE terminálon keresztül beavatkozásokat lehet elvégezni. Ehhez az ebben a csoportban megadott beállítások szerint be kellhet jelentkezni a rendszerbe. A bejelentkezés elévülésének (automatikus kijelentkezés) a paraméterei is ebben a csoportban adhatók meg.\n\nA paraméterek:\n>>> InterventionAuthenticationMode=None: nem kell bejelentkezni az ASE terminálon\n>>> InterventionAuthenticationMode=OneTime: egy beavatkozásra érvényes a bejelentkezés\n>>> InterventionAuthenticationMode=Normal: a bejelentkezés kijelentkezésig, vagy lejáratáig érvényes)\n>>> InterventionLoginExpire=a bejelentkezés bizonyos inaktív idő után lejár (true/false)\n>>> InterventionLoginExpireTime=a bejelentkezés ennyi idő után jár le (perc)\n>>> InterventionLoginPasswordRequired=a bejelentkezéskor a felhasználó név mellett jelszó megadása is szükséges (true/false)</Help>
+        <Settings>
+          <Setting Path="wpparameters/LoginControl/InterventionAuthenticationMode|value" Name="InterventionAuthenticationMode" DisplayName="ASE bejelentkezés módja" SettingDescription="ASE bejelentkezés módja (None/OneTime/Normal)." />
+          <Setting Path="wpparameters/LoginControl/InterventionLoginExpire|value" Name="InterventionLoginExpire" DisplayName="ASE bejelentkezés lejár" SettingDescription="ASE bejelentkezés lejár-e, vagy sem (true/false)." />
+          <Setting Path="wpparameters/LoginControl/InterventionLoginExpireTime|value" Name="InterventionLoginExpireTime" DisplayName="ASE bejelentkezés lejárati idő" SettingDescription="Ha az ASE bejelentkezés lejár, akkor ennyi inaktív idő után (perc)." />
+          <Setting Path="wpparameters/LoginControl/InterventionLoginPasswordRequired|value" Name="InterventionLoginPasswordRequired" DisplayName="ASE bejelentkezéshez jelszó" SettingDescription="ASE bejelentkezéshez a felhasználói név mellett jelszóra van-e szükség (true/false)." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="IV" Heading="Beavatkozások paraméterei" XmlId="WPparams">
+        <Help>A rendszert vezérlő beavatkozások paraméterei adhatók meg ebben a csoportban.\n\n>>> Group=A beavatkozást tartalmazó csoport kódja\n>>> AutoID=a vonalkódolvasóról (ASE RS232 portra) küldött beavatkozás elérési kódja (alfanumerikus adat, javasolt a #$IVXX forma)\n>>> KeyCode=az ASE USB portjára kapcsolt billentyűzetről bevitt beavatkozásokhoz elérési kód (két számjegyű numerikus adat)\n>>> ButtonEvent=Annak az ASE nyomógombnak a sorszáma, amelyikhez a beavatkozás hozzárendelésre kerül (értékei: 1/2/0; 0 jelentése: nincs hozzárendelés)\n>>> SensorEvent=Beavatkozás esemény neve (IOIntervention1/2/3/4)\n>>> AuthenticatedOnly=Csak jogosult és azonosított felhasználó hajthatja végre a beavatkozást (értékei: true/false)\n>>> NeededRole=Ha a beavatkozáshoz autentikáció kell, akkor a beavatkozás végrehajtásához szükséges szerepet kell itt megadni\n>>> ParameterSeparator=a beavatkozás paramétereit az AutoId parancsokban (vonalkód) határoló karaktkter (csak több paraméteres beavatkozások esetén!)</Help>
+        <Settings>
+          <Setting Path="Interventions/Intervention|Name=*|Group" Name="Group" DisplayName="* beavatkozás csoportja" SettingDescription="* beavatkozás csoportja." />
+          <Setting Path="Interventions/Intervention|Name=*|AutoID" Name="AutoID" DisplayName="* elérési kód vonalkódról" SettingDescription="* elérési kódja soros vonalkódolvasóról." />
+          <Setting Path="Interventions/Intervention|Name=*|KeyCode" Name="KeyCode" DisplayName="* elérési kód billentyűzetről" SettingDescription="* elérési kódja billentyűzetről." />
+          <Setting Path="Interventions/Intervention|Name=*|ButtonEvent" Name="ButtonEvent" DisplayName="* elérés ASE nyomógombról" SettingDescription="Annak az ASE nyomógombhoz rendelt eseménynek a neve, amelyikhez a * beavatkozás hozzárendelésre kerül." />
+          <Setting Path="Interventions/Intervention|Name=*|SensorEvent" Name="SensorEvent" DisplayName="* elérés ASE szenzorról" SettingDescription="Annak az ASE szenzorhoz rendelt eseménynek a neve, amelyikhez a * beavatkozás hozzárendelésre kerül." />
+          <Setting Path="Interventions/Intervention|Name=*|AuthenticatedOnly" Name="AuthenticatedOnly" DisplayName="* autentikáció szükséges" SettingDescription="* végrehajtásához autentikáció szükséges-e." />
+          <Setting Path="Interventions/Intervention|Name=*|NeededRole" Name="NeededRole" DisplayName="* autentikáció esetén szükséges szerep" SettingDescription="* végrehajtásához autentikáció esetén szükséges szerep." />
+          <Setting Path="Interventions/Intervention|Name=*/Parameters|ParameterSeparator" Name="ParameterSeparator" DisplayName="* paraméter-elválasztó karakter" SettingDescription="*-ban a paramétereket elválasztó karakter" />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="ASETOPC" Heading="ASE-PC csatlakozás" XmlId="MWconfig">
+        <Help>A szerelősori ASE terminálok a szerver számítógép IP címére, és az "ASE csatlakozási port" paraméterben megadott portra csatlakoznak.\nA szerver az ASE terminálokat az ASE azonosítás módja paraméterben megadott módon azonosítja.\n\nA paraméterek:\n>>> PClistenPort=ASE terminálok ehhez a porthoz csatlakoznak a szerveren\n>>> IdentifiedBy = IP: ASE azonosítás IP cím alapján\n>>> IdentifiedBy = ID: ASE azonosítás felhasználó által megadható név alapján\n>>> ASEHeartbeatInterval: ASE által küldött életjel gyakorisága tizedmásodpercben (0 esetén életjel kikapcsolva)\n>>> HeartBeatTimeOut: ASE-MW ennyi ezredmásodperccel késlelteti a reakciót az ASE-életjel elmaradásakor\n>>> HDMIHeartBeatInterval: tizedmásodpercben a MW által küldött életjelek közötti időzítés értéke (0 jelentése, hogy a HDMI életjel funkció nem kerül bekapcsolásra)\n>>> HDMIHeartBeatTimeout: tizedmásodpercben az az időzítés, amennyit az ASE HDMI egység még várakozik az életjel időzítés lejárta esetén; HDMIHeartBeatInterval+HDMIHeartBeatTimeout értéke 1-255 közötti szám</Help>
+        <Settings>
+          <Setting Path="MiddlewareConfigRoot/Configuration/AseHandler|ServerPort" DisplayName="ASE csatlakozásokat figyelő port a PC-n" Name="PClistenPort" SettingDescription="ASE csatlakozásokat figyelő 'Listen' port a szerver PC-n." />
+          <Setting Path="MiddlewareConfigRoot/Configuration/AseHandler/IdentifiedBy|IdentifiedBy" DisplayName="ASE azonosítás módja" Name="IdentifiedBy" SettingDescription="ASE csatlakozás módja a szerver PC-n (IP/ID)." />
+          <Setting Path="MiddlewareConfigRoot/Configuration/AseHandler/ASEHeartbeatInterval" DisplayName="ASE heartbeat frequency (mp/10)" Name="ASEHeartbeatInterval" SettingDescription="ASE heartbeat frequency (mp/10)." />
+          <Setting Path="MiddlewareConfigRoot/Configuration/AseHandler/HeartBeatTimeOut" DisplayName="ASE-MW életjel elmaradás reakció késleltetés (mp/1000)" Name="HeartBeatTimeOut" SettingDescription="ASE-MW életjel elmaradás reakció késleltetés (mp/1000)." />
+          <Setting Path="MiddlewareConfigRoot/Configuration/AseHandler/HDMIHeartBeatInterval" DisplayName="MW-&gt;ASE életjel küldés időzítés (mp/10, max 255)" Name="HDMIHeartBeatInterval" SettingDescription="MW-&gt;ASE életjel küldés időzítés (mp/10, max 255)." />
+          <Setting Path="MiddlewareConfigRoot/Configuration/AseHandler/HDMIHeartBeatTimeOut" DisplayName="MW-&gt;ASE életjel időzítés tűrés (mp/10, max 255)" Name="HDMIHeartBeatTimeOut" SettingDescription="MW-&gt;ASE életjel időzítés tűrés (mp/10, max 255)." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="ASEDCWPWF" Heading="ASE SENSOR/CONTROL terminálok hozzárendelése szerelősorokhoz">
+        <Help>Az ASE SENSOR/CONTROL terminálokat kell definiálni ebben a részben.\nJelenleg 48 szerelősort lehet a rendszerben definiálni (azonosítók: AS01-AS48).\nHa ennél többre van szükség, akkor a rendszer xml paraméter file-jainak szerkesztésével ez a szám növelhető.\nA paraméterek nevében szereplő azonosító (ASnn) köti össze az itt megadott paramétereket a Szerelősorok törzsállományban egy szerelősor azonosítójával. A szerelősor használata érdekében nem elegendő ezen a felületen engedélyezni a szerelősort, azt a Szerelősor törzsállományban is aktiválni kell!\n\nA szerelősorok mindegyikéhez a következő paramétereket kell megadni:\n>>> ASnn Inuse=a szerelősor használatban van a rendszerben (kötelező true-ra állítani)\n>>> ASnn Display name=csak ezen a paraméter képernyőn megjelenő név\n>>> ASnn AseID-End=a szerelősorhoz tartozó elsődleges ASE terminál azonosítója</Help>
+        <Settings>
+          <Setting XmlId="DEVparmsWPWF" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*|Inuse" DisplayName="* szerelősor használatban" Name="* Inuse" SettingDescription="* szerelősor használatban van a rendszerben." />
+          <Setting XmlId="DEVparmsWPWF" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*|DisplayName" DisplayName="* szerelősor neve" Name="* DisplayName" SettingDescription="* szerelősor név." />
+          <Setting XmlId="DEVparmsWPWF" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=ASEWP/ASEs/ASE|Name=End|ID" DisplayName="* szerelősor ASE End terminál azonosító" Name="* AseID-End" SettingDescription="* ASE azonosító (IP cím, vagy ID)." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="ASEDCMON" Heading="ASE MONITOR terminálok hozzárendelése szerelősorokhoz">
+        <Help>Az ASE MONITOR terminálok definiálhatók itt.\nJelenleg 48 szerelősort lehet a rendszerben definiálni (azonosítók: AS01-AS48).\nHa ennél többre van szükség, akkor a rendszer xml paraméter file-jainak szerkesztésével ez a szám növelhető.\nA paraméterek nevében szereplő azonosító (ASnn) köti össze az itt megadott paramétereket a Szerelősorok törzsállományban egy szerelősor azonosítójával! A szerelősor használata érdekében nem elegendő ezen a felületen engedélyezni a szerelősort, azt a Szerelősor törzsállományban is aktiválni kell!\n\nMinden szerelősorhoz a következő paramétereket kell megadni:\n>>> ASnn Inuse=állítsa true-ra, ha kíván MONITOR ASE terminálokat használni a rendszerben\n>>> ASnn Display name=csak ezen a paraméter képernyőn megjelenő név.\n\n>>> ASnn Ase-HDMI#1/2/3/4-ID=a * szerelosorhoz tartozo #1/2/3/4 ASE terminal azonositoja.\n>>> ASnn Ase-HDMI#1/2/3/4-ScreenDescriptor=a * szerelosorhoz tartozo #1/2/3/4 ASE terminalon megjelenitett kepernyo leirot tartalmazo file/blokk\n\nASE#1 altalaban a szerelősorhoz tartozó sor fölötti TV monitorokat vezérli, #2 pedig a szerelősorhoz tartozó műszak összesítő TV monitorokat.</Help>
+        <Settings>
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*|Inuse" DisplayName="* szerelősor használatban" Name="* Inuse" SettingDescription="* szerelősor használatban van a rendszerben." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*|DisplayName" DisplayName="* szerelősor neve" Name="* DisplayName" SettingDescription="* szerelősor név." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=1|Inuse" DisplayName="* Ase-HDMI#1 terminal használatban" Name="* Ase-HDMI#1 Inuse" SettingDescription="* Ase-HDMI#1 terminal használatban." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=1/ASEs/ASE|Name=HDMI11|ID" DisplayName="* Ase-HDMI#1 terminal terminál azonosító" Name="* Ase-HDMI#1 IP/ID" SettingDescription="* Ase-HDMI#1 terminal azonosító (IP cím, vagy ID)." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=1/Parameters|Screen" DisplayName="* Ase-HDMI#1 kepernyo leiro neve" Name="* Ase-HDMI#1 ScreenName" SettingDescription="* Ase-HDMI#1 kepernyo leiro neve." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=2|Inuse" DisplayName="* Ase-HDMI#2 terminal használatban" Name="* Ase-HDMI#2 Inuse" SettingDescription="* Ase-HDMI#2 terminal használatban." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=2/ASEs/ASE|Name=HDMI21|ID" DisplayName="* Ase-HDMI#2 terminal terminál azonosító" Name="* Ase-HDMI#2 IP/ID" SettingDescription="* Ase-HDMI#2 terminal azonosító (IP cím, vagy ID)." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=2/Parameters|Screen" DisplayName="* Ase-HDMI#2 kepernyo leiro neve" Name="* Ase-HDMI#2 ScreenName" SettingDescription="* Ase-HDMI#2 kepernyo leiro neve." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=3|Inuse" DisplayName="* Ase-HDMI#3 terminal használatban" Name="* Ase-HDMI#3 Inuse" SettingDescription="* Ase-HDMI#3 terminal használatban." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=3/ASEs/ASE|Name=HDMI31|ID" DisplayName="* Ase-HDMI#3 terminal terminál azonosító" Name="* Ase-HDMI#3 IP/ID" SettingDescription="* Ase-HDMI#3 terminal azonosító (IP cím, vagy ID)." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=3/Parameters|Screen" DisplayName="* Ase-HDMI#3 kepernyo leiro neve" Name="* Ase-HDMI#3 ScreenName" SettingDescription="* Ase-HDMI#3 kepernyo leiro neve." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=4|Inuse" DisplayName="* Ase-HDMI#4 terminal használatban" Name="* Ase-HDMI#4 Inuse" SettingDescription="* Ase-HDMI#4 terminal használatban." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=4/ASEs/ASE|Name=HDMI41|ID" DisplayName="* Ase-HDMI#4 terminal terminál azonosító" Name="* Ase-HDMI#4 IP/ID" SettingDescription="* Ase-HDMI#4 terminal azonosító (IP cím, vagy ID)." />
+          <Setting XmlId="DEVparmsASEMON" Path="PluginInstanceGroups/PluginInstanceGroup|Name=*/Instance|Type=HDMIMonitor|Num=4/Parameters|Screen" DisplayName="* Ase-HDMI#4 kepernyo leiro neve" Name="* Ase-HDMI#4 ScreenName" SettingDescription="* Ase-HDMI#4 kepernyo leiro neve." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="EMAIL" Heading="E-mail beállítások">
+        <Help>Az alkalmazás SMTP e-mail kapcsolatát lehet itt beállítani.\mailDeliveryMethod=az e-mail kézbesítés módja.\nmailDeliveryFrom=a küldött e-mailben küldőként szereplő cím.\mailHost=az e-mail szerver neve.\nmailUsername=az email szerverre ezen a usernéven jelentkezik be a rendszer.\nmailUserPassword=az email szerverre ezzel a jelszóval jelentkezik be a rendszer.\nmailPort=az e-mail küldéshez használt port száma (általában 25).\nmailSSLenable=az e-mail küldés SSL protokoll használatával történik (true/false).</Help>
+        <Settings>
+          <Setting Path="configuration/system.net/mailSettings/smtp|deliveryMethod" Name="mailDeliveryMethod" XmlId="WEBconfig" DisplayName="Mail kézbesítési mód" SettingDescription="Mail kézbesítési mód." />
+          <Setting Path="configuration/system.net/mailSettings/smtp|from" Name="mailDeliveryFrom" XmlId="WEBconfig" DisplayName="Mail küldő cím" SettingDescription="Mail küldő cím." />
+          <Setting Path="configuration/system.net/mailSettings/smtp/network|host" Name="mailHost" XmlId="WEBconfig" DisplayName="Mail host neve" SettingDescription="Mail host neve." />
+          <Setting Path="configuration/system.net/mailSettings/smtp/network|userName" Name="mailUsername" XmlId="WEBconfig" DisplayName="Mail felhasználó neve" SettingDescription="Mail felhasználó neve." />
+          <Setting Path="configuration/system.net/mailSettings/smtp/network|password" Name="mailUserPassword" XmlId="WEBconfig" DisplayName="Mail felhasználó jelszava" SettingDescription="Mail felhasználó jelszava." />
+          <Setting Path="configuration/system.net/mailSettings/smtp/network|port" Name="mailPort" XmlId="WEBconfig" DisplayName="Mail szerver által használt port száma" SettingDescription="Mail szerver által használt port száma." />
+          <Setting Path="configuration/system.net/mailSettings/smtp/network|enableSsl" Name="mailSSLenable" XmlId="WEBconfig" DisplayName="Mail protokollban SSL engedélyezése" SettingDescription="Mail protokollban SSL engedélyezése." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="WEBMON" Heading="WebMonitor komponensek beállításai">
+        <Help>A Web Monitor komponenseinek beállításait lehet elvégezni ezeken a paramétereken keresztül.\nRrefreshIntervalMatrix1=Web monitor 1DMatrix elemek frissítési gyakorisága\nRrefreshIntervalMatrix2D=Web monitor 2DMatrix elemek frissítési gyakorisága\nRrefreshIntervalTD=Web monitor TrendDiagram elemek frissítési gyakorisága.\nTDxxxxColor=Trend Diagram oszlopok színe.</Help>
+        <Settings>
+          <Setting Path="Matrix1D/GeneralParameters/Options|RefreshInterval" Name="RefreshIntervalMatrix1D" XmlId="Matrix1D" DisplayName="WebMonitor Matrix1D frissítési gyakoriság" SettingDescription="WebMonitor Matrix1D frissítési gyakoriság (másodperc)." />
+          <Setting Path="Matrix2D/GeneralParameters/Options|RefreshInterval" Name="RefreshIntervalMatrix2D" XmlId="Matrix2D" DisplayName="WebMonitor Matrix2D frissítési gyakoriság" SettingDescription="WebMonitor Matrix2D frissítési gyakoriság (másodperc)." />
+          <Setting Path="TrendDiagram/Options|RefreshInterval" Name="RefreshIntervalTD" XmlId="TrendDiagram" DisplayName="WebMonitor TrendDiagram frissítési gyakoriság" SettingDescription="WebMonitor TrendDiagram frissítési gyakoriság (ezred másodperc)." />
+          <Setting Path="TrendDiagram/Phases/Phase|Name=PeriodOverproduction|Color" Name="TDOverproductionColor" XmlId="TrendDiagram" DisplayName="WebMonitor TrendDiagram hasáb szín (Túlgyártás)" SettingDescription="TrendDiagram hasáb szín (Túlgyártás) esetén." />
+          <Setting Path="TrendDiagram/Phases/Phase|Name=PeriodProduction|Color" Name="TDProductionColor" XmlId="TrendDiagram" DisplayName="WebMonitor TrendDiagram hasáb szín (Termelés)" SettingDescription="TrendDiagram hasáb szín (Termelés) esetén." />
+          <Setting Path="TrendDiagram/Phases/Phase|Name=PeriodBreaktime|Color" Name="TDBreaktimeColor" XmlId="TrendDiagram" DisplayName="WebMonitor TrendDiagram hasáb szín (Szünet)" SettingDescription="TrendDiagram hasáb szín (Szünet) esetén." />
+          <Setting Path="TrendDiagram/Phases/Phase|Name=PeriodDowntime|Color" Name="TDDowntimeColor" XmlId="TrendDiagram" DisplayName="WebMonitor TrendDiagram hasáb szín (Állásidő)" SettingDescription="TrendDiagram hasáb szín (Állásidő) esetén." />
+          <Setting Path="TrendDiagram/Phases/Phase|Name=Cycle|Color" Name="TDCycleColor" XmlId="TrendDiagram" DisplayName="WebMonitor TrendDiagram hasáb szín (Ciklus)" SettingDescription="TrendDiagram hasáb szín (Ciklus) esetén." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="WEBMONGROUPS" Heading="WebMonitor szerelősor csoportok">
+        <Help>A szerelősorokat csoportosítani lehet, amely csoportokat a WebMonitor használja fel a megjelenítő képernyőkön. Öt előre definiált szerelősor csoport létezik a rendszerben (szükség esetén újabbak is definiálhatók), amelyekhez a keresőkódok és megnevezések ezen a felületen adhatók meg. Minden szerelősor csoportot egy keresőkód és egy megjeleníthető megnevezés ír le. A keresőkódot a szerelősor törzsállomány Monitor csoportok mezőjébe kell beírni (ide vesszővel elválasztva több keresőkód is beírható), a megjeleníthető megnevezés pedig a webmonitor programban a szerelősor csoport kiválasztását segítő listában látható.\n\nPéldául definiáljuk a következő két WebMonitor csoportot: (keresőkód=NISSAN, megnevezés=Nissan gyártósorok); (keresőkód=LEFTDOOR, megnevezés=Bal oldali ajtó korbácsok). Ha egy szerelősorhoz a törzsállományban a Monitor csoportok mezőbe a 'NISSAN,LEFTDOOR' keresőszavakat írja be, akkor a szerelősor adatai megjelennek a 'Nissan gyártósorok' és a 'Bal oldali ajtó korbácsok' WebMonitor csoportok megjelenítésekor.\n\nSearchCode: a keresőkód (használja az UNUSED szót, ha nem akarja használni).\nDisplayName: a megjeleníthető név.</Help>
+        <Settings>
+          <Setting Path="WorkPlaceGroups/WorkPlaceGroup|Num=0|Id=*|Name" XmlId="WPGdef" Name="SearchCode" DisplayName="* csoport kereső kódja" />
+          <Setting Path="WorkPlaceGroups/WorkPlaceGroup|Num=0|Id=*|Displayname" XmlId="WPGdef" Name="DisplayName" DisplayName="* csoport megjelenítendő neve a választó listában" />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="DATAMASKS" Heading="Adatmaszkolások" XmlId="WPparams">
+        <Help>A rendszer az ASE terminálokról beérkező AutoId adatokat (vonalkódokat) képes maszkolással felismerni és konvertálva továbbküldeni feldolgozásra.\nTöbb adatmaszk is definiálható, mindegyikhez a következő adatokat kell megadni:\nInport = az adat forrása; az ASE terminál portja (COM1/COM2).\nIndata = a bejövő adat formátumát leíró reguláris kifejezés.\nOutdata = a konvertált adatot leíró kifejezés, amiben a regex-ben használt named group nevekre lehet hivatkozni..\n nameseparator = ezzel a zárójelezéssel kell a named group nevekre hivatkozni az Outdata kifejezésben.</Help>
+        <Settings>
+          <Setting Path="datamasks/datamask|id=*|Inport" DisplayName="* - a bejövő adat ASE forrás portja" SettingDescription="Az az ASE port, ahonnan az adat érkezik." />
+          <Setting Path="datamasks/datamask|id=*|Indata" DisplayName="* - a bejövő adatot leíró reguláris kifejezés" SettingDescription="A bejövő adatot leíró reguláris kifejezés." />
+          <Setting Path="datamasks/datamask|id=*|Outdata" DisplayName="* - a továbbadott adatot leíró kifejezés" SettingDescription="A továbbadott adatot leíró kifejezés." />
+          <Setting Path="datamasks/datamask|id=*|nameseparator" DisplayName="* - a továbbadott adatban levő neveket keretező zárójel" SettingDescription="A bejövő adatot leíró reguláris kifejezésben lévő nevekre ezzel a zárójelezéssel kell hivatkozni a kimenő adatot eíró kifejezésben." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="IVCONN" Heading="IV Connector konfiguráció CabPack kapcsolathoz" XmlId="WFparams">
+        <Help>Ez a blokk a CabPack által küldött beavatkozások üzenet formáját írja le.\nAz üzenet formája:\n [MessagePrefix][AssemblyLine]\n[IVIDSeparator][IVID]\n[ParameterSeparator][Parameter1][ParameterSeparator][Parameter2][ParameterSeparator][Parameter3]\n[MessageSuffix]\nAz [AssemblyLine] annak a szerelősornak az azonosítója, vagy a megnevezése a Szerelősor törzsadat állományból, amelyikre a beavatkozás vonatkozik. \nIP = ezen az IP-n várja a CabPack csatlakozását az ALM szerver.\nPort = ezen a porton várja a CabPack csatlakozást az ALM szerver.\nMessagePrefix = a feldolgozandó üzeneteknek ezzel a prefix-szel kell kezdődni.\nMessageSuffix = a feldolgozandó üzeneteknek ezzel a suffix-szel kell végződni.\nIVIDSeparator = a beavatkozás azonosítót a paraméterektől elválasztó karakter sorozat.\nParameterSeparator = a beavatkozás paramétereket egymástól elválasztó karakter sorozat.\nAck = Az üzenet sikeres feldolgozása után visszaküüldendő karaktersorozat.\nHa a fenti karaktersorozatok elején [backslash]x áll, akkor utána hexadecimálisan van leírva a tartalom, tehát [backslash]x0D0A a CR-LF karakterek küldését jelenti.\nAz egyes üzenetekkel (MSG#n) kapcsolatban a következő adatokat kell megadni:\nMessageId = Az IVID karaktersorozat.\nIntervention = Az indítandó egy beavatkozás neve.</Help>
+        <Settings>
+          <Setting Path="wfparameters/IVConnectorConfig/configuration|IP" DisplayName="Listen IP cím" SettingDescription="CabPack erre az IP-re kell csatlakozzon." />
+          <Setting Path="wfparameters/IVConnectorConfig/configuration|Port" DisplayName="Listen IP port" SettingDescription="CabPack erre az portra kell csatlakozzon." />
+          <Setting Path="wfparameters/IVConnectorConfig/configuration|MessagePrefix" DisplayName="Az üzenetek prefix-e" SettingDescription="Minden üzenetet ez a karaktersorozat nyit." />
+          <Setting Path="wfparameters/IVConnectorConfig/configuration|MessageSuffix" DisplayName="Az üzenetek suffix-e" SettingDescription="Minden üzenetet ez a karaktersorozat zár." />
+          <Setting Path="wfparameters/IVConnectorConfig/configuration|IVIDSeparator" DisplayName="IV azonosító szeparátor karakter" SettingDescription="Ez a karakter határolja el a beavatkozás azonosítót a paraméterektől." />
+          <Setting Path="wfparameters/IVConnectorConfig/configuration|ParameterSeparator" DisplayName="IV paraméter szeparátor karakter" SettingDescription="Ez a karakter határolja el a beavatkozás paramétereit egymástól." />
+          <Setting Path="wfparameters/IVConnectorConfig/configuration|Ack" DisplayName="Nyugta üzenet" SettingDescription="Ezt az karaktersorozatot küldi a modul a beavatkozásokra válaszul." />
+          <Setting Path="wfparameters/IVConnectorConfig/HandledMessages/Message|MessageNum=*|MessageId" DisplayName="MSG#* Message Id" SettingDescription="Elfogadott beavatkozás azonosítója." />
+          <Setting Path="wfparameters/IVConnectorConfig/HandledMessages/Message|MessageNum=*|Intervention" DisplayName="MSG#* Intervention Name" SettingDescription="Elfogadott beavatkozás neve." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="LOG" Heading="Naplózási beállítások">
+        <Help>Az alkalmazás naplózási paraméterei, változtatásuk esetén a teljes rendszert újra kell indítani.\nASE MW LogLevel=None (nem naplóz), All (mindent naplóz) és Default (alapértelmezett beállítás szerint naplóz).\nALM DC LogLevel=None (nem naplóz),Error, Warning, Information vagy Verbose(mindent naplóz). Az értékek hierarchikusak, tehát pl. a Warning szint tartalmazza az Error szinthez tartozó minden bejegyzést is.\nLogFilePath=A log file-okat tároló könyvtár elérési útja (ide bekerül az utolsó napló file neve, de ez felülírható).\nLogFileMaxSize=Egy log file maximális mérete, ennek elérésekor újat kezd a rendszer.</Help>
+        <Settings>
+          <Setting Path="MiddlewareConfigRoot/Configuration/LogConfig/LogLevel|Id=Main|Name" XmlId="MWconfig" DisplayName="ASE Middleware naplózási szint" Name="ASE MW LogLevel" SettingDescription="ASE Middleware naplózási szint." />
+          <Setting Path="configuration/applicationSettings/VRH.Log4Pro.DataController.Datacontroller/setting|name=LogLevel/value" Name="ALM DC LogLevel" XmlId="DCConfig" DisplayName="ALM alkalmazás keret (DataController) naplózási szint" SettingDescription="ALM alkalmazás keret (DataController) naplózási szint." />
+          <Setting Path="configuration/applicationSettings/VRH.Log4Pro.DataController.Datacontroller/setting|name=LogLevel/value" Name="ALM DC ASEMON LogLevel" XmlId="DCASEMONConfig" DisplayName="ALM alkalmazás keret (DataController ASEMON) naplózási szint" SettingDescription="ALM alkalmazás keret (DataController ASEMON) naplózási szint." />
+          <Setting Path="Configuration/FilePath" XmlId="ILOGTXT" DisplayName="Napló file tárolási helye" Name="LogFilePath" SettingDescription="Napló file tárolási helye." />
+          <Setting Path="Configuration/MaxFileSize" XmlId="ILOGTXT" DisplayName="Napló file maximális mérete" Name="LogFileMaxSize" SettingDescription="Napló file maximális mérete." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="FLOWDT" Heading="Folyamat paraméterek - Állásidő számítás paraméterek" XmlId="WFparams">
+        <Help>A rendszer bizonyos állásidő helyzetek alkalmával automatikusan állásidő okokat regisztrál. Az állásidő kódokat a kezelő felületen is fel lehet venni, és ebben az esetben szabatos megnevezéseket lehet megadni nekik.\n\nA paraméterek:\n&gt;&gt;&gt; DTR_LateShiftStart=a szerelősor a műszakváltás után késve indul (pozitív állásidő).\n&gt;&gt;&gt; DTR_LateBreakEnd=a szerelősor a szünet indulása után késve indul (pozitív állásidő).\n&gt;&gt;&gt; DTR_EarlyShiftEnd=a szerelősor a műszakváltás előtt korán áll le (pozitív állásidő).\n&gt;&gt;&gt; DTR_EarlyBreakStart=a szerelősor a szünet kezdete előtt korán áll le (pozitív állásidő).\n&gt;&gt;&gt; DTR_ProductionEarlyStart=a szerelősor a szünet vége előtt korán elindul (negatív állásidő).\n&gt;&gt;&gt; DTR_ProductionLateEnd=a szerelősor a szünet kezdete után későn áll le(negatív állásidő).\n&gt;&gt;&gt; DTR_ShortDowntimePeriode=az állásidő hossza kisebb, mint egy határérték.\n&gt;&gt;&gt; DTR_ShortDowntimePeriodeTimeLimit=a DTR_ShortDowntimePeriode automatikus állásidő kódokhoz tartozó határ érték másodpercben.\n\n&gt;&gt;&gt; Ha azt tapasztalja, hogy az ALM rendszerben kijelzett hátralévő ciklusidő késedelemben van a szerelősor valósidejű hátralévő ciklusidő számlálójához képest, akkor az ASEMonitorCycleStartDelay paraméter beállításával ezt a késleltetést korrigálhatja. Ha pl. az ALM rendszer számlálója mindig 5 másodperccel később indul, mint a valós idejű, akkor ennek a paraméternek az 5-re állításával ez a késés korrigálható.\n&gt;&gt;&gt; ASEMonitorCycleStartDelay=ALM hátralévő ciklusidő számláló késés kompenzáló eltolás értéke.</Help>
+        <Settings>
+          <Setting Path="wfparameters/DTMparameters/ASEMonitorCycleStartDelay" DisplayName="Remaining cycletime counter delay" SettingDescription="Remaining cycletime counter delay." />
+          <Setting Path="wfparameters/DTMparameters/DTR_LateBreakEnd" Name="DTR_StartAfterBreakEnd" DisplayName="Indulás szünet vége után" SettingDescription="Termelés késői indulása szünet után." />
+          <Setting Path="wfparameters/DTMparameters/DTR_EarlyBreakStart" Name="DTR_StopBeforeBreakStart" DisplayName="Leállás szünet indulás előtt" SettingDescription="Termelés korai leállása szünet előtt." />
+          <Setting Path="wfparameters/DTMparameters/DTR_LateShiftStart" Name="DTR_StartAfterShiftChange" DisplayName="Indulás műszakváltás után" SettingDescription="Termelés késői indulása műszakváltás után." />
+          <Setting Path="wfparameters/DTMparameters/DTR_EarlyShiftEnd" Name="DTR_StopBeforeShiftChange" DisplayName="Leállás műszakváltás előtt" SettingDescription="Termelés korai leállása műszakváltás előtt." />
+          <Setting Path="wfparameters/DTMparameters/DTR_ProductionLateEnd" Name="DTR_StopAfterBreakStart" DisplayName="Leállás szünet indulása után" SettingDescription="Termelés késői befejezése szünet indulása után." />
+          <Setting Path="wfparameters/DTMparameters/DTR_ProductionEarlyStart" Name="DTR_StartBeforeBreakEnd" DisplayName="Indulás szünet vége előtt" SettingDescription="Termelés korai indulása szünet vége előtt." />
+          <Setting Path="wfparameters/DTMparameters/DTR_ShortDowntimePeriode" DisplayName="Rövid állásidő" SettingDescription="Rövid állásidő után automatikus állásidő kód." />
+          <Setting Path="wfparameters/DTMparameters/DTR_ShortDowntimePeriode|TimeLimit" Name="DTR_ShortDowntimePeriodeTimeLimit" DisplayName="Rövid állásidő határ" SettingDescription="Rövid állásidő határ értéke másodpercben." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="FLOWCOMPLETED" Heading="Folyamat paraméterek - Termék lejelentés" XmlId="WFparams">
+        <Help>A termék lejelentés paramétereit lehet ebben a részben megadni. Megqadható a termék lejelentés módja, valamint a termék lejelentésre való figyelmeztetéshez és a termék lejelentés nyugtázásához lehet itt hangjelzéseket hozzárendelni.\nA termék lejelentés módja lehet manuális, vagy automatikus. Manuális mód esetén minden egyes termék elkészülésekor ezt a Termék lejelentése beavatkozással jelezni kell a rendszerben (pl. a beavatkozáshoz kapcsolt nyomógomb lenyomásával), automatikus mód esetén minden ciklusban automatikusan lejelentésre kerül egy termék, kivéve, ha a Termék lejelentése beavatkozással (a gombnyomással) ezt kifejezetten letiltják.\nMegadható az egy gyártási ciklusban keletkezett termékek száma az összes szerelősorra (közös mennyiség), és egyenként azokra a szerelősorokra, amelyek esetén a mennyiség nem egyezik a közös mennyiséggel.\nA szerelési ciklusban (csak manuális termék számlálás esetén) egy sípjel sorozat figyelmezteti az operátort arra, hogy egy termék elkészülte esetén ezt egy gombnyomással jelezze a rendszer felé. A hangjelzés sorozat a kezdő hangjelzéssel indul, majd a záró hangjelzés követi.\nA termék elkészültét jelző gombnyomás észlelését és feldolgozását a rendszer ugyancsak egy hangjelzés-sorozattal nyugtázza a szerelősori ASE terminál felé.\n\nA paraméterek:\n&gt;&gt;&gt; AutoProductCountMode=True (automatikus), vagy False (manuális)\n&gt;&gt;&gt; ItemCompletedInOneCycleQty=az egy ciklusban gyártandó mennyiség\n&gt;&gt;&gt; Signalname=az eseményhez rendelt hangjelzéshez neve\n&gt;&gt;&gt; Afterinseconds=az eseményhez rendelt hangjelzés indítási ideje (a ciklusidő százalékában).</Help>
+        <Settings>
+          <Setting Path="wfparameters/DTMparameters/AutoProductCountMode" DisplayName="Automatikus termék lejelentés" SettingDescription="Automatikus termék lejelentés." />
+          <Setting Path="wfparameters/DTMparameters/ProdCountWarning/StartLowWarning|Signalname" DisplayName="Lejelentés figyelmeztetés kezdő hangjelzés neve" SettingDescription="Lejelentés figyelmeztetés kezdő hangjelzés neve." />
+          <Setting Path="wfparameters/DTMparameters/ProdCountWarning/StartLowWarning|AfterInSecond" DisplayName="Lejelentés figyelmeztetés kezdő hangjelzés indítási ideje" SettingDescription="Lejelentés figyelmeztetés kezdő hangjelzés indítási ideje." />
+          <Setting Path="wfparameters/DTMparameters/ProdCountWarning/StartHighWarning|Signalname" DisplayName="Lejelentés figyelmeztetés befejező hangjelzés neve" SettingDescription="Lejelentés figyelmeztetés befejező hangjelzés neve." />
+          <Setting Path="wfparameters/DTMparameters/ProdCountWarning/StartHighWarning|AfterInSecond" DisplayName="Lejelentés figyelmeztetés befejező  hangjelzés indítási ideje" SettingDescription="Lejelentés figyelmeztetés befejező  hangjelzés indítási ideje." />
+          <Setting Path="wfparameters/DTMparameters/ProdCountWarning/ShootdownWarning|Signalname" DisplayName="Lejelentés visszajelző nyugta hangjelzés neve" SettingDescription="Lejelentés visszajelző nyugta hangjelzés neve." />
+          <Setting Path="wfparameters/DTMparameters/ProdCountWarning/ShootdownWarning|AfterInSecond" DisplayName="Lejelentés visszajelző nyugta  hangjelzés indítási ideje" SettingDescription="Lejelentés visszajelző nyugta hangjelzés indítási ideje." />
+          <Setting Path="wfparameters/DTMparameters/ItemCompletedInOneCycleQty" DisplayName="Egy ciklusban legyártott termékek száma" SettingDescription="Egy ciklusban legyártott termékek száma." />
+          <Setting Path="wfparameters/AssemblyLineParameters/AssemblyLine|Name=*/DTMparameters/ItemCompletedInOneCycleQty" Name="ItemCompletedInOneCycleQty *" DisplayName="Egy ciklusban legyártott termékek száma a * szerelősoron" SettingDescription="Egy ciklusban legyártott termékek száma a * szerelősoron." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="FLOWSUSP" Heading="Folyamat paraméterek - Felfüggesztés folytatás műszak indulásakor" XmlId="WFparams">
+        <Help>A szerelősor felfüggesztett állapotából való kilépés módjának szabályozása. Műszak indulásakor először a felfüggesztéssel kapcsolatos paraméterek kerülnek kiértékelésre, és ez alapján beállításra kerül a szerelősor felfüggesztett/nem felfüggesztett állapota az új műszakra vonatkozóan.\n\nA paraméterek:\n&gt;&gt;&gt; AutoSuspendShiftStart=true: ha a szerelősor nem felfüggesztett, és az induló műszak felfüggesztett, akkor a szerelősor automatikusan felfüggesztett állapotba kerül.\n&gt;&gt;&gt; AutoResumeShiftStart=true: ha a szerelősor felfüggesztett, és az induló műszak nem felfüggesztett, akkor a szerelősor automatikusan kikerül a felfüggesztett állapotból.\n&gt;&gt;&gt; AutoResumeEWSexists=true: ha a szerelősor felfüggesztett állapotban van és az induló műszakra van EWS tervezve, akkor a szerelősor felfüggesztése megszűnik (akár felfüggesztett, akár nem az induló műszak).</Help>
+        <Settings>
+          <Setting Path="wfparameters/DTMparameters/AutoSuspendShiftStart" DisplayName="Felfüggesztés műszak indulásakor" SettingDescription="Felfüggesztés műszak indulásakor." />
+          <Setting Path="wfparameters/DTMparameters/AutoResumeShiftStart" DisplayName="Felfüggesztésből kilépés műszak indulásakor" SettingDescription="Felfüggesztésből kilépés műszak indulásakor." />
+          <Setting Path="wfparameters/DTMparameters/AutoResumeEWSexists" DisplayName="Felfüggesztésből való kilépés, ha van EWS az induló műszakra" SettingDescription="Felfüggesztésből való kilépés, ha van EWS az induló műszakra." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="FLOWEWS" Heading="Folyamat paraméterek - EWS mód kezelése műszak indulásakor" XmlId="WFparams">
+        <Help>Az E-munkalap indulási és végrehajtási módjának szabályozása. Műszak indulásakor először a felfüggesztéssel kapcsolatos paraméterek kerülnek kiértékelésre, és ez alapján beállításra kerül a szerelősor felfüggesztett/nem felfüggesztett állapota. Ha a szerelősor NEM felfüggesztett állapotba került, akkor kerül sor az EWS végrehajtási paraméterek kiértékelésére a következők szerint: ha a szerelősoron van EWS gyártás (mert a felfüggesztéskor ment az EWS), akkor folyamatos végrehajtási mód esetén az folytatódik. Ha azonban szakaszos a végrehajtási mód, akkor a felfüggesztett EWS gyártás nem folytatódik, viszont ha automatikus EWS indítási mód bekapcsolva van, akkor az induló műszakhoz tartozó EWS (ha létezik) elindul.\n\nA paraméterek:\n&gt;&gt;&gt; EwsExecutionModeAutostart=true esetén műszak indulásakor automatikusan bekapcsolódik az e-munkalap végrehajtási mód, ha van az induló műszakra tervezett e-munkalap.\n&gt;&gt;&gt; EwsExecutionModeContinous=true: műszakváltáskor a folyamatban lévő e-munkalap végrehajtása folytatódik.\n&gt;&gt;&gt; EwsExecutionModeContinous=false: műszakváltáskor az induló műszakhoz rendelt e-munkalap indul (ha van ilyen), vagy leáll az e-munkalap üzemmód.</Help>
+        <Settings>
+          <Setting Path="wfparameters/DTMparameters/EwsExecutionModeAutostart" DisplayName="E-munkalap automatikus indulás" SettingDescription="E-munkalap automatikus indulás." />
+          <Setting Path="wfparameters/DTMparameters/EwsExecutionModeContinous" DisplayName="E-munkalap végrehajtási mód" SettingDescription="E-munkalap végrehajtási mód." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="FLOWSPP" Heading="Folyamat paraméterek - Óránkénti terv kezelése" XmlId="WFparams">
+        <Help>A ProductionStart,ProductionEnd,Packaging és a PackagingClose beavatkozások az óránkénti terv kezeléséhez kapcsolódnak, és azt szabályozzák, hogy a termék indítás, termék legyártás, termék csomagolás és szállítási egység lezárása beavatkozások közül melyek vannak használatban. True érték esetén a rendszer a beavatkozás manuális végrehajtásukkor könyveli a mennyiséget, False érték esetén pedig egyéb események alkalmával automatikusan könyveli a kérdéses mennyiséget. Ha pl. a ProductionStart=False, akkor a rendszer a termék lejelentés beavatkozás hatására könyveli utomatikusan a termék indítás mennyiséget is.\n&gt;&gt;&gt; SPMFactIVEnableProductionStart: A termék indítás beavatkozás használata\n&gt;&gt;&gt; SPMFactIVEnableProductionEnd: A termék legyártása beavatkozás használata\n&gt;&gt;&gt; SPMFactIVEnablePackaging: A termék csomagolása beavatkozás használata\n&gt;&gt;&gt; SPMFactIVEnablePackagingClose: A szállítási egység lezárása beavatkozás használata.\n\nAz óránkénti tervek a műszak folyamán periódikusan újra generálásra kerülnek feltétel nélkül, vagy csak akkor, ha változás történik a futó e-munkalapban.\n&gt;&gt;&gt; SPMPlanAutoModeOn=True: Óránkénti ter automatikus újragenerálásának engedélyezése (false esetén nem engedélyez).\n&gt;&gt;&gt; SPMPlanEwsModeRefreshOnChangeOnly=True: Óránkénti terv automatikus újragenerálása csak EWS változása esetén.\n&gt;&gt;&gt; SPMPlanEwsModeReloadFrequency: Óránkénti terv automatikus újragenerálásának gyakorisága (másodpercben).\n\nE-munkalap indításakor a rendszer a szerelősor tartalmára vonatkozó feltételezéssel ér (üres, vagy teli).\n&gt;&gt;&gt; SPMPlanEwsModeOn=True: Óránkénti terv generálás EWS alapján.\n&gt;&gt;&gt; SPMPlanEwsModeOn=False: Óránkénti terv közvetlen megadása EWS használata nélkül.\n&gt;&gt;&gt; SPMPlanEwsModeIniToEmpty=True: Óránkénti terv generálásakor EWS indítás esetén üres sort feltételez.\n&gt;&gt;&gt; SPMPlanEwsModeIniToEmpty=False: Óránkénti terv generálásakor EWS indítás esetén az EWS első tételével teli sort feltételez.\n&gt;&gt;&gt;PCPackITSNrescanfrequency: Ismételt Packaging és PackagingClose beavatkozások nem kerülnek elfogadásra ugyanarra a tételre vonatkozóan ezen az időintervallumon belül (formátum=óó:pp:mm).</Help>
+        <Settings>
+          <Setting Path="wfparameters/SPMparameters/configuration/SPMFactIVEnableProductionStart" DisplayName="A termék indítás beavatkozás használata" SettingDescription="A termék indítás beavatkozás használata." />
+          <Setting Path="wfparameters/SPMparameters/configuration/SPMFactIVEnableProductionEnd" DisplayName="A termék legyártása beavatkozás használata" SettingDescription="A termék legyártása beavatkozás használata." />
+          <Setting Path="wfparameters/SPMparameters/configuration/SPMFactIVEnablePackaging" DisplayName="A termék csomagolása beavatkozás használata" SettingDescription="A termék csomagolása beavatkozás használata." />
+          <Setting Path="wfparameters/SPMparameters/configuration/SPMFactIVEnablePackagingClose" DisplayName="A szállítási egység lezárása beavatkozás használata" SettingDescription="A szállítási egység lezárása beavatkozás használata." />
+          <Setting Path="wfparameters/SPMparameters/SPMPlanAutoModeOn" DisplayName="Óránkénti terv automatikus újratöltése" SettingDescription="Óránkénti terv automatikus újratöltése." />
+          <Setting Path="wfparameters/SPMparameters/SPMPlanEwsModeRefreshOnChangeOnly" DisplayName="Óránkénti terv újratöltés csak e-munkalap változás esetén" SettingDescription="Óránkénti terv újratöltés csak e-munkalap változás esetén." />
+          <Setting Path="wfparameters/SPMparameters/SPMPlanEwsModeReloadFrequency" DisplayName="Óránkénti terv újratöltési gyakorisága EWS módban" SettingDescription="Óránkénti terv újratöltési gyakorisága EWS módban." />
+          <Setting Path="wfparameters/SPMparameters/SPMPlanEwsModeOn" DisplayName="Óránkénti terv generálása e-munkalapok alapján" SettingDescription="Óránkénti terv generálása e-munkalapok alapján." />
+          <Setting Path="wfparameters/SPMparameters/SPMPlanEwsModeIniToEmpty" DisplayName="Óránkénti terv generáláskor üres sor feltételezése" SettingDescription="Óránkénti terv generáláskor üres sor feltételezése." />
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="FLOWEFF" Heading="Folyamat paraméterek - Hatékonyság számolás paraméterei" XmlId="WFparams">
+        <Help>Ezek a paraméterek szabályozzák a hatékonyság mutatók (SDLH=Standard Lear Hours = Lear Sztender Órák, PTU=Production Time Utilization = Termelési Idő Felhasználás, IPPM = Internal Parts Per Million = Meghibásodási Mutatók Egymillió Darabra Vetítve) számolását.\n\n>>> EfficiencyMetricCalculationOperation=started|completed|packed|closed: a hatékonyság mutatókat ennek a műveletnek a mennyiségei alapján kell meghatározni.\n>>> IPPMstd: sztenderd IPPM mutató.\n>>> RefreshInterval: a hatékonyság adatok újraszámolási gyakorisága (másodpercben).</Help>
+        <Settings>
+          <Setting Path="wfparameters/EfficiencyParameters/EfficiencyMetricCalculationOperation" DisplayName="Erre a műveletre kell számolni a hatékonyságot" SettingDescription="Erre a műveletre kell számolni a hatékonyságot."/>
+          <Setting Path="wfparameters/EfficiencyParameters/IPPMstd" DisplayName="Globális sztenderd IPPM korlát" SettingDescription="Globális sztenderd IPPM korlát."/>
+          <Setting Path="wfparameters/EfficiencyParameters/RefreshInterval" DisplayName="Adat frissítési gyakoriság (mp)" SettingDescription="Data refresh interval (mp)."/>
+        </Settings>
+      </SettingGroup>
+      <SettingGroup Id="FLOWANDON" Heading="Folyamat paraméterek - ANDON funkciók paraméterei" XmlId="WFparams">
+        <Help>Az ANDON funkcióhoz kapcsolódó beállítási paraméterek.\nUseMasterData = az ANDON kódok fogadásakor történjen ellenőrzés az ALM rendszer törzsadataival (true/false).\n\nA paraméterek:\n&gt;&gt;&gt; StopRequestCode = A leállítás kérés ANDON kódja.\n&gt;&gt;&gt; ShiftChangeAction = mi történjen műszakváltáskor az aktív kérésekkel (Nothing=nincs művelet a kérések aktívak maradnak, da az Andon Log adatbázisban továbbra is lezárult műszakhoz kötödnek, Init=minden aktív kérés lezárásra kerül, Move=az aktív kérések lezáratlanok maradnak, és az adatbázisban az új műszakra kerülnek átkötésre).\n&gt;&gt;&gt; AndonViewOnTimer = az ASEMonitoron ennyi ideig van bekapcsolva az Andon kijelzés (másodperc).\nAndonViewOffTimer = az ASEMonitoron ennyi ideig van kikapcsolva az Andon kijelzés (másodperc).\n&gt;&gt;&gt; ASE LogicalName = az ANDON vezérlőhöz kapcsolódó ASE logikai neve (Start/End).\nASE ComPort = az ANDON vezérlőhöz kapcsolódó ASE COM port száma(1/2).\n&gt;&gt;&gt; Acknowledge = ezt a karaktersorozatot küldi az ANDON vezérlőnek pozitív nyugtaként a kapott parancsra (kérés sikeresen feldolgozva.\n&gt;&gt;&gt; NegativeAcknowledge = ezt a karaktersorozatot küldi az ANDON vezérlőnek negatív nyugtaként (kérés feldolgozása során hiba lépett fel.\n&gt;&gt;&gt; AndonControllerInitSequence = ezt a karaktersorozatot küldi az ANDON vezérlőnek initkor a soros porton át.\n&gt;&gt;&gt; A karaktersorozatokon belül a nem alfanumerikus karaktereket \\xHH vagy \\XXX formában kell megadni, ahol HH a byte 2 számjegyű hexadecimális kódja), XXX pedig a byte ASCII elnevezése:\n&gt;&gt;&gt;    0-9: NUL,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB;\n&gt;&gt;&gt;    10-20:LF,VT,FF,CR,SO,SI,DLE,DC1,DC2,DC3,DC4;\n&gt;&gt;&gt;    21-31:NAK,SYSN,ETB,CAN,EM,SUB,ESC,FS,GS,RS,US;\n&gt;&gt;&gt;    127:DEL.\n>>> QueueStopRequests = true: Tárolja be a stop kéréseket is a kérés sorokba.\n>>> MaxNumOfWP = A szerelősorokhoz a monitor képernyőkön megjeleníthető munkahelyek maximális száma.\n>>> MaxLenWPqueue = A munkahelyenként a monitor képernyőkön megjeleníthető kérések maximális száma.\n>>> MaxNumOfCode = A szerelősorokhoz a monitor képernyőkön megjeleníthető kéréstípusok maximális száma.\n>>> MaxLenCodeQueue = A  monitor képernyőkön megjeleníthető kérések száma kérés típusonként.</Help>
+        <Settings>
+          <Setting Path="wfparameters/ANDONparameters/UseMasterData" DisplayName="ANDON kérés kódok ellenőrzése a törzsadatokkal" SettingDescription="ANDON kérés kódok ellenőrzése a törzsadatokkal." />
+          <Setting Path="wfparameters/ANDONparameters/StopRequestCode" DisplayName="Leállítás kérés ANDON kódja" SettingDescription="Leállítás kérés ANDON kódja." />
+          <Setting Path="wfparameters/ANDONparameters/AndonControllerInitSequence" DisplayName="Inicializáláskor az ANDON kontroller felé küldendő karaktersorozat" SettingDescription="Inicializáláskor az ANDON kontroller felé küldendő karaktersorozat." />
+          <Setting Path="wfparameters/ANDONparameters/ShiftChangeAction" DisplayName="Teendő műszakváltáskor" SettingDescription="Teendő műszakváltáskor." />
+          <Setting Path="wfparameters/ANDONparameters/AndonViewOnTimer" DisplayName="ANDON monitor bekapcsolt állapotának hossza" SettingDescription="ANDON monitor bekapcsolt állapotának hossza." />
+          <Setting Path="wfparameters/ANDONparameters/AndonViewOFFTimer" DisplayName="ANDON monitor kikapcsolt állapotának hossza" SettingDescription="ANDON monitor kikapcsolt állapotának hossza." />
+          <Setting Path="wfparameters/ANDONparameters/Acknowledge" DisplayName="ANDON vezérlőtől érkező parancsra küldött pozitív nyugta" SettingDescription="ANDON vezérlőtől érkező parancsra küldött pozitív nyugta." />
+          <Setting Path="wfparameters/ANDONparameters/NegativeAcknowledge" DisplayName="ANDON vezérlőtől érkező parancsra küldött negatív nyugta" SettingDescription="ANDON vezérlőtől érkező parancsra küldött negatív nyugta." />
+          <Setting Path="wfparameters/ANDONparameters/ASEDevice|LogicalName" Name="ASE LogicalName" DisplayName="ANDON vezérlőhöz kapcsolódó ASE terminál neve" SettingDescription="ANDON vezérlőhöz kapcsolódó ASE terminál neve." />
+          <Setting Path="wfparameters/ANDONparameters/ASEDevice|ComPort" Name="ASE ComPort" DisplayName="ANDON vezérlőhöz kapcsolódó ASE terminál COM port" SettingDescription="ANDON vezérlőhöz kapcsolódó ASE terminál COM port." />
+          <Setting Path="wfparameters/ANDONparameters/QueueStopRequests" Name="QueueStopRequests" DisplayName="A stop kéréseket is állítsa be a sorokba" SettingDescription="A stop kéréseket is állítsa be a sorokba." />
+          <Setting Path="wfparameters/ANDONparameters/MaxNumOfWP" Name="MaxNumOfWP" DisplayName="A munkahelyek max. száma" SettingDescription="A monitor képernyőkön megjeleníthető munkahelyek max. száma szerelősoronként." />
+          <Setting Path="wfparameters/ANDONparameters/MaxLenWPqueue" Name="MaxLenWPqueue" DisplayName="A kérések max száma szerelősoronként" SettingDescription="A monitor képernyőkön megjeleníthető kérések max. száma szerelősoronként." />
+          <Setting Path="wfparameters/ANDONparameters/MaxNumOfCode" Name="MaxNumOfCode" DisplayName="Kérés típusok max. száma" SettingDescription="A monitor képernyőkön megjeleníthető kéréstípusok max. száma." />
+          <Setting Path="wfparameters/ANDONparameters/MaxLenCodeQueue" Name="MaxLenCodeQueue" DisplayName="A kérések max száma kérés típusonként" SettingDescription="A monitor képernyőkön megjeleníthető kérések max. száma kérés típusonként."/>
+        </Settings>
+      </SettingGroup>
+    </SettingMainGroup>
+  </SettingMainGroups>
+</ConfigEditor>

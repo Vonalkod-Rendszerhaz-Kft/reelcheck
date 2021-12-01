@@ -1,0 +1,104 @@
+﻿
+@model Vrh.Web.ServiceControl.Areas.ServiceControl.Models.ServiceControlViewModel
+
+@{
+    var title = Html.Raw(Model.Translation(typeof(WordCodes.ServiceControl.IndexView.Title)));
+
+    Object commonRouteValues = new { area = Constants.AREA, xml = Model.XmlConnectionString };
+    AjaxOptions commonAjaxOptions = new AjaxOptions
+    {
+        UpdateTargetId = Constants.Ids.LISTVIEW,
+        HttpMethod = "get",
+        OnBegin = "disableButtons",
+        OnSuccess = "enableRefreshButton"
+    };
+    Object commonHtmlAttributes = new { id = "refreshButton", @class = "btn btn-action refreshButton fas fa-sync-alt", @style = Model.RefreshButton_Style };
+}
+
+<style>
+    .helpText {
+        color: #FFCC33;
+        font-size: small;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-7 col-lg-8" style="line-height:1rem;">
+                <h1 class="card-title">@Model.Title</h1>
+                @if (Model.Help != null)
+                {
+                    foreach (var line in @Model.Help.Split(new string[] { "\\n" }, StringSplitOptions.None))
+                    {
+                        <small class="helpText">@line</small><br />
+                    }
+                }
+            </div>
+            <div class="col-0 col-sm-0 col-md-5 col-lg-4 mt-2 mt-sm-2 mt-md-0">
+                <div class="float-right">
+                    @Ajax.ActionLink(" ", Constants.Actions.COMMONSERVICEACTION, Constants.CTRL_SRVC, commonRouteValues, commonAjaxOptions, commonHtmlAttributes)
+                    <button class="btn btn-success autorefreshButton" id="ase-getsensorscontinously" style="@(Model.AutoRefreshButton_Style)">
+                        <span id="ase-sensor-spinner" class="fas fa-sync-alt fa-align-left"></span>
+                        @Model.Translation(typeof(WordCodes.ServiceControl.IndexView.AutoRefresh))
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- class="card-header" END -->
+    @Html.Partial(Constants.Views.SERVICELISTVIEW, Model)
+</div> <!-- class="card" END -->
+
+@section scripts
+{
+    <script>
+        var getsensorscntsly = false;
+        var sensorrefresh = null;
+        var refreshIntervalForServiceControl = '@Html.Raw(Model.AutoRefreshInterval * 1000)';
+
+        $(document).ready(function () {
+            'use strict';
+
+            var thisfn = 'ServiceControl Index.cshtml: ready event: ';
+            console.log(thisfn + 'PING');
+
+            $("#ase-getsensorscontinously").click(function () {
+                var thisfn = 'ServiceControl Index.cshtml: #ase-getsensorscontinously.click event: '
+                console.log(thisfn + 'PING');
+                if (getsensorscntsly) {
+                    getsensorscntsly = false;
+                    $("#ase-sensor-spinner").removeClass('fa-spin');
+                    $("#ase-getsensorscontinously").removeClass('btn-warning');
+                    $("#ase-getsensorscontinously").addClass('btn-success');
+                    clearInterval(sensorrefresh);
+
+                } else {
+                    getsensorscntsly = true;
+                    $("#ase-sensor-spinner").addClass('fa-spin');
+                    $("#ase-getsensorscontinously").removeClass('btn-success');
+                    $("#ase-getsensorscontinously").addClass('btn-warning');
+                    sensorrefresh = setInterval(function () { SensorsRefresh(); }, refreshIntervalForServiceControl);
+                }
+            });
+        });
+
+        function GetItemId(theButton) {
+            $('#clicked_button').val(theButton.name);
+            $('#button_type').val(theButton.value);
+            return true;
+        }
+
+        //function setRefreshInterval(interval) {
+        //    refreshIntervalForServiceControl = interval;
+        //}
+
+        function SensorsRefresh() {
+            $("#refreshButton").click();
+        }
+
+        function enableRefreshButton() {
+            $('a.refreshButton').removeClass('disabled');
+            $('a.btn-action').removeAttr('disabled');
+        }
+    </script>
+}

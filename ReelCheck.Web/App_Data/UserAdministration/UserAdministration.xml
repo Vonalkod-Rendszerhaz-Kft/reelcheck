@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?> 
+<UserAdministration>
+	<XmlParser>
+		<XmlVar Name="ELSO">Első XMlParser változó belső</XmlVar>
+		<XmlVar Name="MASODIK">Második XMlParser változó belső</XmlVar>
+		<XmlVar Name="HARMADIK">Harmadik XMlParser változó belső</XmlVar>
+		<XmlVar Name="NEGYEDIK">Negyedik XMlParser változó belső</XmlVar>
+	</XmlParser>
+
+  <!--
+	IntegratedLogin: Az alapértelmezett belső bejelentkezés leíró neve; kötelező elem,
+                   egy Type="Integrated" Login bejegyzésre kell mutasson, egyébként hiba!
+	ExternalLogin: Az alapértelmezett külső bejelentkezés leíró neve; nem kötelező, 
+		             ha nincs, akkor a külső bejelentkezés nem elérhető az alapértelmezett
+		             login képernyőn, ha meg van adva, akkor ez az alapértelmezett bejelentkezési mód.
+  -->
+  <Default IntegratedLogin="ADMIN" ExternalLogin="NORMALUI"/>
+
+  <LoginTypeDefaults>  
+    <Integrated></Integrated>
+    <WebReq>
+      <Url>
+        <protocol>http</protocol>
+        <hostname>192.168.77.47</hostname>
+        <appname>CustomFVS</appname>
+        <area>ReelCheck</area>
+        <controller>CORSTest</controller>
+        <action>Error</action>
+	<!--
+        <area>UserAdministration</area><controller>Account</controller><action>RemoteLoginTest</action>
+	-->
+      </Url>
+      <RequestTemplate FromServer="true">ID=99|USER={USERNAME}|PSW={PASSWORD}</RequestTemplate>
+
+      <ResponseTemplates>
+        <ResponseTemplate Regex="^status=(?'PART_STATUS'PASS)\|">
+          <Parts><Part>szint=(?'PART_ROLEGROUP'.*)($|\|)</Part></Parts>
+          <DataElements>
+                <DataElement Name="STATUS">{PART_STATUS}</DataElement>
+                <DataElement Name="ROLEGROUP">{PART_ROLEGROUP}</DataElement>
+          </DataElements>
+        </ResponseTemplate>
+        <ResponseTemplate Regex="^status=(?'PART_STATUS'FAIL)\|">
+          <Parts><Part>msg=(?'PART_ERRMSG'.*) ($|\|)</Part></Parts>
+          <DataElements>
+                <DataElement Name="STATUS">{PART_STATUS}</DataElement>
+                <DataElement Name="ERRMSG">{PART_ERRMSG}</DataElement>
+          </DataElements>
+        </ResponseTemplate>
+      </ResponseTemplates>
+      
+      <RoleGroupTranslaton ExternalSystem="" EntityType="">
+        <InternalRoleGroup ExternalRoleGroup="0">ReelCheckOperator</InternalRoleGroup>
+        <InternalRoleGroup ExternalRoleGroup="1">ReelCheckManager</InternalRoleGroup>
+      </RoleGroupTranslaton>
+    </WebReq>
+    <ActiveDirectory></ActiveDirectory>
+  </LoginTypeDefaults>
+
+  <Logins>
+    <Login Name="LABELD" Label="" LabelWordCode="" Type="WebReq" ReloadLogin="false" ReloadLogout="false">
+      <AfterLogin>
+        <area>Intervention</area><controller>LabelD</controller><action>Run</action>
+        <inputparameter name="interventionName">Login</inputparameter>
+      </AfterLogin>
+      <BeforeLogout>
+        <area>Intervention</area><controller>LabelD</controller><action>Run</action>
+        <inputparameter name="interventionName">Logout</inputparameter>
+        <inputparameter name="userName">*</inputparameter>
+      </BeforeLogout>
+    </Login>
+    <Login Name="LABELK" Label="" LabelWordCode="" Type="WebReq" ReloadLogin="false" ReloadLogout="false">
+      <AfterLogin>
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Login</inputparameter>
+      </AfterLogin>
+      <BeforeLogout>
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Logout</inputparameter>
+        <inputparameter name="userName">*</inputparameter>
+      </BeforeLogout>
+    </Login>
+    <Login Name="LABELE" Label="" LabelWordCode="" Type="WebReq" ReloadLogin="false" ReloadLogout="false">
+      <AfterLogin>
+        <area>Intervention</area><controller>LabelE</controller><action>Run</action>
+        <inputparameter name="interventionName">Login</inputparameter>
+        <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+      </AfterLogin>
+      <BeforeLogout>
+        <area>Intervention</area><controller>LabelE</controller><action>Run</action>
+        <inputparameter name="interventionName">Logout</inputparameter>
+        <inputparameter name="userName">*</inputparameter>
+      </BeforeLogout>
+    </Login>
+    <Login Name="ADMIN" Label="" LabelWordCode="" ReloadLogin="true" ReloadLogout="true">
+      <AfterLogin>
+        <area>UserAdministration</area><controller>Account</controller><action>ReturnInfoTest</action>
+        <inputparameter name="event">TesztLogin.AfterLogin</inputparameter>
+        <inputparameter name="LoginName">ADMIN</inputparameter>
+      </AfterLogin>
+      <BeforeLogout>
+        <area>UserAdministration</area><controller>Account</controller><action>ReturnInfoTest</action>
+        <inputparameter name="event">TesztLogin.BeforeLogout</inputparameter>
+        <inputparameter name="LoginName">ADMIN</inputparameter>
+      </BeforeLogout>
+    </Login>
+    <Login Name="NORMALUI" Label="" LabelWordCode="" Type="WebReq" ReloadLogin="false" ReloadLogout="true">
+      <AfterLogin>
+        <area>UserAdministration</area><controller>Account</controller><action>ReturnInfoTest</action>
+        <inputparameter name="event">TesztLogin.AfterLogin</inputparameter>
+        <inputparameter name="LoginName">NORMALUI</inputparameter>
+      </AfterLogin>
+      <BeforeLogout>
+        <area>UserAdministration</area><controller>Account</controller><action>ReturnInfoTest</action>
+        <inputparameter name="event">TesztLogin.BeforeLogout</inputparameter>
+        <inputparameter name="LoginName">NORMALUI</inputparameter>
+      </BeforeLogout>
+    </Login>
+  </Logins>
+
+</UserAdministration>

@@ -1,0 +1,60 @@
+﻿@using System.Reflection;
+@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Common.Lib;
+
+@model ProfileModel
+
+@{
+    string thiscs = "WebMonitor.Display.cshtml: ";
+    Layout = WebCommon.Layout;
+    System.Diagnostics.Debug.WriteLine($"{thiscs}: WebCommon.Layout={WebCommon.Layout}");
+
+    string getTitle = MultiLanguageManager.GetTranslation(typeof(WordCodes.WebMonitor.RefreshIconTitle));
+
+    //Assembly assembly = Assembly.GetExecutingAssembly();
+    //CookieApplicationSettings cookieApplicationSettings = new CookieApplicationSettings(assembly, Request);
+    //System.Diagnostics.Debug.WriteLine($"{thiscs}: ViewMode={cookieApplicationSettings.ViewMode}, Name={cookieApplicationSettings.ProductName}, Version={cookieApplicationSettings.ProductVersion}");
+}
+
+@Styles.Render("~/webmonitor/content")
+
+<div id="webmonitorhead" ondblclick="wmon.headMinimize();" style="@(Model.IsHeadHide ? "display:none;height:0;" : "")">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.UserGroup)
+        if (Model.SelectedProfile.SelectEnable_MonitorProfile == "true")
+        {
+            @Html.DropDownListFor(x => x.SelectedProfileName, Model.ProfileSelectList)
+        }
+        else
+        {
+            @Html.HiddenFor(x => x.SelectedProfileName)
+        }
+        <select id="blocks-select" class="select-class" style="display:none;"></select>
+        <select id="assemblyLines" class="select-class" style="display:none;"></select>
+        <button onclick="wmon.ChangeIframeClick();" class="btn btn-success" style="display:none;" type="button" id="btnConfiguration">
+            <span aria-hidden="true" class="fas fa-play"></span>
+        </button>
+        <a>
+            @*<span id="fullscreenicon" class="glyphicon glyphicon-resize-full wmicons" onclick="wmon.switchFullScreen();" title="@Html.Raw(fullScreenOnTitle)"></span>
+                <span id="menuicon" class="glyphicon glyphicon-align-justify wmicons" onclick="wmon.ahaVisibleChange();" title="@Html.Raw(visibleMenuTitle)"></span>*@
+            <span id="refreshicon" class="fas fa-sync-alt wmicons" onclick="wmon.ajaxGetValues();" title="@Html.Raw(getTitle)"></span>
+        </a>
+    }
+</div>
+<div id="webmonitorprogressbar">
+    <div style="display:table-cell;vertical-align:middle;">@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.WebMonitor.Loading)))</div>
+</div>
+<div id="webmonitorbody">
+</div>
+
+@Scripts.Render("~/webmonitor/scripts")
+<script type="text/javascript">
+    function WebMonitorConstantsSet() {
+        wmon.cnst.ISHEADHIDE = @(Model.IsHeadHide ? "true" : "false");
+        @*wmon.cnst.URL_SAVEVISIBLE = '@Url.Action("SaveVisible", "WebMonitor", new { area = "WebMonitor" })';
+        wmon.cnst.TITLE_FULLSCREEN_ON = '@Html.Raw(fullScreenOnTitle)';
+        wmon.cnst.TITLE_FULLSCREEN_OFF = '@Html.Raw(fullScreenOffTitle)';*@
+        wmon.cnst.URL_GETVALUES = '@Html.Raw(Url.Action("GetValues", "WebMonitor", new { area = "WebMonitor", xml = Model.XmlConnectionString, paramjson = Model.ParametersJSON }))';
+    }
+</script>

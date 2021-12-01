@@ -1,0 +1,82 @@
+﻿/***************************************************
+VRH AutoComplete megoldásához használatos stílusok.
+    Created: Wittmann Antal, 2016
+    Updated: Wittmann Antal, 2017.02.12-14.
+        A JQuery Mobile használata miatt, pár stílust egyedivé kellett tenni, hogy
+        hasonlóan nézzen ki, mint a Mobile alatt használt dolgok.
+    Updated: Wittmann Antal, 2018.05.14.
+        Az új jQuery és bootstrap miatt.
+***************************************************/
+.input-group-append {
+    cursor: pointer;
+}
+.input-group-append > .fa-search:before {
+    color: lightgray;
+    /*vertical-align: middle;*/
+}
+
+
+/*Innentől ui-autocomplete-hoz WA20170212*/
+.ui-corner-all {
+    -moz-border-radius: 4px 4px 4px 4px;
+}
+
+.ui-widget-content {
+    /*border: 1px solid gray;*/
+    color: #222222;
+    background-color: white;
+}
+
+.ui-widget {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 12px;
+}
+
+.ui-menu {
+    display: block;
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 2px;
+}
+
+.ui-autocomplete {
+    cursor: default;
+    position: absolute;
+    z-index: 2000;
+}
+
+.ui-menu .ui-menu-item {
+    /*background-color: white;
+            height:18px;
+            font-size:12px;*/
+    background-color: white;
+    border: none;
+    border-radius: 3px;
+    clear: left;
+    float: left;
+    margin: 0;
+    padding: 0px;
+    width: 100%;
+}
+    /* ezek lehet nem kellenek csak a mintában benne voltak egyelőre marad*/
+    .ui-menu .ui-menu-item a {
+        display: block;
+        padding: 3px 3px 3px 3px;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: Green;
+    }
+        .ui-menu .ui-menu-item a:hover {
+            display: block;
+            padding: 3px 3px 3px 3px;
+            text-decoration: none;
+            color: whitesmoke;
+            cursor: pointer;
+            background-color: ButtonText;
+        }
+    /* EDDIG ezek lehet nem kellenek csak a mintában benne voltak egyelőre marad*/
+
+.ui-widget-content a {
+    color: #222222;
+}

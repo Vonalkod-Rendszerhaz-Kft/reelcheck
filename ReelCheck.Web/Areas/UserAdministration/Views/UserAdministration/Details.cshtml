@@ -1,0 +1,144 @@
+@using System.Globalization;
+@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Membership.Areas.UserAdministration.Models;
+
+@model DetailsViewModel
+@{
+    IHtmlString lastActivityTranslationText = Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.LastActivity)));
+    IHtmlString lastLogInTranslationText = Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.LastLogIn)));
+    IHtmlString neverTranslationText = Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.Never)));
+
+    ViewBag.Title = Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.WUser))) + ": " + Model.DisplayName + " [" + Html.Raw(Model.Trans(DetailsViewModel.GetStatusWordCode(Model.Status))) + "]";
+}
+
+@section Styles {
+    <link href="@Url.Content(Constants.AREA_CONTENTPATH + "MvcMembership.css")" rel="stylesheet" type="text/css" />
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title mvcMembership">@ViewBag.Title</h1>
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <ul class="mvcMembership-tabs ml-2">
+                <li>@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Common.Details)))</li>
+                <li>@Html.ActionLink(Model.Trans(typeof(WordCodes.MvcMembership.User.Password)), "Password", Constants.CONTROLLER_UA, new { id = Model.User.ProviderUserKey, tabPage = 1 }, null)</li>
+                @if (Model.IsRolesEnabled)
+                {
+                    <li>@Html.ActionLink(Model.Trans(typeof(WordCodes.MvcMembership.ManyToMany.RoleGroups)), "UsersRoles", Constants.CONTROLLER_UA, new { id = Model.User.ProviderUserKey }, null)</li>
+                }
+            </ul>
+        </div>
+
+        <div class="row">
+            @*<td style="vertical-align: top; width: Auto;">*@
+            <div class="col-lg-5">
+                <h2 class="mvcMembership">@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.Access)))</h2>
+                <div class="mvcMembership-account">
+                    <dl class="mvcMembership">
+                        <dt>@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.UserName))):</dt>
+                        <dd>@Model.User.UserName</dd>
+                        <dt>@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.EmailAddress))):</dt>
+                        <dd>
+                            @if (!string.IsNullOrEmpty(Model.User.Email))
+                            {
+                                <a href="mailto:@Model.User.Email">@Model.User.Email</a>
+                            }
+                            else
+                            {
+                                @:-
+                            }
+                        </dd>
+                        @*@if (Model.User.LastActivityDate == Model.User.CreationDate)*@
+                        @if (Model.User.LastActivityDate.Equals(Global.NEVERONLINE))
+                        {
+                            <dt>@lastActivityTranslationText:</dt>
+                            <dd><em>@neverTranslationText</em></dd>
+                            <dt>@lastLogInTranslationText:</dt>
+                            <dd><em>@neverTranslationText</em></dd>
+                        }
+                        else
+                        {
+                            <dt>@lastActivityTranslationText:</dt>
+                            @*<dd>@Model.User.LastActivityDate.ToString("MMMM dd, yyyy h:mm:ss tt", CultureInfo.InvariantCulture)</dd>*@
+                            <dd>@Model.User.LastActivityDate.ToString("yyyy MM dd, h:mm:ss", CultureInfo.InvariantCulture)</dd>
+                            <dt>@lastLogInTranslationText:</dt>
+                            @*<dd>@Model.User.LastLoginDate.ToString("MMMM dd, yyyy h:mm:ss tt", CultureInfo.InvariantCulture)</dd>*@
+                            <dd>@Model.User.LastLoginDate.ToString("yyyy MM dd, h:mm:ss", CultureInfo.InvariantCulture)</dd>
+                        }
+                        <dt>@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.RegisterDate))):</dt>
+                        @*<dd>@Model.User.CreationDate.ToString("MMMM dd, yyyy h:mm:ss tt", CultureInfo.InvariantCulture)</dd>*@
+                        <dd>@Model.User.CreationDate.ToString("yyyy MM dd, h:mm:ss", CultureInfo.InvariantCulture)</dd>
+                    </dl>
+                    @if (Model.User.UserName != Constants.FIRST_USERNAME && Model.User.UserName != User.Identity.Name)
+                    {   // !!! Az 'Admin'-t és saját magát ne tudja letiltani !!!
+                        using (Html.BeginForm("ChangeApproval", Constants.CONTROLLER_UA, new { id = Model.User.ProviderUserKey }))
+                        {
+                            @Html.Hidden("isApproved", !Model.User.IsApproved)
+                            <input type="submit" class="btn btn-danger mt-2"
+                                   value='@(Model.User.IsApproved ? Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.AccessDenied))) : Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.AccessGranted))))' />
+                        }
+                        string prefixWR = LoginTypes.WebReq.ToString() + "_";
+                        string prefixAD = LoginTypes.AD.ToString() + "_";
+                        if (Model.User.UserName.StartsWith(prefixAD) || Model.User.UserName.StartsWith(prefixWR))
+                        {
+                            <button type="button" class="btn btn-danger mt-2" onclick="deleteUserInDetails('@(Model.User.ProviderUserKey)');">
+                                @(Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Common.Delete))))
+                            </button>
+                        }
+                    }
+
+                </div> <!-- class="mvcMembership-account" -->
+            </div> <!-- class="col-6" -->
+            @*<td style="width: 5%;"></td>*@
+            @*<td style="vertical-align:top; width: Auto;">*@
+
+            <div class="col-md-7">
+                <h3 class="mvcMembership">@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.EmailAddressAndDescription)))</h3>
+                <div class="mvcMembership-emailAndComments">
+                    @using (Html.BeginForm("Details", Constants.CONTROLLER_UA, new { id = Model.User.ProviderUserKey }))
+                    {
+                        @*<fieldset>*@
+                        <p>
+                            <label for="email">@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.EmailAddress))):</label>
+                            <br />
+                            @Html.TextBox("email", Model.User.Email)
+                        </p>
+                        <p>
+                            <label for="comments" style="vertical-align:top;">@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.Description))):</label>
+                            <br />
+                            @Html.TextArea("comments", Model.User.Comment)
+                        </p>
+                        <input type="submit"
+                               class="btn btn-success"
+                               value="@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.SaveEmailAndDescription)))" />
+                        @*</fieldset>*@
+                    }
+                </div> <!-- class="mvcMembership-emailAndComments" -->
+            </div> <!-- class="col-md-7" -->
+
+        </div> <!-- class="row" -->
+    </div> <!-- class="card-body" -->
+</div> <!-- class="card" -->
+
+<script>
+    /*##### FUNCTIONS #####*/
+    function deleteUserInDetails(userid) {
+        var thisfn = "deleteUserInDetails function: "
+        vrhct.bootbox.delete({
+            ajax: {
+                url: '@Url.Action("DeleteUser", Constants.CONTROLLER_UA, new { area = Constants.AREA })',
+                data: { userid }
+            },
+            title: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Confirmation)))',
+            confirm: '@(String.Format(Model.Trans(typeof(WordCodes.MvcMembership.Messages.Confirmations.UserDelete)),Model.User.UserName))',
+            size: 'large',
+            success: function () {
+                window.location = '@Url.Action("Index", Constants.CONTROLLER_UA, new { area = Constants.AREA })';
+            }
+        });
+    }
+    /*##### FUNCTIONS END #####*/
+</script>

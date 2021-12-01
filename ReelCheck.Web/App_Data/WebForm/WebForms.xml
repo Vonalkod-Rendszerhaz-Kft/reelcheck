@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebFormXML>
+	<XmlParser>
+		<XmlVar Name="LOGO_Path">../../Images/</XmlVar>
+		<XmlVar Name="LOGO_FORWARD">go.png</XmlVar>
+		<XmlVar Name="LOGO_MENU">menu.png</XmlVar>
+		<XmlVar Name="STYLE_IMAGE">background-position: left center;background-repeat:no-repeat;background-size:contain;</XmlVar>
+		<XmlVar Name="STYLE_IMAGEBACKGROUNDFORWARD">@STYLE_IMAGE@;background-image: url('@LOGO_Path@@LOGO_FORWARD@');</XmlVar>
+		<XmlVar Name="STYLE_IMAGEBACKGROUNDMENU">@STYLE_IMAGE@;background-image: url('@LOGO_Path@@LOGO_MENU@');</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_COMMON">color:black;font-weight:bold;justify-content:center;align-items:center;word-wrap: break-word;text-align:center;box-shadow:2vmax 1vmax 3vmax 1vmax black;text-shadow:0vmax 0vmax 0vmax;border-radius:8vmax 4vmax 4vmax 8vmax;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_S">font-size:2vmax;padding: 0.5vmax  0.5vmax  0.5vmax  0.5vmax;line-height: 4vmax;@BUTTONSTYLE_COMMON@;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_M">font-size:2vmax;padding: 1vmax 2vmax 1vmax 2vmax;line-height: 6vmax;@BUTTONSTYLE_COMMON@;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_XL">font-size:3vmax;padding: 1vmax 2vmax 1vmax 2vmax;line-height: 9vmax;@BUTTONSTYLE_COMMON@;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_XXL">font-size:2vmax;padding: 5vmax 2vmax 5vmax 2vmax;line-height: 16vmax;@BUTTONSTYLE_COMMON@;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE">@BUTTONSTYLE_M@;@STYLE_IMAGEBACKGROUNDFORWARD@;padding-left:5vmax;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_XXL_MENU">@BUTTONSTYLE_XXL@;@STYLE_IMAGEBACKGROUNDMENU@;padding-left:1vmax;</XmlVar>
+
+		<XmlVar Name="STYLE_BUTTON_BLACKONGREEN">background-color:green;color:black;padding:3vmax 0vmax 3vmax 0vmax;</XmlVar>
+		<XmlVar Name="STYLE_BUTTON_BLACKONRED">background-color:red;color:black;</XmlVar>
+		<XmlVar Name="ERRONEOUSPARAMETERS" LCID="hu-HU">Hibás paraméterek!</XmlVar>
+		<XmlVar Name="ERRONEOUSPARAMETERS" LCID="en-US">Erroneous parameters!</XmlVar>
+		<XmlVar Name="INTERVENTIONFINISHED" LCID="hu-HU">A beavatkozás végrehajtása befejeződött!</XmlVar>
+		<XmlVar Name="INTERVENTIONFINISHED" LCID="en-US">Intervention execution finished!</XmlVar>
+		<XmlVar Name="CLEARINPUTFIELDS" LCID="hu-HU">Mezők törlése</XmlVar>
+		<XmlVar Name="CLEARINPUTFIELDS" LCID="en-US">Clear input fields</XmlVar>
+		<XmlVar Name="SELECTALL" LCID="hu-HU">Összes kijelölése</XmlVar>
+		<XmlVar Name="SELECTALL" LCID="en-US">Select All</XmlVar>
+		<XmlVar Name="SELECTALLITEM" LCID="hu-HU">Összes</XmlVar>
+		<XmlVar Name="SELECTALLITEM" LCID="en-US">All</XmlVar>
+		<XmlVar Name="DESELECTALL" LCID="hu-HU">Jelöltek törlése</XmlVar>
+		<XmlVar Name="DESELECTALL" LCID="en-US">Deselect All</XmlVar>
+		<XmlVar Name="PARAMETERREQUIRED" LCID="hu-HU">'{0}' parameter is required!</XmlVar>
+		<XmlVar Name="PARAMETERREQUIRED" LCID="en-US">Deselect All</XmlVar>
+		<XmlVar Name="PLEASEWAIT" LCID="hu-HU">Kérem várjon!</XmlVar>
+		<XmlVar Name="PLEASEWAIT" LCID="en-US">Please wait!</XmlVar>
+		<XmlVar Name="INPUTFIELDLABEL_FVS" LCID="hu-HU">FVS vonalkód</XmlVar>
+		<XmlVar Name="INPUTFIELDLABEL_FVS" LCID="en-US">FVS barcode</XmlVar>
+		<XmlVar Name="INPUTFIELDLABEL_PN" LCID="hu-HU">Cikkszám</XmlVar>
+		<XmlVar Name="INPUTFIELDLABEL_PN" LCID="en-US">Part number</XmlVar>
+		<XmlVar Name="INPUTFIELDLABEL_LN" LCID="hu-HU">LOT szám</XmlVar>
+		<XmlVar Name="INPUTFIELDLABEL_LN" LCID="en-US">LOT number</XmlVar>
+		<XmlVar Name="INPUTFIELDLABEL_QTY" LCID="hu-HU">Mennyiség</XmlVar>
+		<XmlVar Name="INPUTFIELDLABEL_QTY" LCID="en-US">Quantity</XmlVar>
+		<XmlVar Name="BUTTONLABELACTIONSTART" LCID="hu-HU">Küldés</XmlVar>
+		<XmlVar Name="BUTTONLABELACTIONSTART" LCID="en-US">Send</XmlVar>
+		<XmlVar Name="BUTTONLABEL_HHMODEON" LCID="hu-HU">Kézi adatbeviteli mód BE</XmlVar>
+		<XmlVar Name="BUTTONLABEL_HHMODEON" LCID="en-US">Handheld scan mode ON</XmlVar>
+		<XmlVar Name="BUTTONLABEL_HHMODEOFF" LCID="hu-HU">Kézi adatbeviteli mód KI</XmlVar>
+		<XmlVar Name="BUTTONLABEL_HHMODEOFF" LCID="en-US">Handheld scan mode OFF</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_FORMTITLE" LCID="hu-HU">Tekercs kód adatbevitel kézi vonalkódolvasóval</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_FORMTITLE" LCID="en-US">Reel barcode entry with handheld scanner</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_EXECUTECONDITION1" LCID="hu-HU">Adjon meg valamilyen adatot!</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_EXECUTECONDITION1" LCID="en-US">All input fileds can not be empty!</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_EXECUTECONDITION3" LCID="hu-HU">A cikkszám, LOT szám és mennyiség kötelezőek!</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_EXECUTECONDITION3" LCID="en-US">Part number, LOT number and Quantity are mandatory!</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_FVS_FORMHELP" LCID="hu-HU">
+			Adja meg csak FVS vonalkódot!\n
+			Az adatokat formázás (pl. prefix,suffix) nélkül kell megadni!\n
+			Használhatja a billentyűzetet is az adatok megadásához.
+		</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_BCLIST_FORMHELP" LCID="hu-HU">
+			Adja meg a Cikkszám+LOT szám+Mennyiség adatokat!\n
+			Az adatokat formázás (pl. prefix,suffix) nélkül kell megadni!\n
+			Használhatja a billentyűzetet is az adatok megadásához.
+		</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_FVS_FORMHELP" LCID="en-US">
+			Enter the FVS barcode!\n
+			The data have to be entered without any formatting (no prefix, no suffix,...)!\n
+			Use the keyboard if neccessary!
+		</XmlVar>
+		<XmlVar Name="LABELE_HHMODE_BCLIST_FORMHELP" LCID="en-US">
+			Enter the partnumber+LOTnumber+Quantity barcodes.\n
+			The data have to be entered without any formatting (no prefix, no suffix,...)!\n
+			Use the keyboard if neccessary!
+		</XmlVar>
+	</XmlParser>
+	<DefaultLCID>hu-HU</DefaultLCID>
+	<CommonElementsDefaults>
+		<Defaults>
+			<!--<FormDesign Layout="~/Views/Shared/_Layout.cshtml" LayoutMobile="~/Views/Shared/_Layout.cshtml" Style="width:100%;"/>-->
+			<FormDesign Style="width:100%;"/>
+			<Parameters NameSeparator="##"/>
+			<Inputs Type="Text" Required="false" ReadOnly="false" UploadFolder="~/App_Data/Uploads"/>
+      <!-- Bekötött karakter nevek:
+        {CR}:   Carriage return (\r), {Enter} néven is lehet rá hivatkozni
+        {LF}:   New line, line feed (\n)
+        {TAB}:  Horizontal tab (\t) 
+        {VTAB}: Vertival tab (\v) 
+        {BELL}: Bell, alert (\a) 
+        {'}:    Single quotation marg (\')
+        {"}:    Double quotation marg (\")
+        {BACK}: Backspace (\b)
+        {#}:    # = valamilyen billentyűkód (érvényes egész szám érték, különben nem veszi figyelembe)
+      -->
+      <InputFilter Active="true" IgnoredChars="{LF},{CR},x,{37},{39}"/>
+			<FormTexts 	ReturnMessageOKHeader="@INTERVENTIONFINISHED@" 
+                  ReturnMessageNOKHeader="@ERRONEOUSPARAMETERS@" 
+                  ClearFormButton="@CLEARINPUTFIELDS@" 
+                  WaitMessage="@PLEASEWAIT@" 
+                  RequiredMissing="@PARAMETERREQUIRED@"
+                  SelectAll="@SELECTALL@" SelectAllItem="@SELECTALLITEM@" DeselectAll="@DESELECTALL@"/>
+			<SQLList ID="IID" Display="DDISPLAY" />
+   </Defaults>
+	</CommonElementsDefaults>
+	<CommonElementsActions>
+		<CommonActions>
+			<Action Scope="ref" Name="HHMODEON" ReturnMode="ReturnInfoJSON" ButtonLabel="@BUTTONLABEL_HHMODEON@" ButtonStyle="@BUTTONSTYLE@">
+				<url><area>Intervention</area><controller>LabelE</controller><action>Run</action></url>
+			</Action>
+			<Action Scope="ref" Name="HHMODEOFF" ReturnMode="ReturnInfoJSON" ButtonLabel="@BUTTONLABEL_HHMODEOFF@" ButtonStyle="@STYLE_BUTTON_BLACKONRED@">
+				<url><area>Intervention</area><controller>LabelE</controller><action>Run</action></url>
+			</Action>
+			<Action Scope="ref" Name="TestDisplay" ReturnMode="ReturnInfoJSON" ButtonLabel="@BUTTONLABELACTIONSTART@" ButtonStyle="@STYLE_BUTTON_BLACK@">
+				<url><area>WebForm</area><controller>WebForm</controller><action>TestAction</action></url>
+			</Action>
+		</CommonActions>
+	</CommonElementsActions>
+	<WebForms>
+		<WebForm Name="LABELE_HHMODE_FVS" LCID="@LCID@" Title="@LABELE_HHMODE_FORMTITLE@">
+			<Help>@LABELE_HHMODE_FVS_FORMHELP@</Help>
+			<Inputs>
+				<Input Row="1" Col="1" Name="FVS" Label="@INPUTFIELDLABEL_FVS@" DefaultValue=""/>
+			</Inputs>
+
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="HHMODEON"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="interventionName"><Value>HHMODEON</Value></Parameter>
+						<!--<Parameter PassTo="url" Name="BCLIST"><Value>TMPL=HH;FVS=#FVS#,PN=#PN#,LN=#LN#,QTY=#QTY#</Value></Parameter>-->
+						<Parameter PassTo="url" Name="FVS"><Value>#FVS#</Value></Parameter>
+					</Parameters>
+					<ExecuteConditions>
+						<ExecuteCondition Type="notequal" Test="1#FVS#1" With="11" ErrMsg="@LABELE_HHMODE_EXECUTECONDITION1@"/>
+					</ExecuteConditions>
+				</ActionCondition>
+				<ActionCondition Type="else">
+					<Action Name="HHMODEOFF"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="interventionName"><Value>HHMODEOFF</Value></Parameter>
+					</Parameters>
+				</ActionCondition>
+			</ActionConditions>
+		</WebForm>
+		<WebForm Name="LABELE_HHMODE_BCLIST" LCID="@LCID@" Title="@LABELE_HHMODE_FORMTITLE@">
+			<Help>@LABELE_HHMODE_BCLIST_FORMHELP@</Help>
+			<Inputs>
+				<Input Row="1" Col="1" Name="PN" Label="@INPUTFIELDLABEL_PN@" Type="Text" DefaultValue=""/>
+				<Input Row="2" Col="1" Name="LN" Label="@INPUTFIELDLABEL_LN@" Type="Text" DefaultValue=""/>
+				<Input Row="3" Col="1" Name="QTY" Label="@INPUTFIELDLABEL_QTY@" Type="Number" DefaultValue="0">
+					<Number ValueType="Integer" Min="0" Max="999" Step="1"/>
+				</Input>
+			</Inputs>
+
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="HHMODEON"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="interventionName"><Value>HHMODEON</Value></Parameter>
+						<!--<Parameter PassTo="url" Name="BCLIST"><Value>TMPL=HH;FVS=#FVS#,PN=#PN#,LN=#LN#,QTY=#QTY#</Value></Parameter>-->
+						<Parameter PassTo="url" Name="FVS"><Value></Value></Parameter>
+						<Parameter PassTo="url" Name="PN"><Value>#PN#</Value></Parameter>
+						<Parameter PassTo="url" Name="LN"><Value>#LN#</Value></Parameter>
+						<Parameter PassTo="url" Name="QTY"><Value>#QTY#</Value></Parameter>
+					</Parameters>
+					<ExecuteConditions>
+						<ExecuteCondition Type="match" Test="#QTY#" With="^[0-9]+$" ErrMsg="A mennyiség csak szám lehet!"/>
+						<ExecuteCondition Type="notequal" Test="2#PN#23#LN#34#QTY#4" With="223344" ErrMsg="@LABELE_HHMODE_EXECUTECONDITION1@"/>
+						<ExecuteCondition Type="notequal" Test="2#PN#23#LN#34#QTY#4" With="223#LN#34#QTY#4" ErrMsg="@LABELE_HHMODE_EXECUTECONDITION3@"/>
+						<ExecuteCondition Type="notequal" Test="2#PN#23#LN#34#QTY#4" With="2#PN#2334#QTY#4" ErrMsg="@LABELE_HHMODE_EXECUTECONDITION3@"/>
+						<ExecuteCondition Type="notequal" Test="2#PN#23#LN#34#QTY#4" With="2#PN#23#LN#344" ErrMsg="@LABELE_HHMODE_EXECUTECONDITION3@"/>
+					</ExecuteConditions>
+				</ActionCondition>
+				<ActionCondition Type="else">
+					<Action Name="HHMODEOFF"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="interventionName"><Value>HHMODEOFF</Value></Parameter>
+					</Parameters>
+				</ActionCondition>
+			</ActionConditions>
+		</WebForm>
+	</WebForms>
+</WebFormXML>

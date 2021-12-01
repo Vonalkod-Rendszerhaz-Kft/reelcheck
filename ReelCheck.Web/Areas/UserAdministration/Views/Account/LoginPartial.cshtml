@@ -1,0 +1,43 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Membership.Areas.UserAdministration.Models;
+
+@model LoginModel
+
+@{
+    IHtmlString btnLogin = Html.Raw(MultiLanguageManager.GetTranslation(typeof(MVCMembershipWordCodes.MvcMembership.User.LogIn)));
+    string phUserName = MultiLanguageManager.GetTranslation(typeof(MVCMembershipWordCodes.MvcMembership.User.UserName));
+    string phPassword = MultiLanguageManager.GetTranslation(typeof(MVCMembershipWordCodes.MvcMembership.User.Password));
+    string formId = "loginForm";
+
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = formId,
+        OnSuccess = "",
+    };
+}
+<div id="@(formId)">
+    @using (Ajax.BeginForm("LoginPartial", "Account", new { area = Global.AREANAME, ReturnUrl = ViewBag.ReturnUrl }, ajaxOptions))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = phUserName })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+
+        <div class="form-group">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = phPassword })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label text-dark my-auto" })
+            @Html.CheckBoxFor(x => x.RememberMe, new { @class = "form-check-input ml-1 my-auto", style = "width:25px;height:25px;" })
+            @Html.ValidationMessageFor(x => x.RememberMe)
+        </div>
+        <button type="submit" class="btn btn-success">@(btnLogin)</button>
+        @Html.ValidationSummary(true)
+    }
+</div>

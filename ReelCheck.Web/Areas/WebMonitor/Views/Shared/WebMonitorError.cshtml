@@ -1,0 +1,47 @@
+﻿@*
+    ---------------------------------------------
+    WebMonitor, Matrix1D, Matrix2D - Error.cshtml
+    ---------------------------------------------
+*@
+
+@using Vrh.Web.Common.Lib
+
+@model List<string>
+
+@{
+    if (String.IsNullOrWhiteSpace(ViewBag.Head))
+    {   //Matrix1D és Matrix2D 
+        ViewBag.Head = ViewBag.Title;
+    }
+    else
+    {   //WebMonitor esetén van Head is, akkor betöltjük a Layout-ot
+        //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = WebCommon.Layout;
+    }
+}
+<head>
+    <title>@Html.Raw(ViewBag.Title)</title>
+    @Styles.Render(Vrh.Web.Menu.Global.BUNDLES_STYLE)   @*"~/Content/cssBase"*@
+    @Scripts.Render(Vrh.Web.Menu.Global.BUNDLES_SCRIPT) @*"~/bundles/base"*@
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h2>@Html.Raw(ViewBag.Head)</h2>
+        </div>
+        <div class="card-body">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var mess in Model)
+                {
+                    <label>@Html.Raw(mess)</label><br />
+                }
+            }
+        </div>
+    </div>
+</body>
+@*
+    ---------------------------------------------
+    WebMonitor, Matrix1D, Matrix2D - Error.cshtml
+    ---------------------------------------------
+*@

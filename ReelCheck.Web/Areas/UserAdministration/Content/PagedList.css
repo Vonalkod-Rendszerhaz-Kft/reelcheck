@@ -1,0 +1,18 @@
+﻿.PagedList-pager > ul{
+	display: block;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: right;
+	color: #F7941D;	
+}
+.PagedList-pager > ul > li{
+	margin: .25em;
+	display: inline-block;
+}
+.PagedList-pager > ul > li a{
+    cursor: pointer;    
+}
+.PagedList-goToPage > fieldset{
+	border: 0;
+}

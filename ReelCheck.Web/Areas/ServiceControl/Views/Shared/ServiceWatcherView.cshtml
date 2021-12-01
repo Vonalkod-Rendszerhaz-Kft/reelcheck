@@ -1,0 +1,32 @@
+﻿@using Vrh.Web.ServiceControl.Areas.ServiceControl.Models;
+@model ServiceWatcherViewModel
+
+<div id="serviceWatcher">
+    @if (Model != null)
+    {
+        if (Model.StartedServices != null && Model.StartedServices.Any())
+        {
+            <div style="background-color:green;color:white;padding-left:5px;padding-right:5px">
+                <text>@Model.Translation(typeof(WordCodes.ServiceControl.IndexView.Watcher.StartedServices))</text>
+                <ul>
+                    @foreach (var service in Model.StartedServices)
+                    {
+                        <li>@service</li>
+                    }
+                </ul>
+            </div>
+        }
+        if (Model.StoppedServices != null && Model.StoppedServices.Any())
+        {
+            <div style="background-color:red;color:white;padding-left:5px;padding-right:5px">
+                <text>@Model.Translation(typeof(WordCodes.ServiceControl.IndexView.Watcher.StoppedServices))</text>
+                <ul>
+                    @foreach (var service in Model.StoppedServices)
+                    {
+                        <li>@service</li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+</div>

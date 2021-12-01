@@ -1,0 +1,183 @@
+﻿p.mvcMembership-warning{
+	color: #cc0000;
+	font-weight: bold;
+	border: 2px solid #cc0000;
+	padding: 1em;
+	border-radius: .5em;
+	text-align: center;
+}
+
+h3.mvcMembership{
+	clear: left;
+}
+
+ul.mvcMembership-paging > li{
+	float: left;
+	list-style-type: none;
+	margin: 1em;
+}
+
+ul.mvcMembership > li > form{
+	display: inline;
+	margin-left: 1em;
+}
+
+dl.mvcMembership{
+	/*margin-bottom: 50px;*/
+}
+dl.mvcMembership > dt
+{
+	display: block;
+	float: left;
+	font-weight: bold; 
+	margin-right: 10px;
+	padding: 5px;  
+	width: 200px; 
+}
+dl.mvcMembership > dd{
+	display: block;
+	margin: 2px 0;
+	padding: 5px 0;
+	width: 100%;
+}
+
+div.mvcMembership-account > form{
+	display: inline;
+}
+
+div.mvcMembership-allUsers ul{
+	margin: 0;
+}
+div.mvcMembership-allUsers ul.mvcMembership-users > li{
+	margin: .5em 0 .5em 0;
+}
+div.mvcMembership-allUsers ul.mvcMembership-users > li > span.mvcMembership-isOnline{
+	display: block;
+	font-weight: bold;
+	color: #33cc33;
+}
+div.mvcMembership-allUsers ul.mvcMembership-users > li > span.mvcMembership-isOffline{
+	display: block;
+	color: #999;
+}
+div.mvcMembership-allUsers ul.mvcMembership-users > li > span.mvcMembership-email{
+	display: block;
+	font-size: .8em;
+}
+div.mvcMembership-allUsers ul.mvcMembership-users > li > span.mvcMembership-comment{
+	display: block;
+	border: 1px solid #ccc;
+	padding: .25em .5em .25em .5em;
+	margin: .5em 0 .5em 0;
+}
+
+div.mvcMembership-allUsers .PagedList-disabled a{
+	color: #666;
+}
+div.mvcMembership-allUsers .PagedList-disabled a:hover{
+	color: #666;
+}
+
+div.mvcMembership-allRoles ul > li
+{
+	margin: .5em 0 .5em 0;
+}
+
+form.mvcMembership-searchForm fieldset,
+.mvcMembership-allRoles fieldset{
+	padding-top: 1.5em;
+}
+
+a.userIsInRole 
+{
+    color: Lime;
+}
+
+a.userIsNotInRole
+{
+    color: Gray;
+}
+
+/* TAB MENU
+----------------------------------------------------------*/
+ul.mvcMembership-tabs {
+    padding: 0 0 2px;
+    margin: 0 0 1rem 0; /* top right bottom left*/
+    text-align: left;
+}
+
+ul.mvcMembership-tabs li {
+    display: inline;
+    list-style: none;
+    font-weight: bold;
+}
+
+ul.mvcMembership-tabs li#greeting {
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 2.8em;
+    color: Red;
+}
+
+ul.mvcMembership-tabs li a {
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 2.8em;
+    background-color: #292D38;
+    color: #F7941D;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+}
+
+ul.mvcMembership-tabs li a:hover {
+    background-color: Black;/*#292D96*/
+    text-decoration: none;
+}
+
+ul.mvcMembership-tabs li a:active {
+    /*background-color: Yellow;*/
+    text-decoration: none;
+}
+
+ul.mvcMembership-tabs li.selected a {
+    background-color: #fff;
+    color: #000;
+}
+
+/* USERS TABLE  
+----------------------------------------------------------*/
+
+div.mvcMembership-allUsers table.mvcMembership-users
+{
+    width: 100%;
+    background-color: #333743;
+    overflow: hidden;
+    color: White;
+}
+
+div.mvcMembership-allUsers table.mvcMembership-users th
+{
+    background-color: #F7A23B;
+}
+
+div.mvcMembership-allUsers table.mvcMembership-users a
+{
+    color: Yellow;
+}
+
+div.mvcMembership-allUsers table.mvcMembership-users td.mvcMembership-isOnline
+{
+    color: Lime;
+}
+
+div.mvcMembership-allUsers table.mvcMembership-users td.mvcMembership-isOffline
+{
+    color: White;
+}
+
+a.log4pro-roles {
+    color: whitesmoke;
+}

@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal test</title>
+    <link rel="stylesheet" href="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Content/fontawesome-all.min.css" />
+    <!--link href="http://code.jquery.com/ui/1.10.4/themes/start/jquery-ui.css" rel="stylesheet"-->
+
+    <style>
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 200px;
+            height: 34px;
+        }
+
+            /* Hide default HTML checkbox */
+            .switch input {
+                display: none;
+            }
+
+        .switch-text {
+            position: relative;
+            top: 4px;
+            padding-right: 8px;
+            padding-left: 8px;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: background-color .4s;
+            transition: background-color .4s;
+            -webkit-transition: text-align .4s;
+            transition: text-align .4s;
+            text-align: right;
+        }
+
+            .slider:before { /* 200 - (26 szélesség + 4 bal + 4 jobb = 166 */
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+            text-align: left;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(166px);
+            -ms-transform: translateX(166px);
+            transform: translateX(166px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+    </style>
+</head>
+<body>
+    <div id="my-dialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Modal header</h3>
+                </div>
+                <div class="modal-body bg-dark p-3">
+                    <label class="switch p-3 text-white">
+                        <input id="tgl" type="checkbox" onchange="javascript: console.log('Toggle change this=',$(this));" />
+                        <span class="slider round">
+                            <span class="switch-text"></span>
+                        </span>
+                        <!--input id="tglbut"
+                                    type="checkbox"
+                                    data-toggle="toggle"
+                                    data-on="On hosszú szöveg és ennyi"
+                                    data-off="Off Ennyi és hosszú szöveg"
+                                    onchange="javascript: console.log('Toggle change this=',this);"-->
+                        <!--button type="button" class="button btn-warning" data-toggle="button" autocomplete="off">
+                            Gomb felirat
+                        </button-->
+                        <!--div class="btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-secondary">
+                                <input name="my-input-value" type="checkbox" value="0" />
+                            </label>
+                        </div-->
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal">Close</a>
+                    <a href="#" class="btn btn-primary">Save changes</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function setSwitchText(swtch) {
+            var txt = swtch.checked ? 'Bekapcsolva' : 'Kikapcsolva';
+            $('.swithc-text').text(txt);
+        }
+
+        $(document).ready(function () {
+            console.log("ready PING");
+            $('#my-dialog').modal('show');
+            setSwitchText($('#tgl'));
+            //$('#tglbut').bootstrapToggle({
+            //    on: '1-es (on) állapot',
+            //    off: '2-es (off) állapot'
+            //});
+            //$('.date-picker').datepicker({
+            //	dateFormat: "mm-dd-yy",
+            //	yearRange: "-10:+10",
+            //	changeMonth: true,
+            //	changeYear: true
+            //});
+        });
+    </script>
+</body>
+

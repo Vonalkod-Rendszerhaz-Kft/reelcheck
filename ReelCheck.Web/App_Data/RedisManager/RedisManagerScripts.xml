@@ -1,0 +1,21 @@
+<Scripts>
+  <Script Name="Script neve" Instance="instance neve" DataPool="adatpool neve">
+    <TargetVariables />
+  </Script>
+  <Script Name="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" Instance="TEST1" DataPool="ALM">
+    <TargetVariables>
+      <TargetVariable Name="99">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;OneData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;DataKey&gt;NUMOFWORKERS&lt;/DataKey&gt;
+  &lt;FieldType&gt;Int32&lt;/FieldType&gt;
+  &lt;Value xsi:type="xsd:string"&gt;99&lt;/Value&gt;
+&lt;/OneData&gt;</TargetVariable>
+      <TargetVariable Name="XXXXXXXXXXXX">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;OneData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;DataKey&gt;MACHINE_NAME&lt;/DataKey&gt;
+  &lt;FieldType&gt;String&lt;/FieldType&gt;
+  &lt;Value xsi:type="xsd:string"&gt;XXXXXXXXXXXX&lt;/Value&gt;
+&lt;/OneData&gt;</TargetVariable>
+    </TargetVariables>
+  </Script>
+</Scripts>

@@ -1,0 +1,142 @@
+﻿@model MenuViewModel
+
+@if (Model.IsLoadBaseTools)
+{
+    @Styles.Render(Global.BUNDLES_STYLE)
+    @Scripts.Render(Global.BUNDLES_SCRIPT)
+}
+<style>
+    @foreach (StyleKit sk in Model.General.StyleKits)
+    {
+        @Html.Raw(sk.GetContent(Model.MenuGUID))
+    }
+</style>
+
+<div class="card" style="@(Model.General.MenuPageAppearance.ContainerStyle)">
+    <div class="card-header" style="display:none;@(Model.General.MenuPageAppearance.TitleAreaStyle)">
+        <h2 style="@(Model.General.MenuPageAppearance.TitleStyle)">@Html.Raw(Model.General.MenuPageTitle)</h2>
+    </div>
+    <div class="card-body" style="display:none;@(Model.General.MenuPageAppearance.BodyStyle)">
+        <div id="accordion">
+            @GetMenuPage(Model.MenuViews, "accordion", 1)   @*!!! Fontos, nullánál nagyobb legyen az indulás (level) !!!*@
+        </div> <!-- id="accordion" -->
+    </div> <!-- class="card-body" -->
+</div>
+<script src="@Url.Content(Global.SCRIPT_MENUCOMMON)"></script>
+<script type="text/javascript">
+    $(function () {
+        "use strict";
+
+        var thisfn = 'MenuPage.Accordion: ready event: ';
+        console.log(thisfn + 'PING');
+
+        //header és footer animált megjelenítése
+        var delay = 400;
+        $('.card-header').show(delay);
+        $('.card-body').show(delay);
+
+        // 'a' elem click eseményére feliratkozás
+        $('a').on("click", function (e) {
+            //e.stopPropagation();
+            //console.log('MenuPage.Accordion: <a> click event:', e, this);
+            $('a').removeClass('active');
+            $(this).addClass('active');
+        });
+
+
+        // ### Collapse eseményekre feliratkozás ###
+        //$('div.collapse').on('hide.bs.collapse', function () {
+        //    var headid = $(this).attr('aria-labelledby');
+        //    console.log('hide.bs.collapse event occur: headid', headid);
+        //    $('#' + headid).find('i').attr('class', 'fa fa-caret-down');
+        //})
+        $('div.collapse').on('hidden.bs.collapse', function () {
+            var headid = $(this).attr('aria-labelledby');
+            //console.log('hidden.bs.collapse event occur: headid', headid);
+            $('#' + headid).find('i').attr('class', 'fa fa-caret-down');
+        });
+        //$('div.collapse').on('show.bs.collapse', function () {
+        //    var headid = $(this).attr('aria-labelledby');
+        //    console.log('show.bs.collapse event occur: headid', headid);
+        //    $('#' + headid).find('i').attr('class', 'fa fa-caret-up');
+        //})
+        $('div.collapse').on('shown.bs.collapse', function () {
+            var headid = $(this).attr('aria-labelledby');
+            //console.log('shown.bs.collapse event occur: headid', headid);
+            $('#' + headid).find('i').attr('class', 'fa fa-caret-up');
+        });
+    });
+
+    /**
+    * A MenuCommonScripts (MenuCommon.js) számára küldendő értékek.
+    */
+    function ExportToMenuCommon() {
+        'use strict';
+        this.DirectAuthentication = {
+            Title: '@Html.Raw(Model.Trans(typeof(WordCodes.Menu.Titles.Login)))',
+            Url: '@Html.Raw(Url.Content(Global.ACTION_DIRECTAUTHENTICATION))'
+        };
+    }
+    var vrhmenucommon = new MenuCommonScripts(new ExportToMenuCommon());
+</script>
+
+@helper GetMenuAction(MenuView mv, int level)
+{
+    string mleft = String.Format("margin-left:{0}vmax;", level - 1);
+    if (String.IsNullOrWhiteSpace(mv.LinkOrCommand))
+    {
+        <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)" style="@(mleft)">
+            <a href="#">@Html.Raw(mv.Label)</a>
+        </div>
+    }
+    else
+    {
+        if (mv.ResponseTarget == ResponseTargets.CurrentPage)
+        {
+            <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)" style="@(mleft)">
+                <a href="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a>
+            </div>
+        }
+        else if (mv.ResponseTarget == ResponseTargets.NewPage)
+        {
+            <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)" style="@(mleft)">
+                <a href="@Html.Raw(Url.Content(mv.LinkOrCommand))" target="_blank">@Html.Raw(mv.Label)</a>
+            </div>
+        }
+        else
+        {
+            <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)" style="@(mleft)">
+                <a href="#" onclick="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a>
+            </div>
+        }
+    }
+}
+
+@helper GetMenuPage(List<MenuView> menuViews, string dataParent, int level)
+{
+    string smargo = String.Format("margin-left:{0}vmax;", level - 1);
+    int menuNumber = 0;
+    foreach (MenuView mv in menuViews)
+    {
+        if (mv.MenuViews == null || !mv.MenuViews.Any())
+        {
+            @GetMenuAction(mv, level)
+        }
+        else
+        {
+            string headid = String.Format("heading{0}", level * 100 + menuNumber);
+            string collapseid = String.Format("collapse{0}", level * 100 + menuNumber);
+            <div style="@(smargo)">
+                <div id="@(headid)" class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)">
+                    <a class="collapsed" href="" data-toggle="collapse" data-target="#@(collapseid)" aria-expanded="@(mv.InitialState == InitialStates.Open ? "true" : "false")" aria-controls="@(collapseid)">
+                        <i class="fa fa-caret-down"></i> @Html.Raw(mv.Label)
+                    </a>
+                </div>
+                <div id="@(collapseid)" class="collapse@(mv.InitialState == InitialStates.Open ? " show" : "")" aria-labelledby="@(headid)" data-parent="#@(dataParent)">
+                    @GetMenuPage(mv.MenuViews, collapseid, level + 1)
+                </div>
+            </div>
+        }
+        menuNumber++;
+    }
+}

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XmlParserConfiguration LCID="en-US" NameSeparator="@@">
+  <XmlParser>
+
+	<XmlVar Name="ALMDBCONNECTIONSTRING">data source=192.168.77.150\SQLExpress;initial catalog=LearALM;user id=sa;password=Vrh@54321;MultipleActiveResultSets=True;App=EntityFramework;</XmlVar>
+    <XmlVar Name="ALMREDISSERVERIP">192.168.77.150</XmlVar>
+    <XmlVar Name="ALMREDISSERVERPORT">6379</XmlVar>
+    
+    <XmlVar Name="LOCALHOSTIP">localhost</XmlVar>
+    <XmlVar Name="REDISSERVERIP">localhost</XmlVar>
+    <XmlVar Name="REDISSERVERPORT">6379</XmlVar>
+    <XmlVar Name="REDISCONNECTIONSTRING">@REDISSERVERIP@:@REDISSERVERPORT@</XmlVar>
+    
+    <!-- A komment be és kitételt válaszd légyszi, ne írd át! -->
+    <!--XmlVar Name="APPROOTPATH">d:/VRH/git/Delphi.ReelCheck</XmlVar -->
+    <XmlVar Name="APPROOTPATH">d:\VRH\git\Delphi.ReelCheck\</XmlVar>
+    
+    <XmlVar Name="APPDATA">@APPROOTPATH@/ReelCheck.Web/App_Data</XmlVar>
+    <XmlVar Name="BACKUPROOTPATH">D:/DelphiREELCHECKBackups</XmlVar>
+    <XmlVar Name="APPDATAWebcommon">@APPROOTPATH@/wwwroot_COMMON/App_Data</XmlVar>
+    <XmlVar Name="URLHEADWebcommon">http://192.168.77.47/Webcommon</XmlVar>
+    <XmlVar Name="URLHEADReelCheck">http://localhost/ReelCheck</XmlVar>
+    <XmlVar Name="MENUXML">file=@APPDATA@/Menu/Menu.xml</XmlVar>
+    <XmlVar Name="MATRIX2DXML">file=@APPDATA@/WebMonitor/Matrix2D.xml</XmlVar>
+    <XmlVar Name="XMLPARSERBUTTONDEFXML">@APPDATA@/WebMonitor/XmlParserButtonDefinitions.xml</XmlVar>
+
+<!--    
+    <ConnectionString Name="REELCHECKDBCONNECTIONSTRING">
+		data source=192.168.77.47;initial catalog=REELCHECK;user id=sa;password=vrh;MultipleActiveResultSets=True;App=EntityFramework;
+	</ConnectionString>
+-->
+    <ConnectionString Name="REELCHECKDBCONNECTIONSTRING">
+		data source=ZGORCSOS-LAPTOP\SQLEXPRESS2008R2;initial catalog=REELCHECK;user id=sa;password=sapw;MultipleActiveResultSets=True;App=EntityFramework;
+	</ConnectionString>
+  </XmlParser>
+  
+  <Configurations>
+    <Configuration Name="Menu" File="~/App_Data/Menu/Menu.xml" Element="MainMenu"/>
+    <Configuration Name="TEST" File="~/App_Data/Menu/Menu.xml" Element="Matrix2DInternalMenuLABELEInterventions"/>
+    <Configuration Name="DataToRedisConfig" File="@APPROOTPATH@\AppContainer\VrhDataToRedis\DataToRedis.Config.xml" Element="DataToRedisConfig" />
+    <Configuration Name="UserAuthentication" File="~/App_Data/UserAdministration/UserAdministration.xml" />
+    <Configuration Name="FileManager" File="~/App_Data/FileManager/FileManager.xml" />
+    <Configuration Name="ConfigEditor" File="~/App_Data/ConfigEditor/ConfigEditor.xml" />
+  </Configurations>
+</XmlParserConfiguration>

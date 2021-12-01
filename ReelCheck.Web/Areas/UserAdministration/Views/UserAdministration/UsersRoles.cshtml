@@ -1,0 +1,50 @@
+@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Membership.Areas.UserAdministration.Models;
+
+@model DetailsViewModel
+
+@{
+    ViewBag.Title = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.WUser))) + ": " + Model.DisplayName + " [" + Html.Raw(MultiLanguageManager.GetTranslation(DetailsViewModel.GetStatusWordCode(Model.Status))) + "]";
+}
+
+@section Styles {
+    <link href="@Url.Content(Constants.AREA_CONTENTPATH + "MvcMembership.css")" rel="stylesheet" type="text/css" />
+}
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>"
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title mvcMembership">@ViewBag.Title</h1>
+    </div>
+    <div class="card-body">
+
+        <ul class="mvcMembership-tabs">
+            <li>@Html.ActionLink(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.Common.Details)), "Details", Constants.CONTROLLER_UA, new { id = Model.User.ProviderUserKey }, null)</li>
+            <li>@Html.ActionLink(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.Password)), "Password", Constants.CONTROLLER_UA, new { id = Model.User.ProviderUserKey, tabPage = 1 }, null)</li>
+            <li>@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.RoleGroups)))</li>
+        </ul>
+
+        @*<h3 class="mvcMembership">Szerepkörök</h3>
+            <div class="mvcMembership-userRoles">
+                <ul class="mvcMembership">
+                    @foreach(var role in Model.Roles){
+                    <li>
+                        @Html.ActionLink(role.Key, "Role", new { id = role.Key }, new { @class = role.Value ? "userIsInRole" : "userIsNotInRole" })
+                        @if(role.Value){
+                            using(Html.BeginForm("RemoveFromRole", "UserAdministration", new{id = Model.User.ProviderUserKey, role = role.Key})){
+                            <input type="submit" value="Eltávolítás ebbõl a szerepkörbõl" />
+                            }
+                        }else{
+                            using(Html.BeginForm("AddToRole", "UserAdministration", new{id = Model.User.ProviderUserKey, role = role.Key})){
+                            <input type="submit" value="Hozzáadás ehhez a szerepkörhöz" />
+                            }
+                        }
+                    </li>
+                    }
+                </ul>
+            </div>*@
+
+        @Html.Partial("../UsersToUserRoleGroups/_UsersToUserRoleGroups", new ViewDataDictionary() { { "id", Model.User.ProviderUserKey } })
+
+    </div>
+</div>

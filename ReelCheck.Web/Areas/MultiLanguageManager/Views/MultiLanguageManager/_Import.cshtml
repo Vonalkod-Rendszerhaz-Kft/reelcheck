@@ -1,0 +1,51 @@
+﻿@using DTM.LangHelper;
+@using DTM.Areas.MultiLanguageManager.Models;
+@model ImportModel
+@{
+    LangHelper langHelper = new LangHelper();
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];
+}
+
+@if (Model != null)
+{
+    @Html.Partial("~/Areas/DataTables/Views/DataTables/_ValidationSummary.cshtml")
+    using (Ajax.BeginForm("Import", controllerName, new { area = areaName }, //FormMethod.Post,
+        new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            OnSuccess = "ajaxFormSubmitComplete(xhr);",
+            OnComplete = "partialContentAjaxOnComplete(true);"
+        },
+        new { id = "importForm", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken();
+    <div class="editor-label">
+        @Html.LabelFor(m => m.File)
+    </div>
+    <div class="editor-field">
+        <div class="editor-htmlattributes">
+            <input type="text" id="file-path" value="@langHelper.getTranslation("MasterData.Dialog.MultilangManager.LoadImport.NoFileChosen")" readonly="readonly" />
+            <span id="selectFileButton" class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-open"></i>
+                <span>@langHelper.getTranslation("Administration.MultiLanguageManager.FileImport.AddFileButton")</span>
+                @Html.TextBoxFor(m => m.File, new { id = "fileUploadButton", type = "file" })
+            </span>
+        </div>
+        @Html.ValidationMessageFor(m => m.File)
+        <br />
+    </div>
+
+    <div class="editor-field">
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(m => m.DescriptionWrite)
+                @Html.DisplayNameFor(m => m.DescriptionWrite)
+            </label>
+        </div>
+        @Html.ValidationMessageFor(m => m.DescriptionWrite)
+        <br />
+    </div>
+
+    }
+}

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?> 
+<MembershipConfiguration>
+	<XmlParser>
+    <XmlVar Name="ELSO">Első XMlParser változó belső</XmlVar>
+    <XmlVar Name="MASODIK">Második XMlParser változó belső</XmlVar>
+    <XmlVar Name="HARMADIK">Harmadik XMlParser változó belső</XmlVar>
+    <XmlVar Name="NEGYEDIK">Negyedik XMlParser változó belső</XmlVar>
+	</XmlParser>
+  
+  <!-- Type: Normal/External Alapértelmezés: Normal
+       LCIDSelection: true/false Alapértelmezés: true
+       Event: egy Event Name, ha nincs akkor nincs esemény akció 
+  -->
+  <DefaultLogin Name="AAA" Type="Normal" Event="LabelD" />
+  
+  <Login Name="AAA" Type="Normal" Event="LABELE"/>
+  
+  <Login Name="BBB" Type="External" Event="LABELE">
+    <ExternalUrl>
+      <area>UserAdministration</area><controller>Account</controller><action>ExtarnalLogin</action>
+    </ExternalUrl>
+    <Constructor>ID=99|USER={USERNAME}|PSW={PASSWORD}</Constructor>
+    <Extractor>
+      <StringParts>
+        <StringPart Name="P1">status=(?'PART_STATUS'.*)|</StringPart>
+        <StringPart Name="P2">szint=(?'PART_ROLEGROUP'.*)|</StringPart>
+      </StringParts>
+      <DataElements>
+        <DataElement Name="STATUS">{PART_STATUS}</DataElement>
+        <DataElement Name="ROLEGROUP">{PART_ROLEGROUP}</DataElement>
+      </DataElements>
+    </Extractor>
+  </Login>
+
+	<Events>
+    <Event Name="LabelD">
+      <AfterLogin>
+        <area>Intervention</area><controller>LabelD</controller><action>Run</action>
+        <inputparameter name="interventionName">Login</inputparameter>
+        <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+      </AfterLogin>
+      <BeforeLogout>
+        <area>Intervention</area><controller>LabelD</controller><action>Run</action>
+        <inputparameter name="interventionName">Logout</inputparameter>
+        <inputparameter name="userName">*</inputparameter>
+      </BeforeLogout>
+    </Event>
+    <Event Name="LABELK">
+      <AfterLogin>
+        <area>Intervention</area><controller>LABELK</controller><action>Run</action>
+        <inputparameter name="interventionName">Login</inputparameter>
+        <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+      </AfterLogin>
+      <BeforeLogout>
+        <area>Intervention</area><controller>LABELK</controller><action>Run</action>
+        <inputparameter name="interventionName">Logout</inputparameter>
+        <inputparameter name="userName">*</inputparameter>
+      </BeforeLogout>
+    </Event>
+    <Event Name="LabelE">
+      <AfterLogin>
+        <area>Intervention</area><controller>LabelE</controller><action>Run</action>
+        <inputparameter name="interventionName">Login</inputparameter>
+        <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+      </AfterLogin>
+    
+      <BeforeLogout>
+        <area>Intervention</area><controller>LabelE</controller><action>Run</action>
+        <inputparameter name="interventionName">Logout</inputparameter>
+        <inputparameter name="userName">*</inputparameter>
+      </BeforeLogout>
+    </Event>
+    <Event Name="TesztLoginError">
+      <AfterLogin>
+        <area>Menu</area><controller>Layout</controller><action>ReturnInfoTestError</action>
+        <inputparameter name="event">TesztLogin.AfterLoginError</inputparameter>
+        <inputparameter name="interventionName">Login</inputparameter>
+        <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+      </AfterLogin>
+      <BeforeLogout>
+        <area>Menu</area><controller>Layout</controller><action>ReturnInfoTestError</action>
+        <inputparameter name="event">TesztLogin.BeforeLogoutError</inputparameter>
+        <inputparameter name="interventionName">Login</inputparameter>
+        <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+      </BeforeLogout>
+    </Event>
+    <Event Name="TesztLogoutError">
+      <BeforeLogout>
+        <area>Menu</area><controller>Layout</controller><action>ReturnInfoTestError</action>
+        <inputparameter name="event">TesztLogout.BeforeLogout</inputparameter>
+        <inputparameter name="interventionName">Logout</inputparameter>
+        <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+      </BeforeLogout>
+    </Event>
+	</Events>  
+</MembershipConfiguration>

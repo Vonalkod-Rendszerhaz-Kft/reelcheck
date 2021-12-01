@@ -1,0 +1,310 @@
+﻿@*
+    -------------------------
+    Reel - Index.cshtml
+    -------------------------
+*@
+@using VRH.Log4Pro.MultiLanguageManager;
+
+@using ReelCheck.Core;
+@using ReelCheck.Core.DAL;
+@using ReelCheck.Web.Areas.MasterData;
+
+@*@model ReelModel*@
+@{
+    ViewBag.Title = MultiLanguageManager.GetTranslation(typeof(WordCodes.MasterData.Reel.Title));
+
+    string m_LangCode = MultiLanguageManager.RelevantLanguageCode;
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    @*string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];*@
+
+    // DataTable beállításai
+    string dataTableId = "grid-reel";
+    int[] tableToolsExportColumnIndexes = new int[] { 0, 1, 2, 3, 4 };
+}
+@*
+    -------------------------
+    Reel - Index.cshtml
+    -------------------------
+*@
+<style>
+    .datatablesColumnFilter {
+        border-radius: 4px;
+        padding: 0 3px 0 3px;
+        /*margin: -2px;*/
+        width: 100%;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-8">
+                <h1 class="card-title">@ViewBag.Title</h1>
+            </div>
+            <div class="col-4 d-flex justify-content-end">
+                @*<input id="view-switch" type="checkbox" />*@
+                <div class="form-group mb-0">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="reelView0" name="reelView" class="custom-control-input" value="0">
+                        <label class="custom-control-label" for="reelView0">
+                            @(MultiLanguageManager.GetTranslation(typeof(WordCodes.MasterData.Reel.InitView0_Title)))
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="reelView1" name="reelView" class="custom-control-input" value="1">
+                        <label class="custom-control-label" for="reelView1">
+                            @(MultiLanguageManager.GetTranslation(typeof(WordCodes.MasterData.Reel.InitView1_Title)))
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="reelView2" name="reelView" class="custom-control-input" value="2">
+                        <label class="custom-control-label" for="reelView2">
+                            @(MultiLanguageManager.GetTranslation(typeof(WordCodes.MasterData.Reel.InitView2_Title)))
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body px-0">
+        <div class="table-responsive">
+            <table id="@(dataTableId)" class="table table-striped table-bordered table-dark table-hover" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.UserName)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.WorkStationId)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.ProcessId)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.IdCamera)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.CheckCamera)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.Printer)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.StartTimeStamp)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.EndTimeStamp)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.Result)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.IdentificationResult)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.BackgroundSystemResult)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.CheckResult)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.IdentificationReadAttempts)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.IdentificationHandheldReadAttempts)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.CheckReadAttempts)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.CheckHandheldReadAttempts)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.PrintAttempts)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.IdentificationReadsData)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.CheckReadsData)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.SendToBackgroundSystem)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.BackgroundSystemResponse)))</th>
+
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.LabelId)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.Vendor)))</th>
+
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.SupplierPartNumber)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.SupplierLot)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.SupplierFVS)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.SupplierReelSerialNumber)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.SupplierQty)))</th>
+
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.InternalMTS)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.InternalFVS)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.InternalQty)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.InternalLot)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.InternalPartNumber)))</th>
+                        <th>@(MultiLanguageManager.GetTranslation(typeof(TrueWordCodes.DAL.Reel.DisplayName.InternalVendor)))</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+@*
+    -------------------------
+    Reel - Index.cshtml
+    -------------------------
+*@
+@section Scripts {
+    <script type="text/javascript">
+        /*##### GLOBAL VARIABLES #####*/
+        var dataTableId = '#@(dataTableId)';
+        var oTable = null;
+        var dtColumns = [
+            [
+                { data: '@(nameof(Reel.Id))', class: 'text-right', width: '2rem'},
+                { data: '@(nameof(Reel.UserName))' },
+                { data: '@(nameof(Reel.WorkstationId))' },
+                { data: '@(nameof(Reel.ProcessId))' },
+                { data: '@(nameof(Reel.IdCamera))' },
+                { data: '@(nameof(Reel.CheckCamera))' },
+                { data: '@(nameof(Reel.Printer))' },
+                {
+                    data: '@(nameof(Reel.StartTimeStamp))',
+                    class: 'text-center',
+                    width: '4rem',
+                    render: function (data, type, row) {
+                        if (type === 'sort' || type === 'type') {
+                            return data;
+                        }
+                        return moment(data).format('L') + ' ' + moment(data).format('LTS');
+                    }
+                },
+                {
+                    data: '@(nameof(Reel.EndTimeStamp))',
+                    class: 'text-center',
+                    width: '4rem',
+                    render: function (data, type, row) {
+                        if (type === 'sort' || type === 'type') {
+                            return data;
+                        }
+                        return moment(data).format('L') + ' ' + moment(data).format('LTS');
+                    }
+                },
+                { data: '@(nameof(Reel.Result))' },
+                { data: '@(nameof(Reel.IdentificationResult))' },
+            ],
+            [
+                { data: '@(nameof(Reel.BackgroundSystemResult))' },
+                { data: '@(nameof(Reel.CheckResult))' },
+                { data: '@(nameof(Reel.IdentificationReadAttempts))', class: 'text-right' },
+                { data: '@(nameof(Reel.IdentificationHandheldReadAttempts))', class: 'text-right' },
+                { data: '@(nameof(Reel.CheckReadAttempts))', class: 'text-right' },
+                { data: '@(nameof(Reel.CheckHandheldReadAttempts))', class: 'text-right' },
+                { data: '@(nameof(Reel.PrintAttempts))', class: 'text-right' },
+                { data: '@(nameof(Reel.IdentificationReadsData))' },
+                { data: '@(nameof(Reel.CheckReadsData))' },
+                { data: '@(nameof(Reel.SendToBackgroundSystem))' },
+                { data: '@(nameof(Reel.BackgroundSystemResponse))' },
+            ],
+            [
+                { data: '@(nameof(Reel.LabelId))' },
+                { data: '@(nameof(Reel.Vendor))' },
+                { data: '@(nameof(Reel.SupplierPartNumber))' },
+                { data: '@(nameof(Reel.SupplierLot))' },
+                { data: '@(nameof(Reel.SupplierFVS))' },
+                { data: '@(nameof(Reel.SupplierReelSerialNumber))' },
+                { data: '@(nameof(Reel.SupplierQty))' },
+                { data: '@(nameof(Reel.InternalMTS))' },
+                { data: '@(nameof(Reel.InternalFVS))' },
+                { data: '@(nameof(Reel.InternalQty))' },
+                { data: '@(nameof(Reel.InternalLot))' },
+                { data: '@(nameof(Reel.InternalPartNumber))' },
+                { data: '@(nameof(Reel.InternalVendor))' },
+            ]
+        ];
+        /*##### GLOBAL VARIABLES END #####*/
+
+        /*##### FUNCTIONS #####*/
+        function tableReset(viewNumber) {
+            'use strict';
+
+            var thisfn = 'MasterData.Reel.Index.cshtml: tableReset(): ';
+            console.log(thisfn + 'PING');
+
+            if (oTable) oTable.destroy();
+
+            //nézet szerinti oszlopok megjelölése
+            if (!viewNumber || viewNumber < 0) viewNumber = 0;
+            if (viewNumber > 2) viewNumber = 2;
+
+            var viewCols = new Array();
+            console.log(thisfn + 'viewNumber', viewNumber);
+            for (var ix = 0; ix < 3; ix++) {
+                console.log(thisfn + 'ix dtColumns[' + ix + ']', ix, dtColumns[ix]);
+                var vsbl = (viewNumber == ix);
+                for (var jx = 0; jx < dtColumns[ix].length; jx++) {
+                    //console.log(thisfn + 'dtColumns[' + ix + '][' + jx + ']', dtColumns[ix][jx]);
+                    dtColumns[ix][jx].bVisible = vsbl;
+                    viewCols.push(dtColumns[ix][jx]);
+                }
+            }
+            console.log(thisfn + 'viewCols', viewCols);
+
+            // Tábla inicializálás
+            oTable = $(dataTableId).DataTable({
+                "bPaginate": true,  // A lapozás működjön-e, még nem tudom mi az új API szerinti neve.
+                processing: true,   // Mutassa-e a "Feldolgozás..." ablakot.
+                serverSide: true,   // Ezzel jelzem, hogy szerver oldali töltés frissítés van.
+                stateSave: false,   // Most nem érdemes, mert mindig visszaállítja az előző nézetre, és az most nem jó az oszlopkészletek miatt.,
+                ajax: {
+                    url: '@Url.Action("GetData", controllerName, new { area = areaName })', // az adatlistát eredményező akció
+                    type: 'post'                                                            // akció típusa
+                },
+                columns: viewCols,  // a táblázatot alkotó oszlpok gyűjteménye
+                language: vrhmdata.GetLanguage('@(m_LangCode)') //nyelvi illetve lokalizáció beállítása
+            });
+
+            // Az összes oszlop kereső inputjához az eseményre feliratkozás
+            oTable.columns().every(function () {
+                var thatx = this;
+                $(dataTableId + ' input[id=datatablesColumnFilter' + this.index() + ']').on('keyup change', function () {
+                    console.log(thisfn + 'filter keyup event: this', this);
+                    if (thatx.search() !== this.value) {
+                        thatx.search(this.value).draw();
+                    }
+                });
+            });
+
+            console.log(thisfn + 'END');
+        } // tableReset() END
+
+
+        /**
+         * Szűrő mezők hozzáadása
+         */
+        function insertFilterFields() {
+            var $head = $(dataTableId + ' thead');
+            var html = '<tr>';
+
+            // A 'datatablesColumnFilterX' azonosítóval ellátott inputok. X a column indexe a táblázatban.
+            var colix = 0;
+            for (var ix = 0; ix < 3; ix++) {
+                for (var jx = 0; jx < dtColumns[ix].length; jx++) {
+                    html += '<th>﻿<input type="text" id="datatablesColumnFilter' + colix + '" class="datatablesColumnFilter" /></th>';
+                    colix++;
+                }
+            }
+            html += '</tr>';
+            $head.prepend(html);
+        } // insertFilterFields() END
+
+        /*##### FUNCTIONS END #####*/
+
+        /*##### EVENTS #####*/
+        $(function () {
+            var thisfn = 'MasterData.Reel.Index.cshtml: ready event: ';
+            console.log(thisfn + 'PING');
+
+            //hasznájuk a moment.js-t, ezért beállítjuk a lokalizációt
+            moment.locale('@(m_LangCode.Substring(0,2))');
+
+            insertFilterFields(); // Szűrő mezők hozzáadása
+
+            $('input[name="reelView"]').on('change', function () {
+                var thisfn = 'MasterData.Reel.Index.cshtml: input[name="reelView"] change event: ';
+                console.log(thisfn + 'this', this);
+                var viewNumber = $(this).val();
+                console.log(thisfn + 'viewNumber', viewNumber);
+
+                tableReset($(this).val());
+            });
+
+            $('#reelView@(ViewBag.InitView)').prop('checked', true);
+            tableReset(@(ViewBag.InitView));
+
+            @*oTable = dataTableInitialization({
+                dataTableSelector: '@Html.Raw(dataTableSelector)',
+                sAjaxSource: sAjaxSource,
+                aoColumns: aoColumns,
+                languageUrl: '@dataTablesLanguageFile',
+                exportColumns: [@string.Join(", ", tableToolsExportColumnIndexes)],
+            });*@
+
+        }); //$(document).ready event END
+        /*##### EVENTS END #####*/
+    </script>
+}
+@*
+    -------------------------
+    Reel - Index.cshtml
+    -------------------------
+*@
+

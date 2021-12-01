@@ -1,0 +1,300 @@
+<ScripterDefinitions>
+	<General>
+		<strings>
+			<string name="cs1">data source=.\SQLExpress;initial catalog=LearALM;user id=sa;password=Vrh@54321;MultipleActiveResultSets=True;App=EntityFramework;</string>
+			<string name="pts1">~\App_Data\OneScripter\TESTS\</string>
+			<string name="pts2">~\App_Data\OneScripter\TESTS\</string>
+			<string name="pts3">C:\ALM\SERVICESCRIPTS\</string>
+		</strings>
+		<Defaults parseparator="###" connectionstring="cs1" pathtoscript="pts3" batchseparator="GO" workdirectory="pts3"/>
+	</General>
+  <Scripters defaultLCID="hu-HU">
+    <Scripter Id="BackupSystem" LCID="hu-HU" Type="PSfile" name="__SF.ps1" pathtoscript="pts3">
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="BACKUPFULL"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="BackupDBOnly" LCID="hu-HU" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="BACKUPDB" />	
+			<Parameter name="commandpar" type="string" Value="" />	
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="ArchiveData" LCID="hu-HU" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="ARCH"/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="PurgeData" LCID="hu-HU" Type="PSfile" name="__SF.ps1" pathtoscript="pts3">
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="PURGE"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="IniStatus" LCID="hu-HU" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="INISTATE"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="AutoRestartEnable" LCID="hu-HU" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="SERVICESENABLEAUTOSTART"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="AutoRestartDisable" LCID="hu-HU" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="SERVICESDISABLEAUTOSTART"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="SystemSTART" LCID="hu-HU" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="SERVICESSTART"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="SystemSTOP" LCID="hu-HU" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="SERVICESSTOP"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+
+    <Scripter Id="BackupSystem" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3">
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="BACKUPFULL"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="BackupDBOnly" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3">
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="BACKUPDB" />	
+			<Parameter name="commandpar" type="string" Value="" />	
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="ArchiveData" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="ARCH"/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="PurgeData" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3">
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="PURGE"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="IniStatus" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="INISTATE"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="AutoRestartEnable" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="SERVICESENABLEAUTOSTART"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="AutoRestartDisable" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="SERVICESDISABLEAUTOSTART"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="SystemSTART" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="SERVICESSTART"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="SystemSTOP" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="SERVICESSTOP"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="WebSiteRESTART" LCID="en-US" Type="PSfile" name="__SF.ps1" pathtoscript="pts3" >
+		<InputParameters>
+			<Parameter name="mode" type="string" Value="WEBUI"/>
+			<Parameter name="command" type="string" Value="WEBSITESTOP"/>
+			<Parameter name="commandpar" type="string" Value=""/>
+		</InputParameters>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+	
+    <!--
+	<Scripter Id="KillW3WP" Type="PSfile" connectionstring="cs1" >
+		<Text>stop-process -Name "w3wp" -force;0,"w3wp.exe killed."</Text>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+	</Scripter>
+	-->
+    <Scripter Id="CloseForgottenEWS" Type="SQLtext" connectionstring="cs1" >
+		<Text>
+DECLARE @D AS DATE
+DECLARE @M AS VARCHAR(200)
+DECLARE @RC AS INTEGER
+SET @D = GETDATE()
+
+SET NOCOUNT OFF
+UPDATE [LearALM].[dbo].[EWorkSheetItems]
+SET [Closed] = @D
+  WHERE [Closed] IS NULL
+	AND [EWorkSheetId] IN 
+	(
+	SELECT [Id]
+	FROM [LearALM].[dbo].[EWorkSheets]
+	WHERE [Activated] IS NOT NULL 
+		AND [Closed] IS NULL 
+		AND [Id] NOT IN 
+		(
+		SELECT [EWSId]
+		FROM [LearALM].[dbo].[DTMStateVariables]
+		WHERE [EWSId] IS NOT NULL
+		)
+	)
+SET @RC = @@ROWCOUNT
+
+
+SET NOCOUNT OFF
+UPDATE [LearALM].[dbo].[EWorkSheets]
+SET [Closed] = @D
+  WHERE [Activated] IS NOT NULL 
+	AND [Closed] IS NULL 
+	AND [Id] NOT IN 
+		(
+		SELECT [EWSId]
+		FROM [LearALM].[dbo].[DTMStateVariables]
+		WHERE [EWSId] IS NOT NULL
+		)
+SET @RC = @RC + @@ROWCOUNT
+
+IF @RC = 0 SET @M = 'No open but not executing EWS records were found. No records were processed!';
+ELSE SET @M = 'Open but not executing E-Worksheets are closed! Number of records processed:' + CONVERT(VARCHAR(10),@RC);
+SELECT 0 AS ReturnCode, @M AS ReturnMessage;
+		</Text>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+    <Scripter Id="DeleteOldHarnessTRXrecords" Type="SQLtext" connectionstring="cs1" >
+		<Text>
+DECLARE @D AS DATE
+DECLARE @M AS VARCHAR(200)
+DECLARE @RC AS INTEGER
+
+SET @D = GETDATE()- 7
+SET NOCOUNT OFF
+
+DELETE FROM [LearALM].[dbo].[HarnessTransactionLogs] WHERE NOT [TransactionTimeStamp] >= @D
+SET @RC = @@ROWCOUNT 
+IF @RC = 0 SET @M = 'No harness transaction records,older than 7 days, are found! No records deleted!';
+ELSE SET @M = 'Harness transaction records,older than 7 days, are deleted! Number of deleted records:' + CONVERT(VARCHAR(10),@RC);
+SELECT 0 AS ReturnCode, @M AS ReturnMessage;
+		</Text>
+		<OutputParameters>
+			<Parameter name="ReturnCode" type="int"/>
+			<Parameter name="ReturnMessage" type="string"/>
+		</OutputParameters>
+    </Scripter>
+   </Scripters>
+</ScripterDefinitions>

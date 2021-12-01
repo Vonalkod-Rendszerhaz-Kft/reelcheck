@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ReelCheck>
+  <Redis>localhost</Redis>
+  <DataPoolName>REELCHECK</DataPoolName>
+  <InitializeMultilanguageDb>true</InitializeMultilanguageDb>
+  <PrintingServiceEventHubChannel>DATA</PrintingServiceEventHubChannel>
+  <!--<CustomFVSURI>http://localhost.fiddler/customfvs/iddata</CustomFVSURI>-->
+  <!--<CustomFVSURI>http://10.238.142.232/cusfvs/admin/cimkezo.php</CustomFVSURI>-->
+  <CustomFVSURI>http://localhost/customfvs/iddata/ReelCheck</CustomFVSURI>
+</ReelCheck>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RedisManager>
+  <!-- Redis kapcsolat létrehozásához: "server=IP;port:PORTSZÁM;pool:ALAPÉRTELMEZETT_DATAPOOL" -->
+  <ConnectionString>server=localhost;port=6379;pool=ALM</ConnectionString>
+  <!-- <ConnectionString>server=localhost;port=6379;pool=REELCHECK</ConnectionString> -->
+  <!--az xml-ben megadott wordcode értékek elé a tényleges szókód előállításához beillesztendő prefix-->
+  <WordCodePrefix>RedisManager.xml.</WordCodePrefix>
+  <!--Az ablak címe-->
+  <Title WordCode="Index.Title">Az ablak címe</Title>
+  <!--Az ablak help szövege-->
+  <Help WordCode="Index.Help">Az ablak help szövege</Help>
+  <!--felhasználói felület frissítési gyakoriság másodpercben-->
+  <AutoRefresh>10</AutoRefresh>
+</RedisManager>

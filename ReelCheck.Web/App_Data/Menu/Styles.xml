@@ -1,0 +1,118 @@
+<StyleDefinitions>
+	<XmlParser>
+		<XmlVar Name="LOGO_Path">../../Images/</XmlVar>
+		<XmlVar Name="LOGO_FORWARD">go.png</XmlVar>
+		<XmlVar Name="LOGO_MENU">menu.png</XmlVar>
+		<XmlVar Name="STYLE_IMAGE">background-position: left center;background-repeat:no-repeat;background-size:contain;</XmlVar>
+		<XmlVar Name="STYLE_IMAGEBACKGROUNDFORWARD">@STYLE_IMAGE@;background-image: url('@LOGO_Path@@LOGO_FORWARD@');</XmlVar>
+		<XmlVar Name="STYLE_IMAGEBACKGROUNDMENU">@STYLE_IMAGE@;background-image: url('@LOGO_Path@@LOGO_MENU@');</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_COMMON">color:black;font-weight:bold;justify-content:center;align-items:center;word-wrap: break-word;text-align:center;box-shadow:2vmax 1vmax 3vmax 1vmax black;text-shadow:0vmax 0vmax 0vmax;border-radius:8vmax 4vmax 4vmax 8vmax;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_S">font-size:2vmax;padding: 0.5vmax  0.5vmax  0.5vmax  0.5vmax;line-height: 4vmax;@BUTTONSTYLE_COMMON@;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_M">font-size:2vmax;padding: 1vmax 2vmax 1vmax 2vmax;line-height: 6vmax;@BUTTONSTYLE_COMMON@;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_XL">font-size:3vmax;padding: 1vmax 2vmax 1vmax 2vmax;line-height: 9vmax;@BUTTONSTYLE_COMMON@;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_XXL">font-size:2vmax;padding: 5vmax 2vmax 5vmax 2vmax;line-height: 16vmax;@BUTTONSTYLE_COMMON@;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE">@BUTTONSTYLE_M@;@STYLE_IMAGEBACKGROUNDFORWARD@;padding-left:5vmax;</XmlVar>
+		<XmlVar Name="BUTTONSTYLE_XXL_MENU">@BUTTONSTYLE_XXL@;@STYLE_IMAGEBACKGROUNDMENU@;padding-left:1vmax;</XmlVar>
+
+		
+		<XmlVar Name="STYLE_CONTAINER">margin: 0rem 0rem 0rem 0rem;</XmlVar>
+		<XmlVar Name="STYLE_ITEM">background-color:transparent;color:lightgray;font-size:1vmax;</XmlVar>
+		<XmlVar Name="STYLE_GROUP">background-color:transparent;color:orange;font-size:1.5vmax;font-weight:bold;</XmlVar>
+		<XmlVar Name="STYLE_HIGHLITED">background-color:transparent;color:white;line-height:200%;font-size:1.2vmax;font-weight:bold;</XmlVar>
+		<XmlVar Name="STYLE_SELECTED">background-color:grey;color:lightgrey;</XmlVar>
+		<XmlVar Name="STYLE_HOVER">background-color: black;color: white;text-shadow:1vmax 1vmax 2vmax;</XmlVar>
+		<XmlVar Name="STYLE_DISABLED">background-color:transparent;color:dimgray;font-style:italic;</XmlVar>
+		<XmlVar Name="STYLE_DISABLEDBUTTON">background-color:transparent;color:darkgray;</XmlVar>
+		<XmlVar Name="STYLE_DEFAULT">background-color:transparent;color:lightgray;font-size: 1vmax;</XmlVar>
+		<XmlVar Name="STYLE_ITEM_DESKTOP">background-color:transparent;color:lightgray;font-size:1vmax;</XmlVar>
+		<XmlVar Name="STYLE_HOVER_DESKTOP">background-color: black;color: white;text-shadow:1vmax 1vmax 2vmax;</XmlVar>
+		<XmlVar Name="STYLE_HIGHLITED_DESKTOP">background-color:transparent;color:white;font-size:1.2vmax;font-weight:bold;</XmlVar>
+	</XmlParser>
+
+	<StyleKits>
+		<StyleKit Name="ButtonKitGrey">
+		  <Style Name="Container">@STYLE_CONTAINER@</Style>
+		  <Style Name="Disabled">@STYLE_DISABLEDBUTTON@</Style>
+		  <Style Name="Hover">@STYLE_HOVER@</Style>
+		  <Style Name="Normal">@BUTTONSTYLE@;background-color:grey;</Style>
+		</StyleKit>
+		<StyleKit Name="ButtonKitYellow">
+		  <Style Name="Container">@STYLE_CONTAINER@</Style>
+		  <Style Name="Disabled">@STYLE_DISABLEDBUTTON@</Style>
+		  <Style Name="Normal">@BUTTONSTYLE@;background-color:yellow;</Style>
+		  <Style Name="Hover">@STYLE_HOVER@</Style>
+		</StyleKit>
+		<StyleKit Name="ButtonKitGreen">
+		  <Style Name="Container">@STYLE_CONTAINER@</Style>
+		  <Style Name="Disabled">@STYLE_DISABLEDBUTTON@</Style>
+		  <Style Name="Normal">@BUTTONSTYLE@;background-color:green;</Style>
+		  <Style Name="Hover">@STYLE_HOVER@</Style>
+		</StyleKit>
+		<StyleKit Name="ButtonKitRed">
+		  <Style Name="Container">@STYLE_CONTAINER@</Style>
+		  <Style Name="Disabled">@STYLE_DISABLEDBUTTON@</Style>
+		  <Style Name="Hover">@STYLE_HOVER@</Style>
+		  <Style Name="Normal">@BUTTONSTYLE@;background-color:red;</Style>
+		</StyleKit>
+		<StyleKit Name="ButtonKitOrange">
+		  <Style Name="Container">@STYLE_CONTAINER@</Style>
+		  <Style Name="Disabled">@STYLE_DISABLEDBUTTON@</Style>
+		  <Style Name="Hover">@STYLE_HOVER@</Style>
+		  <Style Name="Normal">@BUTTONSTYLE@;background-color:orange;</Style>
+		</StyleKit>
+		<StyleKit Name="DefaultKitTouch">
+			<Style Name="Normal">@STYLE_DEFAULT@</Style>
+			<Style Name="Hover">@STYLE_HOVER@</Style>
+			<Style Name="Disabled">@STYLE_DISABLED@</Style>
+			<Style Name="Container">@STYLE_CONTAINER@</Style>
+		</StyleKit>
+		<StyleKit Name="ItemKitTouch">
+			<Style Name="Normal">@STYLE_ITEM@</Style>
+			<Style Name="Hover">@STYLE_HOVER@</Style>
+			<Style Name="Disabled">@STYLE_DISABLED@</Style>
+			<Style Name="Container">@STYLE_CONTAINER@</Style>
+		</StyleKit>
+		<StyleKit Name="GroupKitTouch">
+			<Style Name="Normal">@STYLE_GROUP@;font-size:3vmax;</Style>
+			<Style Name="Hover">@STYLE_HOVER@</Style>
+			<Style Name="Disabled">@STYLE_DISABLED@</Style>
+			<Style Name="Container">@STYLE_CONTAINER@</Style>
+		</StyleKit> 
+		<StyleKit Name="GroupKitTouchButton">
+			<Style Name="Normal">@BUTTONSTYLE_XXL_MENU@;color:blue;</Style>
+			<Style Name="Hover">@STYLE_HOVER@</Style>
+			<Style Name="Disabled">@STYLE_DISABLED@</Style>
+			<Style Name="Container">@STYLE_CONTAINER@</Style>
+		</StyleKit> 
+		<StyleKit Name="HighlitedTouch">
+			  <Style Name="Container">@STYLE_CONTAINER@</Style>
+			  <Style Name="Disabled">@STYLE_DISABLED@</Style>
+			  <Style Name="Hover">@STYLE_HOVER@</Style>
+			  <Style Name="Normal">@STYLE_HIGHLITED@</Style>
+		</StyleKit>
+		<StyleKit Name="DefaultKitDesktop">
+			<Style Name="Normal">@STYLE_DEFAULT@</Style>
+			<Style Name="Hover">@STYLE_HOVER_DESKTOP@</Style>
+			<Style Name="Disabled">@STYLE_DISABLED@</Style>
+			<Style Name="Container">@STYLE_CONTAINER@</Style>
+		</StyleKit>
+		<StyleKit Name="ItemKitDesktop">
+			<Style Name="Normal">@STYLE_ITEM_DESKTOP@</Style>
+			<Style Name="Hover">@STYLE_HOVER_DESKTOP@</Style>
+			<Style Name="Disabled">@STYLE_DISABLED@</Style>
+			<Style Name="Container">@STYLE_CONTAINER@</Style>
+		</StyleKit>
+		<StyleKit Name="GroupKitDesktop">
+			<Style Name="Normal">@STYLE_GROUP@;font-size:1vmax;</Style>
+			<Style Name="Hover">@STYLE_HOVER_DESKTOP@</Style>
+			<Style Name="Disabled">@STYLE_DISABLED@</Style>
+			<Style Name="Container">@STYLE_CONTAINER@</Style>
+		</StyleKit> 
+		<StyleKit Name="HighlitedDesktop">
+			  <Style Name="Normal">@STYLE_HIGHLITED_DESKTOP@;font-size:1vmax;</Style>
+			  <Style Name="Hover">@STYLE_HOVER_DESKTOP@</Style>
+			  <Style Name="Disabled">@STYLE_DISABLED@</Style>
+			  <Style Name="Container">@STYLE_CONTAINER@</Style>
+		</StyleKit>
+	</StyleKits>
+</StyleDefinitions>

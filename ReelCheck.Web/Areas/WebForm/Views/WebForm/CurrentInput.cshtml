@@ -1,0 +1,289 @@
+﻿@using System.Globalization;
+
+@model WebFormModel
+
+@{
+    WebForm.Input currentInput = Model.CurrentInput;
+
+    if (currentInput != null)
+    {
+        string addattributes = currentInput.ReadOnly ? " readonly" : "";
+        switch (currentInput.InputType)
+        {
+            case Vrh.WebForm.InputType.Text:
+                if (currentInput.Text != null)
+                {
+                    addattributes += String.IsNullOrWhiteSpace(currentInput.Text.Pattern) ? "" : String.Format(" pattern={0}", currentInput.Text.Pattern);
+                }
+
+                <div class="form-group">
+                    <label for="@(currentInput.Name)">@Html.Raw(currentInput.Label)</label>
+                    <input type="text"
+                           id="@(currentInput.Name)"
+                           name="@(currentInput.Name)"
+                           class="webformtextbox form-control"
+                           data-theme="a"
+                           value="@(currentInput.Value)"
+                           @(addattributes)>
+                </div>
+                break;
+
+            case Vrh.WebForm.InputType.Number:
+                if (currentInput.Number != null)
+                {
+                    addattributes += (String.IsNullOrWhiteSpace(currentInput.Number.Min) ? "" : String.Format(" min={0}", currentInput.Number.Min))
+                                   + (String.IsNullOrWhiteSpace(currentInput.Number.Max) ? "" : String.Format(" max={0}", currentInput.Number.Max))
+                                   + (String.IsNullOrWhiteSpace(currentInput.Number.Step) ? "" : String.Format(" step={0}", currentInput.Number.Step));
+                }
+                <div class="form-group">
+                    <label for="@(currentInput.Name)">@Html.Raw(currentInput.Label)</label>
+                    <input type="number"
+                           id="@(currentInput.Name)"
+                           name="@(currentInput.Name)"
+                           class="webformtextbox form-control"
+                           data-theme="a"
+                           value="@(currentInput.Value)"
+                           @(addattributes)>
+                </div>
+                break;
+
+            case Vrh.WebForm.InputType.FileName:
+                <div class="form-group">
+                    <label for="@(currentInput.Name)">@Html.Raw(currentInput.Label)</label>
+                    <input type="text"
+                           id="@(currentInput.Name)"
+                           name="@(currentInput.Name)"
+                           class="webformtextbox form-control"
+                           data-theme="a"
+                           value="@(currentInput.Value)"
+                           @(addattributes)>
+                </div>
+                break;
+
+            case Vrh.WebForm.InputType.EnumList:
+            case Vrh.WebForm.InputType.SQLList:
+            case Vrh.WebForm.InputType.XMLList:
+            case Vrh.WebForm.InputType.DATList:
+                string inpselname = currentInput.Name + "SelectedName";
+                string multiname = currentInput.Name + "Multi";
+                ListType lsttype = ListType.Single;
+                if (Vrh.WebForm.InputType.Equals(currentInput.InputType, Vrh.WebForm.InputType.EnumList))
+                {
+                    lsttype = currentInput.EnumList.Type;
+                }
+                else if (Vrh.WebForm.InputType.Equals(currentInput.InputType, Vrh.WebForm.InputType.SQLList))
+                {
+                    lsttype = currentInput.SQLList.Type;
+                }
+                else if (Vrh.WebForm.InputType.Equals(currentInput.InputType, Vrh.WebForm.InputType.XMLList))
+                {
+                    lsttype = currentInput.XMLList.Type;
+                }
+                else if (Vrh.WebForm.InputType.Equals(currentInput.InputType, Vrh.WebForm.InputType.DATList))
+                {
+                    lsttype = currentInput.DATList.Type;
+                }
+
+                if (lsttype == ListType.Single || lsttype == ListType.SingleListOnly)
+                {
+                    System.Diagnostics.Debug.WriteLine("List.Single: name={0}, default={1}", currentInput.Name, currentInput.ValueSelectedName);
+                    <div class="form-group">
+                        <label for="@(inpselname)">@Html.Raw(currentInput.Label)</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   id="@(inpselname)"
+                                   name="@(inpselname)"
+                                   class="form-control"
+                                   value="@(currentInput.ValueSelectedName)"
+                                   @(currentInput.ReadOnly ? "readonly" : "") @(lsttype == ListType.SingleListOnly ? "readonly" : "")>
+                            <div class="input-group-append" onclick="AutoCompClickOnSearch('@(inpselname)')">
+                                <span class="input-group-text fa fa-search" id="@(inpselname)"></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (lsttype == ListType.Multi || lsttype == ListType.MultiListOnly)
+                {
+                    <table class="multitable">
+                        @if (Model.ViewMode == ViewModes.Mobile)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="@(currentInput.Name)">@Html.Raw(currentInput.Label)</label>
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   id="@(inpselname)"
+                                                   name="@(inpselname)"
+                                                   class="form-control"
+                                                   value="" @(currentInput.ReadOnly ? "readonly" : "") @(lsttype == ListType.MultiListOnly ? "readonly" : "")>
+                                            <div class="input-group-append" onclick="AutoCompClickOnSearch('@(inpselname)')">
+                                                <span class="input-group-text fa fa-search" id="@(inpselname)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="border:1px solid #ccc;border-radius:4px;display:table-cell;" id="@(multiname)">
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td style="width:30%;vertical-align:top;">
+                                    <div class="form-group">
+                                        <label for="@(currentInput.Name)">@Html.Raw(currentInput.Label)</label>
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   id="@(inpselname)"
+                                                   name="@(inpselname)"
+                                                   class="form-control"
+                                                   value="" @(currentInput.ReadOnly ? "readonly" : "") @(lsttype == ListType.MultiListOnly ? "readonly" : "")>
+                                            <div class="input-group-append" onclick="AutoCompClickOnSearch('@(inpselname)')">
+                                                <span class="input-group-text fa fa-search" id="@(inpselname)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="@(multiname)" style="color:transparent"></label>
+                                        <div style="border:1px solid #ccc;border-radius:4px;display:table-cell;" id="@(multiname)">
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+                break;
+
+            case Vrh.WebForm.InputType.FileUpload:
+                <div class="form-group">
+                    <label for="@(currentInput.Name)text">@Html.Raw(currentInput.Label)</label>
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               data-theme="a"
+                               id="@(currentInput.Name)text"
+                               name="@(currentInput.Name)text"
+                               value="@(currentInput.Value)" @(addattributes)>
+                        <input type="file"
+                               id="@(currentInput.Name)"
+                               name="@(currentInput.Name)"
+                               style="display:none;"
+                               value="@(currentInput.Value)"
+                               class="webformfilename">
+                        <div class="input-group-append" onclick="FileClickOn('@(currentInput.Name)')">
+                            <span class="input-group-text fa fa-folder-open fa-lg" id="@(currentInput.Name)text"></span>
+                        </div>
+                    </div>
+                </div>
+                break;
+
+            case Vrh.WebForm.InputType.DateTime:
+                if (currentInput.DateTimeFormat.Name == DateTimeFormatNames.WF_Time ||
+                    currentInput.DateTimeFormat.Name == DateTimeFormatNames.SQL_CONVERT120T
+                   )
+                {
+                    <div class="form-group">
+                        <label for="@(currentInput.Name)">@Html.Raw(currentInput.Label)</label>
+                        @if (Model.ViewMode == ViewModes.Mobile)
+                        {
+                            <input type="time"
+                                   class="form-control"
+                                   data-theme="a"
+                                   data-clear-btn="false"
+                                   id="@(currentInput.Name)"
+                                   name="@(currentInput.Name)"
+                                   value="@(currentInput.Value)" @(addattributes)>
+                        }
+                        else
+                        {
+                            <div class="input-group date" id="picker_for_time" style="width:60%;">
+                                <input type="text"
+                                       class="form-control"
+                                       id="@(currentInput.Name)"
+                                       name="@(currentInput.Name)"
+                                       value="@(currentInput.Value)" @(addattributes)>
+                                <div class="input-group-append input-group-addon">
+                                    <span class="input-group-text fas fa-clock fa-lg" id="@(currentInput.Name)"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else if (currentInput.DateTimeFormat.Name == DateTimeFormatNames.WF_Date ||
+                         currentInput.DateTimeFormat.Name == DateTimeFormatNames.SQL_CONVERT120D
+                        )
+                {
+                    <div class="form-group">
+                        <label for="@(currentInput.Name)">@Html.Raw(currentInput.Label)</label>
+                        @if (Model.ViewMode == ViewModes.Mobile)
+                        {
+                            <input type="date"
+                                   class="form-control"
+                                   data-theme="a"
+                                   data-clear-btn="false"
+                                   id="@(currentInput.Name)"
+                                   name="@(currentInput.Name)"
+                                   value="@(currentInput.Value)" @(addattributes)>
+                        }
+                        else
+                        {
+                            <div class="input-group date" id="picker_for_date" style="width:60%;">
+                                <input type="text"
+                                       class="form-control"
+                                       id="@(currentInput.Name)"
+                                       name="@(currentInput.Name)"
+                                       value="@(currentInput.Value)" @(addattributes)>
+                                <div class="input-group-append input-group-addon">
+                                    <span class="input-group-text fas fa-calendar fa-lg" id="@(currentInput.Name)"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else if (currentInput.DateTimeFormat.Name == DateTimeFormatNames.WF_DateTime ||
+                         currentInput.DateTimeFormat.Name == DateTimeFormatNames.SQL_CONVERT120DT
+                        )
+                {
+                    <div class="form-group">
+                        <label for="@(currentInput.Name)">@Html.Raw(currentInput.Label)</label>
+                        @if (Model.ViewMode == ViewModes.Mobile)
+                        {
+                            <input type="datetime-local"
+                                   class="form-control"
+                                   data-theme="a"
+                                   data-clear-btn="false"
+                                   id="@(currentInput.Name)"
+                                   name="@(currentInput.Name)"
+                                   value="@(currentInput.Value)" @(addattributes)>
+                        }
+                        else
+                        {
+                            <div class="input-group date" id="picker_for_datetime" style="width:80%;">
+                                <input type="text"
+                                       class="form-control"
+                                       id="@(currentInput.Name)"
+                                       name="@(currentInput.Name)"
+                                       value="@(currentInput.Value)" @(addattributes)>
+                                <div class="input-group-append input-group-addon">
+                                    <span class="input-group-text fas fa-calendar fa-lg" id="@(currentInput.Name)"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+}

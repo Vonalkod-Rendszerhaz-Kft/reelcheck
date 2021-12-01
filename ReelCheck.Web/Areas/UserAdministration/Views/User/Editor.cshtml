@@ -1,0 +1,149 @@
+﻿@using Vrh.Web.Common.Lib;
+@using Vrh.Web.Membership.Areas.UserAdministration.Controllers
+
+@model UserEditorModel
+@{
+    string actionName = nameof(UserController.Editor);
+    object routeValues = new
+    {
+        area = Constants.AREA
+    };
+    var ajaxOptions = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId)
+    };
+    object htmlAttributes = new { id = Constants.Ids.Form.USEREDITOR };
+}
+
+@if (Model.UserId != null)
+{   // csak módosításkor van értelme
+    <div class="row">
+        <div class="col-4">
+            <label>
+                @Model.Trans(typeof(WordCodes.MvcMembership.Labels.CreateDate))
+            </label><br />
+            @Model.CreateDate
+        </div>
+        <div class="col-4">
+            <label>
+                @Model.Trans(typeof(WordCodes.MvcMembership.Labels.LastLogin))
+            </label><br />
+            @Model.LastLoginDate
+        </div>
+        <div class="col-4">
+            <label>
+                @Model.Trans(typeof(WordCodes.MvcMembership.Labels.LastActivity))
+            </label><br />
+            @Model.LastActivityDate
+        </div>
+    </div>
+}
+
+@Html.Partial(Constants.VALIDATIONSUMMARY)
+
+@using (Ajax.BeginForm(actionName, Constants.CONTROLLER_USER, routeValues, ajaxOptions, htmlAttributes))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.BootboxId)
+    @Html.HiddenFor(x => x.EditMode)
+    @Html.HiddenFor(x => x.IsFirstOrYourself)
+    @Html.HiddenFor(x => x.UserId)
+
+    <div class="row">
+        <div class="col-9 form-group">
+            @Html.LabelFor(x => x.UserName)
+            @if (Model.UserId == null)
+            {
+                @Html.TextBoxFor(x => x.UserName)
+            }
+            else
+            {
+                @Html.TextBoxFor(x => x.UserName, new { @readonly = "" })
+            }
+            @Html.ValidationMessageFor(x => x.UserName)
+        </div>
+
+        @*<div class="col-3 form-group checkbox text-center">
+                <label class="form-check-label" for="@(nameof(UserEditorModel.IsApproved))">
+                    @(Model.Trans(typeof(WordCodes.MvcMembership.Labels.UserApprove)))
+                </label>
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="@(nameof(UserEditorModel.IsApproved))"
+                       name="@(nameof(UserEditorModel.IsApproved))"
+                       value="@(Model.IsApproved.ToString().ToLower())">
+                @Html.ValidationMessageFor(x => x.IsApproved)
+            </div>*@
+
+        <div class="col-3 form-group checkbox text-center">
+            <label class="form-check-label" for="@(nameof(UserEditorModel.IsApproved))">
+                @(Model.Trans(typeof(WordCodes.MvcMembership.Labels.UserApprove)))
+            </label>
+            @if (Model.IsFirstOrYourself)
+            {
+                @Html.CheckBoxFor(x => x.IsApproved, new { @class = "form-check-input", @disabled = "" })
+            }
+            else
+            {
+                @Html.CheckBoxFor(x => x.IsApproved, new { @class = "form-check-input" })
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-9 form-group">
+            @Html.LabelFor(x => x.Email)
+            @Html.TextBoxFor(x => x.Email)
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+    </div>
+
+    if (Model.UserId == null)
+    {   // felvitel
+        <div class="row">
+            <div class="col-6 form-group">
+                @Html.LabelFor(x => x.Password)
+                @Html.PasswordFor(x => x.Password)
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+            <div class="col-6 form-group">
+                @Html.LabelFor(x => x.ConfirmPassword)
+                @Html.PasswordFor(x => x.ConfirmPassword)
+                @Html.ValidationMessageFor(x => x.ConfirmPassword)
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col form-group">
+            @Html.LabelFor(x => x.Comment)
+            @Html.TextAreaFor(x => x.Comment)
+            @Html.ValidationMessageFor(x => x.Comment)
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    /*##### EVENTS #####*/
+    $(function () {
+        'use strict';
+
+        //var thisfn = 'UserController.Editor.cshtml: ready event: ';
+        //console.log(thisfn + 'PING'); Constants.Ids.Form.USEREDITOR
+
+        //vrhct.masterdata.addClass('#@(Model.BootboxId)','input[type=text],input[type=checkbox],input[type=password],input[type=email],textarea,select');
+        vrhct.masterdata.addClass('#@(Constants.Ids.Form.USEREDITOR)','input[type=text],input[type=checkbox],input[type=password],input[type=email],textarea,select');
+
+        @if (Model.EditMode == EditModes.Select)
+        {
+            <text>
+        $('#IsApproved').attr('disabled', "");
+        $('#Email').attr('readonly', "");
+        $('#Comment').attr('readonly', "");
+            </text>
+        }
+        //console.log(thisfn + 'END');
+    }); // $(document).ready END
+    /*##### EVENTS END #####*/
+</script>

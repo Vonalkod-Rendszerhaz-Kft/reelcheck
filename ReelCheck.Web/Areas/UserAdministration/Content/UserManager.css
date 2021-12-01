@@ -1,0 +1,46 @@
+﻿/***************************************************
+UserManager.css
+    A Vonalkód Rendszerház felhasználók kezeléséhez készült stílusok.
+----------------------
+Alapítva:
+    2019.03.05. Wittmann Antal
+Módosult:
+****************************************************/
+
+.datatableColumnFilter {
+    border-radius: 4px;
+    padding: 0 3px 0 3px;
+    /*margin: -2px;*/
+    width: 100%;
+    height: 28px;
+}
+
+.datatableActionIcon {
+    cursor: pointer;
+    color: orange;
+    opacity: .7;
+}
+
+.fa-square, .fa-check-square {
+    font-size: 1.3rem;
+}
+
+.wrapWord {
+    word-break: break-word;
+}
+
+/* 
+* Sajnos, ha a "table-sm" osztályt alkalamazzuk a táblázaton, akkor a sorting jelölő rossz helyre kerül.
+* Ez a megoldás nem dinamikus, ha kivesszük a "table-sm" osztályt, akkor ezt is kommentezzük ki.
+*/
+table.dataTable thead .sorting:before, table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:after {
+    bottom: 0.3em;
+}

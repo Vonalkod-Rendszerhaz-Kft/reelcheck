@@ -1,0 +1,29 @@
+digraph {
+        label="LabelD: Print"
+		compound=true;
+		node [shape=Mrecord]
+		rankdir="BT"
+	    Rest [label="Rest|entry / Goto Rest (initial) state:\n- LabelPrinted set to LOW"];
+		Print [label="Print|entry / Printing:\n- if print not need: Fire End\n- if print need: \n - Print label & receive print succes\n - Save print data into reel data\n - if print fail: Fire PrintNok\n - if print successful: Fire PrintOk\n"];
+		WaitForIntervention [label="WaitForIntervention"];
+		NoPrint [label="NoPrint|entry / Skip print operation:\n- Set data in reel data\n- Fire End"];
+		PrintOk [label="PrintOk|entry / Print Successful:\n- Set data in real data\n- Fire: WiatForSticking"];
+		WaitForSticking [label="WaitForSticking|entry / Wait For sticking:\n- Set LabelPrinted to High\n- Wait For StickingDone input High (Fire: StickingDone)"];
+		WaitForStickingDoneReset [label="WaitForStickingDoneReset|entry / Wait for StickingDonetio Low:\n- Set LabelPrinted to Low\n- Wait For StickingDone input Low (Fire: PrintProcessEnd)"];
+		PrintProcessEnd [label="PrintProcessEnd|entry / Print process end:\n- Report print process end to main\n- Fire End trigger (Go to Rest)"];
+		
+		Rest -> Print [style="solid", label="Start"];
+		Print -> PrintOk [style="solid", label="PrintOk"];
+		Print -> WaitForIntervention [style="solid", label="PrintNok"];
+		Print -> Rest [style="solid", label="End"];
+		WaitForIntervention -> Print [style="solid", label="Reprint"];
+		WaitForIntervention -> NoPrint [style="solid", label="SkipPrint"];
+		WaitForIntervention -> Rest [style="solid", label="End"];
+		NoPrint -> Rest [style="solid", label="End"];
+		PrintOk -> WaitForSticking [style="solid", label="WaitForSticking"];
+		WaitForSticking -> WaitForStickingDoneReset [style="solid", label="StickingDone"];
+		WaitForSticking -> Rest [style="solid", label="End"];
+		WaitForStickingDoneReset -> PrintProcessEnd [style="solid", label="ProcessEnd"];
+		WaitForStickingDoneReset -> Rest [style="solid", label="End"];
+		PrintProcessEnd -> Rest [style="solid", label="End"];
+		}

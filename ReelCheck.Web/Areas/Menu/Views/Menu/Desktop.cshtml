@@ -1,0 +1,107 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Common.Lib;
+
+@model MenuViewModel
+
+@{
+    string titleDesktop = "Welcome";
+    if (!String.IsNullOrWhiteSpace(Model.General.ApplicationName))
+    {
+        titleDesktop = String.Concat(Model.General.ApplicationName, " ", Model.General.ApplicationVersion);
+    }
+    System.Diagnostics.Debug.WriteLine($"Desktop.cshtml: titleDesktop = {titleDesktop}");
+}
+
+<style>
+    @foreach (StyleKit sk in Model.StyleKits)
+    {
+        @Html.Raw(sk.GetContent(Model.MenuGUID))
+    }
+</style>
+<script type="text/javascript">
+    document.title = '@titleDesktop';
+    vrhmenu.MenuBehavior = Number(@((int)Model.General.MenuBehavior));  //enum-nak az értéke kell
+    vrhmenu.MenuAutoHide = Number(@(Model.General.MenuAutoHide * 1000)); //ms, hogy ott már ne kelljen szorozni
+    vrhmenu.IsFullScreenAtStartUp = @(Model.General.FullScreenAtStartUp.ToString().ToLower());
+    vrhmenu.IsFlowOver = @(Model.General.IsFlowOver.ToString().ToLower());
+</script>
+<script src="@Url.Content(Global.SCRIPT_MENUCOMMON)"></script>
+<script type="text/javascript">
+    /**
+    * A MenuCommonScripts (MenuCommon.js) számára küldendő értékek.
+    */
+    function ExportToMenuCommon() {
+        'use strict';
+        this.DirectAuthentication = {
+            Title: '@Html.Raw(Model.Trans(typeof(WordCodes.Menu.Titles.Login)))',
+            Url: '@Html.Raw(Url.Content(Global.ACTION_DIRECTAUTHENTICATION))'
+        };
+    }
+    var vrhmenucommon = new MenuCommonScripts(new ExportToMenuCommon());
+</script>
+<div class="container-fluid m-0" style="display:none;" id="desktophidebar"></div>
+<nav class="navbar navbar-expand-md fixed-top p-0" id="desktopheader" style="display:none">
+    <table class="navbar-brand m-0 p-0 d-none d-sm-none d-md-none d-lg-block">
+        <tr>
+            <td rowspan="2" class="p-0"><a id="customerlogolink" href=""><img style="max-height:3rem;" src="@Url.Content(Global.CustomerLogo)" /></a></td>
+            <td class="font-weight-bold text-center px-2" style="font-size:smaller;">@(Model.General.ApplicationName)</td>
+        </tr>
+        <tr><td class="text-center px-2" style="color:lightgray;font-size:smaller;">@(Model.General.ApplicationVersion)</td></tr>
+    </table>
+    <button type="button" class="navbar-toggler navbar-dark" data-toggle="collapse" data-target="#navbarLog4Pro" aria-controls="navbarLog4Pro" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarLog4Pro">
+        <ul class="navbar-nav mr-auto bg-dark">
+            @foreach (MenuView mv in Model.MenuViews)
+            {
+                if (mv.MenuViews == null || !mv.MenuViews.Any())
+                {   //nincs almenü (nav-item), egyszerü menüpont
+                    string liClass = "nav-item " + (mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled); //engedélytől függő li osztály összerakása
+                    if (String.IsNullOrWhiteSpace(mv.LinkOrCommand))
+                    {
+                        <li class="@(liClass)"><a class="nav-link" href="#">@Html.Raw(mv.Label)</a></li>
+                    }
+                    else
+                    {
+                        //string liClass = "nav-item"; //a fő menü pontokra lehet nem kéne
+                        string aClass = "nav-link";
+                        if (mv.ResponseTarget == ResponseTargets.CurrentPage)
+                        {
+                            <li class="@(liClass)"><a class="@(aClass)" href="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a></li>
+                        }
+                        else if (mv.ResponseTarget == ResponseTargets.NewPage)
+                        {
+                            <li class="@(liClass)"><a class="@(aClass)" href="@Html.Raw(Url.Content(mv.LinkOrCommand))" target="_blank">@Html.Raw(mv.Label)</a></li>
+                        }
+                        else
+                        {
+                            <li class="@(liClass)"><a class="@(aClass)" href="#" onclick="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a></li>
+                        }
+                    }
+                }
+                else
+                {   //dropdown meghívása
+                    @Html.Partial("DesktopDown", mv)
+                }
+            }
+        </ul>
+    </div>
+    <div class="navbar log4proicons my-auto" style="position:fixed;right:.2rem;">
+        <a class="px-3 fa fa-angle-double-up fa-lg" id="menuhideicon" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.MenuHide), Model.LCID))"></a>
+        <a class="px-3 fa fa-expand fa-lg" id="fullscreenicon"></a>
+        @if (Global.IsUseAuthentication)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                <a class="p-3 fa fa-sign-out-alt fa-lg" id="loginouticon" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.Logout), Model.LCID))"></a>
+                @Html.ActionLink(User.Identity.Name, "Manage", "Account", new { area = "UserAdministration" }, htmlAttributes: new { @class = "username", title = "Manage" })
+            }
+            else
+            {
+                <a class="p-3 fa fa-sign-in-alt fa-lg" id="loginouticon" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.Login), Model.LCID))"></a>
+            }
+        }
+    </div>
+</nav>
+

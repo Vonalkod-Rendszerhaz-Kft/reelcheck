@@ -1,0 +1,78 @@
+﻿#MTMMain {
+    /*margin: 5px 5px 5px 5px;*/
+    overflow: auto;
+    width: 100%;
+}
+
+.mtmTable {
+    width: 100%;
+}
+
+    .mtmTable td {
+        padding: 5px 5px 5px 5px;
+    }
+
+.mtmTable, td {
+    border: 0;
+    background-color: #333743;
+    border-collapse: collapse;
+}
+
+.mtmNoBorder {
+    border: 0;
+}
+
+.mtmHeader {
+    background-color: #F7A23B;
+    color: White;
+}
+
+.mtmButtons, .mtmButtonsHeader {
+    background-color: #333743;
+    border: 0;
+    text-align: center;
+    width: 4em;
+}
+
+.mtmSwitchButton[type="submit"] {
+    font-size: 0.7em;
+    padding: 0;
+}
+
+.connectedSortable, #mtmDropDownList {
+    overflow: auto;
+    text-align: left;
+    height: 30em;
+    white-space: nowrap;
+}
+
+    .connectedSortable div, #mtmDropDownList div {
+        font-size: 1.2em;
+        cursor: default;
+        white-space: nowrap;
+    }
+
+        .connectedSortable div.item, #mtmDropDownList div.item {
+            color: White;
+        }
+
+        .connectedSortable div.itemDisabled, #mtmDropDownList div.itemDisabled {
+            color: Gray;
+        }
+
+        .connectedSortable div:hover, #mtmDropDownList div:hover {
+            background-color: #F7A23B;
+        }
+
+        .connectedSortable div.ui-sortable-placeholder {
+            visibility: visible;
+            border-width: 2px;
+            border-style: dashed;
+            border-color: #F7A23B;
+            height: 1.2em;
+        }
+
+    .connectedSortable > div.selectedItem, #mtmDropDownList > div.selectedItem {
+        /*background-color: #F7A23B;*/
+        background-color: #CA5100;
+    }

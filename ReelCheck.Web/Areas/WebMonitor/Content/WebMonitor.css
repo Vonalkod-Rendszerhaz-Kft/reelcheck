@@ -1,0 +1,138 @@
+﻿/***************************************************
+WebMonitor.Display-hez használt stílusok.
+
+    Created: Wittmann Antal, 2017.11.10
+***************************************************/
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
+select#SelectedProfileName::-ms-expand {
+    display: none;
+}
+
+div#webmonitorhead select option {
+    background-color: rgb(122, 130, 136);
+    color: white;
+}
+
+select#SelectedProfileName {
+    /*-webkit-appearance: none;*/
+    /*-moz-appearance: none;*/
+    margin-top: 0.2vmax;
+    height: 1.8vmax;
+    color: white;
+    background-color: transparent;
+    font-size: 1.5vmax;
+    font-weight: bold;
+    border: none;
+    text-align: center;
+}
+
+div#webmonitorhead {
+    padding: 0;
+    margin: 0;
+
+    box-sizing: border-box;
+    position: fixed;
+
+    left: 0;
+    right: auto;
+    top: 0;
+    height: 2.2vmax;
+    width: 100%;
+
+    border: none;
+    text-align: center;
+    background-color: gray;
+    /*z-index: 500;*/
+}
+
+div#webmonitorbody {
+    padding: 0;
+    margin: 0;
+
+    box-sizing: border-box;
+    position: fixed;
+
+    left: 0;
+    top: 2.3vmax;
+    width: 100%;
+}
+
+div#webmonitorprogressbar {
+    box-sizing: border-box;
+    /*border: 5px dotted red;*/
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 30%;
+    height: 40%;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 5vmax;
+    font-weight: bold;
+    display: table;
+    z-index: 510;
+}
+
+.webmonitorblock {
+    box-sizing: border-box;
+    position: absolute;
+    right: auto;
+    bottom: auto;
+    padding: 0;
+    margin: 0;
+}
+
+#blockiframe {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    right: auto;
+    bottom: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.wmicons {
+    float: right;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    margin-top: 0.3vmax;
+    margin-right: 0.5vmax;
+    font-size: 1vmax;
+}
+
+form {
+    line-height: 1vmax;
+}
+
+.select-class {
+    background-color: transparent;
+    border: medium none;
+    color: white;
+    font-size: 1.5vmax;
+    font-weight: bold;
+    height: 1.8vmax;
+    margin-top: 0.2vmax;
+    text-align: center;
+}
+
+#btnConfiguration {
+    margin-left: 5px;
+    margin-top: -14px;
+}
+
+iframe {
+    border: 0.3vmax inset lightgrey;
+}
+

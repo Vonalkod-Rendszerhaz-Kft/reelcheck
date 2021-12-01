@@ -1,0 +1,177 @@
+﻿@*
+    -------------------------------------
+    User - Manager.cshtml
+    -------------------------------------
+*@
+
+@using VRH.Log4Pro.MultiLanguageManager
+@using Vrh.Web.Common.Lib;
+@using Vrh.Web.Membership.Areas.UserAdministration.Controllers
+
+@model UserManagerModel
+
+@{
+    ViewBag.Title = Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.UserManagement)));
+
+    int[] tableToolsExportColumnIndexes = new int[] { 0, 1, 2, 3, 4, 5 };
+}
+@Styles.Render(Constants.BUNDLES_STYLE_FOR_USER)
+@Scripts.Render(Constants.BUNDLES_SCRIPT_FOR_USER)
+
+<div class="card mb-4">
+    <div class="card-header" style="padding-bottom:0.1rem;">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <div class="col-sm-12 col-md-5 d-md-flex justify-content-md-end">
+                @if (Model.EditMode == EditModes.Manage)
+                {
+                    <button type="button" class="btn btn-link mb-1 text-warning"
+                            id="@(Constants.Ids.Button.ROLEMANAGE)"
+                            title="@(Model.Trans(typeof(WordCodes.MvcMembership.Titles.RoleManagement)))"
+                            onclick="vrhusman.RoleManage()">
+                        @(Model.Trans(typeof(WordCodes.MvcMembership.Labels.Button.Roles)))
+                    </button>
+                    <button type="button" class="btn btn-link mb-1 text-warning"
+                            id="@(Constants.Ids.Button.ROLEGROUPMANAGE)"
+                            title="@(Model.Trans(typeof(WordCodes.MvcMembership.Titles.RoleGroupManagement)))"
+                            onclick="vrhusman.RoleGroupManage()">
+                        @(Model.Trans(typeof(WordCodes.MvcMembership.Labels.Button.RoleGroups)))
+                    </button>
+                }
+                @if (Model.EditMode != EditModes.Select)
+                {
+                    <button type="button" class="btn btn-success mb-1" id="@(Constants.Ids.Button.ADDUSER)" onclick="vrhusman.Edit(null)">
+                        @(Model.Trans(typeof(WordCodes.MvcMembership.User.CreateNewUser)))
+                    </button>
+                }
+            </div>
+        </div><!--class="row"-->
+    </div><!--class="card-header"-->
+    <div class="card-body px-0">
+        <div class="row mb-1" style="margin-top:-15px;">
+            <div class="col d-md-flex justify-content-md-end">
+                <div class="custom-control custom-checkbox mr-3">
+                    <input class="custom-control-input"
+                           type="checkbox" value="" id="@(Constants.Ids.Input.CHECKBOXTEMP)"
+                           onchange="vrhusman.ChangeTemporary();">
+                    <label class="custom-control-label" style="font-size:smaller;" for="@(Constants.Ids.Input.CHECKBOXTEMP)">
+                        @(Model.Trans(typeof(WordCodes.MvcMembership.Labels.TemporaryUsers)))
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="@(Constants.Ids.USER_TABLE)" class="table table-sm table-striped table-bordered table-dark table-hover" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.User.UserName)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.User.EmailAddress)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.User.LastLogIn)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.User.LastActivity)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.User.Description)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.Labels.Status)))</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+    @*Ide kell tenni a drop-down szűrő listákat, és majd a javascript beteszi*@
+    <div hidden>
+        @Html.DropDownList(Constants.Ids.Input.FILTERSTATUS, Model.StatusList)
+    </div>
+</div>
+@*<iframe id="myFrame" style="display:none"></iframe>*@ @*Nem fog ez kelleni, nemtom miért volt itt.*@
+@*
+    -------------------------------------
+    User - Manager.cshtml
+    -------------------------------------
+*@
+@section Scripts {
+    <script type="text/javascript">
+@if (!ViewData.ModelState.IsValid && !string.IsNullOrEmpty(Html.ValidationSummaryMessage(true)))
+{
+        <text>
+        bootbox.alert({
+            size: 'large',
+            message: '@Html.Raw(Html.ValidationSummaryMessage(true).Trim().Replace(System.Environment.NewLine, WebCommon.HTML_NEWLINE).Replace("\n", WebCommon.HTML_NEWLINE).Replace("\r", WebCommon.HTML_NEWLINE))'
+        });
+        </text>
+}
+        /**
+        * A UserManagerScript (UserManager.js) számára küldendő értékek.
+        * Ezeket a kódban állandóként (constansként) érdemes kezelni.
+        */
+        var vrhusman = new UserManagerScript({
+            Confirmations: {
+                UserDelete: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Messages.Confirmations.UserDelete)))',
+                },
+                Data: {
+                UserName: '@(nameof(UserManagerCols.UserName))',
+                Email : '@(nameof(UserManagerCols.Email))',
+                LastLogin: '@(nameof(UserManagerCols.LastLogin))',
+                LastLoginString: '@(nameof(UserManagerCols.LastLoginString))',
+                LastActivity: '@(nameof(UserManagerCols.LastActivity))',
+                Comment: '@(nameof(UserManagerCols.Comment))',
+                Status: '@(nameof(UserManagerCols.Status))',
+                },
+                EditMode: {
+                Current: '@Model.EditMode',
+                Select: '@EditModes.Select',
+                Add: '@EditModes.Add',
+                Delete: '@EditModes.Delete',
+                Manage: '@EditModes.Manage',
+                },
+                Ids: {
+                Form: {
+                UserEditor: '@(Constants.Ids.Form.USEREDITOR)',
+                PasswordRenewal: '@(Constants.Ids.Form.PASSWORDRENEVAL)',
+                },
+                Input: {
+                FilterStatus: '@(Constants.Ids.Input.FILTERSTATUS)',
+                CheckBoxTemp: '@(Constants.Ids.Input.CHECKBOXTEMP)',
+                NewPassword: '@(nameof(PasswordRenewalModel.NewPassword))',
+                },
+                Table: '@(Constants.Ids.USER_TABLE)',
+                },
+                Labels: {
+                Button: {
+                FunctionManage: '@(Model.Trans(typeof(WordCodes.MvcMembership.Labels.Button.FunctionManage)))'
+                },
+                },
+                LCID: '@(Model.LCID)',
+                Messages: {
+                Wait: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Messages.PleaseWait)))',
+                },
+                Titles: {
+                Confirmation: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Confirmation)))',
+                OperationProgress: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Progress)))',
+                PasswordRenewal: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.PasswordRenewal)))',
+                Unlock: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.Unlock)))',
+                UserAdd: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.User.CreateNewUser)))',
+                UserEdit: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.UserEdit)))',
+                UserDelete: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.UserDelete)))',
+                UserDetails: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.UserDetails)))',
+                },
+                Url: {
+                Editor: '@Url.Action(nameof(UserController.Editor), Constants.CONTROLLER_USER, new { area = Constants.AREA, editMode = Model.EditMode.ToString() })',
+                Delete: '@Url.Action(nameof(UserController.Delete), Constants.CONTROLLER_USER, new { area = Constants.AREA })',
+                GetData: '@Url.Action(nameof(UserController.GetData), Constants.CONTROLLER_USER, new { area = Constants.AREA, translationsJSON = Model.TranlationsJSON })',
+                PasswordRenewal: '@Url.Action(nameof(UserController.PassswordRenewal), Constants.CONTROLLER_USER, new { area = Constants.AREA })',
+                RoleGroupManage: '@Url.Action(nameof(UserController.RoleGroups), Constants.CONTROLLER_USER, new { area = Constants.AREA, editMode = Model.EditMode.ToString() })',
+                RoleManage: '@Url.Action(nameof(UserController.Roles), Constants.CONTROLLER_USER, new { area = Constants.AREA, editMode = Model.EditMode.ToString() })',
+                Unlock: '@Url.Action(nameof(UserController.Unlock), Constants.CONTROLLER_USER, new { area = Constants.AREA })',
+                }
+                });
+    </script>
+}
+@*
+    -------------------------------------
+    User - Manager.cshtml
+    -------------------------------------
+*@
+

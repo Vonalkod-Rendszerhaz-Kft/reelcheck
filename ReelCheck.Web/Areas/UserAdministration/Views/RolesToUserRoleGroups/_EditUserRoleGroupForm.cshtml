@@ -1,0 +1,47 @@
+﻿@using Vrh.Web.Common.Lib;
+@using VRH.Log4Pro.MultiLanguageManager;
+
+@model Vrh.Web.Membership.Areas.UserAdministration.Models.EditUserRoleGroupViewModel
+
+@if (Model != null)
+{
+    <div id="editDialog">
+        @if (ViewData["UserRoleGroupOldName"] != null && ViewData["UserRoleGroupNewName"] != null)
+        {
+            <script type="text/javascript">
+            bootbox.alert('@Html.Raw(string.Format(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.RoleGroupRenameSuccessfull)), ViewData["UserRoleGroupOldName"], ViewData["UserRoleGroupNewName"]))');
+            </script>
+        }
+
+        @using (Ajax.BeginForm("EditUserRoleGroup", Constants.CONTROLLER_RTURG, new { area = Constants.AREA },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "editDialog",
+        }, new { id = "EditUserRoleGroupNameForm" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(x => x.SelectedUserRoleGroupId)
+                @Html.DropDownListFor(x => x.SelectedUserRoleGroupId, Model.UserRoleGroups, new { @class = "form-control", size = 10, autofocus = "" })
+                @Html.ValidationMessageFor(x => x.SelectedUserRoleGroupId)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.NewUserRoleGroupName)
+                @Html.TextBoxFor(x => x.NewUserRoleGroupName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.NewUserRoleGroupName)
+            </div>
+            if (!ViewData.ModelState.IsValid && !String.IsNullOrEmpty(Html.ValidationSummaryMessage(true)))
+            {
+                @Html.ValidationSummary(true)
+            }
+        }
+    </div>
+    <script>
+        // ha a modal megjelenik, és van autofocus-os elem, akkor oda teszi a fókuszt.
+        $('.modal').on('shown.bs.modal', function () {
+            $(this).find('[autofocus]').focus();
+        });
+    </script>
+}

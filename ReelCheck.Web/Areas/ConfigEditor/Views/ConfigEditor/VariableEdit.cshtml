@@ -1,0 +1,111 @@
+﻿@using Vrh.Web.Common.Lib;
+@using Vrh.Web.ConfigEditor.Areas.ConfigEditor.Controllers
+
+@model VariableEditModel
+@{
+    string actionName = nameof(ConfigEditorController.VariableEdit);
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];
+    var ajaxops = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId),
+    };
+
+    @Html.Partial("ValidationSummary");
+
+    using (Ajax.BeginForm(actionName, controllerName, new { area = areaName }, ajaxops, new { id = Constants.Ids.Forms.VARIABLEEDIT }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.BootboxId)
+        @Html.HiddenFor(x => x.SettingJSON)
+        for (int ix = 0; ix < Model.VariableNames.Count(); ix++)
+        {
+            string nameid = nameof(Model.VariableNames);
+            string onlyid = nameof(Model.VariableReadOnly);
+            <input id="@(nameid)" name="@(nameid)" value="@(Model.VariableNames[ix])" type="hidden" />
+            <input id="@(onlyid)" name="@(onlyid)" value="@(Model.VariableReadOnly[ix].ToString().ToLower())" type="hidden" />
+        }
+
+        <div class="row">
+            <div class="col">
+                <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.SettingLabel))):</label>
+                <span class="ceve-info">@(Model.EditSetting.Label)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.SettingGroup))):</label>
+                <span class="ceve-info">@(Model.EditSetting.GroupHeading)</span>
+            </div>
+            <div class="col-4">
+                @if (!String.IsNullOrWhiteSpace(Model.EditSetting.Connection.Element))
+                {
+                    <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.XmlElement))):</label>
+                    <span class="ceve-info">@(Model.EditSetting.Connection.Element)</span>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.XmlFile))):</label>
+                <span class="ceve-info">@(Model.EditSetting.Connection.File)</span>
+            </div>
+        </div>
+        if (!String.IsNullOrWhiteSpace(Model.EditSetting.Connection.Root))
+        {
+            <div class="row">
+                <div class="col">
+                    <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.XmlParserRoot))):</label>
+                    <span class="ceve-info">@(Model.EditSetting.Connection.Root)</span>
+                </div>
+            </div>
+        }
+        <div class="row border-bottom border-warning">
+            <div class="col">
+                <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.XPathQuery))):</label>
+                <span class="text-white ml-1" style="word-break:break-all;">@(Model.EditSetting.XPath)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.ValueOriginal))):</label>
+                <span class="ceve-info">@(Model.EditSetting.OriginalValue)</span>
+            </div>
+        </div>
+        <div class="row border-bottom border-warning">
+            <div class="col">
+                <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.ValueSubstituted))):</label>
+                <span class="ceve-info">@(Model.EditSetting.Value)</span>
+            </div>
+        </div>
+
+        if (Model.VariableNames.Any())
+        {
+            <div class="row">
+                <div class="col-3">
+                    <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.VariableName)))</label>
+                </div>
+                <div class="col-9">
+                    <label>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.VariableValue)))</label>
+                </div>
+            </div>
+            for (int ix = 0; ix < Model.VariableNames.Count; ix++)
+            {
+                <div class="row mb-1">
+                    <div class="col-3 d-flex">
+                        <span class="align-self-center">@(Model.VariableNames[ix])</span>
+                    </div>
+                    <div class="col-9">
+                        <input id="@(nameof(Model.VariableValues))"
+                               name="@(nameof(Model.VariableValues))"
+                               value="@(Model.VariableValues[ix])"
+                               class="form-control" @(Model.VariableReadOnly[ix] ? "readonly" : "") 
+                               title="@(Model.VariableReadOnly[ix] ? Model.Trans(typeof(WordCodes.ConfigEditor.Messages.VariableNotUpdate)) : "")"/>
+                    </div>
+                </div>
+            }
+        }
+    }
+}

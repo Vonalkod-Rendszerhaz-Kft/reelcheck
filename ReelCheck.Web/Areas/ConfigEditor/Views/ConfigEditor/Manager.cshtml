@@ -1,0 +1,183 @@
+﻿@*
+    -------------------------------------
+    ConfigEditor - Manager.cshtml
+    -------------------------------------
+*@
+
+@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Common.Lib;
+@using Vrh.Web.ConfigEditor.Areas.ConfigEditor.Controllers;
+
+@model ConfigEditorModel
+
+@{
+    int[] tableToolsExportColumnIndexes = new int[] { 0, 1, 2, 3 };
+    object routeValues = new
+    {
+        area = Constants.AREA,
+        requested = Model.RequestedParameters,
+        other = Model.OtherParameters
+    };
+
+    string titleDownload = Model.Trans(typeof(WordCodes.ConfigEditor.Labels.Button.SaveConfigurations));
+    object htmlAtt = new
+    {
+        //class = "btn btn-warning mr-1",
+        id = Constants.Ids.Buttons.CONFIGSAVE,
+        hidden = true
+    };
+}
+@Styles.Render(Constants.BUNDLES_STYLE)
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-12 col-md-7">
+                <h2 class="mb-0" id="@(Constants.Ids.TITLE)">@(Model.Editor.Title)</h2>
+            </div>
+            <div class="col col-md-5">
+                <div class="form-inline justify-content-start justify-content-md-end">
+                    <div class="custom-control custom-checkbox mr-2">
+                        <input type="checkbox" class="custom-control-input"
+                               id="@(Constants.Ids.Inputs.CHECKBOX_WSV)"
+                               onclick="javascript: vrhces.ReloadTable();">
+                        <label class="custom-control-label" for="@(Constants.Ids.Inputs.CHECKBOX_WSV)">
+                            @(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.WithSubstitutedVariables)))
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-warning mr-1"
+                            id="@(Constants.Ids.Buttons.CONFIGSAVE)"
+                            onclick="javascript: vrhces.ConfigurationsSave();">
+                        @(titleDownload)
+                    </button>
+                    <button type="button" class="btn btn-success"
+                            id="@(Constants.Ids.Buttons.RELOAD)"
+                            onclick="javascript: vrhces.ReloadTable();">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div><!--class="row"-->
+        <div class="row" >
+            <h4 class="col mb-0" id="@(Constants.Ids.GROUPTITLE)">
+                <span style="color:#ffd800;opacity:0.8;"></span>
+                <i class="fas fa-info-circle"
+                   data-toggle="collapse"
+                   data-target="#@(Constants.Ids.GROUPHELP)"
+                   aria-expanded="false"
+                   aria-controls="@(Constants.Ids.GROUPHELP)"
+                   title="@(Model.Trans(typeof(WordCodes.ConfigEditor.Titles.GroupInformation)))"
+                   style="color:#ffd800;opacity:0.8;font-size:smaller;cursor:pointer;display:none;"></i>
+            </h4>
+        </div><!--class="row"-->
+        <div class="row collapse" id="@(Constants.Ids.GROUPHELP)">
+            <div class="col" style="color:#ffd800;line-height:1.1rem;"></div>
+        </div><!--class="row"-->
+    </div><!--class="card-header"-->
+    <div class="card-body px-0">
+        <div class="table-responsive">
+            <table id="@(Constants.Ids.TABLE)"
+                   class="table table-sm table-striped table-bordered table-dark table-hover"
+                   style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.SettingGroup)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.SettingLabel)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.SettingName)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.SettingValue)))</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+    @if (String.IsNullOrWhiteSpace(Model.SelectedGroupId))
+    {
+        <div hidden>
+            @Html.DropDownList(Constants.Ids.Inputs.SELECTGROUP, Model.GroupHeads)
+        </div>
+    }
+</div>
+@*
+    -------------------------------------
+    ConfigEditor - Manager.cshtml
+    -------------------------------------
+*@
+@*@section Scripts {*@
+@Scripts.Render(Constants.BUNDLES_SCRIPT)
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript">
+    /**
+        * A ConfigEditorScripts (Editor.js) számára küldendő értékek osztálya
+        * Ezeket a kódban állandóként (constansként) érdemes kezelni.
+    */
+    function ExportToConfigEditor() {
+        'use strict';
+        this.Confirmations = {
+            ConfigurationsSave: '@Html.Raw(Model.Trans(typeof(WordCodes.ConfigEditor.Messages.Confirmations.ConfigurationsSave)))',
+        };
+        this.Data = {
+            ID: '@(Setting.COL_ID)',
+            Group: '@(Setting.COL_GROUP)',
+            Label: '@(Setting.COL_LABEL)',
+            Name: '@(Setting.COL_NAME)',
+            Value: '@(Setting.COL_VALUE)',
+        };
+        this.Labels = {
+            Cancel: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Cancel)))',
+            OK: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.OK)))',
+            No: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.No)))',
+            Yes: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Yes)))',
+            All: '@("*" + Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.All)).Trim().TrimStart('*'))',
+            SettingName: '@(Model.Trans(typeof(WordCodes.ConfigEditor.Labels.SettingName)))'
+        };
+        this.LCID = '@(Model.LCID)';
+        this.Ids = {
+            Button: {
+                ConfigSave: '@(Constants.Ids.Buttons.CONFIGSAVE)',
+                Reload: '@(Constants.Ids.Buttons.RELOAD)'
+            },
+            Form: {
+                VariableEdit: '@(Constants.Ids.Forms.VARIABLEEDIT)'
+            },
+            GroupHelp: '@(Constants.Ids.GROUPHELP)',
+            GroupTitle: '@(Constants.Ids.GROUPTITLE)',
+            Input: {
+                CheckWSV: '@(Constants.Ids.Inputs.CHECKBOX_WSV)',
+                SelectHidden: '@(Constants.Ids.Inputs.SELECTGROUP)',
+                SelectFilter: '@(Constants.Ids.TABLE)-ColumnFilter0'
+            },
+            Table: '@(Constants.Ids.TABLE)',
+            Title: '@(Constants.Ids.TITLE)',
+        };
+        this.Messages = {
+        };
+        this.SelectedGroupId = '@(Model.SelectedGroupId??"")';
+        this.Titles = {
+            ClickToEditing: '@Html.Raw(Model.Trans(typeof(WordCodes.ConfigEditor.Titles.ClickToEditing)))',
+            Confirmation: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Confirmation)))',
+            EditVariables: '@Html.Raw(Model.Trans(typeof(WordCodes.ConfigEditor.Titles.EditVariables)))',
+        };
+        this.Url = {
+            ConfigZipDownLoad: '@Html.Raw(Url.Action(nameof(ConfigEditorController.ConfigZipDownload), Constants.CTRL_CFNG, new { area = Constants.AREA }))',
+            ConfigZipMake: '@Html.Raw(Url.Action(nameof(ConfigEditorController.ConfigZipMake), Constants.CTRL_CFNG, routeValues))',
+            GetData: '@Html.Raw(Url.Action(nameof(ConfigEditorController.GetData), Constants.CTRL_CFNG, routeValues))',
+            GetGroup: '@Html.Raw(Url.Action(nameof(ConfigEditorController.GetGroup), Constants.CTRL_CFNG, routeValues))',
+            UpdateValue: '@Html.Raw(Url.Action(nameof(ConfigEditorController.UpdateValue), Constants.CTRL_CFNG, new { area = Constants.AREA }))',
+            VariableEdit: '@Html.Raw(Url.Action(nameof(ConfigEditorController.VariableEdit), Constants.CTRL_CFNG, new { area = Constants.AREA }))',
+        };
+    }
+
+    var vrhces = new ConfigEditorScripts(new ExportToConfigEditor());
+        //hasznájuk a moment.js-t, ezért beállítjuk a lokalizációt
+    moment.locale('@(Model.LCID.Substring(0,2))');
+</script>
+@*
+    -------------------------------------
+    ConfigEditor - Manager.cshtml
+    -------------------------------------
+*@
+

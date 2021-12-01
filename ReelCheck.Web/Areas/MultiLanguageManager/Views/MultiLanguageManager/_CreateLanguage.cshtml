@@ -1,0 +1,106 @@
+﻿@using Vrh.Web.I18N.Areas.MultiLanguageManager.Controllers;
+@using Vrh.Web.Common.Lib;
+
+@model CreateLanguageModel
+
+@if (Model != null)
+{
+    string actionName = nameof(MultiLanguageManagerController.CreateLanguage);
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];
+    var ajaxops = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId)
+    };
+
+    @Html.Partial("ValidationSummary")
+
+    using (Ajax.BeginForm(actionName, controllerName, new { area = areaName }, ajaxops, new { id = Constants.FormIds.CREATELANGUAGE }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.BootboxId)
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.LanguageCode)
+            @Html.DropDownListFor(x => x.LanguageCode, Model.LanguageCodeList, new { @onchange = "javascript:setLanguageName()", @autofocus = "" })
+            @Html.ValidationMessageFor(x => x.LanguageCode)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.LanguageName)
+            @Html.TextBoxFor(x => x.LanguageName, new { @disabled = true })
+            @Html.ValidationMessageFor(x => x.LanguageName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.CreateOption)
+            @Html.DropDownListFor(x => x.CreateOption, Model.CreateOptionList, new { @disabled = true, @onchange = "javascript:createOptionChange()" })
+            @Html.ValidationMessageFor(x => x.CreateOption)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.ExistTranslation)
+            @Html.DropDownListFor(x => x.ExistTranslation, Model.ExistTranslationList, new { @disabled = true })
+            @Html.ValidationMessageFor(x => x.ExistTranslation)
+        </div>
+    }
+}
+<script type="text/javascript">
+    /*##### EVENTS #####*/
+    $(function () {
+        'use strict';
+
+        //var thisfn = 'MultiLanguageManager.Editor.cshtml: ready event: ';
+        //console.log(thisfn + 'PING');
+
+        vrhct.masterdata.addClass('#@(Model.BootboxId)','input[type=text],textarea,select');
+
+        //console.log(thisfn + 'END');
+    }); // $(document).ready END
+    /*##### EVENTS END #####*/
+
+    /*##### FUNCTIONS #####*/
+
+    /**
+     * Ha megváltozik az inicializálás módja, akkor a választásnak megfelelően
+     * engedélyezi, vagy tiltja az alapnyelv kiválasztását.
+     * */
+    function createOptionChange() {
+        var $frm = $('#@(Constants.FormIds.CREATELANGUAGE)');
+        var $etr = $frm.find('#ExistTranslation');
+        if ($frm.find('#CreateOption').val() === '@(Constants.CreateOptions.ExistLanguage)') {
+            $etr.prop('disabled', false);
+        }
+        else {
+            $etr.prop('disabled', true);
+        }
+    } // CreateOptionChange END
+
+    /**
+     * Ha megváltozik melyik nyelvet választotta ki, akkor beállítja a
+     * nyelvhez tartozó alapértelmezett megnevezést
+     */
+    function setLanguageName() {
+        var $dialog = $('#@(Model.BootboxId)');
+        var $combo = $dialog.find('select#@(nameof(CreateLanguageModel.LanguageCode))');
+        var $lname = $dialog.find('input#@nameof(CreateLanguageModel.LanguageName)');
+        var $options = $dialog.find('select#@nameof(CreateLanguageModel.CreateOption)');
+        var sval = $combo.val();
+        console.log('setLanguageName sval', sval);
+        if (sval) {
+            $lname.prop('disabled', false);
+            $options.prop('disabled', false);
+            var sname = $combo.find("option[value='" + sval + "']").text();
+            $lname.val(sname.replace(sval + ' ', ''));
+        }
+        else {
+            $lname.val('');
+            $lname.prop('disabled', true);
+            $options.prop('disabled', true);
+        }
+    } // setLanguageName END
+
+    /*##### FUNCTIONS END #####*/
+</script>

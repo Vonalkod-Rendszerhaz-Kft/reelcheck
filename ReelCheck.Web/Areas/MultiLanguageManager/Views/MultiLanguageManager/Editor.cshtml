@@ -1,0 +1,100 @@
+﻿@using Vrh.Web.Common.Lib;
+@using Vrh.Web.I18N.Areas.MultiLanguageManager.Controllers
+
+@model MultiLanguageManagerModel
+
+@{
+    string actionName = nameof(MultiLanguageManagerController.Editor);
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];
+    bool isAdmin = !Global.IsUseAuthentication || User.IsInRole(Constants.ROLE_TRANSLATIONADMINISTRATOR);
+    var ajaxops = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId)
+    };
+
+    @Html.Partial("ValidationSummary")
+
+    using (Ajax.BeginForm(actionName, controllerName, new { area = areaName }, ajaxops, new { id = Constants.FormIds.EDITOR }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.BootboxId)
+        @Html.HiddenFor(x => x.OriginalWordCode)
+        @Html.HiddenFor(x => x.OriginalWordCodeDescription)
+        @Html.HiddenFor(x => x.OriginalWordCodeModul)
+
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.LanguageCode)
+                    @Html.TextBoxFor(x => x.LanguageCode, new { @readonly = "readonly" })
+                    @Html.ValidationMessageFor(x => x.LanguageName)
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.LanguageName)
+                    @Html.TextBoxFor(x => x.LanguageName, new { @readonly = "readonly" })
+                    @Html.ValidationMessageFor(x => x.LanguageName)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-9 form-group">
+                <div class="d-flex justify-content-between">
+                    @Html.LabelFor(x => x.WordCode)
+                    @if (isAdmin)
+                    {
+                        <div class="checkbox">
+                            <label>
+                                @Model.Trans(typeof(I18NWordCodes.MLM.Titles.WordCodeEdit))
+                                @Html.CheckBox("wordCodeEdit", false, new { OnChange = "vrhmlm.ClickWordCodeEditEnable(this)" })
+                            </label>
+                        </div>
+                    }
+                </div>
+                @Html.TextBoxFor(x => x.WordCode, new { @readonly = "true" })
+                @Html.ValidationMessageFor(x => x.WordCode)
+            </div>
+            <div class="col-3 form-group">
+                @Html.LabelFor(x => x.WordCodeModul)
+                @Html.TextBoxFor(x => x.WordCodeModul, new { @readonly = "true" })
+                @Html.ValidationMessageFor(x => x.WordCodeModul)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                @Html.LabelFor(x => x.WordCodeDescription)
+                @Html.TextAreaFor(x => x.WordCodeDescription, new { @readonly = "true" })
+                @Html.ValidationMessageFor(x => x.WordCodeDescription)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                @Html.LabelFor(x => x.Text)
+                @Html.TextBoxFor(x => x.Text, new { @autofocus = "" })
+                @Html.ValidationMessageFor(x => x.Text)
+            </div>
+        </div>
+    }//Ajax.BeginForm END
+}
+<script type="text/javascript">
+    /*##### EVENTS #####*/
+    $(function () {
+        'use strict';
+
+        //var thisfn = 'MultiLanguageManager.Editor.cshtml: ready event: ';
+        //console.log(thisfn + 'PING');
+
+        vrhct.masterdata.addClass('#@(Model.BootboxId)','input[type=text],textarea');
+
+        //console.log(thisfn + 'END');
+    }); // $(document).ready END
+    /*##### EVENTS END #####*/
+</script>

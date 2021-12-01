@@ -1,0 +1,55 @@
+@using VRH.Log4Pro.MultiLanguageManager;
+
+@model Vrh.Web.Membership.Areas.UserAdministration.Models.RoleViewModel
+
+@{
+    string frm = MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.Role.Title));
+    ViewBag.Title = Html.Raw(String.Format(frm, Model.Role));
+}
+
+@section Styles {
+    <link href="@Url.Content(Constants.AREA_CONTENTPATH + "MvcMembership.css")" rel="stylesheet" type="text/css" />
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">@ViewBag.Title</h1>
+    </div>
+    <div class="card-body">
+        @if (Model.Users.Count() > 0)
+        {
+            <ul class="list-group" style="max-width:50%;min-width:30rem;">
+                @foreach (var key in Model.Users.Keys)
+                {
+                    var user = Model.Users[key];
+                <li class="list-group-item d-flex justify-content-between align-items-center py-0 bg-dark" style="border-color:black;">
+                    @if (user == null)
+                    {
+                        <span>@key <em>(@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.Deleted))))</em></span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(user.UserName, "Details", new { id = user.ProviderUserKey }, new { @class = "text-light"})
+                        
+                        if (Model.Role != Constants.ROLE_ADMINISTRATOR || user.UserName != Constants.FIRST_USERNAME)
+                        {   // Az alapértelmezett felhasználót nem lehet kivenni az 
+                            using (Html.BeginForm("RemoveFromRoleOnRolePage", Constants.CONTROLLER_UA, new { id = user.ProviderUserKey, role = Model.Role }))
+                            {
+                                <input type="submit"
+                                       class="btn btn-warning btn-sm my-1 py-0"
+                                       style="line-height:1.1;"
+                                       value="@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.RemoveFromRoleGroup)))" />
+                            }
+                        }
+                    }
+                </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.NoUserInRoleGroup)))</p>
+        }
+        @*@Html.ActionLink("Vissza", "Roles", "UserAdministration", new { area = "UserAdministration" }, null)*@
+    </div>
+</div>

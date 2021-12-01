@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Reelcheck>
+  <GeneralParameters>
+    <Station>LABELD</Station>
+    <Process>LABEL</Process>
+    <GoldenSampleMode AutoInactive="true" NumberOfSamples="5" PermittedCycleCounter="2" ExtraCycles="1"/>
+    <UnloadMode AutoInactive="true"/>
+    <ManualMode AutoStartIdentification="true"/>
+  </GeneralParameters>
+  <CameraDefinitions>
+    <Camera Function="ID" Name="LABELD_ID"/>
+    <Camera Function="CHECK" Name="LABELD_CHECK"/>
+  </CameraDefinitions>
+  <PrinterDefinitions>
+    <Printer LogicalName="PRN" PhisycalName="PRN" DefaultPrintEventId="PrintEvent_1" Active="true">
+      <PrintEvents>
+        <PrintEvent EventId="PrintEvent_1" LabelId="Label_1" NameSeparator="@" Active="true">
+          <LabelVars>
+            <LabelVar Name="LabelVar_1">ConstructorString1</LabelVar>
+            <LabelVar Name="LabelVar_2">ConstructorString2</LabelVar>
+          </LabelVars>
+        </PrintEvent>
+        <PrintEvent EventId="PrintEvent_2" LabelId="Label_2" NameSeparator="@" Active="true">
+          <LabelVars>
+            <LabelVar Name="LabelVar_3">ConstructorString3</LabelVar>
+            <LabelVar Name="LabelVar_4">ConstructorString4</LabelVar>
+          </LabelVars>
+        </PrintEvent>
+      </PrintEvents>
+    </Printer>
+  </PrinterDefinitions>
+  <LabelMessages>
+    <LabelMessage Source="ID" Id="LabelMessage_ID">
+      <MessageMask ListName="List_ID" ListSeparator="@">Regex_ID</MessageMask>
+      <Labels>
+        <Label Id="Label_1"/>
+        <Label Id="Label_2"/>
+      </Labels>
+    </LabelMessage>
+    <LabelMessage Source="CHECK" Id="LabelMessage_CHECK">
+      <MessageMask ListName="List_CHECK" ListSeparator="@">Regex_CHECK</MessageMask>
+      <Labels>
+        <Label Id="Label_3"/>
+        <Label Id="Label_4"/>
+      </Labels>
+    </LabelMessage>
+  </LabelMessages>
+  <Labels>
+    <Label Id="Label_1">
+      <Barcodes>
+        <Barcode Name="Barcode_1_1">Regex11</Barcode>
+        <Barcode Name="Barcode_1_2">Regex12</Barcode>
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="DataElement_1_1">Constructor11</DataElement>
+          <DataElement Name="DataElement_1_2">Constructor12</DataElement>
+      </DataElements>
+    </Label>
+    <Label Id="Label_2">
+      <Barcodes>
+        <Barcode Name="Barcode_2_1">Regex21</Barcode>
+        <Barcode Name="Barcode_2_2">Regex22</Barcode>
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="DataElement_2_1">Constructor21</DataElement>
+        <DataElement Name="DataElement_2_2">Constructor22</DataElement>
+      </DataElements>
+    </Label>
+    <Label Id="Label_3">
+      <Barcodes>
+        <Barcode Name="Barcode_3_1">Regex31</Barcode>
+        <Barcode Name="Barcode_3_2">Regex32</Barcode>
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="DataElement_3_1">Constructor31</DataElement>
+        <DataElement Name="DataElement_3_2">Constructor32</DataElement>
+      </DataElements>
+    </Label>
+    <Label Id="Label_4">
+      <Barcodes>
+        <Barcode Name="Barcode_4_1">Regex41</Barcode>
+        <Barcode Name="Barcode_4_2">Regex42</Barcode>
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="DataElement_4_1">Constructor41</DataElement>
+        <DataElement Name="DataElement_4_2">Constructor42</DataElement>
+      </DataElements>
+    </Label>
+  </Labels>
+  <IncomingMessages>
+    <IncomingMessage Id="IncomingMessage_ID">
+      <MessageMask>Regex_ID</MessageMask>
+      <Parts>
+        <Part>ExtractorRegex_1</Part>
+        <Part>ExtractorRegex_2</Part>
+      </Parts>
+      <DataElements>
+        <DataElement Name="DataElement_I_1_1">ConstructorI11</DataElement>
+        <DataElement Name="DataElement_I_1_2">ConstructorI12</DataElement>
+      </DataElements>
+    </IncomingMessage>
+  </IncomingMessages>
+  <OutgoingMessages>
+    <OutgoingMessage Id="IDDATA_AUTOSCAN" NameSeparator="@">IDDATA_AUTOSCAN_Message</OutgoingMessage>
+    <OutgoingMessage Id="IDDATA_MANUSCAN" NameSeparator="@">IDDATA_MANUSCAN_Message</OutgoingMessage>
+  </OutgoingMessages>
+  <HandheldLabels>
+    <HandheldLabel Source="ID">
+      <Label Id="HandheldLabel_ID"/>
+    </HandheldLabel>
+    <HandheldLabel Source="CHECK">
+      <Label Id="HandheldLabel_CHECK"/>
+    </HandheldLabel>
+  </HandheldLabels>
+  <CheckSuccess NameSeparator="@">
+    <Condition Type="Equal" Test="ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL" With="ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL"/>
+    <Condition Type="NotEqual" Test="ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL" With="ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL M"/>
+    <Condition Type="Match" Test="N ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL M" With="ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL"/>
+  </CheckSuccess>
+  <TransactionBooking Enabled="true">
+    <BookingRecord Name="BookingRecord1" Enabled="true"/>
+    <BookingRecord Name="BookingRecord2" Enabled="true"/>
+  </TransactionBooking>
+</Reelcheck>

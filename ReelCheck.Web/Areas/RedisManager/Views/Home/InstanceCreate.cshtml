@@ -1,0 +1,32 @@
+﻿@using Vrh.Web.Common.Lib;
+@using Vrh.Web.RedisManager.Areas.RedisManager.Controllers
+
+@model InstanceCreateModel
+@{
+    string actionName = nameof(HomeController.InstanceCreate);
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];
+    var ajaxops = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId),
+    };
+
+    @Html.Partial("ValidationSummary")
+
+    using (Ajax.BeginForm(actionName, controllerName, new { area = areaName }, ajaxops, new { id = Constants.Ids.Forms.INSTANCECREATE }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.BootboxId)
+        @Html.HiddenFor(x => x.Server)
+        @Html.HiddenFor(x => x.Port)
+        @Html.HiddenFor(x => x.Pool)
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.InstanceName)
+            @Html.TextBoxFor(x => x.InstanceName, new { @autofocus = "", @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.InstanceName)
+        </div>
+    }
+}

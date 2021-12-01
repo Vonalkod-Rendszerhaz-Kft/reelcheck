@@ -1,0 +1,378 @@
+﻿@using DataTables.Areas.DataTables.Models;
+@using DataTables.Areas.DataTables.Models.ColumnActions;
+@using DataTables.Areas.DataTables.Models.ColumnFilters;
+@using WebApplication;
+@using DTM.LangHelper;
+@using DTM.Common;
+
+@model ConfigEditorModel
+
+@* Módosítható paraméterek *@
+@{
+    LangHelper langHelper = new LangHelper();
+    string languageCode = VRH.Log4Pro.MultiLanguageManager.MultiLanguageManager.RelevantLanguageCode;
+
+    //#warning TODO: A megfelelő WordCode-ra kell cserélni, ha nem megfelelő az alapértelmezés!
+    string title = langHelper.getTranslation(WordCodes.ConfigEditor.GeneralSetting.Title);
+    string paramsavetitle = langHelper.getTranslation(WordCodes.ConfigEditor.GeneralSetting.ParamSaveTitle);
+    bool isVisibleGroupColumn = String.IsNullOrEmpty(Model.GroupId);
+
+    int[] tableToolsExportColumnIndexes = new int[] { 0, 1, 2, 3, 4, 6 };
+
+    @* !!!FIX!!! INNENTŐL nem kell módosítani, belenyúlni (elvileg :$) *@
+    //string actionsColumnText = langHelper.getTranslation("MasterData.Actions");
+    string actionsColumnText = String.Empty;
+
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    @*string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];*@
+    string controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    AjaxParametersModel ajaxParameters = new AjaxParametersModel(areaName, controllerName, createTitleText: "", updateTitleText: "",
+                                                deleteTitleText: langHelper.getTranslation(WordCodes.MasterData.Delete.Title),
+                                                deleteMessage: langHelper.getTranslation(WordCodes.MasterData.Delete.Message),
+                                                detailsTitleText: langHelper.getTranslation(WordCodes.MasterData.Details.Title),
+                                                oKButtonText: langHelper.getTranslation(WordCodes.MasterData.Dialog.OK),
+                                                cancelButtonText: langHelper.getTranslation(WordCodes.MasterData.Dialog.Cancel)
+                                                );
+    UpdateDeleteModel actions = new UpdateDeleteModel();
+    actions.DeleteTitleText = langHelper.getTranslation(WordCodes.MasterData.Action.Delete);
+    actions.UpdateTitleText = langHelper.getTranslation(WordCodes.MasterData.Action.Update);
+    string dataTablesLanguageFile = Url.Action("GetDataTablesLanguage", "Home", new { area = "" }) + @"\?languageCode=" + languageCode;
+    string dateTimePickerLanguage = languageCode.Substring(0, 2);
+    string tableToolsSWFPath = Url.Content("~/DataTables/Content/DataTables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf");
+    ViewBag.Title = Html.Raw(title);
+    @* !!!FIX!!! Eddig *@
+}
+
+@section Styles {
+    <link href="@Url.Content("~/DataTables/Content/DataTables.css")" rel="stylesheet" />
+}
+
+<style media="all" type="text/css">
+    .alignRight {
+        text-align: right;
+    }
+</style>
+
+@section Scripts {
+    <script src="@Url.Content("~/DataTables/Scripts/DataTables.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/DataTables/Scripts/rangy.inputs.insert.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/DataTables/Scripts/datetimepicker/languages/" + dateTimePickerLanguage + ".js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var sAjaxSource = '@Url.Action("GetData", controllerName, new { area = areaName, transit = Model.TransitParameters })';
+        //console.log(sAjaxSource);
+
+        var myoTable = null;
+        var groupHelp = new Array(new Array("",""));
+        @foreach (var it in Model.GroupHeads)
+        {   @*A "\" jel azért kell oda, mert az jelzi a javascriptnek, hogy a hosszú string a következő sorban folytatódik!*@
+            <text>groupHelp.push(new Array("@Html.Raw(it.Name)", "@Html.Raw(it.Help.Replace(@"\n",@"<br /> \").Replace('"','`'))"));</text>
+        }
+
+        $(document).ready(function () {
+            @if (!isVisibleGroupColumn)
+            {
+                <text>SetGroupTitleAndHelp('@Html.Raw(Model.GroupName)');</text>
+            }
+
+            @Html.Partial("~/Areas/DataTables/Views/DataTables/_AjaxParameters.cshtml", ajaxParameters)
+
+            @*WA20150220:Ha az első oszlopba tesszük az ID-t, akkor nem kell külön gondoskodni,
+                         hogy a <tr> elemekbe bekerüljön az Id attribútum az makeEditable elvárásai miatt!
+                         Ez egyébként is követendőbb példa lenne, mint a gombok alá rejteni. 0. oszlop az az Id, punk-tum ;) *@
+
+            var aoColumns = [
+                {
+                    sName: "Id",
+                    bVisible: false,
+                },
+                @if (isVisibleGroupColumn)
+                {
+                    <text>
+                    {
+                        sName: "GroupHeading",
+                        sTitle: '@Html.Raw(langHelper.getTranslation(WordCodes.ConfigEditor.GeneralSetting.Columns.EditGroupHeading))',
+                    },
+                    </text>
+                }
+                {
+                    sName: "Label",
+                    sTitle: "@Html.Raw(langHelper.getTranslation(WordCodes.ConfigEditor.GeneralSetting.Columns.Label))",
+                },
+                {
+                    sName: "Name",
+                    sTitle: "@Html.Raw(langHelper.getTranslation(WordCodes.ConfigEditor.GeneralSetting.Columns.Name))",
+                },
+                {
+                    sName: "Value",
+                    sTitle: "@Html.Raw(langHelper.getTranslation(WordCodes.ConfigEditor.GeneralSetting.Columns.Value))",
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).css("background-color", "#5a5c60").css("cursor", "pointer").css("font-weight", "bolder").css("color", "white");
+                    },
+                },
+                {
+                    sName: "Description",
+                    sTitle: "@Html.Raw(langHelper.getTranslation(WordCodes.ConfigEditor.GeneralSetting.Columns.Description))",
+                    //fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                    //    $(nTd).css("background-color", "#5a5c60").css("cursor", "pointer").css("font-weight", "bolder").css("color", "white");
+                    //},
+                },
+            ];
+
+            //console.log('myoTable = mydataTableInitialization( ELŐTT: ', sAjaxSource);
+            myoTable = mydataTableInitialization({
+                dataTableSelector: '#grid',
+                sAjaxSource: sAjaxSource,
+                aoColumns: aoColumns,
+                languageUrl: '@dataTablesLanguageFile',
+                dateTimePickerLanguage: '@dateTimePickerLanguage',
+                oTableTools: {
+                    sSwfPath: '@(tableToolsSWFPath)',
+                    pdfExport: true,
+                    exportColumns: [@string.Join(", ", tableToolsExportColumnIndexes)]
+                },
+            });
+
+            myoTable.makeEditable({
+                sUpdateURL: '@Url.Action("UpdateData", controllerName, new { area = areaName, transit = Model.TransitParameters })',
+                oEditableSettings: { event: 'click' },
+                aoColumns: [
+                    @(isVisibleGroupColumn ? "null," : "")
+                    null,
+                    null,
+                    {
+                        placeholder: "",
+                    },
+                    null,
+                ],
+            });
+        });
+
+    function mydataTableInitialization(p) {
+        if (!p.dataTableSelector) {
+            console.log('dataTableSelector: ', p.dataTableSelector);
+        }
+        if (!p.languageUrl) {
+            console.log('languageUrl: ', p.languageUrl);
+        }
+        if (!p.sAjaxSource) {
+            console.log('sAjaxSource: ', p.sAjaxSource);
+        }
+        if (!p.aoColumns) {
+            console.log('aoColumns: ', p.aoColumns);
+        }
+
+        if (p.dataTableSelector &&
+            p.languageUrl &&
+            p.sAjaxSource &&
+            p.aoColumns) {
+
+            var oTable = $(p.dataTableSelector).dataTable({
+                "oLanguage": {
+                    "sUrl": p.languageUrl
+                },
+                "bStateSave": true,
+                "bPaginate": true,
+                "iDisplayLength": 100,
+                "sPaginationType": "full_numbers",
+                "bProcessing": true,
+                "bServerSide": true,
+                "bAutoWidth": false,
+                "sAjaxSource": p.sAjaxSource,
+                "fnInitComplete": function () {
+                    /* Now do the individual values */
+                    var oSettings = this.fnSettings();
+                    var jqFiltersHead = $(this.selector + ' > thead th').find('.dataTablesFilterTextBox, .dataTablesFilterDateTime, .dataTablesFilterBool');
+                    var jqFiltersFoot = $(this.selector + ' > tfoot th').find('.dataTablesFilterTextBox, .dataTablesFilterDateTime, .dataTablesFilterBool');
+                    for (var i = 0; i < oSettings.aoPreSearchCols.length; i++) {
+                        if (oSettings.aoPreSearchCols[i].sSearch != '') {
+                            var filterValue = oSettings.aoPreSearchCols[i].sSearch;
+                            if (jqFiltersHead.length > 0) {
+                                jqFiltersHead[i].value = filterValue;
+                            }
+                            if (jqFiltersFoot.length > 0) {
+                                jqFiltersFoot[i].value = filterValue;
+                            }
+                        }
+                    }
+                    @if (isVisibleGroupColumn)
+                    {
+                        <text>
+                        //hogy a kiírás is frissüljön
+                        var grpselect = document.getElementById("GroupHeading");
+                        //alert("huhu/" + grpselect.selectedIndex);
+                        SelectedGroupHeadChange(grpselect);
+                        </text>
+                    }
+
+                    // set filter old values
+                    $(this.selector + ' .dataTablesFilterTextBox, ' + this.selector + ' .dataTablesFilterDateTime').each(function () {
+                        $(this).data('oldValue', $(this).val());
+                    });
+                    /* save datetimepickers input's selection */
+                    $(this.selector + ' .dataTablesFilterDateTime').each(function (i, value) {
+                        $(this).focusout(function (e) {
+                            rangyInputsSaveSelection(this);
+                        });
+                        $(this).bind("beforedeactivate", function () {
+                            rangyInputsSaveSelection(this);
+                            $(this).unbind("focusout");
+                        });
+                    });
+                },
+                "fnDrawCallback": function () {
+                    /* update */
+                    $('.dataTable .updateLink').click(function (event) {
+                        ajaxBootboxDialog({
+                            ajaxUrl: AjaxParameters.Update.AjaxUrl,
+                            dataId: $(this).attr('data-id'),
+                            dialogId: 'updateDialog',
+                            formSelector: '#updateForm',
+                            titleText: AjaxParameters.Translations.Update
+                        });
+                    });
+
+                    /* delete */
+                    $('.dataTable .deleteLink').click(function (event) {
+                        bootBoxDialog({
+                            titleText: AjaxParameters.Translations.Delete,
+                            messageText: AjaxParameters.Delete.Message,
+                            dataId: $(this).attr('data-id')
+                        });
+                    });
+
+                    /* details */
+                    $('.dataTable .detailsLink').click(function (event) {
+                        ajaxBootboxDialog({
+                            ajaxUrl: AjaxParameters.Details.AjaxUrl,
+                            dataId: $(this).attr('data-id'),
+                            dialogId: 'detailsDialog',
+                            formSelector: '#detailsForm',
+                            titleText: AjaxParameters.Translations.Details
+                        });
+                    });
+                },
+                "aoColumns": p.aoColumns
+            });
+
+            /* filters */
+            dataTableFilters(oTable);
+
+            /* datetimepicker language */
+            dataTableDateTimePicker(p.dateTimePickerLanguage);
+
+            /* TableTools */
+            if (p.oTableTools) {
+                tableToolsInitilization({
+                    dataTable: oTable,
+                    sSwfPath: p.oTableTools.sSwfPath,
+                    exportColumns: p.oTableTools.exportColumns,
+                    aButtons: p.oTableTools.aButtons
+                });
+            }
+
+            console.log('DataTables initialized: ', oTable);
+            return oTable;
+        }
+    }
+
+    function SelectedGroupHeadChange(mySelect) {
+        SetGroupTitleAndHelp(mySelect.value);
+    }
+
+    function SetGroupTitleAndHelp(heading){
+        console.log('SetGroupTitleAndHelp',heading);
+        var t = document.getElementById("GroupTitle");
+        var h = document.getElementById("GroupHelp");
+        for (var i = 0; i < groupHelp.length; i++) {
+            if (groupHelp[i][0] === heading) {
+                t.innerHTML = groupHelp[i][0];
+                h.innerHTML = groupHelp[i][1];
+            }
+        }
+    }
+
+    function parameterDownLoad() {
+        var a = document.getElementById("parameterDownLoadLink");
+        a.click();
+    }
+    </script>
+}
+
+@if (Model != null)
+{
+    <div class="panel panel-primary" id="EWorkSheetItemBody">
+        <div class="panel-heading">
+            <div id="GroupTitle" style="font-weight:bold;font-size:40px;font-family:'Times New Roman', Times, serif"></div>
+            <table style="width:80%;background-color:inherit">
+                <tr>
+                    <th><h1 class="panel-title" style="font-weight:bold;font-size:large;">@(ViewBag.Title)</h1></th>
+                    <th style="width:200px;text-align:right;padding-right:6px;">
+                        <button type="button" class="btn btn-warning" id="parameterDownLoadButton" onclick="javascript: parameterDownLoad()">
+                            @(paramsavetitle)
+                        </button>
+                        @Html.ActionLink(paramsavetitle, "Download", "ConfigEditor", new { transit = Model.TransitParameters }, new { style = "font-size:smaller", hidden = true, id = "parameterDownLoadLink" } )
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <h1 class="panel-title" style="font-style:italic;font-size:inherit;color:#ffd800;" id="GroupHelp"></h1>
+                    </th>
+                </tr>
+            </table>
+            @*<button type="button" class="btn btn-success btn-sm right" style="margin-right:4px">
+                    @Html.ActionLink("Paraméterek mentése", "Download")
+                </button>*@
+        </div>
+        <div class="panel-body">
+            @if (String.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <table id="grid" class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            @if (isVisibleGroupColumn)
+                            {
+                                <th>
+                                    <select id="GroupHeading" class="dataTablesFilterBool form-control" name="GroupHeading" onchange="SelectedGroupHeadChange(this)">
+                                        <option value="" onclick="SelectedGroupHead(this)"></option>
+                                        @foreach (var hd in Model.GroupHeads)
+                                        {
+                                            <text>
+                                                <option value="@(hd.Name)">@(hd.Name)</option>
+                                            </text>
+                                        }
+                                    </select>
+                                </th>
+                            }
+                            <th>@Html.Partial("~/Areas/DataTables/Views/DataTables/_ColumnFilterTextBox.cshtml")</th>
+                            <th>@Html.Partial("~/Areas/DataTables/Views/DataTables/_ColumnFilterTextBox.cshtml")</th>
+                            <th>@Html.Partial("~/Areas/DataTables/Views/DataTables/_ColumnFilterTextBox.cshtml")</th>
+                            <th>@Html.Partial("~/Areas/DataTables/Views/DataTables/_ColumnFilterTextBox.cshtml")</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            @if (isVisibleGroupColumn)
+                            {
+                                <th></th>
+                            }
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            }
+            else
+            {
+                <p style="font-size:medium;color:red">@Html.Raw(langHelper.getTranslation(WordCodes.ConfigEditor.GeneralSetting.Error.Title))</p>
+                <br />
+                <p>@Html.Raw(Model.ErrorMessage.Replace(Environment.NewLine, "<br />"))</p>
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,1222 @@
+<ROOT>
+	<XmlParser>
+	</XmlParser>
+	<Matrix2DDefinitions>
+		<XmlParser>
+			<XmlVar Name="AutoCloseWaitFor">3</XmlVar>
+			<XmlVar Name="AutoCloseDialog">60</XmlVar>
+			<XmlVar Name="AutoCloseDialogManualEntry">90</XmlVar>
+			<XmlVar Name="STYLE_DIALOG_MENU">max-width:70vmax;margin:0vmax; padding:30vmax;</XmlVar>
+			<XmlVar Name="STYLE_DIALOG_RETURNINFO">max-width:50vmax;font-size:larger;color:white;</XmlVar>
+			<XmlVar Name="STYLE_DIALOG_ENTRYM">max-width:70vmax;font-size:larger;color:white;</XmlVar>
+			<XmlVar Name="STYLE_DIALOG_ENTRYXL">max-width:100vmax;font-size:larger;color:white;</XmlVar>
+			<XmlVar Name="STATIONLabel" LCID="hu-HU">Állomás</XmlVar>
+			<XmlVar Name="STATIONLabel" LCID="en-US">Station</XmlVar>
+			<XmlVar Name="PROCESSLabel" LCID="hu-HU">Folyamat</XmlVar>
+			<XmlVar Name="PROCESSLabel" LCID="en-US">Process</XmlVar>
+			<XmlVar Name="USERLabel" 	LCID="hu-HU">Gép felhasználó</XmlVar>
+			<XmlVar Name="USERLabel" 	LCID="en-US">Machine user</XmlVar>
+			<XmlVar Name="MESSAGESTACKLABEL" LCID="hu-HU">Utolsó üzenetek</XmlVar>
+			<XmlVar Name="MESSAGESTACKLABEL" LCID="en-US">Recent messages</XmlVar>
+			<XmlVar Name="SECT1HEADING" LCID="hu-HU">Azonosítás</XmlVar>
+			<XmlVar Name="SECT1HEADING" LCID="en-US">Identification</XmlVar>
+			<XmlVar Name="SECT2HEADING" LCID="hu-HU">Nyomtatás</XmlVar>
+			<XmlVar Name="SECT2HEADING" LCID="en-US">Printing</XmlVar>
+			<XmlVar Name="SECT3HEADING" LCID="hu-HU">Ellenőrzés</XmlVar>
+			<XmlVar Name="SECT3HEADING" LCID="en-US">Checking</XmlVar>
+			<XmlVar Name="SECT4HEADING" LCID="hu-HU">Az elkészült tekercs státusza</XmlVar>
+			<XmlVar Name="SECT4HEADING" LCID="en-US">The status of the finished reel</XmlVar>
+			<XmlVar Name="LABELDMainHeading" LCID="hu-HU">Automata ellenőrző gép státusz (LABELD)</XmlVar>
+			<XmlVar Name="LABELDMainHeading" LCID="en-US">Automatic ReelChecker (LABELD)</XmlVar>
+			<XmlVar Name="LABELKMainHeading" LCID="hu-HU">Automata ellenőrző gép státusz (LABELK)</XmlVar>
+			<XmlVar Name="LABELKMainHeading" LCID="en-US">Automatic ReelChecker (LABELK)</XmlVar>
+			<XmlVar Name="LABELEMainHeading" LCID="hu-HU">Félautomata ellenőrző gép státusz</XmlVar>
+			<XmlVar Name="LABELEMainHeading" LCID="en-US">Semi-automatic ReelChecker</XmlVar>
+			<XmlVar Name="STATUS_SECT_ID_READ" LCID="hu-HU">ID olvasás</XmlVar>
+			<XmlVar Name="STATUS_SECT_ID_READ" LCID="en-US">ID reading</XmlVar>
+			<XmlVar Name="STATUS_SECT_ID_CHKDATA" LCID="hu-HU">ID adatellenőrzés</XmlVar>
+			<XmlVar Name="STATUS_SECT_ID_CHKDATA" LCID="en-US">ID datacheck</XmlVar>
+			<XmlVar Name="STATUS_SECT_ID_CHKFVS" LCID="hu-HU">ID FVS ellenőrzés</XmlVar>
+			<XmlVar Name="STATUS_SECT_ID_CHKFVS" LCID="en-US">ID FVS check</XmlVar>
+			<XmlVar Name="STATUS_SECT_PRN_PRN" LCID="hu-HU">Nyomtatás</XmlVar>
+			<XmlVar Name="STATUS_SECT_PRN_PRN" LCID="en-US">Printing</XmlVar>
+			<XmlVar Name="STATUS_SECT_PRN_APP" LCID="hu-HU">Címke ragasztás</XmlVar>
+			<XmlVar Name="STATUS_SECT_PRN_APP" LCID="en-US">Applying label</XmlVar>
+			<XmlVar Name="STATUS_SECT_CHK_READ" LCID="hu-HU">CHECK olvasás</XmlVar>
+			<XmlVar Name="STATUS_SECT_CHK_READ" LCID="en-US">CHECK read</XmlVar>
+			<XmlVar Name="STATUS_SECT_CHK_CHKDATA" LCID="hu-HU">CHECK adatell.</XmlVar>
+			<XmlVar Name="STATUS_SECT_CHK_CHKDATA" LCID="en-US">CHECK datacheck</XmlVar>
+			<XmlVar Name="STATUS_SECT_CHK_BOOKING" LCID="hu-HU">CHECK könyvelés</XmlVar>
+			<XmlVar Name="STATUS_SECT_CHK_BOOKING" LCID="en-US">CHECK booking</XmlVar>
+			<XmlVar Name="STATUS_SECT_EXIT" LCID="hu-HU">Össz.eredmény</XmlVar>
+			<XmlVar Name="STATUS_SECT_EXIT" LCID="en-US">Result</XmlVar>
+			<XmlVar Name="STATUS_SECT_CYCLESTART" LCID="hu-HU">Ciklus kezdete</XmlVar>
+			<XmlVar Name="STATUS_SECT_CYCLESTART" LCID="en-US">Start of cycle</XmlVar>
+			<XmlVar Name="STATUS_SECT_CYCLEEND" LCID="hu-HU">Ciklus vége</XmlVar>
+			<XmlVar Name="STATUS_SECT_CYCLEEND" LCID="en-US">End of cycle</XmlVar>
+			<XmlVar Name="DATALABEL_MTSID" LCID="hu-HU">MTS azonosító</XmlVar>
+			<XmlVar Name="DATALABEL_MTSID" LCID="en-US">MTS id</XmlVar>
+			<XmlVar Name="DATALABEL_PN" LCID="hu-HU">Cikkszám</XmlVar>
+			<XmlVar Name="DATALABEL_PN" LCID="en-US">Part number</XmlVar>
+			<XmlVar Name="DATALABEL_QTY" LCID="hu-HU">Mennyiség</XmlVar>
+			<XmlVar Name="DATALABEL_QTY" LCID="en-US">Quantity</XmlVar>
+			<XmlVar Name="DATALABEL_FVS" LCID="hu-HU">FVS kód</XmlVar>
+			<XmlVar Name="DATALABEL_FVS" LCID="en-US">FVS code</XmlVar>
+		</XmlParser>
+		<XmlParser Include="@XMLPARSERBUTTONDEFXML@"/>
+		<GeneralParameters>
+			<Options RefreshInterval="1;1" CheckXML="true"/>
+		</GeneralParameters>
+		<StyleDefinitions ConfigFile="file=~/App_Data/WebMonitor/Styles.xml"/>
+		<FieldDefinitions ConfigFile="file=~/App_Data/WebMonitor/Fields.xml">
+			<Fields>
+				<Field Name="ANTITEST" Content="DUMMY" Override=" "/>
+			</Fields>
+		</FieldDefinitions>
+		<Defaults>
+			<DataSource Type="redis" ConnectionString="Pool=REELCHECK;Server=@REDISSERVERIP@;Port=@REDISSERVERPORT@"/>
+			<DefaultStyles Display="DefaultM2DDisplay" FieldCell="CellStyle_Default" LabelCell="CellStyle_Default" FieldText="TextStyle_Default" LabelText="TextStyle_Default"/>
+			<DefaultNameSeparator>@</DefaultNameSeparator>
+		</Defaults>
+		<Displays>
+			<Display Name="TEST" Style="DefaultM2DDisplay">
+				<DataSource Type="sql" KeyParameterName="KKEY" ConnectionString="data source=REELCHECK;initial catalog=REELCHECK;user id=sa;password=vrh;MultipleActiveResultSets=True;App=EntityFramework;">
+					<SQL>
+						SELECT
+						'LABELD' AS KKEY
+						, 'ReelCheckService.UiMessage.IdentificationOperation.NoRead' AS WORDCODE
+						, '--@ReelCheckService.UiMessage.IdentificationOperation.NoRead@ -- @ReelCheckService.UiMessage.IdentificationOperation.EptyReelPosition@ --' AS TEXTMASK1
+						, '@ReelCheckService.UiMessage.IdentificationOperation.NoRead@' AS TEXTMASK2
+					</SQL>
+				</DataSource>
+				<Cells>
+					<!--HEADING-->
+					<Cell Name="Heading" Left="0" Width="1000" Top="0" Height="1000" Label=""/>
+					<Cell Ref="Heading" Left="0" Width="1000" Top="0" Height="100" Field="TESTWORDCODE" TextStyle="TextStyle_AutoAlign6TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="0" Width="1000" Top="100" Height="100" Field="TESTTEXTMASK1" TextStyle="TextStyle_AutoAlign6TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="0" Width="1000" Top="200" Height="100" Field="TESTTEXTMASK2" TextStyle="TextStyle_AutoAlign6TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+				</Cells>
+			</Display>
+			
+			<!-- LABELE MAIN DISPLAY -->
+			<Display Name="LABELESTD" Style="DefaultM2DDisplay">
+				<Cells>
+					<!--HEADING-->
+					<Cell Name="Heading" Left="0" Width="1000" Top="0" Height="100" Label=""/>
+					<Cell Ref="Heading" Left="0" Width="800" Top="0" Height="1000" Label="@LABELEMainHeading@" TextStyle="TextStyle_AutoAlign6TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="0" Height="400" Field="NOW" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="400" Height="600" Field="WINUSERNAMEWITHLABEL" TextStyle="TextStyle_AutoAlign2TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<!--WSTATUS-->
+					<Cell Name="WSstatus" Left="0" Width="200" Top="100" Label="" Height="900" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="0"    Height="40" Label="@STATIONLabel@ / @PROCESSLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="40"   Height="85" Field="F_WS.STATION" TextStyle="TextStyle_AutoAlign3TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="125"  Height="40" Label="@USERLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="165"  Height="85"  Field="F_WS.USERNAME" TextStyle="TextStyle_AutoAlign2TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="250"  Height="100" Field="F_WS.MAINSTATUS" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="350"  Height="150" Field="F_WS.REELCHECKMODE" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500"  Height="250" Field="F_GS.DUE" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="750"  Height="50" Field="F_WS.UIMESSAGE1" TextStyle="TextStyle_AutoAlign1.5TextLeftBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="800"  Height="50" Field="F_WS.UIMESSAGE2" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="850"  Height="50" Field="F_WS.UIMESSAGE3" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="900"  Height="50" Field="F_WS.UIMESSAGE4" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="950"  Height="50" Field="F_WS.UIMESSAGE5" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500" Height="250" Field="F_SPECIALMODES" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<!--BUTTONS-->
+					<Cell Name="SectButtons" Left="800" Width="200" Top="100" Height="900" Label="" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="SectButtons" Left="100" Width="800" Top="300" Height="400" Label="@BUTTONGROUP_Interventions@" Help="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_BUTTONSTYLEmenu">
+						<Link ResponseTarget="CurrentPage">
+							<url>
+								<area>WebMonitor</area>
+								<controller>Matrix2D</controller>
+								<action>Index</action>
+								<inputparameter name="xml">@MATRIX2DXML@;element=Matrix2DDefinitions;</inputparameter>
+								<inputparameter name="BlockName">LABELEINTERVENTIONS</inputparameter>
+								<inputparameter name="WorkPlace">LABELE</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectButtons" Left="200" Width="600" Top="950" Height="50" Label="@BUTTONGROUP_Interventions@-MenuPage" Help="" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_BUTTONSTYLEorange">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_MENU@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>Menu</area>
+								<controller>MenuPage</controller>
+								<action>Display</action>
+								<inputparameter name="xml">@MENUXML@;element=Matrix2DInternalMenuLABELEInterventions</inputparameter>
+								<inputparameter name="URLTITLETEXT"></inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<!--SECT1-->					
+					<Cell Name="Sect1" Left="200" Width="600" Top="100" Height="900" Label=""/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="0"   Height="1000" Field="F_SECT1.STATUS_EXIT" TextStyle="TextStyle_NoText" />
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="0"  Height="200" Field="F_WSE.STATUS"  TextStyle="TextStyle_AutoAlign6TextCenter"/>
+						<!--SECT1: STATUS SECTION - LABELS -->
+					<Cell Ref="Sect1" Left="0" Width="300" Top="200" Height="45" Label="@STATUS_SECT_ID_READ@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="245" Height="45" Label="@STATUS_SECT_ID_CHKDATA@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="290" Height="45" Label="@STATUS_SECT_ID_CHKFVS@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="335" Height="45" Label="@STATUS_SECT_PRN_PRN@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="380" Height="45" Label="@STATUS_SECT_PRN_APP@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="425" Height="45" Label="@STATUS_SECT_CHK_READ@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="470" Height="45" Label="@STATUS_SECT_CHK_CHKDATA@" TextStyle="TextStyle_AutoAlign2.5TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="515" Height="45" Label="@STATUS_SECT_CHK_BOOKING@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="560" Height="60" Label="@STATUS_SECT_EXIT@" TextStyle="TextStyle_AutoAlign3TextCenterBold"/>
+						<!--SECT1: STATUS SECTION - FIELDS -->
+					<Cell Ref="Sect1" Left="300" Width="200" Top="200"  Height="45" Field="F_SECT1.STATUS_ID_READ" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="245"  Height="45" Field="F_SECT1.STATUS_ID_RCCHECK" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="290"  Height="45" Field="F_SECT1.STATUS_ID_EXTCHECK" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="335"  Height="45" Field="F_SECT1.STATUS_PRN_PRINT" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="380"  Height="45" Field="F_SECT1.STATUS_PRN_APPLY" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="425"  Height="45" Field="F_SECT1.STATUS_CHK_READ" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="470"  Height="45" Field="F_SECT1.STATUS_CHK_RCCHECK" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="515"  Height="45" Field="F_SECT1.STATUS_CHK_BOOKING" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="560"  Height="60" Field="F_SECT1.STATUS_EXIT" TextStyle="TextStyle_AutoAlign3TextCenterBold"/>
+						<!--SECT1: STARTTIMESTAMP -->
+					<Cell Ref="Sect1" Left="500" Width="200" Top="200" Height="45" Label="@STATUS_SECT_CYCLESTART@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="700" Width="300" Top="200" Height="45" Field="F_SECT1.CYCLESTARTTIMESTAMP" TextStyle="TextStyle_AutoAlign3TextLeft"/>
+						<!--SECT1: EROOR, MESSAGES SECTION -->
+					<Cell Ref="Sect1" Left="500" Width="500" Top="245" Height="380" Field="F_SECT1.LABELLOGO" TextStyle="TextStyle_NoText"/>
+					<Cell Ref="Sect1" Left="500" Width="500" Top="240" Height="380" Field="F_SECT1.BACKGROUNDSYSTEMMESSAGE_SEMIAUTOMATIC" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="790" Width="200" Top="490" Height="110" Field="F_SECT1.BUTTON_MSGOK_SEMIAUTOMATIC" TextStyle="TextStyle_AutoAlign4TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Unblock</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+						<!--SECT1: MAIN DATA SECTION -->
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="620"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="630"  Height="60" Label="@DATALABEL_FVS@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="630"  Height="60"  Field="F_SECT1.IFVS" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="690"  Height="60" Label="@DATALABEL_QTY@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="690"  Height="60" Field="F_SECT1.IQTY" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="750"  Height="60" Label="@DATALABEL_PN@" TextStyle="TextStyle_AutoAlign3TextCenterBold"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="750"  Height="60"  Field="F_SECT1.IPN" TextStyle="TextStyle_AutoAlign3TextCenterBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="810"  Height="60" Label="@DATALABEL_MTSID@" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="810"  Height="60"  Field="F_SECT1.IMTSID" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="870"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="880"  Height="60"  Field="F_SECT1.BCLISTID" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="940"  Height="60"  Field="F_SECT1.BCLISTCHECK" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="620"  Height="380"  Field="F_SECT1.ERRORMESSAGE" TextStyle="TextStyle_AutoAlign4TextCenter"/>
+				</Cells>
+			</Display>
+			<!-- LABELE Interventions display -->
+			<Display Name="LABELEINTERVENTIONS" Style="DefaultM2DDisplay">
+				<Cells>
+					<!--HEADING-->
+					<Cell Name="Heading" Left="0" Width="1000" Top="0" Height="100" Label=""/>
+					<Cell Ref="Heading" Left="0" Width="800" Top="0" Height="1000" Label="@LABELEMainHeading@" TextStyle="TextStyle_AutoAlign6TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="0" Height="400" Field="NOW" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="400" Height="600" Field="WINUSERNAMEWITHLABEL" TextStyle="TextStyle_AutoAlign2TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<!--WSTATUS-->
+					<Cell Name="WSstatus" Left="0" Width="200" Top="100" Label="" Height="900" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="0"    Height="40" Label="@STATIONLabel@ / @PROCESSLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="40"   Height="85" Field="F_WS.STATION" TextStyle="TextStyle_AutoAlign3TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="125"  Height="40" Label="@USERLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="165"  Height="85"  Field="F_WS.USERNAME" TextStyle="TextStyle_AutoAlign2TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="250"  Height="100" Field="F_WS.MAINSTATUS" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="350"  Height="150" Field="F_WS.REELCHECKMODE" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500"  Height="250" Field="F_GS.DUE" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="750"  Height="50" Field="F_WS.UIMESSAGE1" TextStyle="TextStyle_AutoAlign1.5TextLeftBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="800"  Height="50" Field="F_WS.UIMESSAGE2" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="850"  Height="50" Field="F_WS.UIMESSAGE3" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="900"  Height="50" Field="F_WS.UIMESSAGE4" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="950"  Height="50" Field="F_WS.UIMESSAGE5" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500" Height="250" Field="F_SPECIALMODES" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<!--BUTTONS-->
+					<Cell Name="SectButtons" Left="800" Width="200" Top="100" Height="900" Label="" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="SectButtons" Left="100" Width="800" Top="300" Height="400" Label="@BUTTONTEXT_BACK@" Help="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_BUTTONSTYLEback">
+						<Link ResponseTarget="CurrentPage">
+							<url>
+								<area>WebMonitor</area>
+								<controller>Matrix2D</controller>
+								<action>Index</action>
+								<inputparameter name="xml">@MATRIX2DXML@;element=Matrix2DDefinitions;</inputparameter>
+								<inputparameter name="BlockName">LABELESTD</inputparameter>
+								<inputparameter name="WorkPlace">LABELE</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<!--IVBUTTONS-->
+					<Cell Name="SectIVButtons" Left="200" Width="600" Top="100" Height="900" Label="" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="SectIVButtons" Left="100" Width="450" Top="100" Height="250" Field="BUTTON_REPRINT" Help="@BUTTONHELP_REPRINT@" TextStyle="TextStyle_AutoAlign5TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Re-print</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="550" Width="450" Top="100" Height="250" Field="BUTTON_NOPRINT" Help="@BUTTONHELP_NOPRINT@" TextStyle="TextStyle_AutoAlign5TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">No-print</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="360" Height="60" Field="BUTTON_BLOCK" Help="@BUTTONHELP_BLOCK@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Block</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="360" Height="60" Field="BUTTON_UNBLOCK" Help="@BUTTONHELP_UNBLOCK@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Unblock</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="530" Height="60" Field="BUTTON_RCLOGIN" Help="@BUTTONHELP_RCLOGIN@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Login</inputparameter>
+								<inputparameter name="userName">@USERNAME@</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="530" Height="60" Field="BUTTON_RCLOGOUT" Help="@BUTTONHELP_RCLOGOUT@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Logout</inputparameter>
+								<inputparameter name="userName">*</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="620" Height="120" Field="BUTTON_LOGIN" Help="@BUTTONHELP_LOGIN@" TextStyle="TextStyle_AutoAlign5TextCenter">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>UserAdministration</area>
+								<controller>Account</controller>
+								<action>Login</action>
+								<inputparameter name="xml">config=UserAuthentication</inputparameter>
+								<inputparameter name="name">LABELE</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="620" Height="120" Field="BUTTON_LOGOUT" Help="@BUTTONHELP_LOGOUT@" TextStyle="TextStyle_AutoAlign5TextCenter">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>UserAdministration</area>
+								<controller>Account</controller>
+								<action>Logout</action>
+								<inputparameter name="xml">config=UserAuthentication</inputparameter>
+								<inputparameter name="name">LABELE</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="300" Top="775" Height="60" Field="BUTTON_HHMODEON_FVS" Help="@BUTTONHELP_HHMODEON_FVS@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>WebForm</area>
+								<controller>WebForm</controller>
+								<action>Execute</action>
+								<inputparameter name="fileName">@APPDATA@/WebForm/WebForms.xml</inputparameter>
+								<inputparameter name="formName">LABELE_HHMODE_FVS</inputparameter>
+								<inputparameter name="viewmode">desktop</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="500" Width="300" Top="775" Height="60" Field="BUTTON_HHMODEON_BCLIST" Help="@BUTTONHELP_HHMODEON_BCLIST@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>WebForm</area>
+								<controller>WebForm</controller>
+								<action>Execute</action>
+								<inputparameter name="fileName">@APPDATA@/WebForm/WebForms.xml</inputparameter>
+								<inputparameter name="formName">LABELE_HHMODE_BCLIST</inputparameter>
+								<inputparameter name="viewmode">desktop</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="800" Width="80" Top="775" Height="60" Field="BUTTON_HHMODEOFF" Help="@BUTTONHELP_HHMODEOFF@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">HHMODEOFF</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="100" Width="220" Top="870" Height="120" Field="BUTTON_GSON" Help="@BUTTONHELP_GSON@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSSTART</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="320" Width="220" Top="900" Height="60" Field="BUTTON_GSOFF" Help="@BUTTONHELP_GSOFF@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSSTOP</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="220" Top="900" Height="60" Field="BUTTON_GSSETDUE" Help="@BUTTONHELP_GSSETDUE@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSSETDUE</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="760" Width="220" Top="900" Height="60" Field="BUTTON_GSDUESKIP" Help="@BUTTONHELP_GSDUESKIP@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelE</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSDUESKIP</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+				</Cells>
+			</Display>
+
+			<!-- LABELD Main Display -->
+			<Display Name="LABELDSTD" Style="DefaultM2DDisplay">
+				<Cells>
+					<!--HEADING-->
+					<Cell Name="Heading" Left="0" Width="1000" Top="0" Height="100" Label=""/>
+					<Cell Ref="Heading" Left="0" Width="850" Top="0" Height="1000" Label="@LABELDMainHeading@" TextStyle="TextStyle_AutoAlign6TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="0" Height="400" Field="NOW" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="400" Height="600" Field="WINUSERNAMEWITHLABEL" TextStyle="TextStyle_AutoAlign2TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<!--WSTATUS-->
+					<Cell Name="WSstatus" Left="0" Width="200" Top="100" Height="900" Label="" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="0"    Height="40" Label="@STATIONLabel@ / @PROCESSLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="40"   Height="85" Field="F_WS.STATION" TextStyle="TextStyle_AutoAlign3TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="125"  Height="40" Label="@USERLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="165"  Height="85"  Field="F_WS.USERNAME" TextStyle="TextStyle_AutoAlign2TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="250"  Height="100" Field="F_WS.MAINSTATUS" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="350"  Height="150" Field="F_WS.REELCHECKMODE" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500"  Height="250" Field="F_GS.DUE" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="750"  Height="50" Field="F_WS.UIMESSAGE1" TextStyle="TextStyle_AutoAlign1.5TextLeftBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="800"  Height="50" Field="F_WS.UIMESSAGE2" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="850"  Height="50" Field="F_WS.UIMESSAGE3" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="900"  Height="50" Field="F_WS.UIMESSAGE4" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="950"  Height="50" Field="F_WS.UIMESSAGE5" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500" Height="250" Field="F_SPECIALMODES" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<!--BUTTONS-->
+					<Cell Name="SectButtons" Left="800" Width="200" Top="100" Height="900" Label="" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="SectButtons" Left="100" Width="800" Top="300" Height="400" Label="@BUTTONGROUP_Interventions@" Help="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_BUTTONSTYLEmenu">
+						<Link ResponseTarget="CurrentPage">
+							<url>
+								<area>WebMonitor</area>
+								<controller>Matrix2D</controller>
+								<action>Index</action>
+								<inputparameter name="xml">@MATRIX2DXML@;element=Matrix2DDefinitions;</inputparameter>
+								<inputparameter name="BlockName">LABELDINTERVENTIONS</inputparameter>
+								<inputparameter name="WorkPlace">LABELD</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectButtons" Left="200" Width="600" Top="950" Height="50" Label="@BUTTONGROUP_Interventions@-MenuPage" Help="" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_BUTTONSTYLEorange">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_MENU@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>Menu</area>
+								<controller>MenuPage</controller>
+								<action>Display</action>
+								<inputparameter name="xml">@MENUXML@;element=Matrix2DInternalMenuLABELDInterventions</inputparameter>
+								<inputparameter name="URLTITLETEXT"></inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<!--SECT1-->
+					<Cell Left="200" Width="200" Top="100" Height="300" Label=""  TextStyle="TextStyle_NoText" CellStyle="CellStyle_CellGroupBorder"/>
+					<Cell Name="Sect1" Left="203" Width="194" Top="103" Height="294" Label="" CellStyle="CellStyle_Default"/>
+						<!--SECT1: HEADER SECTION -->
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="0" Height="120" Label="@SECT1HEADING@" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="120" Height="80" Field="F_WS.IDSTATUS" TextStyle="TextStyle_AutoAlign1.5TextCenterBold" />
+						<!--SECT1: STATUS SECTION - LABELS -->
+					<Cell Ref="Sect1" Left="0" Width="300" Top="200" Height="45" Label="@STATUS_SECT_ID_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="245" Height="45" Label="@STATUS_SECT_ID_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="290" Height="45" Label="@STATUS_SECT_ID_CHKFVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="335" Height="45" Label="@STATUS_SECT_PRN_PRN@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="380" Height="45" Label="@STATUS_SECT_PRN_APP@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="425" Height="45" Label="@STATUS_SECT_CHK_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="470" Height="45" Label="@STATUS_SECT_CHK_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="515" Height="45" Label="@STATUS_SECT_CHK_BOOKING@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="560" Height="60" Label="@STATUS_SECT_EXIT@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT1: STATUS SECTION - FIELDS -->
+					<Cell Ref="Sect1" Left="300" Width="200" Top="200"  Height="45" Field="F_SECT1.STATUS_ID_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="245"  Height="45" Field="F_SECT1.STATUS_ID_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="290"  Height="45" Field="F_SECT1.STATUS_ID_EXTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="335"  Height="45" Field="F_SECT1.STATUS_PRN_PRINT" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="380"  Height="45" Field="F_SECT1.STATUS_PRN_APPLY" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="425"  Height="45" Field="F_SECT1.STATUS_CHK_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="470"  Height="45" Field="F_SECT1.STATUS_CHK_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="515"  Height="45" Field="F_SECT1.STATUS_CHK_BOOKING" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="560"  Height="60" Field="F_SECT1.STATUS_EXIT" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT1: STARTTIMESTAMP -->
+					<Cell Ref="Sect1" Left="500" Width="200" Top="200" Height="90" Label="@STATUS_SECT_CYCLESTART@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="700" Width="300" Top="200" Height="90" Field="F_SECT1.CYCLESTARTTIMESTAMP" TextStyle="TextStyle_AutoAlign1TextLeft"/>
+						<!--SECT1: EROOR SECTION -->
+					<Cell Ref="Sect1" Left="500" Width="500" Top="290" Height="330" Field="F_SECT1.LABELLOGO" TextStyle="TextStyle_NoText"/>
+					<Cell Ref="Sect1" Left="500" Width="500" Top="290" Height="330"  Field="F_SECT1.ERRORMESSAGE" TextStyle="TextStyle_ErrorMessage_Small" CellStyle="CellStyle_Default"/>
+						<!--SECT1: MAIN DATA SECTION -->
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="620"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="630"  Height="60" Label="@DATALABEL_FVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="630"  Height="60"  Field="F_SECT1.IFVS" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="690"  Height="60" Label="@DATALABEL_QTY@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="690"  Height="60" Field="F_SECT1.IQTY" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="750"  Height="60" Label="@DATALABEL_PN@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="750"  Height="60"  Field="F_SECT1.IPN" TextStyle="TextStyle_AutoAlign1TextCenterBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="810"  Height="60" Label="@DATALABEL_MTSID@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="810"  Height="60"  Field="F_SECT1.IMTSID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="870"  Height="10" Label="" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="880"  Height="60"  Field="F_SECT1.BCLISTID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="940"  Height="60"  Field="F_SECT1.BCLISTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<!--SECT2-->
+					<Cell Left="400" Width="200" Top="100" Height="300" Label=""  TextStyle="TextStyle_NoText" CellStyle="CellStyle_CellGroupBorder"/>
+					<Cell Name="Sect2" Left="403" Width="194" Top="103" Height="294" Label=""/>
+						<!--SECT2: HEADER SECTION -->
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="0"   Height="120" Label="@SECT2HEADING@" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="120" Height="80" Field="F_WS.PRINTSTATUS"  TextStyle="TextStyle_AutoAlign1.5TextCenterBold" />
+						<!--SECT2: STATUS SECTION - LABELS -->
+					<Cell Ref="Sect2" Left="0" Width="300" Top="200" Height="45" Label="@STATUS_SECT_ID_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="245" Height="45" Label="@STATUS_SECT_ID_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="290" Height="45" Label="@STATUS_SECT_ID_CHKFVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="335" Height="45" Label="@STATUS_SECT_PRN_PRN@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="380" Height="45" Label="@STATUS_SECT_PRN_APP@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="425" Height="45" Label="@STATUS_SECT_CHK_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="470" Height="45" Label="@STATUS_SECT_CHK_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="515" Height="45" Label="@STATUS_SECT_CHK_BOOKING@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="560" Height="60" Label="@STATUS_SECT_EXIT@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT2: STATUS SECTION - FIELDS -->
+					<Cell Ref="Sect2" Left="300" Width="200" Top="200"  Height="45" Field="F_SECT2.STATUS_ID_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="245"  Height="45" Field="F_SECT2.STATUS_ID_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="290"  Height="45" Field="F_SECT2.STATUS_ID_EXTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="335"  Height="45" Field="F_SECT2.STATUS_PRN_PRINT" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="380"  Height="45" Field="F_SECT2.STATUS_PRN_APPLY" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="425"  Height="45" Field="F_SECT2.STATUS_CHK_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="470"  Height="45" Field="F_SECT2.STATUS_CHK_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="515"  Height="45" Field="F_SECT2.STATUS_CHK_BOOKING" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="560"  Height="60" Field="F_SECT2.STATUS_EXIT" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT2: STARTTIMESTAMP -->
+					<Cell Ref="Sect2" Left="500" Width="200" Top="200" Height="90" Label="@STATUS_SECT_CYCLESTART@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="700" Width="300" Top="200" Height="90" Field="F_SECT2.CYCLESTARTTIMESTAMP" TextStyle="TextStyle_AutoAlign1TextLeft"/>
+						<!--SECT2: EROOR SECTION -->
+					<Cell Ref="Sect2" Left="500" Width="500" Top="290" Height="330" Field="F_SECT2.LABELLOGO" TextStyle="TextStyle_NoText"/>
+					<Cell Ref="Sect2" Left="500" Width="500" Top="290" Height="330"  Field="F_SECT2.ERRORMESSAGE" TextStyle="TextStyle_ErrorMessage_Small" CellStyle="CellStyle_Default"/>
+						<!--SECT2: MAIN DATA SECTION -->
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="620"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="630"  Height="60" Label="@DATALABEL_FVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="700" Top="630"  Height="60"  Field="F_SECT2.IFVS" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="690"  Height="60" Label="@DATALABEL_QTY@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="700" Top="690"  Height="60" Field="F_SECT2.IQTY" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="750"  Height="60" Label="@DATALABEL_PN@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+					<Cell Ref="Sect2" Left="300" Width="700" Top="750"  Height="60"  Field="F_SECT2.IPN" TextStyle="TextStyle_AutoAlign1TextCenterBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="810"  Height="60" Label="@DATALABEL_MTSID@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="700" Top="810"  Height="60"  Field="F_SECT2.IMTSID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="870"  Height="10" Label="" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="880"  Height="60"  Field="F_SECT2.BCLISTID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="940"  Height="60"  Field="F_SECT2.BCLISTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<!--SECT3-->
+					<Cell Left="600" Width="200" Top="100" Height="300" Label=""  TextStyle="TextStyle_NoText" CellStyle="CellStyle_CellGroupBorder"/>
+					<Cell Name="Sect3" Left="603" Width="194" Top="103" Height="294" Label=""/>
+						<!--SECT3: HEADER SECTION -->
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="0"   Height="120" Label="@SECT3HEADING@" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="120" Height="80" Field="F_WS.CHECKSTATUS"  TextStyle="TextStyle_AutoAlign1.5TextCenterBold" />
+						<!--SECT3: STATUS SECTION - LABELS -->
+					<Cell Ref="Sect3" Left="0" Width="300" Top="200" Height="45" Label="@STATUS_SECT_ID_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="245" Height="45" Label="@STATUS_SECT_ID_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="290" Height="45" Label="@STATUS_SECT_ID_CHKFVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="335" Height="45" Label="@STATUS_SECT_PRN_PRN@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="380" Height="45" Label="@STATUS_SECT_PRN_APP@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="425" Height="45" Label="@STATUS_SECT_CHK_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="470" Height="45" Label="@STATUS_SECT_CHK_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="515" Height="45" Label="@STATUS_SECT_CHK_BOOKING@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="560" Height="60" Label="@STATUS_SECT_EXIT@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT3: STATUS SECTION - FIELDS -->
+					<Cell Ref="Sect3" Left="300" Width="200" Top="200"  Height="45" Field="F_SECT3.STATUS_ID_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="245"  Height="45" Field="F_SECT3.STATUS_ID_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="290"  Height="45" Field="F_SECT3.STATUS_ID_EXTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="335"  Height="45" Field="F_SECT3.STATUS_PRN_PRINT" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="380"  Height="45" Field="F_SECT3.STATUS_PRN_APPLY" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="425"  Height="45" Field="F_SECT3.STATUS_CHK_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="470"  Height="45" Field="F_SECT3.STATUS_CHK_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="515"  Height="45" Field="F_SECT3.STATUS_CHK_BOOKING" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="560"  Height="60" Field="F_SECT3.STATUS_EXIT" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT3: STARTTIMESTAMP -->
+					<Cell Ref="Sect3" Left="500" Width="200" Top="200" Height="90" Label="@STATUS_SECT_CYCLESTART@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="700" Width="300" Top="200" Height="90" Field="F_SECT3.CYCLESTARTTIMESTAMP" TextStyle="TextStyle_AutoAlign1TextLeft"/>
+						<!--SECT3: EROOR SECTION -->
+					<Cell Ref="Sect3" Left="500" Width="500" Top="290" Height="330" Field="F_SECT3.LABELLOGO" TextStyle="TextStyle_NoText"/>
+					<Cell Ref="Sect3" Left="500" Width="500" Top="290" Height="330"  Field="F_SECT3.ERRORMESSAGE" TextStyle="TextStyle_ErrorMessage_Small" CellStyle="CellStyle_Default"/>
+						<!--SECT3: MAIN DATA SECTION -->
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="620"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="630"  Height="60" Label="@DATALABEL_FVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="700" Top="630"  Height="60"  Field="F_SECT3.IFVS" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="690"  Height="60" Label="@DATALABEL_QTY@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="700" Top="690"  Height="60" Field="F_SECT3.IQTY" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="750"  Height="60" Label="@DATALABEL_PN@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+					<Cell Ref="Sect3" Left="300" Width="700" Top="750"  Height="60"  Field="F_SECT3.IPN" TextStyle="TextStyle_AutoAlign1TextCenterBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="810"  Height="60" Label="@DATALABEL_MTSID@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="700" Top="810"  Height="60"  Field="F_SECT3.IMTSID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="870"  Height="10" Label="" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="880"  Height="60"  Field="F_SECT3.BCLISTID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="940"  Height="60"  Field="F_SECT3.BCLISTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<!--SECT4-->
+					<Cell Left="200" Width="600" Top="400" Height="600" Label=""  TextStyle="TextStyle_NoText" CellStyle="CellStyle_CellGroupBorder"/>
+					<Cell Name="Sect4" Left="203" Width="594" Top="403" Height="594" Label=""/>
+						<!--SECT4: HEADER SECTION -->
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="0"   Height="1000" Field="F_SECT4.STATUS_EXIT" TextStyle="TextStyle_NoText" />
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="0"   Height="120" Label="@SECT4HEADING@" TextStyle="TextStyle_AutoAlign5TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="120" Height="80" Field="F_SECT4.STATUS_EXIT" TextStyle="TextStyle_AutoAlign3TextCenterBold" />
+						<!--SECT4: STATUS SECTION - LABELS -->
+					<Cell Ref="Sect4" Left="0" Width="300" Top="200" Height="45" Label="@STATUS_SECT_ID_READ@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="245" Height="45" Label="@STATUS_SECT_ID_CHKDATA@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="290" Height="45" Label="@STATUS_SECT_ID_CHKFVS@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="335" Height="45" Label="@STATUS_SECT_PRN_PRN@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="380" Height="45" Label="@STATUS_SECT_PRN_APP@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="425" Height="45" Label="@STATUS_SECT_CHK_READ@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="470" Height="45" Label="@STATUS_SECT_CHK_CHKDATA@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="515" Height="45" Label="@STATUS_SECT_CHK_BOOKING@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="560" Height="60" Label="@STATUS_SECT_EXIT@" TextStyle="TextStyle_AutoAlign2TextCenterBold"/>
+						<!--SECT4: STATUS SECTION - FIELDS -->
+					<Cell Ref="Sect4" Left="300" Width="200" Top="200"  Height="45" Field="F_SECT4.STATUS_ID_READ" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="245"  Height="45" Field="F_SECT4.STATUS_ID_RCCHECK" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="290"  Height="45" Field="F_SECT4.STATUS_ID_EXTCHECK" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="335"  Height="45" Field="F_SECT4.STATUS_PRN_PRINT" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="380"  Height="45" Field="F_SECT4.STATUS_PRN_APPLY" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="425"  Height="45" Field="F_SECT4.STATUS_CHK_READ" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="470"  Height="45" Field="F_SECT4.STATUS_CHK_RCCHECK" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="515"  Height="45" Field="F_SECT4.STATUS_CHK_BOOKING" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="560"  Height="60" Field="F_SECT4.STATUS_EXIT" TextStyle="TextStyle_AutoAlign2TextCenterBold"/>
+						<!--SECT4: STARTTIMESTAMP -->
+					<Cell Ref="Sect4" Left="500" Width="200" Top="200" Height="45" Label="@STATUS_SECT_CYCLESTART@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="700" Width="300" Top="200" Height="45" Field="F_SECT4.CYCLESTARTTIMESTAMP" TextStyle="TextStyle_AutoAlign2TextLeft"/>
+						<!--SECT4: EROOR, MESSAGE SECTION -->
+					<Cell Ref="Sect4" Left="500" Width="500" Top="240" Height="380" Field="F_SECT4.LABELLOGO" TextStyle="TextStyle_NoText"/>
+					<Cell Ref="Sect4" Left="500" Width="500" Top="240" Height="380" Field="F_SECT4.ERRORMESSAGE" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="500" Width="500" Top="240" Height="380" Field="F_SECT4.BACKGROUNDSYSTEMMESSAGE" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="790" Width="200" Top="490" Height="110" Field="F_SECT4.BUTTON_MSGOK" TextStyle="TextStyle_AutoAlign4TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Unblock</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+						<!--SECT4: MAIN DATA SECTION -->
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="620"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="630"  Height="60" Label="@DATALABEL_FVS@" TextStyle="TextStyle_AutoAlign2.5TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="700" Top="630"  Height="60"  Field="F_SECT4.IFVS" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="690"  Height="60" Label="@DATALABEL_QTY@" TextStyle="TextStyle_AutoAlign2.5TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="700" Top="690"  Height="60" Field="F_SECT4.IQTY" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="750"  Height="60" Label="@DATALABEL_PN@" TextStyle="TextStyle_AutoAlign2.5TextCenterBold"/>
+					<Cell Ref="Sect4" Left="300" Width="700" Top="750"  Height="60"  Field="F_SECT4.IPN" TextStyle="TextStyle_AutoAlign2.5TextCenterBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="810"  Height="60" Label="@DATALABEL_MTSID@" TextStyle="TextStyle_AutoAlign2.5TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="700" Top="810"  Height="60"  Field="F_SECT4.IMTSID" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="870"  Height="10" Label="" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="880"  Height="60"  Field="F_SECT4.BCLISTID" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="940"  Height="60"  Field="F_SECT4.BCLISTCHECK" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+				</Cells>
+			</Display>
+			<!-- LABELD Interventions display -->
+			<Display Name="LABELDINTERVENTIONS" Style="DefaultM2DDisplay">
+				<Cells>
+					<!--HEADING-->
+					<Cell Name="Heading" Left="0" Width="1000" Top="0" Height="100" Label=""/>
+					<Cell Ref="Heading" Left="0" Width="850" Top="0" Height="1000" Label="@LABELDMainHeading@" TextStyle="TextStyle_AutoAlign6TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="0" Height="400" Field="NOW" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="400" Height="600" Field="WINUSERNAMEWITHLABEL" TextStyle="TextStyle_AutoAlign2TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<!--WSTATUS-->
+					<Cell Name="WSstatus" Left="0" Width="200" Top="100" Height="900" Label="" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="0"    Height="40" Label="@STATIONLabel@ / @PROCESSLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="40"   Height="85" Field="F_WS.STATION" TextStyle="TextStyle_AutoAlign3TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="125"  Height="40" Label="@USERLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="165"  Height="85"  Field="F_WS.USERNAME" TextStyle="TextStyle_AutoAlign2TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="250"  Height="100" Field="F_WS.MAINSTATUS" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="350"  Height="150" Field="F_WS.REELCHECKMODE" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500"  Height="250" Field="F_GS.DUE" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="750"  Height="50" Field="F_WS.UIMESSAGE1" TextStyle="TextStyle_AutoAlign1.5TextLeftBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="800"  Height="50" Field="F_WS.UIMESSAGE2" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="850"  Height="50" Field="F_WS.UIMESSAGE3" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="900"  Height="50" Field="F_WS.UIMESSAGE4" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="950"  Height="50" Field="F_WS.UIMESSAGE5" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500" Height="250" Field="F_SPECIALMODES" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<!--BUTTONS-->
+					<Cell Name="SectButtons" Left="800" Width="200" Top="100" Height="900" Label="" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="SectButtons" Left="100" Width="800" Top="300" Height="400" Label="@BUTTONTEXT_BACK@" Help="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_BUTTONSTYLEback">
+						<Link ResponseTarget="CurrentPage">
+							<url>
+								<area>WebMonitor</area>
+								<controller>Matrix2D</controller>
+								<action>Index</action>
+								<inputparameter name="xml">@MATRIX2DXML@;element=Matrix2DDefinitions;</inputparameter>
+								<inputparameter name="BlockName">LABELDSTD</inputparameter>
+								<inputparameter name="WorkPlace">LABELD</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<!--IVBUTTONS1-->
+					<Cell Name="SectIVButtons" Left="200" Width="600" Top="100" Height="900" Label="" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="SectIVButtons" Left="100" Width="450" Top="100" Height="250" Field="BUTTON_REPRINT" Help="@BUTTONHELP_REPRINT@" TextStyle="TextStyle_AutoAlign5TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Re-print</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="550" Width="450" Top="100" Height="250" Field="BUTTON_NOPRINT" Help="@BUTTONHELP_NOPRINT@" TextStyle="TextStyle_AutoAlign5TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">No-print</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="360" Height="60" Field="BUTTON_BLOCK" Help="@BUTTONHELP_BLOCK@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Block</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="360" Height="60" Field="BUTTON_UNBLOCK" Help="@BUTTONHELP_UNBLOCK@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Unblock</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="530" Height="60" Field="BUTTON_RCLOGIN" Help="@BUTTONHELP_RCLOGIN@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Login</inputparameter>
+								<inputparameter name="userName">@USERNAME@</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="530" Height="60" Field="BUTTON_RCLOGOUT" Help="@BUTTONHELP_RCLOGOUT@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Logout</inputparameter>
+								<inputparameter name="userName">*</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="620" Height="120" Field="BUTTON_LOGIN" Help="@BUTTONHELP_LOGIN@" TextStyle="TextStyle_AutoAlign3TextCenter">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>UserAdministration</area>
+								<controller>Account</controller>
+								<action>Login</action>
+								<inputparameter name="xml">config=UserAuthentication</inputparameter>
+								<inputparameter name="name">LABELD</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="620" Height="120" Field="BUTTON_LOGOUT" Help="@BUTTONHELP_LOGOUT@" TextStyle="TextStyle_AutoAlign3TextCenter">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>UserAdministration</area>
+								<controller>Account</controller>
+								<action>Logout</action>
+								<inputparameter name="xml">config=UserAuthentication</inputparameter>
+								<inputparameter name="name">LABELD</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="100" Width="220" Top="870" Height="120" Field="BUTTON_GSON" Help="@BUTTONHELP_GSON@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSSTART</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="320" Width="220" Top="900" Height="60" Field="BUTTON_GSOFF" Help="@BUTTONHELP_GSOFF@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSSTOP</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="220" Top="900" Height="60" Field="BUTTON_GSSETDUE" Help="@BUTTONHELP_GSSETDUE@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSSETDUE</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="760" Width="220" Top="900" Height="60" Field="BUTTON_GSDUESKIP" Help="@BUTTONHELP_GSDUESKIP@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LabelD</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSDUESKIP</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+				</Cells>
+			</Display>
+			
+			<!-- LABELK Main Display -->
+			<Display Name="LABELKSTD" Style="DefaultM2DDisplay">
+				<Cells>
+					<!--HEADING-->
+					<Cell Name="Heading" Left="0" Width="1000" Top="0" Height="100" Label=""/>
+					<Cell Ref="Heading" Left="0" Width="850" Top="0" Height="1000" Label="@LABELKMainHeading@" TextStyle="TextStyle_AutoAlign6TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="0" Height="400" Field="NOW" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="400" Height="600" Field="WINUSERNAMEWITHLABEL" TextStyle="TextStyle_AutoAlign2TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<!--WSTATUS-->
+					<Cell Name="WSstatus" Left="0" Width="200" Top="100" Height="900" Label="" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="0"    Height="40" Label="@STATIONLabel@ / @PROCESSLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="40"   Height="85" Field="F_WS.STATION" TextStyle="TextStyle_AutoAlign3TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="125"  Height="40" Label="@USERLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="165"  Height="85"  Field="F_WS.USERNAME" TextStyle="TextStyle_AutoAlign2TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="250"  Height="100" Field="F_WS.MAINSTATUS" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="350"  Height="150" Field="F_WS.REELCHECKMODE" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500"  Height="250" Field="F_GS.DUE" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="750"  Height="50" Field="F_WS.UIMESSAGE1" TextStyle="TextStyle_AutoAlign1.5TextLeftBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="800"  Height="50" Field="F_WS.UIMESSAGE2" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="850"  Height="50" Field="F_WS.UIMESSAGE3" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="900"  Height="50" Field="F_WS.UIMESSAGE4" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="950"  Height="50" Field="F_WS.UIMESSAGE5" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500" Height="250" Field="F_SPECIALMODES" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<!--BUTTONS-->
+					<Cell Name="SectButtons" Left="800" Width="200" Top="100" Height="900" Label="" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="SectButtons" Left="100" Width="800" Top="300" Height="400" Label="@BUTTONGROUP_Interventions@" Help="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_BUTTONSTYLEmenu">
+						<Link ResponseTarget="CurrentPage">
+							<url>
+								<area>WebMonitor</area>
+								<controller>Matrix2D</controller>
+								<action>Index</action>
+								<inputparameter name="xml">@MATRIX2DXML@;element=Matrix2DDefinitions;</inputparameter>
+								<inputparameter name="BlockName">LABELKINTERVENTIONS</inputparameter>
+								<inputparameter name="WorkPlace">LABELK</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectButtons" Left="200" Width="600" Top="950" Height="50" Label="@BUTTONGROUP_Interventions@-MenuPage" Help="" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_BUTTONSTYLEorange">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_MENU@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>Menu</area>
+								<controller>MenuPage</controller>
+								<action>Display</action>
+								<inputparameter name="xml">@MENUXML@;element=Matrix2DInternalMenuLABELKInterventions</inputparameter>
+								<inputparameter name="URLTITLETEXT"></inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<!--SECT1-->
+					<Cell Left="200" Width="200" Top="100" Height="300" Label=""  TextStyle="TextStyle_NoText" CellStyle="CellStyle_CellGroupBorder"/>
+					<Cell Name="Sect1" Left="203" Width="194" Top="103" Height="294" Label="" CellStyle="CellStyle_Default"/>
+						<!--SECT1: HEADER SECTION -->
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="0" Height="120" Label="@SECT1HEADING@" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="120" Height="80" Field="F_WS.IDSTATUS" TextStyle="TextStyle_AutoAlign1.5TextCenterBold" />
+						<!--SECT1: STATUS SECTION - LABELS -->
+					<Cell Ref="Sect1" Left="0" Width="300" Top="200" Height="45" Label="@STATUS_SECT_ID_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="245" Height="45" Label="@STATUS_SECT_ID_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="290" Height="45" Label="@STATUS_SECT_ID_CHKFVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="335" Height="45" Label="@STATUS_SECT_PRN_PRN@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="380" Height="45" Label="@STATUS_SECT_PRN_APP@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="425" Height="45" Label="@STATUS_SECT_CHK_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="470" Height="45" Label="@STATUS_SECT_CHK_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="515" Height="45" Label="@STATUS_SECT_CHK_BOOKING@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="560" Height="60" Label="@STATUS_SECT_EXIT@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT1: STATUS SECTION - FIELDS -->
+					<Cell Ref="Sect1" Left="300" Width="200" Top="200"  Height="45" Field="F_SECT1.STATUS_ID_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="245"  Height="45" Field="F_SECT1.STATUS_ID_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="290"  Height="45" Field="F_SECT1.STATUS_ID_EXTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="335"  Height="45" Field="F_SECT1.STATUS_PRN_PRINT" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="380"  Height="45" Field="F_SECT1.STATUS_PRN_APPLY" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="425"  Height="45" Field="F_SECT1.STATUS_CHK_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="470"  Height="45" Field="F_SECT1.STATUS_CHK_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="515"  Height="45" Field="F_SECT1.STATUS_CHK_BOOKING" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="200" Top="560"  Height="60" Field="F_SECT1.STATUS_EXIT" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT1: STARTTIMESTAMP -->
+					<Cell Ref="Sect1" Left="500" Width="200" Top="200" Height="90" Label="@STATUS_SECT_CYCLESTART@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="700" Width="300" Top="200" Height="90" Field="F_SECT1.CYCLESTARTTIMESTAMP" TextStyle="TextStyle_AutoAlign1TextLeft"/>
+						<!--SECT1: EROOR SECTION -->
+					<Cell Ref="Sect1" Left="500" Width="500" Top="290" Height="330" Field="F_SECT1.LABELLOGO" TextStyle="TextStyle_NoText"/>
+					<Cell Ref="Sect1" Left="500" Width="500" Top="290" Height="330"  Field="F_SECT1.ERRORMESSAGE" TextStyle="TextStyle_ErrorMessage_Small" CellStyle="CellStyle_Default"/>
+						<!--SECT1: MAIN DATA SECTION -->
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="620"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="630"  Height="60" Label="@DATALABEL_FVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="630"  Height="60"  Field="F_SECT1.IFVS" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="690"  Height="60" Label="@DATALABEL_QTY@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="690"  Height="60" Field="F_SECT1.IQTY" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="750"  Height="60" Label="@DATALABEL_PN@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="750"  Height="60"  Field="F_SECT1.IPN" TextStyle="TextStyle_AutoAlign1TextCenterBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="300" Top="810"  Height="60" Label="@DATALABEL_MTSID@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect1" Left="300" Width="700" Top="810"  Height="60"  Field="F_SECT1.IMTSID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="870"  Height="10" Label="" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="880"  Height="60"  Field="F_SECT1.BCLISTID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect1" Left="0" Width="1000" Top="940"  Height="60"  Field="F_SECT1.BCLISTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<!--SECT2 -->
+					<Cell Left="400" Width="200" Top="100" Height="300" Label=""  TextStyle="TextStyle_NoText" CellStyle="CellStyle_CellGroupBorder"/>
+					<Cell Name="Sect2" Left="403" Width="194" Top="103" Height="294" Label=""/>
+						<!--SECT2: HEADER SECTION -->
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="0"   Height="120" Label="@SECT2HEADING@" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="120" Height="80" Field="F_WS.PRINTSTATUS"  TextStyle="TextStyle_AutoAlign1.5TextCenterBold"/>
+						<!--SECT2: STATUS SECTION - LABELS -->
+					<Cell Ref="Sect2" Left="0" Width="300" Top="200" Height="45" Label="@STATUS_SECT_ID_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="245" Height="45" Label="@STATUS_SECT_ID_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="290" Height="45" Label="@STATUS_SECT_ID_CHKFVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="335" Height="45" Label="@STATUS_SECT_PRN_PRN@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="380" Height="45" Label="@STATUS_SECT_PRN_APP@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="425" Height="45" Label="@STATUS_SECT_CHK_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="470" Height="45" Label="@STATUS_SECT_CHK_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="515" Height="45" Label="@STATUS_SECT_CHK_BOOKING@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="560" Height="60" Label="@STATUS_SECT_EXIT@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT2: STATUS SECTION - FIELDS -->
+					<Cell Ref="Sect2" Left="300" Width="200" Top="200"  Height="45" Field="F_SECT2.STATUS_ID_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="245"  Height="45" Field="F_SECT2.STATUS_ID_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="290"  Height="45" Field="F_SECT2.STATUS_ID_EXTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="335"  Height="45" Field="F_SECT2.STATUS_PRN_PRINT" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="380"  Height="45" Field="F_SECT2.STATUS_PRN_APPLY" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="425"  Height="45" Field="F_SECT2.STATUS_CHK_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="470"  Height="45" Field="F_SECT2.STATUS_CHK_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="515"  Height="45" Field="F_SECT2.STATUS_CHK_BOOKING" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="200" Top="560"  Height="60" Field="F_SECT2.STATUS_EXIT" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT2: STARTTIMESTAMP -->
+					<Cell Ref="Sect2" Left="500" Width="200" Top="200" Height="90" Label="@STATUS_SECT_CYCLESTART@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="700" Width="300" Top="200" Height="90" Field="F_SECT2.CYCLESTARTTIMESTAMP" TextStyle="TextStyle_AutoAlign1TextLeft"/>
+						<!--SECT2: EROOR SECTION -->
+					<Cell Ref="Sect2" Left="500" Width="500" Top="290" Height="330" Field="F_SECT2.LABELLOGO" TextStyle="TextStyle_NoText"/>
+					<Cell Ref="Sect2" Left="500" Width="500" Top="290" Height="330"  Field="F_SECT2.ERRORMESSAGE" TextStyle="TextStyle_ErrorMessage_Small" CellStyle="CellStyle_Default"/>
+						<!--SECT2: MAIN DATA SECTION -->
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="620"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="630"  Height="60" Label="@DATALABEL_FVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="700" Top="630"  Height="60"  Field="F_SECT2.IFVS" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="690"  Height="60" Label="@DATALABEL_QTY@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="700" Top="690"  Height="60" Field="F_SECT2.IQTY" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="750"  Height="60" Label="@DATALABEL_PN@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+					<Cell Ref="Sect2" Left="300" Width="700" Top="750"  Height="60"  Field="F_SECT2.IPN" TextStyle="TextStyle_AutoAlign1TextCenterBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="300" Top="810"  Height="60" Label="@DATALABEL_MTSID@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect2" Left="300" Width="700" Top="810"  Height="60"  Field="F_SECT2.IMTSID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="870"  Height="10" Label="" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="880"  Height="60"  Field="F_SECT2.BCLISTID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect2" Left="0" Width="1000" Top="940"  Height="60"  Field="F_SECT2.BCLISTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<!--SECT3-->
+					<Cell Left="600" Width="200" Top="100" Height="300" Label=""  TextStyle="TextStyle_NoText" CellStyle="CellStyle_CellGroupBorder"/>
+					<Cell Name="Sect3" Left="603" Width="194" Top="103" Height="294" Label=""/>
+						<!--SECT3: HEADER SECTION -->
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="0"   Height="120" Label="@SECT3HEADING@" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="120" Height="80" Field="F_WS.CHECKSTATUS"  TextStyle="TextStyle_AutoAlign1.5TextCenterBold" />
+						<!--SECT3: STATUS SECTION - LABELS -->
+					<Cell Ref="Sect3" Left="0" Width="300" Top="200" Height="45" Label="@STATUS_SECT_ID_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="245" Height="45" Label="@STATUS_SECT_ID_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="290" Height="45" Label="@STATUS_SECT_ID_CHKFVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="335" Height="45" Label="@STATUS_SECT_PRN_PRN@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="380" Height="45" Label="@STATUS_SECT_PRN_APP@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="425" Height="45" Label="@STATUS_SECT_CHK_READ@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="470" Height="45" Label="@STATUS_SECT_CHK_CHKDATA@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="515" Height="45" Label="@STATUS_SECT_CHK_BOOKING@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="560" Height="60" Label="@STATUS_SECT_EXIT@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT3: STATUS SECTION - FIELDS -->
+					<Cell Ref="Sect3" Left="300" Width="200" Top="200"  Height="45" Field="F_SECT3.STATUS_ID_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="245"  Height="45" Field="F_SECT3.STATUS_ID_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="290"  Height="45" Field="F_SECT3.STATUS_ID_EXTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="335"  Height="45" Field="F_SECT3.STATUS_PRN_PRINT" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="380"  Height="45" Field="F_SECT3.STATUS_PRN_APPLY" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="425"  Height="45" Field="F_SECT3.STATUS_CHK_READ" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="470"  Height="45" Field="F_SECT3.STATUS_CHK_RCCHECK" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="515"  Height="45" Field="F_SECT3.STATUS_CHK_BOOKING" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="200" Top="560"  Height="60" Field="F_SECT3.STATUS_EXIT" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+						<!--SECT3: STARTTIMESTAMP -->
+					<Cell Ref="Sect3" Left="500" Width="200" Top="200" Height="90" Label="@STATUS_SECT_CYCLESTART@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="700" Width="300" Top="200" Height="90" Field="F_SECT3.CYCLESTARTTIMESTAMP" TextStyle="TextStyle_AutoAlign1TextLeft"/>
+						<!--SECT3: EROOR SECTION -->
+					<Cell Ref="Sect3" Left="500" Width="500" Top="290" Height="330" Field="F_SECT3.LABELLOGO" TextStyle="TextStyle_NoText"/>
+					<Cell Ref="Sect3" Left="500" Width="500" Top="290" Height="330"  Field="F_SECT3.ERRORMESSAGE" TextStyle="TextStyle_ErrorMessage_Small" CellStyle="CellStyle_Default"/>
+						<!--SECT3: MAIN DATA SECTION -->
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="620"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="630"  Height="60" Label="@DATALABEL_FVS@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="700" Top="630"  Height="60"  Field="F_SECT3.IFVS" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="690"  Height="60" Label="@DATALABEL_QTY@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="700" Top="690"  Height="60" Field="F_SECT3.IQTY" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="750"  Height="60" Label="@DATALABEL_PN@" TextStyle="TextStyle_AutoAlign1TextCenterBold"/>
+					<Cell Ref="Sect3" Left="300" Width="700" Top="750"  Height="60"  Field="F_SECT3.IPN" TextStyle="TextStyle_AutoAlign1TextCenterBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="300" Top="810"  Height="60" Label="@DATALABEL_MTSID@" TextStyle="TextStyle_AutoAlign1TextCenter"/>
+					<Cell Ref="Sect3" Left="300" Width="700" Top="810"  Height="60"  Field="F_SECT3.IMTSID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="870"  Height="10" Label="" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="880"  Height="60"  Field="F_SECT3.BCLISTID" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect3" Left="0" Width="1000" Top="940"  Height="60"  Field="F_SECT3.BCLISTCHECK" TextStyle="TextStyle_AutoAlign1TextCenter" CellStyle="CellStyle_Default"/>
+					<!--SECT4-->
+					<Cell Left="200" Width="600" Top="400" Height="600" Label=""  TextStyle="TextStyle_NoText" CellStyle="CellStyle_CellGroupBorder"/>
+					<Cell Name="Sect4" Left="203" Width="594" Top="403" Height="594" Label=""/>
+						<!--SECT4: HEADER SECTION -->
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="0"   Height="1000" Field="F_SECT4.STATUS_EXIT" TextStyle="TextStyle_NoText" />
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="0"   Height="120" Label="@SECT4HEADING@" TextStyle="TextStyle_AutoAlign5TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="120" Height="80" Field="F_SECT4.STATUS_EXIT"  TextStyle="TextStyle_AutoAlign3TextCenterBold" />
+						<!--SECT4: STATUS SECTION - LABELS -->
+					<Cell Ref="Sect4" Left="0" Width="300" Top="200" Height="45" Label="@STATUS_SECT_ID_READ@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="245" Height="45" Label="@STATUS_SECT_ID_CHKDATA@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="290" Height="45" Label="@STATUS_SECT_ID_CHKFVS@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="335" Height="45" Label="@STATUS_SECT_PRN_PRN@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="380" Height="45" Label="@STATUS_SECT_PRN_APP@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="425" Height="45" Label="@STATUS_SECT_CHK_READ@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="470" Height="45" Label="@STATUS_SECT_CHK_CHKDATA@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="515" Height="45" Label="@STATUS_SECT_CHK_BOOKING@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="560" Height="60" Label="@STATUS_SECT_EXIT@" TextStyle="TextStyle_AutoAlign2TextCenterBold"/>
+						<!--SECT4: STATUS SECTION - FIELDS -->
+					<Cell Ref="Sect4" Left="300" Width="200" Top="200"  Height="45" Field="F_SECT4.STATUS_ID_READ" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="245"  Height="45" Field="F_SECT4.STATUS_ID_RCCHECK" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="290"  Height="45" Field="F_SECT4.STATUS_ID_EXTCHECK" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="335"  Height="45" Field="F_SECT4.STATUS_PRN_PRINT" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="380"  Height="45" Field="F_SECT4.STATUS_PRN_APPLY" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="425"  Height="45" Field="F_SECT4.STATUS_CHK_READ" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="470"  Height="45" Field="F_SECT4.STATUS_CHK_RCCHECK" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="515"  Height="45" Field="F_SECT4.STATUS_CHK_BOOKING" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="200" Top="560"  Height="60" Field="F_SECT4.STATUS_EXIT" TextStyle="TextStyle_AutoAlign2TextCenterBold"/>
+						<!--SECT4: STARTTIMESTAMP -->
+					<Cell Ref="Sect4" Left="500" Width="200" Top="200" Height="45" Label="@STATUS_SECT_CYCLESTART@" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="Sect4" Left="700" Width="300" Top="200" Height="45" Field="F_SECT4.CYCLESTARTTIMESTAMP" TextStyle="TextStyle_AutoAlign2TextLeft"/>
+						<!--SECT4: EROOR, MESSAGE SECTION -->
+					<Cell Ref="Sect4" Left="500" Width="500" Top="290" Height="330" Field="F_SECT4.LABELLOGO" TextStyle="TextStyle_NoText"/>
+					<Cell Ref="Sect4" Left="500" Width="500" Top="240" Height="380" Field="F_SECT4.ERRORMESSAGE" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="500" Width="500" Top="240" Height="380" Field="F_SECT4.BACKGROUNDSYSTEMMESSAGE" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="790" Width="200" Top="490" Height="110" Field="F_SECT4.BUTTON_MSGOK" TextStyle="TextStyle_AutoAlign4TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Unblock</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+						<!--SECT4: MAIN DATA SECTION -->
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="620"  Height="10" Label="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="630"  Height="60" Label="@DATALABEL_FVS@" TextStyle="TextStyle_AutoAlign2.5TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="700" Top="630"  Height="60"  Field="F_SECT4.IFVS" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="690"  Height="60" Label="@DATALABEL_QTY@" TextStyle="TextStyle_AutoAlign2.5TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="700" Top="690"  Height="60" Field="F_SECT4.IQTY" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="750"  Height="60" Label="@DATALABEL_PN@" TextStyle="TextStyle_AutoAlign2.5TextCenterBold"/>
+					<Cell Ref="Sect4" Left="300" Width="700" Top="750"  Height="60"  Field="F_SECT4.IPN" TextStyle="TextStyle_AutoAlign2.5TextCenterBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="300" Top="810"  Height="60" Label="@DATALABEL_MTSID@" TextStyle="TextStyle_AutoAlign2.5TextCenter"/>
+					<Cell Ref="Sect4" Left="300" Width="700" Top="810"  Height="60"  Field="F_SECT4.IMTSID" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="870"  Height="10" Label="" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="880"  Height="60"  Field="F_SECT4.BCLISTID" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+					<Cell Ref="Sect4" Left="0" Width="1000" Top="940"  Height="60"  Field="F_SECT4.BCLISTCHECK" TextStyle="TextStyle_AutoAlign2.5TextCenter" CellStyle="CellStyle_Default"/>
+				</Cells>
+			</Display>
+			<!-- LABELK Interventions display -->
+			<Display Name="LABELKINTERVENTIONS" Style="DefaultM2DDisplay">
+				<Cells>
+					<!--HEADING-->
+					<Cell Name="Heading" Left="0" Width="1000" Top="0" Height="100" Label=""/>
+					<Cell Ref="Heading" Left="0" Width="850" Top="0" Height="1000" Label="@LABELKMainHeading@" TextStyle="TextStyle_AutoAlign6TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="0" Height="400" Field="NOW" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<Cell Ref="Heading" Left="800" Width="200" Top="400" Height="600" Field="WINUSERNAMEWITHLABEL" TextStyle="TextStyle_AutoAlign2TextCenter" CellStyle="CellStyle_DefaultInverse"/>
+					<!--WSTATUS-->
+					<Cell Name="WSstatus" Left="0" Width="200" Top="100" Height="900" Label="" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="0"    Height="40" Label="@STATIONLabel@ / @PROCESSLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="40"   Height="85" Field="F_WS.STATION" TextStyle="TextStyle_AutoAlign3TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="125"  Height="40" Label="@USERLabel@" TextStyle="TextStyle_AutoAlign2.5TextLeftBold"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="165"  Height="85"  Field="F_WS.USERNAME" TextStyle="TextStyle_AutoAlign2TextLeft"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="250"  Height="100" Field="F_WS.MAINSTATUS" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="350"  Height="150" Field="F_WS.REELCHECKMODE" TextStyle="TextStyle_AutoAlign3TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500"  Height="250" Field="F_GS.DUE" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="750"  Height="50" Field="F_WS.UIMESSAGE1" TextStyle="TextStyle_AutoAlign1.5TextLeftBold" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="800"  Height="50" Field="F_WS.UIMESSAGE2" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="850"  Height="50" Field="F_WS.UIMESSAGE3" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="900"  Height="50" Field="F_WS.UIMESSAGE4" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="950"  Height="50" Field="F_WS.UIMESSAGE5" TextStyle="TextStyle_AutoAlign1.5TextLeft" CellStyle="CellStyle_Default"/>
+					<Cell Ref="WSstatus" Left="0" Width="1000" Top="500" Height="250" Field="F_SPECIALMODES" TextStyle="TextStyle_AutoAlign2TextCenter"/>
+					<!--BUTTONS-->
+					<Cell Name="SectButtons" Left="800" Width="200" Top="100" Height="900" Label="" TextStyle="TextStyle_AutoAlign4TextCenter" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="SectButtons" Left="100" Width="800" Top="300" Height="400" Label="@BUTTONTEXT_BACK@" Help="" TextStyle="TextStyle_AutoAlign3TextCenter" CellStyle="CellStyle_BUTTONSTYLEback">
+						<Link ResponseTarget="CurrentPage">
+							<url>
+								<area>WebMonitor</area>
+								<controller>Matrix2D</controller>
+								<action>Index</action>
+								<inputparameter name="xml">@MATRIX2DXML@;element=Matrix2DDefinitions;</inputparameter>
+								<inputparameter name="BlockName">LABELKSTD</inputparameter>
+								<inputparameter name="WorkPlace">LABELK</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<!--IVBUTTONS1-->
+					<Cell Name="SectIVButtons" Left="200" Width="600" Top="100" Height="900" Label="" CellStyle="CellStyle_DefaultInverseGrey"/>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="200" Height="60" Field="BUTTON_REPRINT" Help="@BUTTONHELP_REPRINT@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Re-print</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="200" Height="60" Field="BUTTON_NOPRINT" Help="@BUTTONHELP_NOPRINT@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">No-print</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="360" Height="60" Field="BUTTON_BLOCK" Help="@BUTTONHELP_BLOCK@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Block</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="360" Height="60" Field="BUTTON_UNBLOCK" Help="@BUTTONHELP_UNBLOCK@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Unblock</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="530" Height="60" Field="BUTTON_RCLOGIN" Help="@BUTTONHELP_RCLOGIN@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Login</inputparameter>
+								<inputparameter name="userName">@USERNAME@</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="530" Height="60" Field="BUTTON_RCLOGOUT" Help="@BUTTONHELP_RCLOGOUT@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">Logout</inputparameter>
+								<inputparameter name="userName">*</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="200" Width="340" Top="620" Height="120" Field="BUTTON_LOGIN" Help="@BUTTONHELP_LOGIN@" TextStyle="TextStyle_AutoAlign3TextCenter">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>UserAdministration</area>
+								<controller>Account</controller>
+								<action>Login</action>
+								<inputparameter name="xml">config=UserAuthentication</inputparameter>
+								<inputparameter name="name">LABELK</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="340" Top="620" Height="120" Field="BUTTON_LOGOUT" Help="@BUTTONHELP_LOGOUT@" TextStyle="TextStyle_AutoAlign3TextCenter">
+						<Link ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@">
+							<url>
+								<area>UserAdministration</area>
+								<controller>Account</controller>
+								<action>Logout</action>
+								<inputparameter name="xml">config=UserAuthentication</inputparameter>
+								<inputparameter name="name">LABELK</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="100" Width="220" Top="870" Height="120" Field="BUTTON_GSON" Help="@BUTTONHELP_GSON@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSSTART</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="320" Width="220" Top="900" Height="60" Field="BUTTON_GSOFF" Help="@BUTTONHELP_GSOFF@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSSTOP</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="540" Width="220" Top="900" Height="60" Field="BUTTON_GSSETDUE" Help="@BUTTONHELP_GSSETDUE@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSSETDUE</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+					<Cell Ref="SectIVButtons" Left="760" Width="220" Top="900" Height="60" Field="BUTTON_GSDUESKIP" Help="@BUTTONHELP_GSDUESKIP@" TextStyle="TextStyle_AutoAlign2TextCenter">
+						<Link ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@">
+							<url>
+								<area>Intervention</area>
+								<controller>LABELK</controller>
+								<action>Run</action>
+								<inputparameter name="interventionName">GSDUESKIP</inputparameter>
+							</url>
+						</Link>
+					</Cell>
+				</Cells>
+			</Display>
+		</Displays>
+	</Matrix2DDefinitions>
+</ROOT>

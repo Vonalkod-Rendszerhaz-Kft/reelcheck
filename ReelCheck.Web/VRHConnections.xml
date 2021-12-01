@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<connectionStrings>
+  <add name="DbConnection" connectionString="Data Source=(local)\SQLEXPRESS2008R2;Initial Catalog=ReelCheck;Integrated Security=True;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
+  <add name="VrhWebMembership" connectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=ReelCheck;Integrated Security=True;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
+  <add name="ReelModel" connectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=ReelCheck;Integrated Security=True;MultipleActiveResultSets=True" providerName="System.Data.SqlClient" />
+
+  <connectionString ConfigEditRef="Database" name="Database">
+    <Element name="Initial Catalog">ReelCheck</Element>
+    <Element name="Data Source">(local)\SQLEXPRESS2008R2</Element>
+    <Element name="Integrated Security">SSPI</Element>
+    <Element name="multipleactiveresultsets">True</Element>
+  </connectionString>
+</connectionStrings>

@@ -1,0 +1,105 @@
+﻿@*
+    -----------------------------------------
+    User - Roles.cshtml
+    -----------------------------------------
+*@
+@using VRH.Log4Pro.MultiLanguageManager
+@using Vrh.Web.Common.Lib
+@using Vrh.Web.Membership.Areas.UserAdministration.Controllers
+@model UserManagerModel
+@{
+    object routeVal = new { area = Constants.AREA, editMode = Model.EditMode };
+    string dataNewInputId = "newdatainputid-roles";
+    string dataRowsPlaceId = "datarowsplaceid-roles";
+}
+@*
+    -----------------------------------------
+    User - Roles.cshtml
+    -----------------------------------------
+*@
+<h2>@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.RoleManagement)))</h2>
+<div class="table-responsive" style="max-height:500px;overflow-y:auto;">
+    <table class="table table-sm table-dark table-hover">
+        <thead>
+            <tr>
+@*                <th style="text-align:right;width:30px;">#</th>*@
+                <th>@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Labels.RoleName)))</th>
+            </tr>
+        </thead>
+        <tbody id="@(dataRowsPlaceId)"></tbody>
+    </table>
+</div>
+<table class="table" style="margin-bottom:0px;">
+    <tr>
+        <td>
+            @if (Model.EditMode != EditModes.Select)
+            {
+                <div class="input-group" style="width:300px;">
+                    <input id="@(dataNewInputId)" class="form-control" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-success ml-1" onclick="handler.addData();">
+                            @(Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Add))))
+                        </button>
+                    </span>
+                </div>
+            }
+        </td>
+        <td style="text-align:right;">
+            <button type="button" class="btn btn-secondary" style="" onclick="vrhct.bootbox.hide('@(Model.BootboxId)');">
+                @(Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Cancel))))
+            </button>
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    var handler;
+    $(document).ready(function () {
+        'use strict';
+        var thisfn = 'UserController: Roles.cshtml: document.ready: ';
+        console.log(thisfn + 'PING');
+
+        handler = new VrhIdNameHandler({
+            AllowAdd: @((Model.EditMode != EditModes.Select).ToString().ToLower()),
+            AllowDelete: @((Model.EditMode != EditModes.Select && Model.EditMode != EditModes.Add).ToString().ToLower()),
+            AllowUpdate: false,
+            Confirm: {
+                Delete: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Messages.Confirmations.RoleDelete)))'
+            },
+            Id: {
+                Editor: '@(Model.BootboxId)',
+                DataRows: '@(dataRowsPlaceId)',
+                DataNew: '@(dataNewInputId)',
+            },
+            Label: {
+                Button: {
+                    No: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.No)))',
+                    Yes: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Yes)))',
+                },
+                Data: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Labels.RoleName)))',
+            },
+            LCID: '@(Model.LCID)',
+            Message: {
+                Delete: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Messages.Warnings.RoleDelete)))',
+                Wait: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Messages.PleaseWait)))',
+            },
+            Title: {
+                Confirm: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Confirmation)))',
+                IconPencil: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.RoleEdit)))',
+                IconTrash: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.RoleDelete)))',
+            },
+            Url: {
+                Add: '@Html.Raw(Url.Action(nameof(UserController.RoleAdd), Constants.CONTROLLER_USER, routeVal))',
+                Delete: '@Html.Raw(Url.Action(nameof(UserController.RoleDelete), Constants.CONTROLLER_USER, routeVal))',
+                List: '@Html.Raw(Url.Action(nameof(UserController.RoleList), Constants.CONTROLLER_USER, routeVal))',
+            },
+            VisibleIdColumn: false,
+        });
+        console.log(thisfn + 'handler=', handler);
+    });// $(document).ready event VÉGE
+</script>
+@*
+    -----------------------------------------
+    User - Roles.cshtml
+    -----------------------------------------
+*@

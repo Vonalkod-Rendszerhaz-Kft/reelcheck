@@ -1,0 +1,20 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Membership.Areas.UAManyToMany.Models;
+
+@{
+    string areaName = "UAManyToMany";
+    string ctrlName = areaName;
+    if (Session["MTM"] != null)
+    {
+        Session["MTM"] = null;
+    }
+    UAManyToManySessionModel mtmSession = new UAManyToManySessionModel();
+    mtmSession.DefaultListItemsHeader = MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.RoleGroups));
+    mtmSession.DefaultSelectedListItemsHeader = MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.RolesInSelectedRoleGroup));
+    mtmSession.DefaultAvailableListItemsHeader = MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.RolesNotInSelectedRoleGroup));
+    mtmSession.ListItemsHeader = MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.Roles));
+    mtmSession.SelectedListItemsHeader = MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.RoleGroupsInSelectedRole));
+    mtmSession.AvailableListItemsHeader = MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.RoleGroupsNotInSelectedRole));
+    Session["MTM"] = mtmSession;
+    Html.RenderAction("ManyToMany", ctrlName, new { area = areaName, name = "RolesToUserRoleGroups", isDefault = true });
+}

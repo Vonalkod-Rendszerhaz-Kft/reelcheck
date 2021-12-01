@@ -1,0 +1,51 @@
+﻿@using Vrh.Web.Common.Lib;
+@using Vrh.Web.Membership.Areas.UserAdministration.Controllers;
+
+@model DirectAuthenticationModel
+@{
+    string actionName = nameof(AccountController.DirectAuthentication);
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];
+    var ajaxops = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId)
+    };
+
+    @Html.Partial("ValidationSummary")
+
+    using (Ajax.BeginForm(actionName, controllerName, new { area = areaName }, ajaxops, new { id = Constants.Ids.Form.DIRECTAUTHENTICATION }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.BootboxId)
+        @Html.HiddenFor(x => x.TargetUrl)
+        @Html.HiddenFor(x => x.RolesRequired)
+        @Html.HiddenFor(x => x.ResponseTarget)
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.UserName)
+            @Html.TextBoxFor(x => x.UserName, new { @autofocus = "" })
+            @Html.ValidationMessageFor(x => x.UserName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Password)
+            @Html.PasswordFor(x => x.Password)
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+    }
+}
+<script type="text/javascript">
+    /*##### EVENTS #####*/
+    $(function () {
+        'use strict';
+
+        //var thisfn = 'MultiLanguageManager.Editor.cshtml: ready event: ';
+        //console.log(thisfn + 'PING');
+
+        vrhct.masterdata.addClass('#@(Model.BootboxId)','input');
+
+        //console.log(thisfn + 'END');
+    }); // $(document).ready END
+    /*##### EVENTS END #####*/
+</script>

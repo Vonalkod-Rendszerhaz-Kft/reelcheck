@@ -1,0 +1,133 @@
+﻿@model MenuViewModel
+
+@if (Model.IsLoadBaseTools)
+{
+    @Styles.Render(Global.BUNDLES_STYLE)
+    @Scripts.Render(Global.BUNDLES_SCRIPT)
+}
+
+<style>
+    .menucontainer {
+        float: left;
+        padding: 0 1vmax 0 1vmax;
+    }
+
+    @foreach (StyleKit sk in Model.General.StyleKits)
+    {
+        @Html.Raw(sk.GetContent(Model.MenuGUID))
+    }
+</style>
+
+<div class="card" style="@(Model.General.MenuPageAppearance.ContainerStyle)">
+    <div class="card-header" style="display:none;@(Model.General.MenuPageAppearance.TitleAreaStyle)">
+        <h2 style="@(Model.General.MenuPageAppearance.TitleStyle)">@Html.Raw(Model.General.MenuPageTitle)</h2>
+    </div>
+    <div class="card-body" style="display:none;@(Model.General.MenuPageAppearance.BodyStyle)">
+        @for (int ix = 0; ix < Model.NumberOfLevels; ix++)
+        {
+            <div class="menucontainer" data-column="@(ix)">
+                @GetLevel(ix)
+            </div>
+        }
+    </div> <!-- class="card-body" -->
+</div>
+<script src="@Url.Content(Global.SCRIPT_MENUCOMMON)"></script>
+<script>
+    $(function () {
+        "use strict";
+
+        var thisfn = 'MenuPage.OpenRight: ready event: ';
+        console.log(thisfn + 'PING');
+
+        $('.card-header').show(400);
+        $('.card-body').show(400);
+
+        $('a').on("click", function (e) {
+            //e.stopPropagation();
+            var thisfn = 'MenuPage.OpenRight: <a> click event: ';
+            //console.log(thisfn + 'PING', e, this);
+
+            var $this = $(this);
+            var $container = $this.parents('.menucontainer'); //kell, hogy megállapítsuk melyik oszlopban vagyunk
+            //kikapcsoljuk az aktuális oszlopban az active-ot, és betesszük az aktuálishoz
+            $container.find('a').removeClass('active');
+            $this.addClass('active');
+
+            var col = $container.data('column');    // column értékének kiszedése
+            //console.log(thisfn + 'column', col);
+            for (var ix = col + 1; ix <  @(Model.NumberOfLevels); ix++) {
+                var $cont = $('.menucontainer[data-column=' + ix + ']');
+                $cont.find('a').removeClass('active');
+                $cont.children().hide();
+            }
+
+            var id = $this.attr('id')
+            //console.log(thisfn + 'id=', id);
+            if (id) {   //ha van id, akkor ez egy almenü
+                var $almenu = $('#' + id + '-submenu');
+                $almenu.fadeIn(500);
+            }
+        });
+    });
+
+    /**
+    * A MenuCommonScripts (MenuCommon.js) számára küldendő értékek.
+    */
+    function ExportToMenuCommon() {
+        'use strict';
+        this.DirectAuthentication = {
+            Title: '@Html.Raw(Model.Trans(typeof(WordCodes.Menu.Titles.Login)))',
+            Url: '@Html.Raw(Url.Content(Global.ACTION_DIRECTAUTHENTICATION))'
+        };
+    }
+    var vrhmenucommon = new MenuCommonScripts(new ExportToMenuCommon());
+</script>
+
+@helper GetMenuAction(MenuView mv)
+{
+    if (String.IsNullOrWhiteSpace(mv.LinkOrCommand))
+    {
+        <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)"><a id="@(mv.Id)" href="#">@Html.Raw(mv.Label)</a></div>
+    }
+    else
+    {
+        if (mv.ResponseTarget == ResponseTargets.CurrentPage)
+        {
+            <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)"><a id="@(mv.Id)" href="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a></div>
+        }
+        else if (mv.ResponseTarget == ResponseTargets.NewPage)
+        {
+            <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)"><a id="@(mv.Id)" href="@Html.Raw(Url.Content(mv.LinkOrCommand))" target="_blank">@Html.Raw(mv.Label)</a></div>
+        }
+        else
+        {
+            <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)"><a id="@(mv.Id)" href="#" onclick="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a></div>
+        }
+    }
+}
+
+@helper GetLevel(int level)
+{
+    if (level == 0)
+    {
+        <div id="mainmenu" class="column@(level)">
+            @foreach (MenuView mv in Model.MenuViews)
+            {
+                @GetMenuAction(mv);
+            }
+        </div>
+    }
+    else
+    {
+        // Előbb elkérjük az előző szint almenüjeit
+        foreach (MenuView mv in Model.GetLevelItems(level - 1))
+        {
+            <div id="@(mv.Id+"-submenu")" class="column@(level)" style="display: none;">
+                @foreach (MenuView mevu in mv.MenuViews)
+                {
+                    @GetMenuAction(mevu);
+                }
+            </div>
+        }
+    }
+}

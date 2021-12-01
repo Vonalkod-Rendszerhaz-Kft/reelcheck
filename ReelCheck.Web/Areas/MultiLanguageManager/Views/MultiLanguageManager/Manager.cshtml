@@ -1,0 +1,174 @@
+﻿@*
+    -------------------------------------
+    MultiLanguageManager - Manager.cshtml
+    -------------------------------------
+*@
+
+@using VRH.Log4Pro.MultiLanguageManager
+@using Vrh.Web.I18N.Areas.MultiLanguageManager.Controllers
+
+@model BaseModel
+
+@{
+    ViewBag.Title = Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.Translations)));
+
+    int[] tableToolsExportColumnIndexes = new int[] { 0, 1, 2, 3 };
+}
+@Styles.Render(Constants.BUNDLES_STYLE)
+@Scripts.Render(Constants.BUNDLES_SCRIPT)
+
+<style>
+    .datatableColumnFilter {
+        border-radius: 4px;
+        padding: 0 3px 0 3px;
+        /*margin: -2px;*/
+        width: 100%;
+    }
+
+    .datatableActionIcon {
+        cursor: pointer;
+        color: orange;
+        opacity: .7;
+    }
+
+    .wrapWord {
+        word-break: break-word;
+    }
+</style>
+@Html.Partial("ValidationSummary")
+<div class="card mb-4">
+    <div class="card-header" style="padding-bottom:0.1rem;">
+        <div class="row">
+            <div class="col-2">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <!-- d-flex justify-content-end-->
+            <div class="col-10">
+                <button type="button" class="btn btn-success mb-1" id="reloadButton" onclick="vrhmlm.reloadCache()">
+                    @(Model.Trans(typeof(I18NWordCodes.MLM.Labels.Button.ReloadCahce)))
+                    <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                </button>
+                @if (!Global.IsUseAuthentication || User.IsInRole(Constants.ROLE_TRANSLATIONADMINISTRATOR))
+                {
+                    <button type="button" class="btn btn-success mb-1" id="addWordCodeButton" onclick="javascript:vrhmlm.addWordCode();">
+                        @(Model.Trans(typeof(I18NWordCodes.MLM.Labels.Button.AddNewWordCode)))
+                    </button>
+                    <button type="button" class="btn btn-success mb-1" id="addLanguageButton" onclick="javascript:vrhmlm.addLanguage();">
+                        @(Model.Trans(typeof(I18NWordCodes.MLM.Labels.Button.AddNewLanguage)))
+                    </button>
+                    <button type="button" class="btn btn-success mb-1" id="updateLanguageButton" onclick="javascript:vrhmlm.updateLanguage();">
+                        @(Model.Trans(typeof(I18NWordCodes.MLM.Labels.Button.UpdateLanguage)))
+                    </button>
+                    <button type="button" class="btn btn-danger mb-1" id="deleteLanguageButton" onclick="javascript:vrhmlm.deleteLanguage()">
+                        @(Model.Trans(typeof(I18NWordCodes.MLM.Labels.Button.DeleteLanguage)))
+                    </button>
+                    <button type="button" class="btn btn-warning mb-1" id="importTranslationsButton" onclick="javascript:vrhmlm.importTranslations()">
+                        @(Model.Trans(typeof(I18NWordCodes.MLM.Labels.Button.ImportTranslations)))
+                    </button>
+                }
+            </div>
+        </div><!--class="row"-->
+    </div><!--class="card-header"-->
+    <div class="card-body px-0">
+        <div class="table-responsive">
+            <table id="@(Constants.DATATABLEID)" class="table table-striped table-bordered table-dark table-hover" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>@(Model.Trans(typeof(I18NWordCodes.MLM.Labels.LanguageName)))</th>
+                        <th>@(Model.Trans(typeof(I18NWordCodes.MLM.Labels.WordCode)))</th>
+                        <th>@(Model.Trans(typeof(I18NWordCodes.MLM.Labels.WordCodeDescription)))</th>
+                        <th>@(Model.Trans(typeof(I18NWordCodes.MLM.Labels.Translation)))</th>
+                        <th>@(Model.Trans(typeof(I18NWordCodes.MLM.Labels.WordCodeModul)))</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<iframe id="myFrame" style="display:none"></iframe>
+@*
+    -------------------------------------
+    MultiLanguageManager - Manager.cshtml
+    -------------------------------------
+*@
+@section Scripts {
+    <script type="text/javascript">
+        /**
+            * A ManagerScript (Manager.js) számára küldendő értékek osztálya
+            * Ezeket a kódban állandóként (constansként) érdemes kezelni.
+            */
+        function ExportToManager() {
+            'use strict';
+
+            this.confirmations = {
+                LanguageDelete: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Messages.Confirmations.LanguageDelete)))',
+                WordCodeDelete: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Messages.Confirmations.WordCodeDelete)))'
+            };
+            this.dataRefs = {
+                Language: '@(AllTranslation.COL_LANGUAGE)',
+                WordCode: '@(AllTranslation.COL_WORDCODE)',
+                Description: '@(AllTranslation.COL_DESCRIPTION)',
+                Translation: '@(AllTranslation.COL_TRANSLATION)',
+                Modul: '@(AllTranslation.COL_MODUL)'
+            };
+            this.forms = {
+                CreateLanguage: '@(Constants.FormIds.CREATELANGUAGE)',
+                CreateWordCode: '@(Constants.FormIds.CREATEWORDCODE)',
+                Editor: '@(Constants.FormIds.EDITOR)',
+                UpdateLanguage: '@(Constants.FormIds.UPDATELANGUAGE)'
+            };
+            this.iamAdmin = @((!Global.IsUseAuthentication || User.IsInRole(Constants.ROLE_TRANSLATIONADMINISTRATOR)).ToString().ToLower());
+            this.labels = {
+                Cancel: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Cancel)))',
+                OK: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.OK)))',
+                No: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.No)))',
+                Yes: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Yes)))',
+            };
+            this.lcid = '@(Model.LCID)';
+            this.messages = {
+                BackupProgress: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Messages.BackupProgress)))',
+                ImportProgress: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Messages.ImportProgress)))',
+                ImportLoadNoFile: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Messages.ImportLoadNoFile)))'
+            };
+            this.tableId = '@(Constants.DATATABLEID)';
+            this.titles = {
+                Confirmation: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Confirmation)))',
+                LanguageAdd: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.LanguageAdd)))',
+                LanguageDelete: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.LanguageDelete)))',
+                LanguageUpdate: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.LanguageUpdate)))',
+                LoadImport: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.LoadImport)))',
+                OperationProgress: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Progress)))',
+                TranslationCreate: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.TranslationCreate)))',
+                TranslationUpdate: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.TranslationUpdate)))',
+                WordCodeAdd: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.WordCodeAdd)))',
+                WordCodeDelete: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.WordCodeDelete)))',
+                WordCodeEdit: '@Html.Raw(Model.Trans(typeof(I18NWordCodes.MLM.Titles.WordCodeEdit)))',
+            };
+            this.url = {
+                addLanguage: '@Url.Action("CreateLanguage", Constants.CONTROLLER, new { area = Constants.AREA })',
+                addWordCode: '@Url.Action("CreateWordCode", Constants.CONTROLLER, new { area = Constants.AREA })',
+                create: '@Url.Action("Create", Constants.CONTROLLER, new { area = Constants.AREA })',
+                deleteLanguage: '@Url.Action("DeleteLanguage", Constants.CONTROLLER, new { area = Constants.AREA })',
+                deleteWordCode: '@Url.Action("DeleteWordCode", Constants.CONTROLLER, new { area = Constants.AREA })',
+                getData: '@Url.Action("GetData", Constants.CONTROLLER, new { area = Constants.AREA })',
+                getDataForBackup: '@Url.Action("GetDataForBackup", Constants.CONTROLLER, new { area = Constants.AREA })',
+                import: '@Url.Action("Import", Constants.CONTROLLER, new { area = Constants.AREA })',
+                progressDialogContent: '@Url.Action("GetProgressModalContent", "Home", new { area = "" })',
+                reloadCache: '@Url.Action(nameof(MultiLanguageManagerController.ReloadCache), Constants.CONTROLLER, new { area = Constants.AREA })',
+                update: '@Url.Action(nameof(MultiLanguageManagerController.Editor), Constants.CONTROLLER, new { area = Constants.AREA })',
+                updateLanguage: '@Url.Action("UpdateLanguage", Constants.CONTROLLER, new { area = Constants.AREA })'
+            };
+        }
+
+        var vrhmlm = new ManagerScripts(new ExportToManager());
+    </script>
+}
+@*
+    -------------------------------------
+    MultiLanguageManager - Manager.cshtml
+    -------------------------------------
+*@
+

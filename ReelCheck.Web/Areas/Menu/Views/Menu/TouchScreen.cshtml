@@ -1,0 +1,113 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Common.Lib;
+
+@model MenuViewModel
+
+<style>
+    @foreach (StyleKit sk in Model.StyleKits)
+    {
+        @Html.Raw(sk.GetContent(Model.MenuGUID))
+    }
+</style>
+<script type="text/javascript">
+    vrhmenu.MenuBehavior = @((int)Model.General.MenuBehavior);
+    vrhmenu.MenuAutoHide = @(Model.General.MenuAutoHide) * 1000; //ms, hogy ott már ne kelljen szorozni
+    vrhmenu.IsFullScreenAtStartUp = @(Model.General.FullScreenAtStartUp.ToString().ToLower());
+    vrhmenu.IsFlowOver = @(Model.General.IsFlowOver.ToString().ToLower());
+</script>
+<script src="@Url.Content(Global.SCRIPT_MENUCOMMON)"></script>
+<script type="text/javascript">
+    /**
+    * A MenuCommonScripts (MenuCommon.js) számára küldendő értékek.
+    */
+    function ExportToMenuCommon() {
+        'use strict';
+        this.DirectAuthentication = {
+            Title: '@Html.Raw(Model.Trans(typeof(WordCodes.Menu.Titles.Login)))',
+            Url: '@Html.Raw(Url.Content(Global.ACTION_DIRECTAUTHENTICATION))'
+        };
+    }
+    var vrhmenucommon = new MenuCommonScripts(new ExportToMenuCommon());
+</script>
+<button class="bg-light" id="touchscreen-menubutton" style="display:none;">
+    <i class="fa fa-angle-double-right fa-lg"></i>
+</button>
+<div id="touchscreen-menucontainer" class="bg-dark" style="display:none;">
+    <div class="navbar log4proicons mx-0">
+        <a class="p-2 fa fa-angle-double-left fa-lg" id="menuhideicon" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.MenuHide), Model.LCID))"></a>
+        <a class="p-2 fa fa-expand fa-lg" id="fullscreenicon" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.FullScreenOn), Model.LCID))"></a>
+        @if (Global.IsUseAuthentication)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                <a class="p-2 fa fa-sign-out-alt fa-lg" id="loginouticon" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.Logout), Model.LCID))"></a>
+            }
+            else
+            {
+                <a class="p-2 fa fa-sign-in-alt fa-lg" id="loginouticon" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.Login), Model.LCID))"></a>
+            }
+        }
+    </div>
+    <div id="touch-accordion" class="mx-2">
+        @GetMenu(Model.MenuViews, "touch-accordion", 1)   @*!!! Fontos, nullánál nagyobb legyen az indulás (level) !!!*@
+    </div> <!-- id="accordion" -->
+    <div class="fixed-bottom row py-0 px-4" title="copyright">
+        <a id="customerlogolink" href=""><img src="@Url.Content(Global.CustomerLogo)" style="margin-left:-.4rem;" /></a>
+        @*<img src="/Images/log4pro_cube.png" class="ml-0 mr-1" />*@
+        @*<b class="d-block mr-2 align-self-center">Log4Pro</b>*@
+        @*<i class="d-none d-sm-block">copyright</i>*@
+        @*<b>Log4Pro</b> <i>&copy; 2018 Vrh.Web.Menu test application </i>*@
+    </div>
+</div> <!-- id="touchscreen-menucontainer" -->
+@helper GetMenuAction(MenuView mv, int level)
+{
+    string mystyle = String.Format("margin-left:{0}rem;", level - 1);
+    if (String.IsNullOrWhiteSpace(mv.LinkOrCommand))
+    {
+        <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)" style="@(mystyle)"><a href="#">@Html.Raw(mv.Label)</a></div>
+    }
+    else
+    {
+        if (mv.ResponseTarget == ResponseTargets.CurrentPage)
+        {
+            <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)" style="@(mystyle)"><a href="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a></div>
+        }
+        else if (mv.ResponseTarget == ResponseTargets.NewPage)
+        {
+            <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)" style="@(mystyle)"><a href="@Html.Raw(Url.Content(mv.LinkOrCommand))" target="_blank">@Html.Raw(mv.Label)</a></div>
+        }
+        else
+        {
+            <div class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)" style="@(mystyle)"><a href="#" onclick="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a></div>
+        }
+    }
+}
+
+@helper GetMenu(List<MenuView> menuViews, string dataParent, int level)
+{
+    string smargo = String.Format("margin-left:{0}rem;", level - 1);
+    int menuNumber = 0;
+    foreach (MenuView mv in menuViews)
+    {
+        if (mv.MenuViews == null || !mv.MenuViews.Any())
+        {
+            @GetMenuAction(mv, level)
+        }
+        else
+        {
+            string headid = String.Format("touch-heading{0}-{1}", level * 100 + menuNumber, mv.Id);
+            string collapseid = String.Format("touch-collapse{0}-{1}", level * 100 + menuNumber, mv.Id);
+            <div style="@(smargo)">
+                <div id="@(headid)" class="@(mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled)">
+                    <a class="collapsed" href="" data-toggle="collapse" data-target="#@(collapseid)" aria-expanded="@(mv.InitialState == InitialStates.Open ? "true" : "false")" aria-controls="@(collapseid)">
+                        <i class="fa fa-caret-down"></i> @Html.Raw(mv.Label)
+                    </a>
+                </div>
+                <div id="@(collapseid)" class="collapse@(mv.InitialState == InitialStates.Open ? " show" : "")" aria-labelledby="@(headid)" data-parent="#@(dataParent)">
+                    @GetMenu(mv.MenuViews, collapseid, level + 1)
+                </div>
+            </div>
+        }
+        menuNumber++;
+    }
+}

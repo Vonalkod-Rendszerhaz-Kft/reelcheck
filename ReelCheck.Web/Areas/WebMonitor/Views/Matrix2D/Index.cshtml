@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+
+@*
+    -----------------------
+    Matrix2D - Index.cshtml
+    -----------------------
+*@
+@using VRH.Log4Pro.MultiLanguageManager;
+
+@model Matrix2DModel
+
+@{
+    string dialogOK = "OK";
+    string dialogCancel = Model.LCID == "hu-HU" ? "Mégsem" : "Cancel";
+    string dialogWait = "";
+    string dialogAutoClose = Model.LCID == "hu-HU" ? "A panel {0} másodperc múlva bezáródik." : "The panel closes in {0} seconds.";
+    dialogOK = MultiLanguageManager.GetTranslation("Menu.Dialog.OK", dialogOK, Model.LCID);
+    dialogCancel = MultiLanguageManager.GetTranslation("Menu.Dialog.Cancel", dialogCancel, Model.LCID);
+    dialogWait = MultiLanguageManager.GetTranslation("Menu.Dialog.WaitMessage", dialogWait, Model.LCID);
+    dialogAutoClose = MultiLanguageManager.GetTranslation("Menu.Dialog.AutoClose", dialogAutoClose, Model.LCID);
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@(Model.DisplayName)</title>
+
+    @Styles.Render(Vrh.Web.Menu.Global.BUNDLES_STYLE)   @*"~/Content/cssBase"*@
+
+    <style type="text/css" media="screen">
+        body {
+            height: .1vmax;  /* hogy kis cellák esetén se legyen vertikális scroll bar */
+        }
+    </style>
+
+    @Scripts.Render(Vrh.Web.Menu.Global.BUNDLES_SCRIPT) @*"~/bundles/base"*@
+
+    <script type="text/javascript">
+        /*##### SELECTORS' CASH #####*/
+        var m2dbody; // majd a ready-ben be kell állítani!
+        /*##### SELECTORS' CASH END #####*/
+
+        /*##### GLOBAL VARIABLES #####*/
+        var intervalid_@(Model.DisplayName);
+        var firstRun_@(Model.DisplayName) = true;
+        vrhct.bootbox.DefaultOptions.okLabel = '@Html.Raw(dialogOK)';
+        vrhct.bootbox.DefaultOptions.cancelLabel = '@Html.Raw(dialogCancel)';
+        vrhct.bootbox.DefaultOptions.pleaseWaitMessage = '@Html.Raw(dialogWait)';
+        vrhct.bootbox.DefaultOptions.autoCloseMessage = '@Html.Raw(dialogAutoClose)';
+        /*##### GLOBAL VARIABLES END #####*/
+
+        /*##### AJAX without jQuery #####*/
+        // jQuery.js még min állapotban is majd 100kb. Annak 5mp-enkénti elküldése percenként 1MB plusz adatküldés.
+        var Ajax = {
+            xhr : null,
+            request : function (url,method,data,success,failure){
+                if (!this.xhr){
+                    this.xhr = window.ActiveX ? new ActiveXObject("Microsoft.XMLHTTP"): new XMLHttpRequest();
+                }
+                var self = this.xhr;
+
+                self.onreadystatechange = function () {
+                    if (self.readyState === 4 && self.status === 200){
+                        // the request is complete, parse data and call callback
+                        var response = JSON.parse(self.responseText);
+                        success(response);
+                    }else if (self.readyState === 4) { // something went wrong but complete
+                        failure();
+                    }
+                };
+                this.xhr.open(method,url,true);
+                this.xhr.send(data);
+            },
+        };
+        /*##### AJAX without jQuery END #####*/
+
+        /*##### FUNCTIONS #####*/
+        @if (Model.RefreshInterval>0)
+        {
+            <text>
+        function refreshItem_@(Model.DisplayName)()
+        {
+            clearInterval(intervalid_@(Model.DisplayName));
+
+            var dt = new Date();
+            var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+            //console.log(time + ' refreshItem_@(@Model.DisplayName)');
+
+            //WA20160901: Mostantól nem a teljes lapot frissítjük, hanem csak a body-t
+            ajaxGetValues();
+        }
+        </text>
+        }
+
+        function ajaxGetValues() {
+            "use strict";
+
+            var url = '@Html.Raw(Url.Action("GetValues"
+                                           , "Matrix2D"
+                                           , new { area = "WebMonitor"
+                                                 , displayName = Model.DisplayName
+                                                 , WorkPlace = Model.WorkPlaceName
+                                                 , xml = Model.XmlConnectionString
+                                                 , otherVarsJSON = Model.OtherVarsJSON
+                                           }
+                                           ))';
+            var data = null;    //url-en kívül nem megy egyéb adat
+
+            //console.log('ajaxGetValues url = ' + url);
+
+            Ajax.request(url,'GET',data,function(responseData){
+                var dt = new Date();
+                var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+                //console.log(time + ' Ajax Success!', responseData);
+                if (responseData.ErrorMessage === "") {
+                    //console.log('responseData.ErrorMessage === ""', responseData.Html);
+                    m2dbody.innerHTML = responseData.Html;
+                } else {
+                    //console.log('Hiba a "@(Model.DisplayName)" nevű block frissítése közben!');
+                    m2dbody.innerHTML = responseData.ErrorMessage;
+                }
+                if (firstRun_@(Model.DisplayName)) {
+                    //console.log('Matrix2D: firstRun');
+                    intervalid_@(Model.DisplayName) = @Html.Raw(Model.SetIntervalFunctionFirst);
+                    firstRun_@(Model.DisplayName) = false;
+                }else {
+                    //console.log('Matrix2D: otherRun');
+                    intervalid_@(Model.DisplayName) = @Html.Raw(Model.SetIntervalFunctionString);
+                }
+            },function(){
+                var dt = new Date();
+                var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+                console.log(time + 'Ajax Failure!');
+                if (firstRun_@(Model.DisplayName)) {
+                    //console.log('Matrix2D: firstRun');
+                    intervalid_@(Model.DisplayName) = @Html.Raw(Model.SetIntervalFunctionFirst);
+                    firstRun_@(Model.DisplayName) = false;
+                }else {
+                    //console.log('Matrix2D: otherRun');
+                    intervalid_@(Model.DisplayName) = @Html.Raw(Model.SetIntervalFunctionString);
+                }
+            });
+        } @* ajaxGetValues()  VÉGE *@
+        /*##### FUNCTIONS END #####*/
+
+        /*##### EVENTS #####*/
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Matrix2D.@(Model.DisplayName).ready', '@(Model.SetIntervalFunctionFirst)', '@(Model.SetIntervalFunctionString)');
+            m2dbody = document.getElementById('matrix2dbody');
+            ajaxGetValues();
+        });
+        /*##### EVENTS END #####*/
+    </script>
+</head>
+<body>
+    <div id="matrix2dbody" style="@(Model.DisplayStyle)position:fixed;box-sizing:border-box;margin:0;padding:0;left:0;width:100%;top:0;height:100%;">
+    </div>
+</body>
+@*
+    -----------------------
+    Matrix2D - Index.cshtml
+    -----------------------
+*@
+</html>

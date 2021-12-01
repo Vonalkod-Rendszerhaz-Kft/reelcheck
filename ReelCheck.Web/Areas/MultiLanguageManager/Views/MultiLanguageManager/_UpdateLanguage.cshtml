@@ -1,0 +1,112 @@
+﻿@using Vrh.Web.I18N.Areas.MultiLanguageManager.Controllers;
+@using Vrh.Web.Common.Lib;
+
+@model UpdateLanguageModel
+
+@if (Model != null)
+{
+    string actionName = nameof(MultiLanguageManagerController.UpdateLanguage);
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];
+    var ajaxops = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId)
+    };
+
+    using (Ajax.BeginForm(actionName, controllerName, new { area = areaName }, ajaxops, new { id = Constants.FormIds.UPDATELANGUAGE }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.BootboxId)
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.LanguageCode)
+            @Html.DropDownListFor(
+                x => x.LanguageCode,
+                Model.LanguageCodeList,
+                new { @onchange = "javascript:languageCodeChange()", @autofocus="" })
+            @Html.ValidationMessageFor(x => x.LanguageCode)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.LanguageName)
+            @Html.TextBoxFor(x => x.LanguageName)
+            @Html.ValidationMessageFor(x => x.LanguageName)
+        </div>
+
+        <div class="form-group">
+            <div class="checkbox">
+                @Html.CheckBoxFor(x => x.Active)
+                @Html.DisplayNameFor(x => x.Active)
+            </div>
+            @Html.ValidationMessageFor(x => x.Active)
+        </div>
+    }
+    @Html.Partial("ValidationSummary")
+}
+<script type="text/javascript">
+    var $thisdialog;
+    var $activeCheckbox;
+    /*##### EVENTS #####*/
+    $(function () {
+        'use strict';
+
+        //var thisfn = 'MultiLanguageManager.Editor.cshtml: ready event: ';
+        //console.log(thisfn + 'PING');
+
+        vrhct.masterdata.addClass('#@(Model.BootboxId)', 'input[type=text],textarea,select');
+
+        $thisdialog = $('#@(Model.BootboxId)');
+        $activeCheckbox = $thisdialog.find('input[type=checkbox]#@nameof(UpdateLanguageModel.Active)');
+
+        //console.log(thisfn + 'END');
+    }); // $(document).ready END
+    /*##### EVENTS END #####*/
+
+    /*##### FUNCTIONS #####*/
+    /**
+     * Ha megváltozik melyik nyelvet választotta ki, akkor beállítja
+     * a nyelvhez tartozó alapértelmezett megnevezést.
+     */
+    function languageCodeChange() {
+        console.log('languageCodeChange PING');
+        var $combo = $thisdialog.find('select#@(nameof(UpdateLanguageModel.LanguageCode))');
+        var $lname = $thisdialog.find('input#@nameof(UpdateLanguageModel.LanguageName)');
+        var sval = $combo.val();
+        //console.log('languageCodeChange sval', sval);
+        $.ajax({
+            cache: false,
+            url: '@Url.Action("GetLanguageData", Constants.CONTROLLER, new { area = Constants.AREA })',
+            type: 'get',
+            contenttype: 'application/json',
+            datatype: 'json',
+            data: { languageCode: sval },
+            success: function (response) {
+                //console.log('languageCodeChange response', response);
+                if (response.ErrorMessage !== '') {
+                    bootbox.alert(response.ErrorMessage);
+                }
+                else {
+                    if (response.Language) {
+                        $lname.val(response.Language.Name);
+                        $activeCheckbox.prop('checked', response.Language.Active);
+                        console.log('languageCodeChange DefaultLanguageCode Language.LCID', response.DefaultLanguageCode, response.Language.LCID);
+                        //$activeCheckbox.prop('disabled', response.DefaultLanguageCode === response.Language.LCID);
+                    }
+                    else {
+                        $lname.val('');
+                        $activeCheckbox.prop('checked',false);
+                        //$lname.prop('disabled', true);
+                        //$active.prop('disabled', true);
+                    }
+                }
+            },
+            error: function (jqXHR, exception) {
+                console.log('Ajax hívás sikertelen! ', jqXHR.responseText);
+            },
+        });
+    } // updateLanguageLanguageCodeChange END
+
+    /*##### FUNCTIONS END #####*/
+</script>

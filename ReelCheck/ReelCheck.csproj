@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{639F1BA3-11F5-4A29-B245-BA8C400AA736}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ReelCheck</RootNamespace>
+    <AssemblyName>ReelCheck.ApplicationContainer.Plugin</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowedReferenceRelatedFileExtensions>
+      <!-- Prevent default XML and PDB files copied to output in RELEASE. 
+           Only *.allowedextension files will be included, which doesn't exist in my case.
+       -->
+	   .pdb
+    </AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowedReferenceRelatedFileExtensions>
+      <!-- Prevent default XML and PDB files copied to output in RELEASE. 
+           Only *.allowedextension files will be included, which doesn't exist in my case.
+       -->
+      .dll
+    </AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Extended, Version=6.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net45\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="InstanceFactory.FromXML, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vrh.ApplicationContainer.1.1.5\lib\net45\InstanceFactory.FromXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RegexChecker">
+      <HintPath>..\ExternalReferences\RegexChecker.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net46\StackExchange.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.Diagnostics.Runtime, Version=0.8.31.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Runtime.Latest.0.8.31.3\lib\net45\Microsoft.Diagnostics.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Vrh.ApplicationContainer, Version=1.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vrh.ApplicationContainer.1.1.5\lib\net45\Vrh.ApplicationContainer.dll</HintPath>
+    </Reference>
+    <Reference Include="Vrh.ApplicationContainer.ConsoleHost, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vrh.ApplicationContainer.1.1.5\lib\net45\Vrh.ApplicationContainer.ConsoleHost.exe</HintPath>
+    </Reference>
+    <Reference Include="Vrh.ApplicationContainer.WindowsServiceHost, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vrh.ApplicationContainer.1.1.5\lib\net45\Vrh.ApplicationContainer.WindowsServiceHost.exe</HintPath>
+    </Reference>
+    <Reference Include="Vrh.CameraService.EventHubContract">
+      <HintPath>..\ExternalReferences\Vrh.CameraService.EventHubContract.dll</HintPath>
+    </Reference>
+    <Reference Include="VRH.Common, Version=2.10.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VRH.Common.2.10.1\lib\net45\VRH.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="VRH.ConnectionStringStore, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VRH.ConnectionStringStore.2.2.1\lib\net461\VRH.ConnectionStringStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Vrh.EventHub.Core, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vrh.EventHub.Core.1.2.1\lib\net45\Vrh.EventHub.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Vrh.EventHub.Protocols.RedisPubSub, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vrh.EventHub.Protocols.RedisPubSub.2.0.7\lib\net45\Vrh.EventHub.Protocols.RedisPubSub.dll</HintPath>
+    </Reference>
+    <Reference Include="Vrh.LinqXMLProcessor.Base, Version=1.2.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vrh.LinqXMLProcessor.Base.1.2.4\lib\net45\Vrh.LinqXMLProcessor.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="VRH.Log4Pro.MultiLanguageManager, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VRH.Log4Pro.MultiLanguageManager.3.4.0\lib\net45\VRH.Log4Pro.MultiLanguageManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Vrh.Logger, Version=1.5.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vrh.Logger.1.5.7\lib\net45\Vrh.Logger.dll</HintPath>
+    </Reference>
+    <Reference Include="Vrh.PrintingService.EventHubContract">
+      <HintPath>..\ExternalReferences\Vrh.PrintingService.EventHubContract.dll</HintPath>
+    </Reference>
+    <Reference Include="Vrh.Redis.ConnectionStore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vrh.Redis.ConnectionStore.1.0.0\lib\net45\Vrh.Redis.ConnectionStore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\ReelCheck.Core\Properties\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <Compile Include="ReelCheckPlugin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Plugins.Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Vrh.ApplicationContainer.ConsoleHost.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Vrh.ApplicationContainer.WindowsServiceHost.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LogConfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Vrh.NugetModuls.Documentations\Vrh.ApplicationContainer\ReadMe.md" />
+    <None Include="Vrh.NugetModuls.Documentations\VRH.Common\ReadMe.md" />
+    <None Include="Vrh.NugetModuls.Documentations\Vrh.EventHub.Core\ReadMe.md" />
+    <None Include="Vrh.NugetModuls.Documentations\Vrh.EventHub.Protocols.RedisPubSub\ReadMe.md" />
+    <None Include="Vrh.NugetModuls.Documentations\Vrh.LinqXMLProcessor.Base\ReadMe.md" />
+    <None Include="Vrh.NugetModuls.Documentations\Vrh.Log4Pro.MultiLanguageManager\ReadMe.md" />
+    <None Include="Vrh.NugetModuls.Documentations\Vrh.Logger\ReadMe.md" />
+    <None Include="Vrh.NugetModuls.Documentations\Vrh.Redis.ConnectionStore\ReadMe.md" />
+    <None Include="Vrh.Redis.ConnectionStore.Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReelCheck.Core\ReelCheck.Core.csproj">
+      <Project>{fee18b5d-1431-48d4-a36e-d06b04240815}</Project>
+      <Name>ReelCheck.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReelCheck.EventHub.Contracts\ReelCheck.EventHub.Contracts.csproj">
+      <Project>{303a475f-83ee-40fa-9c9f-bb13e0ab8937}</Project>
+      <Name>ReelCheck.EventHub.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vrh.CheckSuccess\Vrh.CheckSuccess.csproj">
+      <Project>{1354e0ae-2acc-4d17-a32c-ec33d2782ed9}</Project>
+      <Name>Vrh.CheckSuccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ReelCheck.Core\Configuration\ReelCheck.Instance.Config.xml">
+      <Link>ReelCheck.Instance.Config.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\ReelCheck.Core\Configuration\ReelCheck.LabelDInstance.Config.xml">
+      <Link>ReelCheck.LabelDInstance.Config.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\ReelCheck.Core\Configuration\ReelCheck.LabelEInstance.Config.xml">
+      <Link>ReelCheck.LabelEInstance.Config.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\ReelCheck.Core\Configuration\ReelCheck.PluginLevel.Config.xml">
+      <Link>ReelCheck.PluginLevel.Config.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\ReelCheck.Core\VRHConnections.xml">
+      <Link>VRHConnections.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Vrh.EventHub.Core.Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Vrh.EventHub.RedisPubSub.Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ApplicationContainer.Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

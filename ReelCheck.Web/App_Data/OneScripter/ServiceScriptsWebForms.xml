@@ -1,0 +1,309 @@
+<WebFormXML>
+	<strings>
+		<!--
+		<string Name="cs1">data source=.\SQLExpress;initial catalog=LearALM;user id=sa;password=Vrh@54321;MultipleActiveResultSets=True;App=EntityFramework;</string>
+		-->
+	</strings>
+	<DefaultLCID>en-US</DefaultLCID>
+	<CommonElementsDefaults>
+		<Defaults>
+			<FormDesign Layout="~/Views/Shared/_Layout.cshtml" LayoutMobile="~/Areas/Mobile/Views/Shared/_Layout.cshtml" Style="width:100%;"/>
+			<Parameters NameSeparator="@@"/>
+			<Inputs Type="Text" Required="false" ReadOnly="false" UploadFolder="~/App_Data/Uploads"/>
+			<SQLList ID="Id" Display="Name" ConnectionString="defaultConnectionString"/>
+		</Defaults>
+		<Defaults LCID="hu-HU">
+			<FormTexts ReturnMessageOKHeader="A parancsfile végrehajtása befejeződött!" ReturnMessageNOKHeader="Hibás paraméterek!"
+						ClearFormButton="Mezők törlése" WaitMessage="Kérem várjon!" RequiredMissing="A {0} mező kitöltése kötelező!"/>
+		</Defaults>
+		<Defaults LCID="en-US">
+			<FormTexts ReturnMessageOKHeader="The execution of the script finished!" ReturnMessageNOKHeader="Erroneous parameters!"
+						ClearFormButton="Clear fields" WaitMessage="Please wait!" RequiredMissing="The field {0} is mandatory!"/>
+		</Defaults>
+	</CommonElementsDefaults>
+	<CommonElementsInputs>
+		<CommonInputs LCID="hu-HU">
+				<Input Scope="ref" Name="NumOfBorderDays" Row="2" Col="1" Label="Hány naptól visszafelé?" DefaultValue="-120" />
+				<Input Scope="all" Name="Confirm" Row="9" Col="1" Label="Hagyja jóvá a beavatkozás futtatását!" Type="EnumList" Required="true" DefaultValue="1" ReadOnly="true"> 
+					<EnumList>
+						<EnumItem ID="0" Display="Nem hagyom jóvá."/>
+						<EnumItem ID="1" Display="Jóváhagyom."/>
+					</EnumList>
+				</Input>
+		</CommonInputs>
+		<CommonInputs LCID="en-US" >
+				<Input Scope="ref" Name="NumOfBorderDays" Row="2" Col="1" Label="From how many days bacwards?" DefaultValue="-120" />
+				<Input Scope="all" Name="Confirm" Row="9" Col="1" Label="Confirm execution of intervention!" Type="EnumList" Required="true" DefaultValue="1" ReadOnly="true"> 
+					<EnumList>
+						<EnumItem ID="0" Display="I do not confirm."/>
+						<EnumItem ID="1" Display="I confirm."/>
+					</EnumList>
+				</Input>
+		</CommonInputs>
+	</CommonElementsInputs>
+	<CommonElementsParameters>
+		<CommonParameters>
+				<Parameter Scope="all" Name="xmlpath" PassTo="url"><Value>~\App_Data\OneScripter\ServiceScriptsScripters.xml</Value></Parameter>
+				<Parameter Scope="all" Name="invocationmode" PassTo="dict"><Value>WEBUI</Value></Parameter>
+		</CommonParameters>
+	</CommonElementsParameters>
+	<CommonElementsExecuteConditions>
+		<CommonExecuteConditions LCID="hu-HU">
+			<ExecuteCondition Scope="all" Name="CheckConfirm" Type="equal" Test="@Confirm@1" With="1@Confirm@" ErrMsg="Jóvá kell hagynia a script futtatását!"/>
+		</CommonExecuteConditions>
+		<CommonExecuteConditions LCID="en-US">
+			<ExecuteCondition Scope="all" Name="CheckConfirm" Type="equal" Test="@Confirm@1" With="1@Confirm@" ErrMsg="Confirm if You want to execute the script"/>
+		</CommonExecuteConditions>
+	</CommonElementsExecuteConditions>
+	<CommonElementsActions>
+		<CommonActions>
+			<Action Scope="ref" Name="SC" ReturnMode="returninfoJSON" ButtonStyle="#STYLE_BUTTON_BLACKONYELLOW#" ButtonLabel="Start">
+				<url>
+					<area>OneScripter</area><controller>Scripter</controller><action>RunScriptJson</action>
+				</url>
+			</Action>
+		</CommonActions>
+	</CommonElementsActions>
+	<WebForms>
+		<WebForm Name="IniStatus" LCID="hu-HU" Title="Monitor adatok inicializálása">
+			<Help>A monitor képernyőkön megjelenő adatok inicializálása.\nHibaelhárítás céljából kell végrehajtani abban az esetben, ha a szerelősor állapota bizonytalanná válik.\nA parancsfile kitörli a rendszerből a tárolt monitor adatokat, de a rendszer a script lefutása után ezeket újraépíti.</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name"><Value>IniStatus</Value></Parameter>
+					</Parameters>
+					<ExecuteConditions>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+			</Inputs>
+		</WebForm>
+		<WebForm Name="Backup" LCID="hu-HU" Title="Teljes rendszer vagy adatbázis mentése">
+			<Help>A teljes rendszer mentése adatokkal és programokkal együtt.\nA folyamat hosszú időt, akár 2-3 percet is igénybe vehet!\nA mentés önkicsomagoló tömörített file (.exe) formában történik.\nA mentést tartalmazó file letölthető a menürendszerből elérhető funkció segítségével.\n\nA rendszer SQL adatbázisának mentése egy MS SQLServer backup adatbázis file (.bak) formájában.\nA mentést tartalmazó file letölthető a menürendszerből elérhető funkció segítségével.</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name">
+							<Conditions>
+								<Condition Type="equal" Test="@Action@" With="FULL"><Value>BackupSystem</Value></Condition>
+								<Condition Type="equal" Test="@Action@" With="DB"><Value>BackupDBOnly</Value></Condition>
+							</Conditions>
+						</Parameter>
+					</Parameters>
+					<ExecuteConditions>
+						<ExecuteCondition Type="equal" Test="@Confirm@1" With="1@Confirm@" ErrMsg="Jóvá kell hagynia a script futtatását!"/>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+				<Input Row="1" Col="1" Name="Action" Type="EnumList" Label="Teljes rendszer vagy csak SQL DB" Required="true" DefaultValue="FULL">
+					<EnumList>
+						<EnumItem ID="FULL" Display="Teljes rendszer"/>
+						<EnumItem ID="DB" Display="Csak SQL DB"/>
+					</EnumList>
+				</Input>
+			</Inputs>
+		</WebForm>
+		<WebForm Name="AutoRestart" LCID="hu-HU" Title="Szerviz Autostart kezelése">
+			<Help>Az automatikus szervíz újraindítás funkciót kapcsolhatja ki/be.</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name">
+							<Conditions>
+								<Condition Type="equal" Test="@Action@" With="ENABLE"><Value>AutoRestartEnable</Value></Condition>
+								<Condition Type="equal" Test="@Action@" With="DISABLE"><Value>AutoRestartDisable</Value></Condition>
+							</Conditions>
+						</Parameter>
+					</Parameters>
+					<ExecuteConditions>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+				<Input Row="1" Col="1" Name="Action" Type="EnumList" Label="Bekapcsolás vagy kikapcsolás" Required="true" DefaultValue="ENABLE">
+					<EnumList>
+						<EnumItem ID="ENABLE" Display="Bekapcsolás"/>
+						<EnumItem ID="DISABLE" Display="Kikapcsolás"/>
+					</EnumList>
+				</Input>
+			</Inputs>
+		</WebForm>
+		<WebForm Name="Archive" LCID="hu-HU" Title="SQL adatok archiválása és archive adatok törlése">
+			<Help>Az SQL adatbázisban tárolt működési adatok archiválása. Az archivált adatok kikerülnek az aktív adatok közül, és a továbbiakban csak az archív adatok lekérdezései számára érhetők el.\nMeg kell adni azon napok számát, amelynél "öregebb" adatok már bekerülnek az archive adatbázisba.\n\nElavult adatok törlése az archiv adatbázisból. A törölt adatok a továbbiakban semmilyen módon nem érhetők el a rendszerben, ezért törlés előtt mindenképpen készítsen adatbázis, vagy teljes rendszer mentést!\nMeg kell adni azon napok számát, amelynél "öregebb" adatok már kitörlődnek az archive adatbázisból.\n\nA napok számát negatív számként kell megadni (-30 azt jelenti, hogy harminc napnál öregebb adatokat érint).</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name">
+							<Conditions>
+								<Condition Type="equal" Test="@Action@" With="ARCH"><Value>ArchiveData</Value></Condition>
+								<Condition Type="equal" Test="@Action@" With="PURGE"><Value>PurgeData</Value></Condition>
+							</Conditions>
+						</Parameter>
+					</Parameters>
+					<ExecuteConditions>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+				<Input Row="1" Col="1" Name="Action" Type="EnumList" Label="Aktív adatok archiválása, vagy archív adatok törlése?" Required="true" DefaultValue="ARCH">
+					<EnumList>
+						<EnumItem ID="ARCH" Display="Aktív adatok archiválása"/>
+						<EnumItem ID="PURGE" Display="Archive adatok törlése"/>
+					</EnumList>
+				</Input>
+			</Inputs>
+		</WebForm>
+		<WebForm Name="SystemStartStop" LCID="hu-HU" Title="Rendszer indítása/leállítása">
+			<Help>A rendszer összes szolgáltatása indítható, vagy állítható le.</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name">
+							<Conditions>
+								<Condition Type="equal" Test="@Action@" With="SSTART"><Value>SystemSTART</Value></Condition>
+								<Condition Type="equal" Test="@Action@" With="SSTOP"><Value>SystemSTOP</Value></Condition>
+							</Conditions>
+						</Parameter>
+					</Parameters>
+					<ExecuteConditions>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+				<Input Row="1" Col="1" Name="Action" Type="EnumList" Label="Indítás vagy leállítás">
+					<EnumList>
+						<EnumItem ID="SSTART" Display="Szolgáltatások indítása"/>
+						<EnumItem ID="SSTOP" Display="Szolgáltatások leállítása"/>
+					</EnumList>
+				</Input>
+			</Inputs>
+		</WebForm>
+
+		<WebForm Name="IniStatus" LCID="en-US" Title="Initialize Monitor data">
+			<Help>Deletes the status information of the assembly line from the syste.\nAfter the system restarted, it will rebuild the status info.\nExecute the script if there is an anomaly in the assembly line status information that you can not fix with the standard interventions.</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name"><Value>IniStatus</Value></Parameter>
+					</Parameters>
+					<ExecuteConditions>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+			</Inputs>
+		</WebForm>
+		<WebForm Name="Backup" LCID="en-US" Title="Complete system or SQL DB only backup">
+			<Help>Backup of the complete system with data and programs included.\nBackup process may take a long time (even up to 2-3 minutes)!\nBackup will go into a self-extracting compressed file (.exe).\nThe backup .exe file is available for download from the menu.\n\nBackup of the SQL database of the system into an MS SQLServer backup file (.bak).\nThe backup .exe file is available for download from the menu.</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name">
+							<Conditions>
+								<Condition Type="equal" Test="@Action@" With="FULL"><Value>BackupSystem</Value></Condition>
+								<Condition Type="equal" Test="@Action@" With="DB"><Value>BackupDBOnly</Value></Condition>
+							</Conditions>
+						</Parameter>
+					</Parameters>
+					<ExecuteConditions>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+				<Input Row="1" Col="1" Name="Action" Type="EnumList" Label="Full system or SQL DB only" Required="true" DefaultValue="FULL">
+					<EnumList>
+						<EnumItem ID="FULL" Display="Full system"/>
+						<EnumItem ID="DB" Display="SQL DB only"/>
+					</EnumList>
+				</Input>
+			</Inputs>
+		</WebForm>
+		<WebForm Name="AutoRestart" LCID="en-US" Title="Set Service Autostart">
+			<Help>You can enable and disable the Service AutoStart function here.</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name">
+							<Conditions>
+								<Condition Type="equal" Test="@Action@" With="ENABLE"><Value>AutoRestartEnable</Value></Condition>
+								<Condition Type="equal" Test="@Action@" With="DISABLE"><Value>AutoRestartDisable</Value></Condition>
+							</Conditions>
+						</Parameter>
+					</Parameters>
+					<ExecuteConditions>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+				<Input Row="1" Col="1" Name="Action" Type="EnumList" Label="Enable or disable" Required="true" DefaultValue="ENABLE">
+					<EnumList>
+						<EnumItem ID="ENABLE" Display="Enable"/>
+						<EnumItem ID="DISABLE" Display="Disable"/>
+					</EnumList>
+				</Input>
+			</Inputs>
+		</WebForm>
+		<WebForm Name="Archive" LCID="en-US" Title="Archive SQL Data or Purge outdated archive data">
+			<Help>Archiving the operational data stored in the SQL database. The archived data will be moved out among the active data and will be kept for future queries among the archive data, that are available for queries through appropriate functions from the menu.\nThe process takes the number of days, of which the older data will be archived.\n\nRemoving outdated data from among the archive data. Removed data can not be recovered, so make sure to create a database or a complete system backup before purging the archive database.\nThe process takes the number of days, of which the older data will be archived.\n\nThe number for the number of days must be negative (-120 means data older than 120 days).</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name">
+							<Conditions>
+								<Condition Type="equal" Test="@Action@" With="ARCH"><Value>ArchiveData</Value></Condition>
+								<Condition Type="equal" Test="@Action@" With="PURGE"><Value>PurgeData</Value></Condition>
+							</Conditions>
+						</Parameter>
+					</Parameters>
+					<ExecuteConditions>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+				<Input Row="1" Col="1" Name="Action" Type="EnumList" Label="Archive active data or purge outdated archive data" Required="true" DefaultValue="ARCH">
+					<EnumList>
+						<EnumItem ID="ARCH" Display="Archive data"/>
+						<EnumItem ID="PURGE" Display="Purge outdated archive data"/>
+					</EnumList>
+				</Input>
+			</Inputs>
+		</WebForm>
+		<WebForm Name="SystemStartStop" LCID="en-US" Title="System start/stop">
+			<Help>You can start or stop all the services of the system.</Help>
+			<ActionConditions>
+				<ActionCondition Type="else">
+					<Action Name="SC"/>
+					<Parameters>
+						<Parameter PassTo="url" Name="name">
+							<Conditions>
+								<Condition Type="equal" Test="@Action@" With="SSTART"><Value>SystemSTART</Value></Condition>
+								<Condition Type="equal" Test="@Action@" With="SSTOP"><Value>SystemSTOP</Value></Condition>
+							</Conditions>
+						</Parameter>
+					</Parameters>
+					<ExecuteConditions>
+					</ExecuteConditions>
+				</ActionCondition>			
+			</ActionConditions>
+			<Inputs>
+				<Input Row="1" Col="1" Name="Action" Type="EnumList" Label="Start or stop">
+					<EnumList>
+						<EnumItem ID="SSTART" Display="Start services"/>
+						<EnumItem ID="SSTOP" Display="Stop services"/>
+					</EnumList>
+				</Input>
+			</Inputs>
+		</WebForm>
+	</WebForms>
+</WebFormXML>

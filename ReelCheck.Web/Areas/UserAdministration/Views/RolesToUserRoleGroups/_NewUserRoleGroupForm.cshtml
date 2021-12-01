@@ -1,0 +1,27 @@
+﻿@model Vrh.Web.Membership.Areas.UserAdministration.Models.NewUserRoleGroupViewModel
+
+@if (Model != null)
+{
+    <div id="newDialog">
+        @using (Ajax.BeginForm("NewUserRoleGroup", Constants.CONTROLLER_RTURG, new { area = Constants.AREA },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "newDialog",
+        }, new { id = "NewUserRoleGroupNameForm" }))
+        {
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.NewUserRoleGroupName, new { @class = "form-control", autofocus = "" })
+                @*@Html.ValidationMessageFor(x => x.NewUserRoleGroupName)*@
+                @Html.ValidationSummary(false)
+            </div>
+        }
+    </div>
+    <script>
+        // ha a modal megjelenik, és van autofocus-os elem, akkor oda teszi a fókuszt.
+        $('.modal').on('shown.bs.modal', function () {
+            $(this).find('[autofocus]').focus();
+        });
+    </script>
+}

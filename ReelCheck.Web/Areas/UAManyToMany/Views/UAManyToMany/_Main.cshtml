@@ -1,0 +1,87 @@
+﻿@using Vrh.Web.Membership.Areas.UAManyToMany.Models;
+
+@model UAManyToManyViewModel
+
+@if (Model != null)
+{
+    string areaName = "UAManyToMany";
+    string ctrlName = "UAManyToMany";
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mtmDropDownList>div:not(.itemDisabled)').click(function () {
+                if (isWasAnAjaxCall == false) {
+                    $(this).parent().children().removeClass("selectedItem");
+                    $(this).toggleClass("selectedItem");
+
+                    var ajaxId = $(this).attr('id').substring(9, $(this).attr('id').length);
+                    $.ajax({
+                        cache: false,
+                        url: '@Url.Action("GetMultiSelectLists", ctrlName, new { area = areaName })',
+                        type: "get",
+                        contenttype: "application/j-son",
+                        datatype: 'json',
+                        data: ({ name: '@Model.Name', id: ajaxId, isDefault: @Model.IsDefault.ToString().ToLower() }),
+                        beforeSend: function () {
+                            disableOperations();
+                        },
+                        success: function (responseData) {
+                            $('#MTMMultiSelectLists').html(responseData);
+                        },
+                        complete: function () {
+                            enableOperations();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    
+    <table class="mtmTable">
+        <tbody>
+            <tr>
+                <td class="mtmNoBorder">
+                    <table class="mtmTable">
+                        <thead>
+                            <tr>
+                                <th class="mtmHeader">
+                                    @if (Session["MTM"] != null && Session["MTM"].GetType() == typeof(UAManyToManySessionModel))
+                                    {
+                                        if (Model.IsDefault)
+                                        {
+                                            @:@(((UAManyToManySessionModel)Session["MTM"]).DefaultListItemsHeader)
+                                        }
+                                        else
+                                        {
+                                            @:@(((UAManyToManySessionModel)Session["MTM"]).ListItemsHeader)
+                                        }
+                                    }
+                                    <div style="float:right;">
+                                        <input class="mtmSwitchButton" 
+                                               type="submit" 
+                                               value="<< >>" 
+                                               onclick="javascript:ajaxCallSwitchButton('@Model.Name', '@Url.Action("ManyToMany", ctrlName, new { area = areaName })', '@string.Empty', @((!Model.IsDefault).ToString().ToLower()));" />
+                                    </div>                               
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div id="mtmDropDownList">
+                                        @foreach (SelectListItem item in @Model.DropDownListItems)
+                                        {
+                                            <div class="item @if (!string.IsNullOrEmpty(Model.SelectedDropDownListItemId) && item.Value == Model.SelectedDropDownListItemId) { <text>selectedItem</text> }" id="MTMValue:@item.Value">@item.Text</div>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td class="mtmNoBorder" id="MTMMultiSelectLists">
+                    @Html.Partial("_MultiSelectLists", Model)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

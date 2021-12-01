@@ -1,0 +1,35 @@
+﻿<Matrix1D>
+	<XmlParser>
+	</XmlParser>
+  <GeneralParameters>
+    <Options RefreshInterval="10" CheckXML="true" LogLevel="0" />
+  </GeneralParameters>
+  <Defaults>
+    <DefaultDataSource RedisPool="REELCHECK" RedisServer="@REDISSERVERIP@" RedisPort="@REDISSERVERPORT@"/>
+    <DefaultAreaVisibility HeadingArea="Off" FieldLabelArea="On" WorkPlaceNameArea="Off" />
+    <DefaultStyles Block="M1D_DefaultBlock" Table="M1D_DefaultTable" Heading="M1D_DefaultHeading" WorkPlace="M1D_DefaultWorkPlace" Label="M1D_DefaultLabel" Field="M1D_DefaultField" />
+  </Defaults>
+  <StyleDefinitions ConfigFile="file=~/App_Data/WebMonitor/Styles.xml">
+    <Styles>
+      <Style Name="ANTITEST" Value="background-color:white;"/>
+    </Styles>
+  </StyleDefinitions>
+
+  <FieldDefinitions ConfigFile="file=~/App_Data/WebMonitor/Fields.xml">
+    <Fields>
+      <Field Name="ANTITEST" Content="DUMMY" Override=" "/>
+    </Fields>
+  </FieldDefinitions>
+  <FieldSets>
+    <FieldSet Name="STATIONSTATUS">
+      <Fields>
+		<Field Name="F_WS.STATION"/>
+		<Field Name="F_WS.MAINSTATUS"/>
+		<Field Name="F_WS.REELCHECKMODE"/>
+      </Fields>
+    </FieldSet>
+  </FieldSets>
+  <MonitorBlocks>
+    <MonitorBlock Name="STATIONSTATUS" Heading="@TEST1@ @TEST2@ @LCID@ StationYYYstatus" HeadingArea="On" FieldLabelArea="On" WorkPlaceNameArea="On" WorkPlaceInThe="Column" FieldSetName="STATIONSTATUS"/>
+  </MonitorBlocks>
+</Matrix1D>

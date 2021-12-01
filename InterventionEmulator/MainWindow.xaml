@@ -1,0 +1,224 @@
+﻿<Window x:Name="MainWindow1" x:Class="InterventionEmulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InterventionEmulator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="470" Width="803">
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="438" VerticalAlignment="Top" Width="795">
+            <TabItem Header="Intervention">
+                <Grid Background="#FFE5E5E5" Margin="0,0,8,0">
+                    <ListView x:Name="LogListView" HorizontalAlignment="Left" Height="410" Margin="423,0,0,0" VerticalAlignment="Top" Width="358">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button x:Name="ActivateButton" Content="Activate/Login" HorizontalAlignment="Left" Height="32" Margin="11,79,0,0" VerticalAlignment="Top" Width="116" Click="ActivateButton_Click" RenderTransformOrigin="0.508,1.476" />
+                    <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Height="23" Margin="145,86,0,0" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="LogoutButton" Content="InActivate/Logout" HorizontalAlignment="Left" Height="32" Margin="281,79,0,0" VerticalAlignment="Top" Width="132" Click="LogoutButton_Click" />
+                    <Label Content="EventHub channel name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="139"/>
+                    <TextBox x:Name="LabelDEventHubChannelNameTextbox" HorizontalAlignment="Left" Height="23" Margin="139,12,0,0" TextWrapping="Wrap" Text="LABELD" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="ReIdentifyButton" Content="ReIdentify" HorizontalAlignment="Left" Height="32" Margin="253,235,0,0" VerticalAlignment="Top" Width="147" Click="ReIdentifyButton_Click" Visibility="Hidden" />
+                    <Button x:Name="RePrintButton" Content="RePrint" HorizontalAlignment="Left" Height="32" Margin="11,128,0,0" VerticalAlignment="Top" Width="147" Click="RePrintButton_Click" />
+                    <Button x:Name="SkipPrintButton" Content="SkipPrint" HorizontalAlignment="Left" Height="32" Margin="171,128,0,0" VerticalAlignment="Top" Width="147" Click="SkipPrintButton_Click" />
+                    <Button x:Name="ReCheckButton" Content="ReCheck" HorizontalAlignment="Left" Height="32" Margin="253,203,0,0" VerticalAlignment="Top" Width="147" Click="ReCheckButton_Click" Visibility="Hidden" />
+                    <Button x:Name="GoldenSampleModeEnterButton" Content="Golden SampleMode Enter" HorizontalAlignment="Left" Height="32" Margin="11,203,0,0" VerticalAlignment="Top" Width="148" Click="GoldenSampleModeEnterButton_Click" Visibility="Hidden" />
+                    <Button x:Name="GoldenSampleModeExitButton" Content="Golden SampleMode Exit" HorizontalAlignment="Left" Height="32" Margin="11,240,0,0" VerticalAlignment="Top" Width="148" Click="GoldenSampleModeExitButton_Click" Visibility="Hidden" />
+                    <Button x:Name="GoldenSampleModeExtendValidityButton" Content="Golden SampleMode ExtendValidity" HorizontalAlignment="Left" Height="32" Margin="10,278,0,0" VerticalAlignment="Top" Width="195" Click="GoldenSampleModeExtendValidityButton_Click" Visibility="Hidden" />
+                    <TextBox x:Name="QtyTextBox" HorizontalAlignment="Left" Height="24" Margin="119,282,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="84" PreviewTextInput="NumberValidationTextBox" TextAlignment="Right" Grid.Column="1" Visibility="Hidden"/>
+                    <Button x:Name="UnloadModeEnterButton" Content="UnloadMode Enter" HorizontalAlignment="Left" Height="32" Margin="253,299,0,0" VerticalAlignment="Top" Width="148" Click="UnloadModeEnterButton_Click" Visibility="Hidden" />
+                    <Button x:Name="UnloadModeExitButton" Content="UnloadMode Exit" HorizontalAlignment="Left" Height="32" Margin="253,267,0,0" VerticalAlignment="Top" Width="148" Click="UnloadModeExitButton_Click" Visibility="Hidden" />
+                    <Button x:Name="ManualModeEnterButton" Content="ManualMode Enter" HorizontalAlignment="Left" Height="32" Margin="10,315,0,0" VerticalAlignment="Top" Width="148" Click="ManualModeEnterButton_Click" Visibility="Hidden" />
+                    <Button x:Name="ManualModeExitButton" Content="ManualMode Exit" HorizontalAlignment="Left" Height="32" Margin="163,315,0,0" VerticalAlignment="Top" Width="148" Click="ManualModeExitButton_Click" Visibility="Hidden" />
+                    <Button x:Name="ManualModeDataButton" Content="ManualMode Data" HorizontalAlignment="Left" Height="32" Margin="10,355,0,0" VerticalAlignment="Top" Width="148" Click="ManualModeDataButton_Click" Visibility="Hidden" />
+                    <TextBox x:Name="DataTextBox" HorizontalAlignment="Left" Height="24" Margin="172,362,0,0" TextWrapping="Wrap" Text="ManualData" VerticalAlignment="Top" Width="146" TextAlignment="Left" Visibility="Hidden"/>
+                    <RadioButton x:Name="LabeldRadio" Content="LABELD" HorizontalAlignment="Left" Margin="281,12,0,0" VerticalAlignment="Top" GroupName="Channel" IsChecked="True" Checked="LabeldRadio_Checked"/>
+                    <RadioButton x:Name="LabelERadio" Content="LABELE" HorizontalAlignment="Left" Margin="281,41,0,0" VerticalAlignment="Top" GroupName="Channel" Checked="LabelERadio_Checked"/>
+                    <Button x:Name="BlockingButton" Content="Blocking" HorizontalAlignment="Left" Margin="10,178,0,0" VerticalAlignment="Top" Width="147" Height="34" Click="BlockingButton_Click"/>
+                    <Button x:Name="UnBlockingButton" Content="UnBlocking" HorizontalAlignment="Left" Margin="172,178,0,0" VerticalAlignment="Top" Width="147" Height="34" Click="UnBlockingButton_Click"/>
+                    <Button x:Name="GSDueDeleteButton" Content="GS Due Delete" HorizontalAlignment="Left" Margin="12,233,0,0" VerticalAlignment="Top" Width="147" Height="34" Click="GSDueDeleteButton_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Printer">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="392*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView x:Name="PrintingLogListView" HorizontalAlignment="Left" Height="410" Margin="304,0,0,0" VerticalAlignment="Top" Width="480" Grid.Column="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label Content="EventHub channel name" HorizontalAlignment="Left" Margin="9,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <TextBox x:Name="PrintingEventHubChannelNameTextBox" HorizontalAlignment="Left" Height="23" Margin="164,14,0,0" TextWrapping="Wrap" Text="DATA" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+                    <RadioButton Content="Success Printing" Grid.Column="1" HorizontalAlignment="Left" Margin="0,69,0,0" VerticalAlignment="Top" IsChecked="True" Checked="radioButton_Checked" Foreground="#FF308517"/>
+                    <RadioButton Content="Printer control not found!" Grid.Column="1" HorizontalAlignment="Left" Margin="0,84,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Printing timeout!" Grid.Column="1" HorizontalAlignment="Left" Margin="0,99,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Media Empty or Media Jam" Grid.Column="1" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Printhead Up ( Open )" Grid.Column="1" HorizontalAlignment="Left" Margin="0,129,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Rewinder Full" Grid.Column="1" HorizontalAlignment="Left" Margin="0,145,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="File System Full" Grid.Column="1" HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Filename Not Found" Grid.Column="1" HorizontalAlignment="Left" Margin="0,175,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Duplicate Name" Grid.Column="1" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Syntax error" Grid.Column="1" HorizontalAlignment="Left" Margin="0,204,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Cutter JAM" Grid.Column="1" HorizontalAlignment="Left" Margin="0,219,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Extended Menory Not Found" Grid.Column="1" HorizontalAlignment="Left" Margin="0,234,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Pause" Grid.Column="1" HorizontalAlignment="Left" Margin="0,249,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="In Setting Mode" Grid.Column="1" HorizontalAlignment="Left" Margin="0,265,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="In Keyboard Mode" Grid.Column="1" HorizontalAlignment="Left" Margin="0,280,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Printer is Printing" Grid.Column="1" HorizontalAlignment="Left" Margin="0,295,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Data in Process" Grid.Column="1" HorizontalAlignment="Left" Margin="0,310,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <RadioButton Content="Connect to printer failed!" Grid.Column="1" HorizontalAlignment="Left" Margin="0,325,0,0" VerticalAlignment="Top" Checked="radioButton_Checked" Foreground="#FFE61E14"/>
+                    <CheckBox x:Name="PrinterEmulatorActive" Content="Active" Grid.Column="1" HorizontalAlignment="Left" Margin="46,41,0,0" VerticalAlignment="Top" Click="PrinterEmulatorActive_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ID Camera">
+                <Grid x:Name="IdGrid" Background="#FFE5E5E5" Margin="0,-2,0,2">
+                    <Button x:Name="ManualLabelDataButton" Content="Send Manual Label Data" HorizontalAlignment="Left" Height="32" Margin="3,338,0,0" VerticalAlignment="Top" Width="148" Click="ManualLabelDataButton_Click" Visibility="Hidden"/>
+                    <TextBox x:Name="ManualLabelDataTextBox" HorizontalAlignment="Left" Height="24" Margin="174,345,0,0" TextWrapping="Wrap" Text="ManualLabelData" VerticalAlignment="Top" Width="146" TextAlignment="Left" Visibility="Hidden"/>
+                    <TabControl x:Name="IdTabControl" HorizontalAlignment="Left" Height="400" Margin="0,10,0,0" VerticalAlignment="Top" Width="789">
+                        <TabItem x:Name="IdLabelDTab" Header="LABELD">
+                            <Grid Background="#FFE5E5E5">
+                                <Label Content="EventHub channel name" HorizontalAlignment="Left" Margin="0,1,0,0" VerticalAlignment="Top" Height="26" Width="139"/>
+                                <TextBox x:Name="LabelDIdCameraChennelNameTextBox" HorizontalAlignment="Left" Height="23" Margin="144,4,0,0" TextWrapping="Wrap" Text="LABELD_ID" VerticalAlignment="Top" Width="120"/>
+                                <CheckBox x:Name="LabelDIdCameraActive" Content="Active" HorizontalAlignment="Left" Margin="297,7,0,0" VerticalAlignment="Top" Click="LabelDIdCameraActive_Click"/>
+                                <CheckBox x:Name="LabelDEnable" Content="Enable" HorizontalAlignment="Left" Margin="22,44,0,0" VerticalAlignment="Top" Click="LabelDEnable_Click" Height="16"/>
+                                <CheckBox x:Name="LabelDStickingDone" Content="StickingDone" HorizontalAlignment="Left" Margin="22,65,0,0" VerticalAlignment="Top" Click="LabelDStickingDone_Click"/>
+                                <CheckBox x:Name="LabelDStatusReset" Content="StatusReset" HorizontalAlignment="Left" Margin="22,89,0,0" VerticalAlignment="Top" Click="LabelDStatusReset_Click" Height="17"/>
+                                <CheckBox x:Name="LabelDHardReset" Content="HardReset" HorizontalAlignment="Left" Margin="22,115,0,0" VerticalAlignment="Top" Click="LabelDHardReset_Click"/>
+                                <CheckBox x:Name="LabelDReady" Content="Ready" HorizontalAlignment="Left" Margin="163,44,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                                <CheckBox x:Name="LabelDLabelPrinted" Content="LabelPrinted" HorizontalAlignment="Left" Margin="163,65,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                                <CheckBox x:Name="LabelDAllStationFinished" Content="AllStationFinished" HorizontalAlignment="Left" Margin="163,90,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                                <CheckBox x:Name="LabelDWorkpieceOk" Content="WorkpieceOk" HorizontalAlignment="Left" Margin="163,115,0,0" VerticalAlignment="Top" IsEnabled="False" Foreground="#FF42D80A"/>
+                                <CheckBox x:Name="LabelDWorkpieceNok" Content="WorkpieceNok" HorizontalAlignment="Left" Margin="163,141,0,0" VerticalAlignment="Top" IsEnabled="False" Foreground="#FFCF2919"/>
+                                <CheckBox x:Name="LabelDEmpty" Content="Empty" HorizontalAlignment="Left" Margin="163,168,0,0" VerticalAlignment="Top" IsEnabled="False" Foreground="#FFC6CF14"/>
+                                <Label Content="Read response" HorizontalAlignment="Left" Margin="9,211,0,0" VerticalAlignment="Top" Height="26" Width="87"/>
+                                <ComboBox x:Name="LabelDReadResponseComboBox" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="361" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" Height="22">
+                                    <ComboBoxItem Content="TMPL=EMPTY;"/>
+                                    <ComboBoxItem Content="TMPL=NOREAD;"/>
+                                    <ComboBoxItem Content="TMPL=FVSONLY;BCLIST::FVS=16087936GWMK6L170617992405000;"/>
+                                    <ComboBoxItem Content="TMPL=ROHM;BCLIST::FVS=21001668CF5ZYG001782979003000,LOT=1751G1305L;"/>
+                                    <ComboBoxItem Content="TMPL=DIODES;BCLIST::LOT=1812-J362930.H1;P/N=DMG3415UQ-7;QTY=3000;"/>
+                                    <ComboBoxItem Content="TMPL=STM;BCLIST::LOT=T7O46S6U00117;TYPE=1P5013311407;QTY=1000;"/>
+                                    <ComboBoxItem Content="TMPL=BCLIST;BCLIST::1T1242511ZDZ,P9398119,4LMY,Q2000,L8534048ML8,EG4,D1801,[)&gt;06P939811920001T1242511ZD5W5S;"/>
+                                    <ComboBoxItem Content="TMPL=BCLIST;BCLIST::T124XA-P1-A1,T23B02.N8P,48,P9398119,4LMY,Q2000,L8534048ML8,EG4,D1801,[)&gt;06P939811920001T1242511ZD5W5S;"/>
+                                    <ComboBoxItem Content="TMPL=BCLIST;BCLIST::TAIWAN,T16R54.SLP,K,48,B,T124XA-P1-A1,1819,KOREA,RoHS Compliant,A1,T124XA-P1-A1|T16R54.SLP|48;"/>
+                                    <ComboBoxItem Content="TMPL=BCLIST;BCLIST::TAIWAN,T16R54.SLP,K,48,B,T124XA-P1-A1,1819,KOREA,RoHS Compliant,A1,T124XA-P1-A1|T16R54.SLP|48;"/>
+                                    <ComboBoxItem Content="TMPL=FVSONLY;BCLIST::FVS=939558421412JMA498425.33500 ;"/>
+                                </ComboBox>
+                                <Button x:Name="LabelDClearIdCameraLogButton" Content="Clear" HorizontalAlignment="Left" Margin="386,3,0,0" VerticalAlignment="Top" Width="75" Click="LabelDClearIdCameraLogButton_Click"/>
+                                <ListView x:Name="LabelDIdCameraLogListView" HorizontalAlignment="Left" Margin="386,23,0,0" Width="397">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="IdLabelETab" Header="LABELE">
+                            <Grid Background="#FFE5E5E5">
+                                <Label Content="EventHub channel name" HorizontalAlignment="Left" Margin="0,1,0,0" VerticalAlignment="Top" Height="26" Width="139"/>
+                                <TextBox x:Name="LabelEIdCameraChennelNameTextBox" HorizontalAlignment="Left" Height="23" Margin="144,4,0,0" TextWrapping="Wrap" Text="LABELE_ID" VerticalAlignment="Top" Width="120"/>
+                                <CheckBox x:Name="LabelEIdCameraActive" Content="Active" HorizontalAlignment="Left" Margin="297,7,0,0" VerticalAlignment="Top" Click="LabelEIdCameraActive_Click"/>
+                                <CheckBox x:Name="LabelEEnable" Content="Enable" HorizontalAlignment="Left" Margin="9,43,0,0" VerticalAlignment="Top" Click="LabelEEnable_Click"/>
+                                <CheckBox x:Name="LabelEStickingDone" Content="StickingDone" HorizontalAlignment="Left" Margin="9,72,0,0" VerticalAlignment="Top" Click="LabelEStickingDone_Click"/>
+                                <CheckBox x:Name="LabelEIdCameraEnable" Content="IdCameraEnable (Trigger1)" HorizontalAlignment="Left" Margin="9,97,0,0" VerticalAlignment="Top" Click="LabelEIdCameraEnable_Click"/>
+                                <CheckBox x:Name="LabelECheckCameraEnable" Content="CheckCameraEnable (Trigger2)" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top" Click="LabelECheckCameraEnable_Click" Width="186" RenderTransformOrigin="0.4,1.467"/>
+                                <CheckBox x:Name="LabelEReady" Content="Ready" HorizontalAlignment="Left" Margin="228,48,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                                <CheckBox x:Name="LabelELabelPrinted" Content="LabelPrinted" HorizontalAlignment="Left" Margin="228,72,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Button x:Name="LabelEClearIdCameraLogButton" Content="Clear" HorizontalAlignment="Left" Margin="386,3,0,0" VerticalAlignment="Top" Width="75" Click="LabelEClearIdCameraLogButton_Click"/>
+                                <ListView x:Name="LabelEIdCameraLogListView" HorizontalAlignment="Left" Margin="386,23,0,0" Width="397">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <CheckBox x:Name="LabelEIdCameraReady" Content="IdCameraReady" HorizontalAlignment="Left" Margin="228,157,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label Content="Read response" HorizontalAlignment="Left" Margin="9,211,0,0" VerticalAlignment="Top" Height="26" Width="87"/>
+                                <ComboBox x:Name="LabelEReadResponseComboBox" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="361" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" Height="22">
+                                    <ComboBoxItem Content="TMPL=EMPTY;"/>
+                                    <ComboBoxItem Content="TMPL=NOREAD;"/>
+                                    <ComboBoxItem Content="TMPL=FVSONLY;BCLIST::FVS=16087936GWMK6L170617992405000;"/>
+                                    <ComboBoxItem Content="TMPL=ROHM;BCLIST::FVS=21001668CF5ZYG001782979003000,LOT=1751G1305L;"/>
+                                    <ComboBoxItem Content="TMPL=DIODES;BCLIST::LOT=1812-J362930.H1;P/N=DMG3415UQ-7;QTY=3000;"/>
+                                    <ComboBoxItem Content="TMPL=STM;BCLIST::LOT=T7O46S6U00117;TYPE=1P5013311407;QTY=1000;"/>
+                                    <ComboBoxItem Content="TMPL=BCLIST;BCLIST::1T1242511ZDZ,P9398119,4LMY,Q2000,L8534048ML8,EG4,D1801,[)&gt;06P939811920001T1242511ZD5W5S;"/>
+                                    <ComboBoxItem Content="TMPL=BCLIST;BCLIST::T124XA-P1-A1,T23B02.N8P,48,P9398119,4LMY,Q2000,L8534048ML8,EG4,D1801,[)&gt;06P939811920001T1242511ZD5W5S;"/>
+                                    <ComboBoxItem Content="TMPL=BCLIST;BCLIST::TAIWAN,T16R54.SLP,K,48,B,T124XA-P1-A1,1819,KOREA,RoHS Compliant,A1,T124XA-P1-A1|T16R54.SLP|48;"/>
+                                    <ComboBoxItem Content="TMPL=FVSONLY;BCLIST::FVS=939558421412JMA498425.33500 ;"/>
+                                </ComboBox>
+                                <CheckBox x:Name="LabelEWorkpieceOk" Content="WorkpieceOk" HorizontalAlignment="Left" Margin="228,97,0,0" VerticalAlignment="Top" IsEnabled="False" Foreground="#FF3BC508"/>
+                                <CheckBox x:Name="LabelEWorkpieceNok" Content="WorkpieceNok" HorizontalAlignment="Left" Margin="228,128,0,0" VerticalAlignment="Top" IsEnabled="False" Foreground="#FFD8170E"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Check Camera">
+                <Grid Background="#FFE5E5E5" Margin="-2,0,2,0">
+                    <TabControl HorizontalAlignment="Left" Height="410" VerticalAlignment="Top" Width="789">
+                        <TabItem Header="LABELD">
+                            <Grid Background="#FFE5E5E5">
+                                <ListView x:Name="LabelDCheckCameraLogListView" HorizontalAlignment="Left" Margin="379,28,0,0" Width="404">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Label Content="EventHub channel name" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="LabelDCheckCameraChennelNameTextBox" HorizontalAlignment="Left" Height="23" Margin="161,19,0,0" TextWrapping="Wrap" Text="LABELD_CHECK" VerticalAlignment="Top" Width="120"/>
+                                <ComboBox x:Name="LabelDCheckCameraReadResdponseComboBox" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="353" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" IsEditable="True">
+                                    <ComboBoxItem Content="TMPL=EMPTY;"/>
+                                    <ComboBoxItem Content="TMPL=NOREAD;"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;16087936GWMK6L190923252605000;4613AEA84D6"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;FVSValue;MTSValue"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;16087936GWMK6L190527538205000;5EE1421E42E"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;0940008382519E180628793904000;SHA00JW6GNH"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;0940008382519E180628793904000;SHA00JW6GNH;0_40008382519E180628793904000;SHA00JW6GN_"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;565243303030303030303031"/>
+                                </ComboBox>
+                                <Label Content="Read response" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="LabelDCheckCameraActive" Content="Active" HorizontalAlignment="Left" Margin="299,22,0,0" VerticalAlignment="Top" Click="LabelDCheckCameraActive_Click"/>
+                                <Button x:Name="LabelDClearCheckCameraLogButton" Content="Clear" HorizontalAlignment="Left" Margin="380,3,0,0" VerticalAlignment="Top" Width="75" Click="LabelDClearCheckCameraLogButton_Click"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="LABELE" Height="22" VerticalAlignment="Bottom">
+                            <Grid Background="#FFE5E5E5">
+                                <ListView x:Name="LabelECheckCameraLogListView" HorizontalAlignment="Left" Margin="379,28,0,0" Width="404">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Label Content="EventHub channel name" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="LabelECheckCameraChennelNameTextBox" HorizontalAlignment="Left" Height="23" Margin="161,19,0,0" TextWrapping="Wrap" Text="LABELE_CHECK" VerticalAlignment="Top" Width="120"/>
+                                <ComboBox x:Name="LabelECheckCameraReadResdponseComboBox" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="353" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" IsEditable="True">
+                                    <ComboBoxItem Content="TMPL=EMPTY;"/>
+                                    <ComboBoxItem Content="TMPL=NOREAD;"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;16087936GWMK6L190923252605000;4613AEA84D6"/>                                    
+                                    <ComboBoxItem Content="TMPL=DELPHI;FVSValue;MTSValue"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;0940008382519E180628793904000;SHA00JW6GNH"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;0940008382519E180628793904000;SHA00JW6GNH;09_0008382519E180628793904000;SHA00JW6G_H"/>
+                                    <ComboBoxItem Content="TMPL=DELPHI;565243303030303030303031"/>
+                                </ComboBox>
+                                <CheckBox x:Name="LabelECheckCameraActive" Content="Active" HorizontalAlignment="Left" Margin="299,22,0,0" VerticalAlignment="Top" Click="LabelECheckCameraActive_Click"/>
+                                <Button x:Name="LabelEClearCheckCameraLogButton" Content="Clear" HorizontalAlignment="Left" Margin="380,3,0,0" VerticalAlignment="Top" Width="75" Click="LabelEClearCheckCameraLogButton_Click"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

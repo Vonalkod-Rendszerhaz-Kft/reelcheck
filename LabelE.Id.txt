@@ -1,0 +1,27 @@
+digraph {
+        label="LabelE: Id"
+		compound=true;
+		node [shape=Mrecord]
+		rankdir="TB"
+        Rest [label="Rest"];
+		WaitForEnable [label="WaitForEnable|entry / Start process:\n- if IDCAMENABLE HIGH: start read (Fire StartRead)\n"];
+		Read [label="Read|entry / Label read:\n- Read label\n- Set IDCAMREADY I/O out to HIGH\n- Fire ReadEnd"];
+		BarcodeMatch [label="BarcodeMatch|entry / Label identification:\n- Check & extract readed data with RegexChecker\n- Fire EptyRead or NoRead or NoMatch or CallIdData"];
+		IdData [label="IdData|entry / Call IdData:\n- Call IdData http API for fail/pass status\n- Fire Fail or Pass or ReRead"];
+		WaitForIdCameraEnableToLow [label="WaitForIdCameraEnableToLow|entry / Wait for id cam enable (Trigger1) to low. If receive:\n- Identification ready (ACK1) to low- Wait to ACK1 chenged to low- Fire "];
+		CloseOperation [label="CloseOperation|entry / Close operation\nSet data to reel\nFire End"];
+		
+		Rest -> WaitForEnable [style="solid", label="Start"];
+		WaitForEnable -> Read [style="solid", label="StartRead"];
+		WaitForEnable -> Rest [style="solid", label="End"];
+		Read -> BarcodeMatch [style="solid", label="ReadEnd"];
+		BarcodeMatch -> IdData [style="solid", label="CallIdData"];
+		BarcodeMatch -> WaitForIdCameraEnableToLow [style="solid", label="EmptyRead"];
+		BarcodeMatch -> WaitForIdCameraEnableToLow [style="solid", label="NoRead"];
+		BarcodeMatch -> WaitForIdCameraEnableToLow [style="solid", label="NoMatch"];
+		IdData -> WaitForIdCameraEnableToLow [style="solid", label="Fail"];
+		IdData -> WaitForIdCameraEnableToLow [style="solid", label="Pass"];
+		IdData -> Read [style="solid", label="Reread"];
+		WaitForIdCameraEnableToLow -> CloseOperation [style="solid", label="IdCamEnableChangedToLow"];
+		CloseOperation -> Rest [style="solid", label="End"];
+		}

@@ -1,0 +1,72 @@
+﻿@model MenuView
+
+<li class="nav-item dropdown @(Model.IsEnabled ? Model.StyleKit : Model.StyleKitDisabled)">
+    <a class="nav-link dropdown-toggle" href="" id="@(Model.Id)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Html.Raw(Model.Label)</a>
+    <ul class="dropdown-menu navbar-dark bg-dark" aria-labelledby="@(Model.Id)">
+        @foreach (MenuView item in Model.MenuViews)
+        {
+            if (item.Label == "-")
+            {
+                <li><div class="dropdown-divider mx-3"></div></li>
+            }
+            else
+            {
+                IHtmlString label = Html.Raw(item.Label);
+                if (item.MenuViews == null || !item.MenuViews.Any())
+                {   //nincs almenü, egyszerű menüpont
+                    @GetActionMenu(item)
+                }
+                else
+                {   //itt meg kell rajzolni a almenüt
+                    <li class="dropdown-submenu @(item.IsEnabled ? item.StyleKit : item.StyleKitDisabled)">
+                        <a class="dropdown-item" tabindex="-1" href="#">@Html.Raw(item.Label)</a>
+                        <ul class="dropdown-menu navbar-dark bg-dark">
+                            @foreach (MenuView subitem in item.MenuViews)
+                            {
+                                if (subitem.Label == "-")
+                                {
+                                    <li><div class="dropdown-divider mx-3"></div></li>
+                                }
+                                else
+                                {
+                                    if (subitem.MenuViews == null || !subitem.MenuViews.Any())
+                                    {   //nincs almenü, egyszerű menüpont
+                                        @GetActionMenu(subitem)
+                                    }
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
+            }
+        }
+    </ul>
+</li>
+@helper GetActionMenu(MenuView mv)
+{
+    //engedélytől függő li osztály összerakása
+    string liClass = (mv.IsEnabled ? mv.StyleKit : mv.StyleKitDisabled);
+    //string liClass = ""; //egyelőre a desktop-nál nem alkalmazzuk, hanem az attribútumot teszi be
+    if (String.IsNullOrWhiteSpace(mv.LinkOrCommand))
+    {
+        <li class="@liClass"><a class="dropdown-item" href="#">@(Html.Raw(mv.Label))</a></li>
+    }
+    else
+    {
+        string aClass = "dropdown-item";
+        string disAttr = ""; //mv.IsEnabled ? "" : "disabled";
+
+        if (mv.ResponseTarget == ResponseTargets.CurrentPage)
+        {
+            <li class="@liClass"><a class="@aClass" @disAttr href="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a></li>
+        }
+        else if (mv.ResponseTarget == ResponseTargets.NewPage)
+        {
+            <li class="@liClass"><a class="@aClass" @disAttr href="@Html.Raw(Url.Content(mv.LinkOrCommand))" target="_blank">@Html.Raw(mv.Label)</a></li>
+        }
+        else
+        {
+            <li class="@liClass"><a class="@aClass" @disAttr href="#" onclick="@Html.Raw(Url.Content(mv.LinkOrCommand))">@Html.Raw(mv.Label)</a></li>
+        }
+    }
+}

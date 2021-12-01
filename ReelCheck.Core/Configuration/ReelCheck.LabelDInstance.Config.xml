@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Reelcheck>
+  <GeneralParameters>
+    <StationType>Automatic</StationType>
+    <Process>LABEL</Process>
+    <GoldenSampleMode>
+      <DueTimers>
+        <DueTimer>05:40:00</DueTimer>
+        <DueTimer>13:40:00</DueTimer>
+        <DueTimer>21:40:00</DueTimer>
+      </DueTimers>
+      <DueCycleCounterLimit>0</DueCycleCounterLimit>
+      <GoldenSampleCycles>3</GoldenSampleCycles>
+    </GoldenSampleMode>    
+    <UnloadMode AutoInactive="true"/>
+    <ManualMode AutoStartIdentification="true"/>
+    <IOInputs>
+      <Enable Type="IO">0</Enable>
+      <StickingDone Type="IOExt">0</StickingDone>
+      <StatusReset Type="IOExt">1</StatusReset>
+	    <HardReset Type="IOExt">2</HardReset>
+    </IOInputs>
+    <IOOutputs>
+      <Ready Type="IO">0</Ready>
+      <LabelPrinted Type="IO">1</LabelPrinted>      
+      <WorkpieceOK Type="IOExt">1</WorkpieceOK>
+      <WorkPieceNOK Type="IOExt">2</WorkPieceNOK>
+      <AllStationFinished Type="IOExt">0</AllStationFinished>
+      <Empty Type="IOExt">3</Empty>
+    </IOOutputs>
+    <TimeLog>True</TimeLog>
+  </GeneralParameters>
+  <CameraDefinitions>
+    <Camera Function="ID" Name="ID"/>
+    <Camera Function="CHECK" Name="CHECK"/>
+  </CameraDefinitions>
+  <PrinterDefinitions EventHubChennel="DATA">
+    <Printer LogicalName="AUTOMATIC" PhisycalName="{0}PRINTER" DefaultPrintEventId="LabelFAILREFUSE" Active="true">
+      <PrintEvents>
+        <PrintEvent EventId="LABELPASS" LabelId="PASS.prn" NameSeparator="THIS IS A NOT USED ATTRIBUTE" Active="true">
+          <LabelVars>
+            <LabelVar Name="Date">{PRINTTIMESTAMP}</LabelVar>
+			      <LabelVar Name="WeekNo">{WEEKNO}</LabelVar>
+            <LabelVar Name="Partnumber">{IPN}</LabelVar>
+            <LabelVar Name="Quantity">{IQTY}</LabelVar>
+            <LabelVar Name="Address">{ADDRESS}</LabelVar>
+            <LabelVar Name="Description">{IPNDESC}</LabelVar>
+            <LabelVar Name="FVS">{IFVS}</LabelVar>
+            <LabelVar Name="MTS">{IMTSID}</LabelVar>
+            <LabelVar Name="MSL">{IMSL}</LabelVar>
+          </LabelVars>
+        </PrintEvent>
+        <PrintEvent EventId="LabelFAILREFUSE" LabelId="FAIL.prn" NameSeparator="THIS IS A NOT USED ATTRIBUTE" Active="false">
+          <LabelVars>
+			<LabelVar Name="MSG1">{MSG1}</LabelVar>
+			<LabelVar Name="MSG2">{MSG2}</LabelVar>
+			<LabelVar Name="MSG3">{MSG3}</LabelVar>
+			<LabelVar Name="MSG4">{MSG4}</LabelVar>
+			<LabelVar Name="MSG5">{MSG5}</LabelVar>
+          </LabelVars>
+        </PrintEvent>
+        <PrintEvent EventId="LabelFAILNOREAD" LabelId="FAIL.prn" NameSeparator="THIS IS A NOT USED ATTRIBUTE" Active="false">
+          <LabelVars>
+			<LabelVar Name="MSG1">{MSG1}</LabelVar>
+			<LabelVar Name="MSG2">{MSG2}</LabelVar>
+			<LabelVar Name="MSG3">{MSG3}</LabelVar>
+			<LabelVar Name="MSG4">{MSG4}</LabelVar>
+			<LabelVar Name="MSG5">{MSG5}</LabelVar>
+          </LabelVars>
+        </PrintEvent>
+        <PrintEvent EventId="LabelFAILDATAERROR" LabelId="FAIL.prn" NameSeparator="THIS IS A NOT USED ATTRIBUTE" Active="false">
+          <LabelVars>FST
+			<LabelVar Name="MSG1">{MSG1}</LabelVar>
+			<LabelVar Name="MSG2">{MSG2}</LabelVar>
+			<LabelVar Name="MSG3">{MSG3}</LabelVar>
+			<LabelVar Name="MSG4">{MSG4}</LabelVar>
+			<LabelVar Name="MSG5">{MSG5}</LabelVar>
+          </LabelVars>
+        </PrintEvent>
+        <PrintEvent EventId="LabelFAILNOACK" LabelId="FAIL.prn" NameSeparator="THIS IS A NOT USED ATTRIBUTE" Active="false">
+          <LabelVars>
+			<LabelVar Name="MSG1">{MSG1}</LabelVar>
+			<LabelVar Name="MSG2">{MSG2}</LabelVar>
+			<LabelVar Name="MSG3">{MSG3}</LabelVar>
+			<LabelVar Name="MSG4">{MSG4}</LabelVar>
+			<LabelVar Name="MSG5">{MSG5}</LabelVar>
+          </LabelVars>
+        </PrintEvent>
+      </PrintEvents>
+    </Printer>
+  </PrinterDefinitions>
+  <LabelMessages>
+    <LabelMessage Id="EMPTYID" Source="ID">
+      <MessageMask>^TMPL=EMPTY;</MessageMask>
+    </LabelMessage>
+    <LabelMessage Id="EMPTYCHECK" Source="CHECK">
+      <MessageMask>^TMPL=EMPTY;</MessageMask>
+    </LabelMessage>
+    <LabelMessage Id="NOREADID" Source="ID">
+      <MessageMask>^TMPL=NOREAD;</MessageMask>
+    </LabelMessage>
+    <LabelMessage Id="NOREADCHECK" Source="CHECK">
+      <MessageMask>^TMPL=NOREAD;</MessageMask>
+    </LabelMessage>
+    <LabelMessage Id="FVSONLY" Source="ID">
+      <MessageMask ListName="BCLIST" ListSeparator=",">^TMPL=FVSONLY;BCLIST\:\:(?'BCLIST'.*)$</MessageMask>
+      <Labels>
+        <Label LabelId="FVSONLY"/>
+      </Labels>
+    </LabelMessage>
+    <LabelMessage Id="ROHM" Source="ID">
+      <MessageMask ListName="BCLIST" ListSeparator=",">^TMPL=ROHM;BCLIST\:\:(?'BCLIST'.*)$</MessageMask>
+      <Labels>
+        <Label LabelId="ROHM"/>
+      </Labels>
+    </LabelMessage>
+    <LabelMessage Id="DIODES" Source="ID">
+      <MessageMask ListName="BCLIST" ListSeparator=",">^TMPL=DIODES;BCLIST\:\:(?'BCLIST'.*)$</MessageMask>
+      <Labels>
+        <Label LabelId="DIODES"/>
+      </Labels>
+    </LabelMessage>    
+    <LabelMessage Id="STM" Source="ID">
+      <MessageMask ListName="BCLIST" ListSeparator=",">^TMPL=STM;BCLIST\:\:(?'BCLIST'.*)$</MessageMask>
+      <Labels>
+        <Label LabelId="STM"/>
+      </Labels>
+    </LabelMessage>    
+    <LabelMessage Id="BCLIST" Source="ID">
+      <MessageMask ListName="BCLIST" ListSeparator=",">^TMPL=BCLIST;BCLIST\:\:(?'BCLIST'.*);</MessageMask>
+      <Labels>
+        <Label LabelId="BCLIST1"/>
+        <Label LabelId="BCLIST2"/>
+        <Label LabelId="BCLIST3"/>
+		<Label LabelId="BCLIST4"/>
+		<Label LabelId="BCLIST5"/>
+		<Label LabelId="BCLIST6"/>
+      </Labels>
+    </LabelMessage>    
+    <LabelMessage Id="DELPHICHECK" Source="CHECK">
+      <MessageMask ListName="BCL" ListSeparator=";">^TMPL=DELPHI;(?'BCL'.*)$</MessageMask>
+      <Labels>
+        <Label LabelId="DELPHICHECK"/>
+      </Labels>
+    </LabelMessage>
+  </LabelMessages>
+  <Labels>
+    <Label Id="FVSONLY">
+      <Barcodes>
+        <Barcode Name="FVS">FVS=(?'FVS'.*);</Barcode>
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="SFVS">{FVS}</DataElement>
+      </DataElements>
+    </Label>
+    <Label Id="ROHM">
+      <Barcodes>
+        <Barcode Name="bcFVS">FVS=(?'FVSX'.*)</Barcode>
+        <Barcode Name="bcLOT">LOT=(?'LOTX'.*)</Barcode>
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="SFVS">{FVSX}</DataElement>
+        <DataElement Name="SLOT">{LOTX}</DataElement>
+      </DataElements>
+    </Label>
+    <Label Id="DIODES">
+      <Barcodes>
+        <Barcode Name="bcSPN">P/N=(?'SPNX'.*)</Barcode>
+        <Barcode Name="bcLOT">LOT=(?'LOTX'.*)</Barcode>
+        <Barcode Name="bcQTY">QTY=(?'QTYX'.*)</Barcode>      
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="SPN">{SPNX}</DataElement>
+        <DataElement Name="SLOT">{LOTX}</DataElement>
+        <DataElement Name="SQTY">{QTYX}</DataElement>
+      </DataElements>
+    </Label>    
+    <Label Id="STM">
+      <Barcodes>
+        <Barcode Name="bcTYPE">TYPE=(?'TYPEX'.*)</Barcode>
+        <Barcode Name="bcLOT">LOT=(?'LOTX'.*)</Barcode>
+        <Barcode Name="bcQTY">QTY=(?'QTYX'.*)</Barcode>      
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="TYPE">{TYPEX}</DataElement>
+        <DataElement Name="SLOT">{LOTX}</DataElement>
+        <DataElement Name="SQTY">{QTYX}</DataElement>
+      </DataElements>
+    </Label>    
+    <Label Id="BCLIST1">
+      <Barcodes>
+        <Barcode Name="bcSPN">(?'SPNX'^P.*)</Barcode>
+        <Barcode Name="bcLOT">^1T(?'LOTX'.*)</Barcode>
+        <Barcode Name="bcQTY">^Q(?'QTYX'.*)</Barcode>      
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="SPN">{SPNX}</DataElement>
+        <DataElement Name="SLOT">{LOTX}</DataElement>
+        <DataElement Name="SQTY">{QTYX}</DataElement>
+      </DataElements>
+    </Label>    
+    <Label Id="BCLIST2">
+      <Barcodes>
+        <Barcode Name="bcSPN">(?'SPNX'^1P.*)</Barcode>
+        <Barcode Name="bcLOT">^1T(?'LOTX'.*)</Barcode>
+        <Barcode Name="bcQTY">^Q(?'QTYX'.*)</Barcode>      
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="SPN">{SPNX}</DataElement>
+        <DataElement Name="SLOT">{LOTX}</DataElement>
+        <DataElement Name="SQTY">{QTYX}</DataElement>
+      </DataElements>
+    </Label>    
+    <Label Id="BCLIST3">
+      <Barcodes>
+        <Barcode Name="bcSPN">^3N1(?'SPNX'..........)</Barcode>
+        <Barcode Name="bcLOT">^3N2 (?'LOTX'..........)</Barcode>
+        <Barcode Name="bcQTY">^3N1...........(?'QTYX'[0-9][0-9][0-9][0-9][0-9]|[0-9][0-9][0-9][0-9]|[0-9][0-9][0-9])</Barcode>      
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="SPN">{SPNX}</DataElement>
+        <DataElement Name="SLOT">{LOTX}</DataElement>
+        <DataElement Name="SQTY">{QTYX}</DataElement>
+      </DataElements>
+    </Label>
+    <Label Id="BCLIST4">
+      <Barcodes>
+        <Barcode Name="bcSPN">(?'SPNX'^P.*)</Barcode>
+        <Barcode Name="bcLOT">^H(?'LOTX'.*)</Barcode>
+        <Barcode Name="bcQTY">^Q(?'QTYX'.*)</Barcode>      
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="SPN">{SPNX}</DataElement>
+        <DataElement Name="SLOT">{LOTX}</DataElement>
+        <DataElement Name="SQTY">{QTYX}</DataElement>
+      </DataElements>
+    </Label>    
+    <Label Id="BCLIST5">	
+      <Barcodes>
+        <Barcode Name="bcSPN">(?'SPNX'^P.*)</Barcode>
+        <Barcode Name="bcLOT">^V(?'LOTX'.*)</Barcode>
+        <Barcode Name="bcQTY">^Q(?'QTYX'.*)</Barcode>      
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="SPN">{SPNX}</DataElement>
+        <DataElement Name="SLOT">{LOTX}</DataElement>
+        <DataElement Name="SQTY">{QTYX}</DataElement>
+      </DataElements>
+    </Label>    
+    <Label Id="BCLIST6">
+      <Barcodes>
+        <Barcode Name="bcSPN">^(?'SPNX'.{12}$)</Barcode>
+        <Barcode Name="bcLOT">^T(?'LOTX'.{9}$)</Barcode>
+        <Barcode Name="bcQTY">^(?'QTYX'[0-9]{1,2}$)</Barcode>
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="SPN">{SPNX}</DataElement>
+        <DataElement Name="SLOT">{LOTX}</DataElement>
+        <DataElement Name="SQTY">{QTYX}</DataElement>
+      </DataElements>
+    </Label>
+    <Label Id="DELPHICHECK">
+      <Barcodes>
+        <Barcode Name="bcFVS">^(?'FVSX'{IFVS})</Barcode>
+        <Barcode Name="bcMTS">^(?'MTSX'{IMTSID})</Barcode>
+      </Barcodes>
+      <DataElements>
+        <DataElement Name="CMTSID">{MTSX}</DataElement>
+        <DataElement Name="CFVS">{FVSX}</DataElement>
+      </DataElements>
+    </Label>
+  </Labels>
+  <IncomingMessages>
+    <IncomingMessage Id="PASS">
+      <MessageMask>status=PASS</MessageMask>
+      <Parts>
+        <Part Name="ID">^mtsid=(?'ID'.*)</Part>
+        <Part Name="ADDRESS">^address=(?'ADDRESS'.*)</Part>
+        <Part Name="IFVS">^c9023=(?'IFVS'.*)</Part>
+        <Part Name="IPNDESC">^description=(?'IPNDESC'.*)</Part>
+        <Part Name="IPN">^partnumber=(?'IPN'.*)</Part>
+        <Part Name="IQTY">^quantity=(?'IQTY'.*)</Part>
+        <Part Name="IMSL">^msl=(?'IMSL'.*)</Part>
+      </Parts>
+      <DataElements>
+        <DataElement Name="IMTSID">{ID}</DataElement>
+        <DataElement Name="ADDRESS">{ADDRESS}</DataElement>
+        <DataElement Name="IFVS">{IFVS}</DataElement>
+        <DataElement Name="CT">{CT}</DataElement>
+        <DataElement Name="IPN">{IPN}</DataElement>      
+        <DataElement Name="IQTY">{IQTY}</DataElement>      
+        <DataElement Name="IVENDOR">{IVENDOR}</DataElement>      
+        <DataElement Name="ILOT">{ILOT}</DataElement>      
+        <DataElement Name="ILOTDATE">{ILOTDATE}</DataElement>      
+        <DataElement Name="ILOTSN">{ILOTSN}</DataElement>        
+        <DataElement Name="LOCATOR">{LOCATOR}</DataElement>      
+        <DataElement Name="IPNDESC">{IPNDESC}</DataElement>
+        <DataElement Name="IMSL">{IMSL}</DataElement>
+      </DataElements>
+    </IncomingMessage>
+    <IncomingMessage Id="FAIL">
+      <MessageMask>status=FAIL</MessageMask>
+      <Parts>
+        <Part Name="MSG">^msg=(?'MSG'.*)</Part>
+      </Parts>
+      <DataElements>
+        <DataElement Name="CUSTOMFVSERRORMESSAGE">{MSG}</DataElement>
+      </DataElements>
+    </IncomingMessage>
+    <IncomingMessage Id="REREAD">
+      <MessageMask>status=REREAD</MessageMask>
+    </IncomingMessage>    
+  </IncomingMessages>
+  <OutgoingMessages>
+    <OutgoingMessage Id="FVSONLY" NameSeparator="NOT USED!!!">ID=1|FVS={SFVS}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+    <OutgoingMessage Id="ROHM" NameSeparator="NOT USED!!!">ID=2|FVS={SFVS}|LOT={SLOT}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+    <OutgoingMessage Id="DIODES" NameSeparator="NOT USED!!!">ID=3|LOT={SLOT}|PN={SPN}|QTY={SQTY}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+    <OutgoingMessage Id="BCLIST1" NameSeparator="NOT USED!!!">ID=3|LOT={SLOT}|PN={SPN}|QTY={SQTY}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+    <OutgoingMessage Id="BCLIST2" NameSeparator="NOT USED!!!">ID=3|LOT={SLOT}|PN={SPN}|QTY={SQTY}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+    <OutgoingMessage Id="BCLIST3" NameSeparator="NOT USED!!!">ID=3|LOT={SLOT}|PN={SPN}|QTY={SQTY}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+    <OutgoingMessage Id="BCLIST4" NameSeparator="NOT USED!!!">ID=3|LOT={SLOT}|PN={SPN}|QTY={SQTY}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+	<OutgoingMessage Id="BCLIST5" NameSeparator="NOT USED!!!">ID=3|LOT={SLOT}|PN={SPN}|QTY={SQTY}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+	<OutgoingMessage Id="BCLIST6" NameSeparator="NOT USED!!!">ID=3|LOT={SLOT}|PN={SPN}|QTY={SQTY}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+    <OutgoingMessage Id="STM" NameSeparator="NOT USED!!!">ID=4|LOT={SLOT}|TYPE={TYPE}|QTY={SQTY}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+    <OutgoingMessage Id="BOOKOK" NameSeparator="NOT USED!!!">ID=0|STATUS=PASS|FVS={IFVS}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+    <OutgoingMessage Id="BOOKNOK" NameSeparator="NOT USED!!!">ID=0|STATUS=FAIL|FVS={IFVS}|STATION={STATION}|USER={USERNAME}</OutgoingMessage>
+  </OutgoingMessages>
+  <HandheldLabels>
+    <HandheldLabel Source="ID">
+      <Label Id="HandheldLabel_ID"/>
+    </HandheldLabel>
+    <HandheldLabel Source="CHECK">
+      <Label Id="HandheldLabel_CHECK"/>
+    </HandheldLabel>
+  </HandheldLabels>
+  <CheckSuccess NameSeparator="THIS IS A NOT USED ATTRIBUTE">
+    <Condition Type="Equal" Test="{IFVS}{IMTSID}" With="{CFVS}{CMTSID}"/>
+    <!--
+    <Condition Type="NotEqual" Test="ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL" With="ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL"/>
+    <Condition Type="Match" Test="ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL" With="ABCD @FVSCODE@ EFG @MTSCODE@ HIJKL"/>
+    -->
+  </CheckSuccess>
+  <TransactionBooking Enabled="true">
+    <BookingRecord Name="RESULT_FAIL_EMPTY" Enabled="true"/>
+    <BookingRecord Name="RESULT_FAIL_NOREAD" Enabled="true"/>
+    <BookingRecord Name="RESULT_FAIL_DATEAERR" Enabled="true"/>
+    <BookingRecord Name="RESULT_FAIL_NOACK" Enabled="true"/>
+    <BookingRecord Name="RESULT_FAIL_REFUSE" Enabled="true"/>
+    <BookingRecord Name="RESULT_PASS" Enabled="true"/>
+  </TransactionBooking>
+  <EnableOperationBlocking>
+      <Manual>True</Manual>
+      <GoldenSampleTestFailed>True</GoldenSampleTestFailed>
+      <GoldenSampleTestDue>True</GoldenSampleTestDue>
+      <ReelProcessingFailed>True</ReelProcessingFailed>
+  </EnableOperationBlocking>
+</Reelcheck>

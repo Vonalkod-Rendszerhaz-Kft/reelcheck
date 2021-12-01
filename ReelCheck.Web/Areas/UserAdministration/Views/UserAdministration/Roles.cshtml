@@ -1,0 +1,65 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Membership.Areas.UserAdministration.Models;
+
+@model IndexViewModel
+
+@{
+    var labelNewRole = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.NewRole)) + ":");
+
+    ViewBag.Title = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.Roles)));
+}
+
+@section Styles {
+    <link href="@Url.Content(Constants.AREA_CONTENTPATH + "MvcMembership.css")" rel="stylesheet" type="text/css" />
+}
+
+@if (Model.IsRolesEnabled)
+{
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">@ViewBag.Title</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    @if (Model.Roles.Count() > 0)
+                    {
+                        <ul class="list-group" style="min-width:20rem;">
+                            @foreach (var role in Model.Roles)
+                            {
+                            <li class="list-group-item d-inline-flex justify-content-between py-0 bg-dark" style="border-color:black;">
+@*                                @Html.ActionLink(role, "Role", new { roleid = role }, new { @class = "ml-1 text-light" })*@
+                                <span class="ml-1 text-light">@role</span>
+                                @if (role != Constants.ROLE_ADMINISTRATOR)
+                                {
+                                    using (Html.BeginForm("DeleteRole", Constants.CONTROLLER_UA, new { roleid = role }))
+                                    {
+                                        <input type="submit"
+                                               class="btn btn-danger btn-sm my-1 py-0"
+                                               style="line-height:1.1;"
+                                               value="@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.Common.Delete)))" />
+                                    }
+                                }
+                            </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.NoRoles)))</p>
+                    }
+                </div>
+                <div class="col-lg-6">
+                    @using (Html.BeginForm("CreateRole", Constants.CONTROLLER_UA, FormMethod.Post, new { @class = "form-inline" }))
+                    {
+                        <div class="form-group">
+                            <label for="id">@(labelNewRole)</label>
+                            @Html.TextBox("id", null, new { @class = "form-control mx-2" })
+                        </div>
+                        <button type="submit" class="btn btn-success">@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.Common.Create)))</button>
+                    }
+                </div>
+            </div> <!-- class="row" -->
+        </div> <!-- class="card-body" -->
+    </div> <!-- class="card" -->
+}

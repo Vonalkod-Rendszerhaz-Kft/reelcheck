@@ -1,0 +1,11 @@
+﻿﻿@using Vrh.Web.Common.Lib;
+
+@if (!ViewData.ModelState.IsValid && !string.IsNullOrEmpty(Html.ValidationSummaryMessage(true)))
+{
+    <script type="text/javascript">
+        bootbox.alert({
+            size: 'large',
+            message: '@Html.Raw(Html.ValidationSummaryMessage(true).Trim().Replace(System.Environment.NewLine, WebCommon.HTML_NEWLINE).Replace("\n", WebCommon.HTML_NEWLINE).Replace("\r", WebCommon.HTML_NEWLINE))'
+        });
+    </script>
+}

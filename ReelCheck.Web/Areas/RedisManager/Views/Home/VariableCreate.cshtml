@@ -1,0 +1,38 @@
+﻿@using Vrh.Web.Common.Lib;
+@using Vrh.Web.RedisManager.Areas.RedisManager.Controllers
+
+@model VariableCreateModel
+@{
+    string actionName = nameof(HomeController.VariableCreate);
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];
+    var ajaxops = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId),
+    };
+
+    @Html.Partial("ValidationSummary")
+
+    using (Ajax.BeginForm(actionName, controllerName, new { area = areaName }, ajaxops, new { id = Constants.Ids.Forms.VARIABLECREATE }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.BootboxId)
+        @Html.HiddenFor(x => x.Server)
+        @Html.HiddenFor(x => x.Port)
+        @Html.HiddenFor(x => x.Pool)
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.VariableName)
+            @Html.TextBoxFor(x => x.VariableName, new { @autofocus = "", @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.VariableName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.DataType)
+            @Html.DropDownListFor(x => x.DataType, Model.DataTypeList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.DataType)
+        </div>
+    }
+}

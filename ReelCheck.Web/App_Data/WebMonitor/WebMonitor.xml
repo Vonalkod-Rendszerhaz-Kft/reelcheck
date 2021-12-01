@@ -1,0 +1,82 @@
+<WEBMonitor>
+	<!-- xmlfile=~\App_Data\WebMonitor\WebMonitors.xml -->
+	<XmlParser>
+		<XmlVar Name="LABELDHeading" LCID="en-US">Automatic ReelChecker (LABELD)</XmlVar>
+		<XmlVar Name="LABELDHeading" LCID="hu-HU">Automata ellenőrző gép (LABELD)</XmlVar>
+    <XmlVar Name="LABELKHeading" LCID="en-US">Automatic ReelChecker (LABELK)</XmlVar>
+    <XmlVar Name="LABELKHeading" LCID="hu-HU">Automata ellenőrző gép (LABELK)</XmlVar>
+    <XmlVar Name="LABELEHeading" LCID="en-US">Semi-automatic ReelChecker</XmlVar>
+		<XmlVar Name="LABELEHeading" LCID="hu-HU">Félautomata ellenőrző gép</XmlVar>
+		<XmlVar Name="LABELdailyStatHeading" LCID="hu-HU">Napi statisztika</XmlVar>
+		<XmlVar Name="LABELdailyStatHeading" LCID="en-US">Daily statistics</XmlVar>
+		<XmlVar Name="M2DXMLPARSERCS">xml=@MATRIX2DXML@;element=Matrix2DDefinitions</XmlVar>
+		<XmlVar Name="M2DLABELEIVXMLPARSERCS">xml=@MENUXML@;element=Matrix2DInternalMenuLABELEInterventions</XmlVar>
+		<XmlVar Name="M2DLABELDIVXMLPARSERCS">xml=@MENUXML@;element=Matrix2DInternalMenuLABELDInterventions</XmlVar>
+    <XmlVar Name="M2DLABELKIVXMLPARSERCS">xml=@MENUXML@;element=Matrix2DInternalMenuLABELKInterventions</XmlVar>
+  </XmlParser>
+	<FrameDefinitions>
+		<FrameDefinition Name="F1x1">
+			<FrameList>
+				<Frame Name="R1C1" Left="0" Width="1000" Top="0" Height="1000"/>
+			</FrameList>
+		</FrameDefinition>
+		<FrameDefinition Name="FLABELXSTD">
+			<FrameList>
+				<Frame Name="RTOP" 	Left="0" Width="750" Top="0" Height="100"/>
+				<Frame Name="RUSERANDTIME" Left="750" Width="250" Top="0" Height="100"/>
+				<Frame Name="RLEFT" Left="0" Width="250" Top="100" Height="900"/>
+				<Frame Name="STATUS" Left="250" Width="500" Top="100" Height="900"/>
+				<Frame Name="RRIGHT" Left="750" Width="250" Top="100" Height="900"/>
+			</FrameList>
+		</FrameDefinition>
+	</FrameDefinitions>
+	<Defaults>
+		<DefaultStyles Profile="DefaultWebMonitorProfile"/>
+		<DefaultVisibility ApplicationHeadingArea="On" SelectionAreaAutoMinimizeTimeout="1"/>
+		<DefaultMonitorProfile MonitorProfileAutoSwitchTimer="30" FrameAutoSwitchTimer="10" 
+								SelectEnable_FrameContent="false" SelectEnable_Frame="false" SelectEnable_MonitorProfile="@SelectEnable_MonitorProfile@"/>
+	</Defaults>
+
+  <StyleDefinitions ConfigFile="~/App_Data/WebMonitor/Styles.xml">
+    <Styles>
+      <Style Name="ANTITEST" Value="border:0.3vmax solid grey;background-color:slategray;" />
+    </Styles>
+  </StyleDefinitions>
+
+  <WorkPlaceDefinitions  ConfigFile="~/App_Data/WebMonitor/WorkPlaceGroupDefinition.xml"/>
+
+	<ProfileSelectionList IncludeAllProfiles="true" IncludeAllGroups="true">
+		<!--Selections>
+			<Selection Name="MP01"/>
+		</Selections-->
+	</ProfileSelectionList>
+	<MonitorProfileGroups></MonitorProfileGroups>
+	<MonitorProfiles>
+		<MonitorProfile Name="LABELESTD" Heading="@LABELEHeading@" FrameDefinitionName="F1x1" Area="WebMonitor" Controller="Matrix2D" Action="Index">
+		  <UserGroups><UserGroup Name="group2" /></UserGroups>
+		  <DisplayBlocks>
+			<DisplayBlock Frame="R1C1" BlockName="LABELESTD" WorkPlace="LABELE" Parameters="@M2DXMLPARSERCS@,Refresh=1"/>
+		  </DisplayBlocks>
+		</MonitorProfile>
+		<MonitorProfile Name="LABELDSTD" Heading="@LABELDHeading@" FrameDefinitionName="F1x1" Area="WebMonitor" Controller="Matrix2D" Action="Index">
+		  <UserGroups><UserGroup Name="group2" /></UserGroups>
+		  <DisplayBlocks>
+			<DisplayBlock Frame="R1C1" BlockName="LABELDSTD" WorkPlace="LABELD" Parameters="@M2DXMLPARSERCS@,Refresh=1"/>
+		  </DisplayBlocks>
+		</MonitorProfile>
+    <MonitorProfile Name="LABELKSTD" Heading="@LABELKHeading@" FrameDefinitionName="F1x1" Area="WebMonitor" Controller="Matrix2D" Action="Index">
+      <UserGroups>
+        <UserGroup Name="group2" />
+      </UserGroups>
+      <DisplayBlocks>
+        <DisplayBlock Frame="R1C1" BlockName="LABELKSTD" WorkPlace="LABELK" Parameters="@M2DXMLPARSERCS@,Refresh=1"/>
+      </DisplayBlocks>
+    </MonitorProfile>
+    <MonitorProfile Name="TEST" Heading="TEST" FrameDefinitionName="F1x1" Area="WebMonitor" Controller="Matrix2D" Action="Index">
+		  <UserGroups><UserGroup Name="group2" /></UserGroups>
+		  <DisplayBlocks>
+			<DisplayBlock Frame="R1C1" BlockName="TEST" WorkPlace="TEST" Parameters="@M2DXMLPARSERCS@,Refresh=1"/>
+		  </DisplayBlocks>
+		</MonitorProfile>
+	</MonitorProfiles>
+</WEBMonitor>

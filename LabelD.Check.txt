@@ -1,0 +1,23 @@
+digraph {
+        label="LabelD: Check"
+		compound=true;
+		node [shape=Mrecord]
+		rankdir="BT"
+		Rest [label="Rest"];
+		StartCheck [label="StartCheck|entry / Start operation:\n- Check need or not\n- if need: Fire ReadStart\n- if not need: Fire NotNeed\n"];
+		Read [label="Read|entry / Read label:\n- Read the label\n- Save readed data- Fire: BarcodMatch"];
+		BarcodeMatch [label="BarcodeMatch|entry / BarcodeMatch:\n- Identification the label\n- Extract label data\nFire next state (StartCheck or EmptyRead or NotRead)"];
+		Check [label="Check|entry / Check the label data:\n- Save check status\n- Fire: EndCheck"];
+		CloseOperation [label="CloseOperation|entry / Close operation:\n- data into reel object\n- Fire: End"];
+		
+		Rest -> StartCheck [style="solid", label="Start"];
+		StartCheck -> CloseOperation [style="solid", label="NotNeed"];
+		StartCheck -> Read [style="solid", label="StartRead"];
+		Read -> BarcodeMatch [style="solid", label="StartBarcodeMatch"];
+		BarcodeMatch -> Check [style="solid", label="StartCheck"];
+		BarcodeMatch -> CloseOperation [style="solid", label="EmptyRead"];
+		BarcodeMatch -> CloseOperation [style="solid", label="NoRead"];
+		BarcodeMatch -> CloseOperation [style="solid", label="NoMatch"];
+		Check -> CloseOperation [style="solid", label="EndCheck"];
+		CloseOperation -> Rest [style="solid", label="End"];
+		}

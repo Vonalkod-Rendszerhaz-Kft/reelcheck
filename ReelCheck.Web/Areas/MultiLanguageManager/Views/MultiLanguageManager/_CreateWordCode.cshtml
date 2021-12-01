@@ -1,0 +1,79 @@
+﻿@using Vrh.Web.Common.Lib;
+@using Vrh.Web.I18N.Areas.MultiLanguageManager.Controllers
+
+@model CreateWordCodeModel
+@{
+    string actionName = nameof(MultiLanguageManagerController.CreateWordCode);
+    string areaName = (string)ViewContext.RouteData.DataTokens["area"];
+    string controllerName = (string)ViewContext.RouteData.DataTokens["controller"];
+    var ajaxops = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId)
+    };
+
+    @Html.Partial("ValidationSummary")
+
+    using (Ajax.BeginForm(actionName, controllerName, new { area = areaName }, ajaxops, new { id = Constants.FormIds.CREATEWORDCODE }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.BootboxId)
+
+        <div class="row">
+            <div class="col-9">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.WordCode)
+                    @Html.TextBoxFor(x => x.WordCode, new { @autofocus = "" })
+                    @Html.ValidationMessageFor(x => x.WordCode)
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Modul)
+                    @Html.TextBoxFor(x => x.Modul)
+                    @Html.ValidationMessageFor(x => x.Modul)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                @Html.LabelFor(x => x.Description)
+                @Html.TextAreaFor(x => x.Description)
+                @Html.ValidationMessageFor(x => x.Description)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col form-group checkbox">
+                <label>
+                    @Html.CheckBoxFor(x => x.PushDescriptionInTranslations, new { @onchange = "javascript:vrhmlm.pushDescriptionInTranslationsClick(this)" })
+                    @Html.DisplayNameFor(x => x.PushDescriptionInTranslations)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                @Html.LabelFor(x => x.LanguageCode)
+                @Html.DropDownListFor(x => x.LanguageCode, Model.LanguageCodeList, new { @disabled = "disabled" })
+                @Html.ValidationMessageFor(x => x.LanguageCode)
+            </div>
+        </div>
+    }
+}
+<script type="text/javascript">
+    /*##### EVENTS #####*/
+    $(function () {
+        'use strict';
+
+        //var thisfn = 'MultiLanguageManager.Editor.cshtml: ready event: ';
+        //console.log(thisfn + 'PING');
+
+        vrhct.masterdata.addClass('#@(Model.BootboxId)','input[type=text],textarea,select');
+
+        //console.log(thisfn + 'END');
+    }); // $(document).ready END
+    /*##### EVENTS END #####*/
+</script>

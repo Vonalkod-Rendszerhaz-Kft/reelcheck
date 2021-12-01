@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ServiceControl>
+  <XmlParser>
+      <XmlVar Name="scriptdir">~/App_Data/OneScripter/Scripters.xml</XmlVar>
+      <XmlVar Name="STYLE_WHITEONLIME">background-color:lime;color:white;</XmlVar>
+      <XmlVar Name="STYLE_WHITEONRED">background-color:red;color:white;</XmlVar>
+      <XmlVar Name="STYLE_WHITEONBLUE">background-color:blue;color:white;</XmlVar>
+      <XmlVar Name="STYLE_BLACKONYELLOW">background-color:yellow;color:black;</XmlVar>
+  </XmlParser>
+  <General>
+     <Defaults>
+      <StartActionButton ButtonOn="true" Style="@STYLE_WHITEONLIME@">Start</StartActionButton>
+      <StopActionButton ButtonOn="true" Style="@STYLE_WHITEONRED@">Stop</StopActionButton>
+      <ManageReturnValue>true</ManageReturnValue>
+    </Defaults>
+	<AutoRefreshInterval>10</AutoRefreshInterval>
+    <WordCodePrefix>ServiceControl.xml.</WordCodePrefix>
+    <Title >REELCHECK Szerviz Komponensek</Title>
+    <Help></Help>
+	<RefreshButton Style="@STYLE_WHITEONBLUE@" AutoStyle="@STYLE_WHITEONBLUE@"/>
+  </General>
+  <Services>
+    <Service Id="STRT" ServiceId="vrh reelcheck starter" StartActionButtonOn="true" StopActionButtonOn="false">
+		<DisplayName>R E E L C H E C K   S Y S T E M   S T A R T</DisplayName>
+    </Service>
+    <Service Id="STOP" ServiceId="vrh reelcheck terminator" StartActionButtonOn="false" StopActionButtonOn="true">
+		<DisplayName>R E E L C H E C K   S Y S T E M   S T O P</DisplayName>
+    </Service>
+    <Service Id="Redis" ServiceId="vrh reelcheck redis">
+		<DisplayName>REELCHECK MONITOR-DATA Service</DisplayName>
+    </Service>
+    <Service Id="APPCONT" ServiceId="vrh reelcheck appcontainer">
+		<DisplayName>REELCHECK MAIN Service</DisplayName>
+    </Service>
+    <Service Id="APPCONTWATCHDOG" ServiceId="vrh reelcheck appcontainer watchdog" StartActionButtonOn="true" StopActionButtonOn="true">
+		<DisplayName>REELCHECK AUTOSTART/WATCHDOG Service</DisplayName>
+    </Service>
+  </Services>
+</ServiceControl>

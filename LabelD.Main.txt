@@ -1,0 +1,22 @@
+digraph {
+        label="LabelD: Main"
+		compound=true;
+		node [shape=Mrecord]
+		rankdir="TB"
+		Starting [label="Starting"];
+		NotReady [label="NotReady|entry / Enter into not ready state (Inactivate/Logout):\n- Switch READY I/O output to LOW\n- Accept Activate intervention only"];
+		Ready [label="Ready|entry / Enter into Active state (Activate/Login):\n- Switch READY I/O output to HIGH\n- Wait for ENABLE I/O input to HIGH"];
+		FeedBack [label="FeedBack|entry / Feedback out reel status in out/load posistion:\n- SET WORKPIECE OK I/O output\n- SET WORKPIECE NOK I/O output\n- Save Reel data into DB on out/load position & unload reel\n- Load emty reel in out/load position"];
+		Stopping [label="Stopping"];
+		AtWork [label="AtWork|entry / Working in progress:\n- Start Identification process\n- Start Printing process\n- Start Check process"];
+		Stopped [label="Stopped"];
+		
+		Starting -> NotReady [style="solid", label="Loaded"];
+		NotReady -> Stopping [style="solid", label="Stop"];
+		NotReady -> Ready [style="solid", label="Activate"];
+		Ready -> NotReady [style="solid", label="InActivate"];
+		Ready -> FeedBack [style="solid", label="ReceiveEnableSignal"];
+		FeedBack -> AtWork [style="solid", label="StartWorking"];
+		Stopping -> Stopped [style="solid", label="Stopped"];
+		AtWork -> Ready [style="solid", label="AllReady"];
+		}

@@ -1,0 +1,1 @@
+﻿status=FAIL|msg=A PN (C2WRAFAC1TR) nem talalhato az FVSBARC tablaban!

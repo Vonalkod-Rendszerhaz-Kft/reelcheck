@@ -1,0 +1,145 @@
+﻿<style>
+    .log4pro-menupage-ItemKit {
+        margin: .1rem 0rem .1rem 0rem;
+    }
+
+        .log4pro-menupage-ItemKit > a {
+            color: #c8c8c8;
+            background-color: transparent;
+            /*background-color: #2E3338;*/
+        }
+
+            .log4pro-menupage-ItemKit > a.active {
+                color: yellow;
+                background-color: transparent;
+                border: 2px solid yellow;
+                /*background-color: #2E3338;*/
+            }
+
+        .log4pro-menupage-ItemKit a:hover {
+            color: white;
+            /*background-color: #2E3338;*/
+            background: #2E3338;
+        }
+
+    .log4pro-menupage-GroupKit {
+        margin: .1rem 0rem .1rem 0rem;
+    }
+
+        .log4pro-menupage-GroupKit > a {
+            color: #FF9413;
+            background-color: #2E3338;
+        }
+
+            .log4pro-menupage-GroupKit > a.active {
+                color: cyan;
+                background-color: transparent;
+                border: 2px solid cyan;
+                /*background-color: #2E3338;*/
+            }
+
+            .log4pro-menupage-GroupKit > a:hover {
+                color: #FFB000;
+                background-color: #272b30 !important;
+            }
+</style>
+<script>
+$(function () {
+    "use strict";
+
+    var thisfn = 'MenuPage.Accordion: ready event: ';
+    console.log(thisfn + 'PING');
+    $('a').on("click", function (e) {
+        //e.stopPropagation();
+        console.log('MenuPage.Accordion: <a> click event:', e, this);
+        $('a').removeClass('active');
+        $(this).addClass('active');
+    });
+
+});
+</script>
+<div class="card card-primary">
+    <div class="card-header">
+        <h2>Menü lap minta</h2>
+    </div>
+    <div class="card-body">
+        <div id="accordion">
+
+            <div class="log4pro-menupage-ItemKit" style="margin-left:0rem;"><a href="http://www.index.hu" target="_">Sima menüpont A</a></div>
+
+            <div style="margin-left:0rem;">
+                <div id="headingOne" class="log4pro-menupage-GroupKit">
+                    <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Menü pont almenüvel #1
+                    </a>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 1</a></div>
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 2</a></div>
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 3</a></div>
+
+                    <div style="margin-left:1rem;">
+                        <div id="headingOne-aaa" class="log4pro-menupage-GroupKit">
+                            <a href="#" data-toggle="collapse" data-target="#collapseOne-aaa" aria-expanded="true" aria-controls="collapseOne-aaa">
+                                Menü pont almenüvel #11
+                            </a>
+                        </div>
+                        <div id="collapseOne-aaa" class="collapse" aria-labelledby="headingOne-aaa" data-parent="#collapseOne">
+                            <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 1</a></div>
+                            <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 2</a></div>
+                            <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 3</a></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-left:1rem;">
+                        <div id="headingOne-bbb" class="log4pro-menupage-GroupKit">
+                            <a href="#" data-toggle="collapse" data-target="#collapseOne-bbb" aria-expanded="true" aria-controls="collapseOne-bbb">
+                                Menü pont almenüvel #12
+                            </a>
+                        </div>
+                        <div id="collapseOne-bbb" class="collapse show" aria-labelledby="headingOne-bbb" data-parent="#collapseOne">
+                            <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 1</a></div>
+                            <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 2</a></div>
+                            <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 3</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="log4pro-menupage-ItemKit" style="margin-left:0rem;"><a href="#">Sima menüpont B</a></div>
+
+
+            <div style="margin-left:0rem;">
+                <div id="headingTwo" class="log4pro-menupage-GroupKit">
+                    <a class="collapsed" href="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Menü pont almenüvel #2
+                    </a>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 1</a></div>
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 2</a></div>
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 3</a></div>
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 4</a></div>
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 5</a></div>
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 6</a></div>
+                </div>
+            </div>
+
+            <div style="margin-left:0rem;">
+                <div id="headingThree" class="log4pro-menupage-GroupKit">
+                    <a class="collapsed" href="" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Menü pont almenüvel #3
+                    </a>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 1</a></div>
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 2</a></div>
+                    <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 3</a></div>
+                </div>
+            </div>
+
+            <div class="log4pro-menupage-ItemKit" style="margin-left:0rem;"><a href="#">Sima menüpont C</a></div>
+        </div> <!-- id="accordion" -->
+    </div> <!-- class="card-body" -->
+</div>

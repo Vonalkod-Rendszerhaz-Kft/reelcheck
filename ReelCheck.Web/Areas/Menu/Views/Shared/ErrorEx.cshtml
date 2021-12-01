@@ -1,0 +1,70 @@
+﻿@model Exception
+
+@helper GetException(Exception ex)
+    {
+        if (ex is ApplicationException)
+        {
+            <div class="row">
+                <div class="col-md-12 text-white text-md-left">@ex.Message</div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-2">Message:</div>
+                <div class="col-md-10">@ex.Message</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">Source:</div>
+                <div class="col-md-10">@ex.Source</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">HResult:</div>
+                <div class="col-md-10">@ex.HResult</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">Stack Trace:</div>
+                <div class="col-md-10">@ex.StackTrace</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">Target Site:</div>
+                <div class="col-md-10">@ex.TargetSite</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">Help Link:</div>
+                <div class="col-md-10">@ex.HelpLink</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">Data:</div>
+                <div class="col-md-10">@ex.Data</div>
+            </div>
+            if (ex.InnerException != null)
+            {
+                <div class="row">
+                    <div class="col-md-2">Inner Exception:</div>
+                    <div class="col-md-10">
+                        @GetException(ex.InnerException)
+                    </div>
+                </div>
+            }
+        }@*if (ex is ApplicationException) END*@
+}@*GetException(Exception ex) helper END*@
+
+@{
+    string title = ViewBag.Title == null ? "Error" : ViewBag.Title;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header"><h2>@title</h2></div>
+        <div class="card-body">
+            @GetException(Model)
+        </div>
+    </div>
+</body>
+</html>

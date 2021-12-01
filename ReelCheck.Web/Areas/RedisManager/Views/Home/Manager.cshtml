@@ -1,0 +1,181 @@
+﻿@*
+    -------------------------------------
+    RedisManager - Manager.cshtml
+    -------------------------------------
+*@
+
+@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Common.Lib;
+@using Vrh.Web.RedisManager.Areas.RedisManager.Controllers;
+
+@model RedisManagerModel
+
+@{
+    ViewBag.Title = Html.Raw(Model.Config.Title);
+
+    int[] tableToolsExportColumnIndexes = new int[] { 0, 1, 2, 3, 4 };
+    object routeValues = new
+    {
+        area = Constants.AREA,
+        server = Model.Config.Connection.Server.Trim(),
+        port = Model.Config.Connection.Port
+    };
+}
+@Styles.Render(Constants.BUNDLES_STYLE)
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <div class="col col-sm col-md col-lg-8 d-none d-md-block" style="color:#ffd800;line-height:1.1rem;">
+                @Html.Raw(Model.Config.Help.Replace(@"\n", WebCommon.HTML_NEWLINE))
+            </div>
+        </div><!--class="row"-->
+        <div class="row mt-2 mb-0">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-5">
+                <div class="form-inline">
+                    <strong><label for="@Constants.Ids.Inputs.DATAPOOL">@(Model.Trans(typeof(WordCodes.RedisManager.Labels.DataPool)))</label></strong>
+                    @Html.DropDownList(Constants.Ids.Inputs.DATAPOOL, Model.DataPoolNames, new { @class = "form-control ml-1", onchange = "vrhrms.ChangeDataPool();" })
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success m-1" id="@(Constants.Ids.Buttons.RELOAD)" onclick="javascript: vrhrms.InstanceChange(true);">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <input type="checkbox" class="form-check-input" id="@(Constants.Ids.Inputs.AUTORELOAD)" onchange="javascript: vrhrms.AutoReload(this);">
+                        <label class="form-check-label" for="@(Constants.Ids.Inputs.AUTORELOAD)">
+                            @(Model.Trans(typeof(WordCodes.RedisManager.Labels.AutoReload)))
+                            <span class="ml-1" id="@(Constants.Ids.COUNTER)"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm col-md-2 col-lg-1">
+                <div class="form-inline justify-content-start justify-content-md-center">
+                    <button type="button" class="btn btn-success m-1" id="@(Constants.Ids.Buttons.VARIABLECREATE)" onclick="javascript: vrhrms.VariableCreate();">
+                        @(Model.Trans(typeof(WordCodes.RedisManager.Titles.VariableCreate)))
+                    </button>
+                </div>
+            </div>
+            <div class="col col-sm col-md-6 col-lg-6">
+                <div class="form-inline justify-content-start justify-content-md-end">
+                    <strong><label for="@(Constants.Ids.Inputs.INSTANCE)">@(Model.Trans(typeof(WordCodes.RedisManager.Labels.Instance)))</label></strong>
+                    @Html.DropDownList(Constants.Ids.Inputs.INSTANCE, Model.InstanceNames, new { @class = "form-control ml-1", onchange = "vrhrms.InstanceChange(true);" })
+                    <button type="button" class="btn btn-success m-1" id="@(Constants.Ids.Buttons.INSTANCECREATE)" onclick="javascript:vrhrms.InstanceCreate()">
+                        @(Model.Trans(typeof(WordCodes.RedisManager.Labels.Button.InstanceCreate)))
+                    </button>
+                    <button type="button" class="btn btn-danger ml-1" id="@(Constants.Ids.Buttons.INSTANCEDELETE)" onclick="javascript:vrhrms.InstanceDelete()">
+                        @(Model.Trans(typeof(WordCodes.RedisManager.Labels.Button.InstanceDelete)))
+                    </button>
+                </div>
+            </div>
+        </div><!--class="row"-->
+    </div><!--class="card-header"-->
+    <div class="card-body px-0">
+        <div class="table-responsive">
+            <table id="@(Constants.Ids.TABLE)" class="table table-sm table-striped table-bordered table-dark table-hover" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>@(Model.Trans(typeof(WordCodes.RedisManager.Labels.Instance)))</th>
+                        <th style="min-width:200px">@(Model.Trans(typeof(WordCodes.RedisManager.Labels.Variable)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.RedisManager.Labels.Type)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.RedisManager.Labels.Value)))</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+@*
+    -------------------------------------
+    RedisManager - Manager.cshtml
+    -------------------------------------
+*@
+@*@section Scripts {*@
+@Scripts.Render(Constants.BUNDLES_SCRIPT)
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript">
+        /**
+            * A RedisManagerScript (Manager.js) számára küldendő értékek osztálya
+            * Ezeket a kódban állandóként (constansként) érdemes kezelni.
+            */
+        function ExportToRedisManager() {
+            'use strict';
+            this.AutoRefresh = @(Math.Max(Model.Config.AutoRefresh,10));
+            this.Confirmations = {
+                InstanceDelete: '@Html.Raw(Model.Trans(typeof(WordCodes.RedisManager.Messages.Confirmations.InstanceDelete)))',
+                VariableDelete: '@Html.Raw(Model.Trans(typeof(WordCodes.RedisManager.Messages.Confirmations.VariableDelete)))',
+                VariableErase: '@Html.Raw(Model.Trans(typeof(WordCodes.RedisManager.Messages.Confirmations.VariableErase)))',
+            };
+            this.Data = {
+                Instance: '@(ExtendedOneData.COL_INSTANCE)',
+                Name: '@(ExtendedOneData.COL_NAME)',
+                TypeName: '@(ExtendedOneData.COL_TYPENAME)',
+                Value: '@(ExtendedOneData.COL_VALUE)',
+                Description: '@(ExtendedOneData.COL_DESC)',
+            };
+            this.DateTimeTypeName = '@(Vrh.Redis.DataPoolHandler.DataType.DateTime.ToString())';
+            this.EmptyValue = '@(Constants.EMPTY_VALUE)';
+            this.Labels = {
+                Cancel: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Cancel)))',
+                OK: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.OK)))',
+                No: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.No)))',
+                Yes: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Yes)))',
+                All: '@("*" + Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.All)).Trim().TrimStart('*'))',
+            };
+            this.LCID = '@(Model.LCID)';
+            this.Ids = {
+                Button: {
+                    Reload: '@(Constants.Ids.Buttons.RELOAD)',
+                    InstanceCreate: '@(Constants.Ids.Buttons.INSTANCECREATE)',
+                    InstanceDelete: '@(Constants.Ids.Buttons.INSTANCEDELETE)',
+                },
+                Counter: '@(Constants.Ids.COUNTER)',
+                Form: {
+                    InstanceCreate: '@(Constants.Ids.Forms.INSTANCECREATE)',
+                    VariableCreate: '@(Constants.Ids.Forms.VARIABLECREATE)',
+                },
+                Input: {
+                    DataPool: '@(Constants.Ids.Inputs.DATAPOOL)',
+                    Instance: '@(Constants.Ids.Inputs.INSTANCE)',
+                    AutoReload: '@(Constants.Ids.Inputs.AUTORELOAD)',
+                },
+                Table: '@(Constants.Ids.TABLE)'
+            };
+            this.Messages = {
+            };
+            this.Titles = {
+                ClickToEditing: '@Html.Raw(Model.Trans(typeof(WordCodes.RedisManager.Titles.ClickToEditing)))',
+                Confirmation: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Confirmation)))',
+                InstanceCreate: '@Html.Raw(Model.Trans(typeof(WordCodes.RedisManager.Titles.InstanceCreate)))',
+                VariableCreate: '@Html.Raw(Model.Trans(typeof(WordCodes.RedisManager.Titles.VariableCreate)))',
+                VariableDelete: '@Html.Raw(Model.Trans(typeof(WordCodes.RedisManager.Titles.VariableDelete)))',
+                VariableErase: '@Html.Raw(Model.Trans(typeof(WordCodes.RedisManager.Titles.ValueErase)))',
+            };
+            this.Url = {
+                GetData: '@Html.Raw(Url.Action(nameof(HomeController.GetData), Constants.CTRL_HOME, routeValues))',
+                GetInstanceNames: '@Html.Raw(Url.Action(nameof(HomeController.GetInstanceNames), Constants.CTRL_HOME, routeValues))',
+                InstanceCreate: '@Html.Raw(Url.Action(nameof(HomeController.InstanceCreate), Constants.CTRL_HOME, routeValues))',
+                InstanceDelete: '@Html.Raw(Url.Action(nameof(HomeController.InstanceDelete), Constants.CTRL_HOME, routeValues))',
+                UpdateData: '@Html.Raw(Url.Action(nameof(HomeController.UpdateValue), Constants.CTRL_HOME, routeValues))',
+                VariableCreate: '@Html.Raw(Url.Action(nameof(HomeController.VariableCreate), Constants.CTRL_HOME, routeValues))',
+                VariableDelete: '@Html.Raw(Url.Action(nameof(HomeController.VariableDelete), Constants.CTRL_HOME, routeValues))',
+                VariableErase: '@Html.Raw(Url.Action(nameof(HomeController.VariableErase), Constants.CTRL_HOME, routeValues))',
+            };
+        }
+
+    var vrhrms = new RedisManagerScripts(new ExportToRedisManager());
+        //hasznájuk a moment.js-t, ezért beállítjuk a lokalizációt
+    moment.locale('@(Model.LCID.Substring(0,2))');
+</script>
+@*}*@
+@*
+    -------------------------------------
+    RedisManager - Manager.cshtml
+    -------------------------------------
+*@
+

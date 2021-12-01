@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Plugins StackSize="50">
+  <Plugin 
+    Assembly="ReelCheck.ApplicationContainer.Plugin.dll" 
+    Type="ReelCheck.ReelCheckPlugin" 
+    Version="1.4.1" 
+    Singletone="false" 
+    AutoStart="true" 
+    PluginDirectory=""
+    PluginConfig="ReelCheck.PluginLevel.Config.xml">
+		<Instance 
+      Id="LABELD" 
+      Name="Automata gép LABELD" 
+      InstanceConfig="ReelCheck.LabelDInstance.Config.xml" />
+	<!--
+    <Instance 
+      Id="LABELK" 
+      Name="Automata gép LABELK" 
+      InstanceConfig="ReelCheck.LabelDInstance.Config.xml" />
+    <Instance
+      Id="LABELE"
+      Name="Flautomata gép LABELE"
+      InstanceConfig="ReelCheck.LabelEInstance.Config.xml" />
+	-->
+	</Plugin>
+  <!--    
+  <Plugin Assembly="PrintingService.ApplicationContainer.Plugin.dll" Type=".PrintingService.PrintingServicePlugin" Version="1.0.0" Singletone="false" AutoStart="true" PluginDirectory="VrhPrintingService" PluginConfig="\VrhPrintingService\XmlParser.xml">
+    <Instance Id="printingserviceplugininstance1" Name="PrintingServicePlugin instance 1" />
+  </Plugin>
+  -->
+</Plugins>

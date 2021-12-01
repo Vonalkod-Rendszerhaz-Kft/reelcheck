@@ -1,0 +1,235 @@
+﻿<FileManager>
+  <XmlParser>
+    <XmlVar Name="_userguides">@APPDATA@\Documents\UserGuides</XmlVar>
+    <XmlVar Name="_importsamples">@APPDATA@\Documents\ImportFileSamples</XmlVar>
+    <XmlVar Name="_other">@APPDATA@\Documents\Other</XmlVar>
+    <XmlVar Name="_languagebackups">@APPDATA@\LanguageBackups</XmlVar>
+    <XmlVar Name="_systembackups">@BACKUPROOTPATH@\SystemBackups</XmlVar>
+    <XmlVar Name="_dbonlybackups">@BACKUPROOTPATH@\BackupDBOnly</XmlVar>
+    <XmlVar Name="_iloggerlogs">@BACKUPROOTPATH@\VRH.iLogger.Logfiles</XmlVar>
+    <XmlVar Name="_MvcDownLoaderLog">@APPDATA@\MvcDownloader\VRH_Logs</XmlVar>
+    <XmlVar Name="_ServiceScriptlogs">@BACKUPROOTPATH@\ServiceScriptLogs</XmlVar>
+    <XmlVar Name="_AppContainerlogs">@BACKUPROOTPATH@\AppContainerLogs</XmlVar>
+    <XmlVar Name="_uploadsREELCHECKpackages">@BACKUPROOTPATH@\UploadsREELCHECKPackages</XmlVar>
+    <XmlVar Name="_anyuploads">@BACKUPROOTPATH@\Uploads</XmlVar>
+    <XmlVar Name="_scheduledsavedreports">@BACKUPROOTPATH@\ScheduledSavedReports</XmlVar>
+    <XmlVar Name="_savedreports">@BACKUPROOTPATH@\SavedReports</XmlVar>
+    <XmlVar Name="_exportdatareports">@BACKUPROOTPATH@\ExportDataReports</XmlVar>
+
+    <XmlVar Name="UserGuides_Title" LCID="hu-HU">Felhasználói kézikönyvek</XmlVar>
+      <XmlVar Name="UserGuides_Title" LCID="en-US">User Guides</XmlVar>
+    <XmlVar Name="UserGuides_Help" LCID="hu-HU">Ebben a könyvtárban az REELCHECK rendszer felhasználói kézikönyvei találhatók. A kézikönyvek magyar és angol nyelven állnak rendelkezésre.</XmlVar>
+      <XmlVar Name="UserGuides_Help" LCID="en-US">This directory stores the user guides of the REELCHECK system. The user guides are available on hungarian and english.</XmlVar>
+
+    <XmlVar Name="ImportFileSamples_Title" LCID="hu-HU">Import Excel file minták</XmlVar>
+      <XmlVar Name="ImportFileSamples_Title" LCID="en-US">Import Excel file samples</XmlVar>
+    <XmlVar Name="ImportFileSamples_Help" LCID="hu-HU">Ebben a könyvtárban az REELCHECK rendszer import mintafile-jai találhatók. A file-ok csv formátumúak.</XmlVar>
+      <XmlVar Name="ImportFileSamples_Help" LCID="en-US">This directory stores the import sample files of the REELCHECK system. The files are in csv format.</XmlVar>
+
+    <XmlVar Name="Other_Title" LCID="hu-HU">Egyéb dokumentumok</XmlVar>
+      <XmlVar Name="Other_Title" LCID="en-US">Other documents</XmlVar>
+    <XmlVar Name="Other_Help" LCID="hu-HU">Ebben a könyvtárban egyéb hasznos dokumetumok találhatók.</XmlVar>
+      <XmlVar Name="Other_Help" LCID="en-US">This directory stores the user guides of the REELCHECK system.\nThe user guides are available on hungarian and english.</XmlVar>
+
+    <XmlVar Name="LanguageBackups_Title" LCID="hu-HU">Nyelvi adatbázis mentések</XmlVar>
+      <XmlVar Name="LanguageBackups_Title" LCID="en-US">Language database backups</XmlVar>
+    <XmlVar Name="LanguageBackups_Help" LCID="hu-HU">Ebben a könyvtárban az REELCHECK rendszer nyelv adatbázisának mentései találhatók. A file-ok csv formátumúak.</XmlVar>
+      <XmlVar Name="LanguageBackups_Help" LCID="en-US">This directory stores the language database backup files of the REELCHECK system. The files are in csv format.</XmlVar>
+
+    <XmlVar Name="SystemBackups_Title" LCID="hu-HU">Teljes rendszer mentések</XmlVar>
+      <XmlVar Name="SystemBackups_Title" LCID="en-US">Full system backups</XmlVar>
+    <XmlVar Name="SystemBackups_Help" LCID="hu-HU">Ebben a könyvtárban az REELCHECK rendszer teljes mentései találhatók. Az .exe programok, önkicsomagoló tömörített file-ok.</XmlVar>
+      <XmlVar Name="SystemBackups_Help" LCID="en-US">This directory stores the full backups of the REELCHECK system. The .exe files are self-extracting compressed files.</XmlVar>
+
+    <XmlVar Name="DBOnlyBackups_Title" LCID="hu-HU">SQL adatbázis mentések</XmlVar>
+      <XmlVar Name="DBOnlyBackups_Title" LCID="en-US">SQL DB backups</XmlVar>
+    <XmlVar Name="DBOnlyBackups_Help" LCID="hu-HU">Ebben a könyvtárban az REELCHECK rendszer adatbázisának mentései találhatók. Az .bak file-okat az SQLServerManagementStudio kezeli.</XmlVar>
+      <XmlVar Name="DBOnlyBackups_Help" LCID="en-US">This directory stores the SQL DB backups of the REELCHECK system. The .bak files are SQLServerManagementStudio standard backup files.</XmlVar>
+
+    <XmlVar Name="iLoggerLogs_Title" LCID="hu-HU">iLogger napló file-ok</XmlVar>
+      <XmlVar Name="iLoggerLogs_Title" LCID="en-US">iLogger log files</XmlVar>
+    <XmlVar Name="iLoggerLogs_Help" LCID="hu-HU">Ebben a könyvtárban az REELCHECK rendszer napló file-jai találhatók. Az .txt file-ok egyszerű szöveg file-ok.</XmlVar>
+      <XmlVar Name="iLoggerLogs_Help" LCID="en-US">This directory stores the iLogger log files of the REELCHECK system. The .txt files are plain text files.</XmlVar>
+
+    <XmlVar Name="AppContainerLogs_Title" LCID="hu-HU">AppContainer napló file-ok</XmlVar>
+      <XmlVar Name="AppContainerLogs_Title" LCID="en-US">AppContainer log files</XmlVar>
+    <XmlVar Name="ServiceScriptLogs_Title" LCID="hu-HU">Szerviz funkció napló file-ok</XmlVar>
+      <XmlVar Name="ServiceScriptLogs_Title" LCID="en-US">Service scripts log files</XmlVar>
+    <XmlVar Name="ServiceScriptLogs_Help" LCID="hu-HU">Ebben a könyvtárban az REELCHECK szerviz funkcióinak napló file-jai találhatók. Az .txt file-ok XML formátumú egyszerű szöveg file-ok.</XmlVar>
+      <XmlVar Name="ServiceScriptLogs_Help" LCID="en-US">This directory stores the Service script log files of the REELCHECK system. The .txt files are plain text files with XML format.</XmlVar>
+    <XmlVar Name="AppContainerLogs_Help" LCID="hu-HU">Ebben a könyvtárban az AppContainer szervizek napló file-jai találhatók. Az .log file-ok egyszerű szöveg file-ok.</XmlVar>
+      <XmlVar Name="AppContainerLogs_Help" LCID="en-US">This directory stores the AppContainer service(es) log files of the REELCHECK system. The .log files are plain text files.</XmlVar>
+
+    <XmlVar Name="REELCHECKInstallPackages_Title" LCID="hu-HU">Feltöltött REELCHECK telepítő/frissítő csomagok</XmlVar>
+      <XmlVar Name="REELCHECKInstallPackages_Title" LCID="en-US">Upload REELCHECK Install/upgrade Packages</XmlVar>
+    <XmlVar Name="REELCHECKInstallPackages_Help" LCID="hu-HU">Ebben a könyvtárban a rendszerbe feltöltött telepítő csomagok találhatók.</XmlVar>
+      <XmlVar Name="REELCHECKInstallPackages_Help" LCID="en-US">This directory stores the REELCHECK upgrade/install packages uploaded to the server.</XmlVar>
+
+    <XmlVar Name="AnyUploads_Title" LCID="hu-HU">Feltöltött file-ok</XmlVar>
+      <XmlVar Name="AnyUploads_Title" LCID="en-US">Uploaded files</XmlVar>
+    <XmlVar Name="AnyUploads_Help" LCID="hu-HU">Ebbe a könyvtárba tetszőleges file feltölthető.</XmlVar>
+      <XmlVar Name="AnyUploads_Help" LCID="en-US">This directory stores any uploaded file.</XmlVar>
+
+    <XmlVar Name="ScheduledReports_Title" LCID="hu-HU">Ütemezett mentett riportok</XmlVar>
+      <XmlVar Name="ScheduledReports_Title" LCID="en-US">Scheduled saved reports</XmlVar>
+    <XmlVar Name="ScheduledReports_Help" LCID="hu-HU">Ebben a könyvtárban az ütemezetten mentett riportok találhatók.</XmlVar>
+      <XmlVar Name="ScheduledReports_Help" LCID="en-US">This directory stores the scheduled and saved reports.</XmlVar>
+
+    <XmlVar Name="SavedReports_Title" LCID="hu-HU">Mentett riportok</XmlVar>
+      <XmlVar Name="SavedReports_Title" LCID="en-US">Saved reports</XmlVar>
+    <XmlVar Name="SavedReports_Help" LCID="hu-HU">Ebben a könyvtárban a mentett riportok találhatók.</XmlVar>
+      <XmlVar Name="SavedReports_Help" LCID="en-US">This directory stores the saved reports.</XmlVar>
+
+    <XmlVar Name="ExportDataReports_Title" LCID="hu-HU">Mentett nyers adatok</XmlVar>
+      <XmlVar Name="ExportDataReports_Title" LCID="en-US">Saved raw data</XmlVar>
+    <XmlVar Name="ExportDataReports_Help" LCID="hu-HU">Ebben a könyvtárban az exportált riport adatok találhatók.</XmlVar>
+      <XmlVar Name="ExportDataReports_Help" LCID="en-US">This directory stores the exported raw report data.</XmlVar>
+  </XmlParser>
+	<General>
+		<Defaults>
+			<Format columns="auto" rowheight="22"/>
+			<Order by="name" direction="asc"/>
+			<Enable subdirs="true" download="false" open="false" delete="false" upload="false" overwrite="false"/>
+		</Defaults>
+	</General>
+	<Definitions>
+		<Definition id="UserGuides">
+			<Format title="@UserGuides_Title@"/>
+			<Order by="name" direction="asc"/>
+			<Enable subdirs="true" download="true" open="true" delete="false"/>
+			<Masks>
+				<FileMask>^.*\.(p|P)(d|D)(f|F)$</FileMask>
+				<FolderMask>^.*ion$</FolderMask>
+			</Masks>
+			<RootFolder>@_userguides@</RootFolder>
+			<Help>@UserGuides_Help@</Help>
+		</Definition>
+		<Definition id="ImportFileSamples">
+			<Format title="@ImportFileSamples_Title@" columns="1"/>
+			<Order by="date"/>
+			<Enable subdirs="false" download="true" open="true" delete="true"/>
+			<Masks>
+				<FileMask>^.*\.[xX][lL][sS][xX]$</FileMask>
+			</Masks>
+			<RootFolder>@_importsamples@</RootFolder>
+			<Help>@ImportFileSamples_Help@</Help>
+		</Definition>
+		<Definition id="Other">
+			<Format title="@Other_Title@" columns="1"/>
+			<Order by="date" />
+			<Enable subdirs="false" download="true" open="true" delete="false"/>
+			<Masks>
+				<Mask files="true" directories="false">.*</Mask>
+			</Masks>
+			<RootFolder>@_other@</RootFolder>
+			<Help>@Other_Help@</Help>
+		</Definition>
+		<Definition id="LanguageBackups">
+			<Format title="@LanguageBackups_Title@" columns="1"/>
+			<Order by="date" />
+			<Enable subdirs="false" download="true" open="true" delete="false"/>
+			<Masks>
+				<FileMask>language_backup_.*\.csv</FileMask>
+			</Masks>
+			<RootFolder>@_languagebackups@</RootFolder>
+			<Help>@LanguageBackups_Help@</Help>
+		</Definition>
+		<Definition id="SystemBackups">
+			<Format title="@SystemBackups_Title@" columns="3"/>
+			<Order by="date" />
+			<Enable subdirs="true" download="true" open="false" delete="false"/>
+			<Masks>
+				<FileMask>REELCHECK_.*_BackupPackage - .* - .*\.exe</FileMask>
+				<FolderMask>^2\d{3}[01]\d[0123]\d$</FolderMask>
+			</Masks>
+			<RootFolder>@_systembackups@</RootFolder>
+			<Help>@SystemBackups_Help@</Help>
+		</Definition>
+		<Definition id="DBOnlyBackups">
+			<Format title="@DBOnlyBackups_Title@" columns="3"/>
+			<Order by="date" />
+			<Enable subdirs="false" download="true" open="false" delete="false"/>
+			<Masks>
+				<FileMask>REELCHECK_.*\.bak</FileMask>
+			</Masks>
+			<RootFolder>@_dbonlybackups@</RootFolder>
+			<Help>@DBOnlyBackups_Help@</Help>
+		</Definition>
+		<Definition id="iLoggerLogs">
+			<Format title="@iLoggerLogs_Title@"/>
+			<Order by="date" direction="desc"/>
+			<Enable subdirs="false" download="true" open="false" delete="false"/>
+			<Masks>
+				<FileMask>iLog_.*\.txt</FileMask>
+			</Masks>
+			<RootFolder>@_iloggerlogs@</RootFolder>
+			<Help>@iLoggerLogs_Help@</Help>
+		</Definition>
+		<Definition id="ServiceScriptLogs">
+			<Format title="@ServiceScriptLogs_Title@" columns="1"/>
+			<Order by="date" />
+			<Enable subdirs="false" download="true" open="false" delete="false"/>
+			<Masks>
+				<FileMask>log-.*\.txt</FileMask>
+			</Masks>
+			<RootFolder>@_ServiceScriptlogs@</RootFolder>
+			<Help>@ServiceScriptLogs_Help@</Help>
+		</Definition>
+		<Definition id="AppContainerLogs">
+			<Format title="@AppContainerLogs_Title@" columns="1"/>
+			<Order by="date" />
+			<Enable subdirs="false" download="true" open="false" delete="false"/>
+			<Masks>
+				<FileMask>.*\.log</FileMask>
+			</Masks>
+			<RootFolder>@_AppContainerlogs@</RootFolder>
+			<Help>@AppContainerLogs_Help@</Help>
+		</Definition>
+		<Definition id="REELCHECKInstallPackages">
+			<Format title="@REELCHECKInstallPackages_Title@"/>
+			<Enable upload="true" subdirs="false" download="true" open="false" delete="true" overwrite="?"/>
+			<Masks>
+				<FileMask>REELCHECK_.*_BackupPackage - .* - .*\.exe</FileMask>
+			</Masks>
+			<RootFolder>@_uploadsREELCHECKpackages@</RootFolder>
+			<Help>@REELCHECKInstallPackages_Help@</Help>
+		</Definition>
+		<Definition id="AnyUploads">
+			<Format title="@AnyUploads_Title@" />
+			<Enable upload="true" subdirs="false" download="true" open="false" delete="true" overwrite="?"/>
+			<RootFolder>@_anyuploads@</RootFolder>
+			<Help>@AnyUploads_Help@</Help>
+		</Definition>
+		<Definition id="ScheduledReports">
+			<Format title="@ScheduledReports_Title@"/>
+			<Enable upload="true" subdirs="true" download="true" open="false" delete="true" overwrite="?"/>
+			<Masks>
+				<FileMask>.*\.[pP][dD][fF]|.*\.[dD][oO][cC]|.*\.[xX][lL][sS]</FileMask>
+				<FolderMask>^2\d{3}[01]\d[0123]\d$|^(?'ROLE'SchRepPck_.*)_.*$</FolderMask>
+			</Masks>
+			<RootFolder>@_scheduledsavedreports@</RootFolder>
+			<Help>@ScheduledReports_Help@</Help>
+		</Definition>
+		<Definition id='SavedReports'>
+			<Format title='@SavedReports_Title@' columns='0'/>
+			<Order by='name' direction='asc'/>
+			<Enable upload="true" subdirs='true' download='true' open='false' delete='true' overwrite='?'/>
+			<Masks>
+				<FileMask>(?'USERNAME'[^_]*)[_]</FileMask>
+			</Masks>
+			<RootFolder>@_savedreports@</RootFolder>
+			<Help>@SavedReports_Help@</Help>
+		</Definition>
+		<Definition id='ExportDataReports'>
+			<Format title='@ExportDataReports_Title@' columns='0'/>
+			<Order by='name' direction='asc'/>
+			<Enable upload="true" subdirs='true' download='true' open='false' delete='true' overwrite='?' rolefiltering='false'/>
+			<Masks>
+				<FileMask>^.*$</FileMask>
+				<FileMask>(?'USERNAME'[^_]*)[_]</FileMask>
+			</Masks>
+			<RootFolder>@_exportdatareports@</RootFolder>
+			<Help>@ExportDataReports_Help@</Help>
+		</Definition>
+	</Definitions>
+</FileManager>

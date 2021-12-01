@@ -1,0 +1,849 @@
+﻿@using System.Threading;
+@using System.Globalization;
+@using System.Collections.Generic;
+
+@model WebFormModel
+
+@{
+    string curlang2 = Model.CurrentLCID.Substring(0, 2);
+    string colWidth = String.Format(CultureInfo.CreateSpecificCulture("en-US"), "{0:0.00}", Convert.ToDouble(100) / Convert.ToDouble(Model.MaxCol));
+    int colspan = 1;
+    int rowspan = 1;
+    List<SkipCell> skipcells = new List<SkipCell>();
+
+    //Multi listák speciális elemeinek értéke
+    int selectAllValue = (int)SpecialItemForList.SelectAll;
+    int deselectAllValue = (int)SpecialItemForList.DeselectAll;
+
+    Object routeValues = new
+    {
+        area = "WebForm",
+        xml = Model.XmlConnectionString,
+        webformname = Model.Form.Name,
+        viewmode = Model.ViewMode,
+        bootboxid = Model.BootBoxId,
+        otherVarsJSON = Model.OtherVarsJSON
+    };
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = "webformpanel" + (Model.BootBoxId ?? ""),
+        //UpdateTargetId = String.IsNullOrWhiteSpace(Model.BootBoxId) ? null : Model.BootBoxId + "-body",
+    };
+    string ajaxFormId = "webformajaxform";
+    Object htmlAttributes = new { enctype = "multipart/form-data", id = ajaxFormId, onsubmit = "wfafOnSubmit()" };
+
+    string urlAction = Model.SelectedAction == null ? "" : (Model.SelectedAction.Url == null ? "" : Url.Content(Model.SelectedAction.Url.GetUrl()));
+    if (!String.IsNullOrWhiteSpace(urlAction) && !String.IsNullOrWhiteSpace(Model.UrlParameters))
+    {
+        urlAction += urlAction.Contains("?") ? ("&" + Model.UrlParameters.Substring(1)) : Model.UrlParameters;
+    }
+}
+
+@using (Ajax.BeginForm("ParameterParse", "WebForm", routeValues, ajaxOptions, htmlAttributes))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.BootBoxId)
+    @Html.HiddenFor(x => x.ViewMode)
+    @Html.HiddenFor(x => x.SelectedActionName)
+
+    //Rejtett inputokat beillesztő ciklusok
+    foreach (var item in Model.Form.Inputs)
+    {
+        if (item.Row == 0 || item.Col == 0)
+        {   //Rejtett input mezők
+            <input type="hidden" id="@(item.Name)" name="@(item.Name)" hidden value="@(item.Value)">
+        }
+        else
+        {   //Az autocomplete targetid-ja
+            if (item.InputType == Vrh.WebForm.InputType.EnumList || item.InputType == Vrh.WebForm.InputType.DATList ||
+                item.InputType == Vrh.WebForm.InputType.SQLList || item.InputType == Vrh.WebForm.InputType.XMLList)
+            {
+                ListType listtype = Model.GetListType(item);
+                if (listtype == ListType.Single || listtype == ListType.SingleListOnly)
+                {
+                    <input type="hidden" id="@(item.Name)" name="@(item.Name)" hidden value="@(item.Value)">
+                }
+                else if (listtype == ListType.Multi || listtype == ListType.MultiListOnly)
+                {
+                    <input type="hidden" id="@(item.Name)" name="@(item.Name)" hidden value="@(item.Value.EndsWith(",") ? item.Value : item.Value + ",")">
+                }
+            }
+        }
+    }
+
+    <table id="webformtable" style="@(Model.Form.Style)">
+        @if (Model.ViewMode == ViewModes.Mobile)
+        {
+            foreach (WebForm.Input inp in Model.Form.Inputs.Where(x => x.Row > 0 && x.Col > 0).OrderBy(o => o.Row).ThenBy(o => o.Col))
+            {
+                Model.CurrentInput = inp;
+                <tr><td>@Html.Partial("~/Areas/WebForm/Views/WebForm/CurrentInput.cshtml", Model)</td></tr>
+            }
+        }
+        else
+        {
+            //ha row=0, vagy col=0, akkor azok rejtett inputok, azért indulnak a ciklusok 1-től
+            for (int row = 1; row <= Model.MaxRow; row++)
+            {
+                <tr>
+                    @for (int col = 1; col <= Model.MaxCol; col++)
+                    {
+                        if (skipcells.Any(x => x.Row == row && x.Col == col))
+                        {
+                            continue;
+                        }
+                        Model.CurrentInput = Model.FindInput(row, col);
+                        colspan = Model.CurrentInput == null ? 1 : Model.CurrentInput.ColSpan;
+                        rowspan = Model.CurrentInput == null ? 1 : Model.CurrentInput.RowSpan;
+                        for (int ix = 1; ix < colspan; ix++)
+                        {
+                            skipcells.Add(new SkipCell() { Row = row, Col = col + ix });
+                        }
+                        for (int ix = 1; ix < rowspan; ix++)
+                        {
+                            skipcells.Add(new SkipCell() { Row = row + ix, Col = col });
+                        }
+                        <td style="width:@(colWidth)%;" colspan="@(colspan)" rowspan="@(rowspan)">
+                            @Html.Partial("~/Areas/WebForm/Views/WebForm/CurrentInput.cshtml", Model)
+                        </td>
+                    }
+
+                </tr>
+            }
+        }
+        <tr>
+            <td colspan="@(Model.ViewMode == ViewModes.Mobile ? 1 : Model.MaxRow)" style="padding-left:0;padding-right:0;">
+                @if (Model.Form.Actions != null && Model.Form.Actions.Any())
+                {
+                    string margin = "margin-right:5px;";
+                    foreach (var action in Model.Form.Actions)
+                    {
+                        string buttStyle = String.IsNullOrWhiteSpace(action.ButtonStyle) ? margin : String.Concat(action.ButtonStyle, action.ButtonStyle.EndsWith(";") ? "" : ";", margin);
+                        <input type="button"
+                               class="btn btn-success btn-lg"
+                               data-role="none"
+                               style="@Html.Raw(buttStyle)"
+                               value="@Html.Raw(action.ButtonLabel)"
+                               onclick="SubmitWebForm('@Html.Raw(action.Name)');" />
+                    }
+                }
+                <input type="button"
+                       class="btn btn-warning btn-lg"
+                       value="@Html.Raw(Model.Form.ClearFormButton)"
+                       style="float:right;"
+                       onclick="ClearInputFields();"
+                       data-role="none" />
+            </td>
+        </tr>
+    </table>
+}@*Ajax.BeginForm VÉGE*@
+
+<script type="text/javascript">
+    var subpush = 'SubmitPushed';
+    var curlangForPicker = '@(curlang2)';
+    var DoActionTimout = 200;
+    var ignoredChars = $.parseJSON('@Html.Raw(Model.Form.IgnoredChars)');
+
+
+    function DoAction() {
+        'use strict';
+        var url = '@Html.Raw(urlAction)';
+        var arg = {};
+        arg.paramlist = new Array();
+        @if (Model.Parameters != null && Model.Parameters.Count() > 0)
+        {
+            foreach (var par in Model.Parameters)
+            {
+                <text>arg.paramlist.push(['@Html.Raw(par.Key)', '@Html.Raw(par.Value.Replace(@"\", @"\\").Replace("'",@"\'"))']);</text>
+            }
+        }
+
+        console.log('DoAction: url arg', url, arg, JSON.stringify(arg.paramlist));
+
+        var manretval = @(Model.SelectedAction == null ? "true" : (Model.SelectedAction.ReturnMode == ReturnMode.ReturnInfoJSON ? "true" : "false"));
+        var isviewmobil = @(Model.ViewMode == ViewModes.Mobile ? "true" : "false");
+        var issendtonewtab = !isviewmobil && @(Model.SelectedAction == null ? "false" : (Model.SelectedAction.ReturnMode == ReturnMode.WebPageToNewTab ? "true" : "false"));
+        console.log('DoAction: isviewmobil issendtonewtab, manretval', isviewmobil, issendtonewtab, manretval);
+
+        var dialog = bootbox.dialog({
+            message: '<div class="text-center"></i>@Html.Raw(Model.Form.WaitMessage)</div>',
+            show: false,
+            closeButton: false,
+        });
+        if (manretval || arg.paramlist.length > 0 ) {
+            //Ha kezelni kell a visszatérő értéket vagy van 'dict' típusú paraméter, akkor ajax és POST.
+            dialog.on('shown.bs.modal', function() {
+                console.log('WaitMessage dialog is shown.');
+
+                var datatype = manretval ? 'json' : 'html';
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    traditional: true,
+                    contentType: "application/json",
+                    dataType: datatype,
+                    data: JSON.stringify(arg.paramlist),
+                    success: function (responseData) {
+                        console.log('WebForm._Input.DoAction: responseData', responseData);
+                        dialog.modal('hide');
+                        if (manretval) {
+                            //console.log('DoAction: ManageReturnValue', responseData);
+                            console.log('WebForm._Input.DoAction: ManageReturnValue');
+                            var message = '<table id="returnvaluetable">';
+                            if (isviewmobil) {
+                                message += '<tr><td>Value</td></tr>';
+                                message += '<tr><td>' + responseData.ReturnValue + '</td></tr>';
+                                message += '<tr><td>Message</td><td>'
+                                message += '<tr><td>' + responseData.ReturnMessage + '</td></tr>';
+                            } else {
+                                message += '<tr><td style="width:70px;">Value</td><td>' + responseData.ReturnValue + '</td></tr>';
+                                message += '<tr><td>Message</td><td>' + responseData.ReturnMessage + '</td></tr>';
+                            }
+                            message += '</table>';
+                            MyBootBoxAlert(message,'@Html.Raw(Model.Form.ReturnMessageOKHeader)');
+                        } else {
+
+                            if (issendtonewtab) {
+                                //console.log('WebForm._Input.DoAction: No ManageReturnValue New Tab', responseData);
+                                /* In the Chrome always returns either null (when the popup is blocked) on a window object !!! */
+                                var resultPage = window.open('_blank');
+                                console.log('WebForm._Input.DoAction: No ManageReturnValue New Tab', resultPage);
+                                if (resultPage) {
+                                    resultPage.document.open();
+                                    resultPage.document.write(responseData);
+                                    document.close();
+                                } else {
+                                    bootbox.alert({
+                                        size: 'large',
+                                        message: '<b>A new tab can not be opened because popup is blocked!<br />'
+                                            + 'Response data: ***</b><br />'
+                                            + responseData + '<br /><b>***</b>'
+                                    });
+                                }
+                            }
+                            else {
+                                console.log('WebForm._Input.DoAction: No ManageReturnValue No New Tab');
+                                document.open();
+                                document.write(responseData);
+                                insertScriptForReturn(document);
+                                document.close();
+                            }
+                        }
+                    },
+                    error: function (jqXHR, exception) {
+                        //console.log('WebForm._Input.DoAction: Ajax hívás sikertelen! jqXHR, exception', jqXHR, exception);
+                        console.log('WebForm._Input.DoAction: Ajax hívás sikertelen! exception', exception);
+                    }
+                });
+            });
+            dialog.modal('show');
+        }else{
+            //Ha nem kell kezelni a visszatérő értéket és nincs 'dict' típusú paraméter, akkor GET.
+            if (issendtonewtab) {
+                //var resultPage = window.open("_blank");
+                //resultPage.location.assign(url);
+                window.open(url,'_blank');
+            } else {
+                dialog.modal('show');
+                window.location.assign(url);
+            }
+        }
+    }
+
+    function SubmitWebForm(actionName){
+        'use strict';
+        console.log('WebForm.Input.cshtml SubmitWebForm: actionName=',actionName);
+        $('#@(WebFormModel.INPNAME_SELECTEDACTIONNAME)').val(actionName);
+        $('#@(ajaxFormId)').submit();
+    } // SubmitWebForm function END
+
+    function insertScriptForReturn(doc){
+        'use strict';
+        //!!!FORRETURN Ez az egész azért van itt, hogy a visszagombra tényleg visszatérjen, ha ugyanoda tesszük az lapot
+        var node = doc.createElement("script");             // Create a <script> node
+        var scrpt = '//!!! Insert by WebForm START\n'
+                  + 'document.addEventListener("DOMContentLoaded", function (event) { \n'
+                  + '   console.log("DOMContentLoaded: HURRÁÁÁÁ!!!!!!!"); \n'
+                  + '   window.onpopstate = function (event) { \n'
+                  + '      console.log("Insert by WebForm window.onpopstate PING", document.referrer, event); \n'
+                  + '      location.reload(document.referrer); \n'
+                  + '   };\n'
+                  + '});\n'
+                  + '//!!! Insert by WebForm END;';
+        var textnode = doc.createTextNode(scrpt);
+        node.appendChild(textnode);                              // Append the text to <li>
+        doc.head.appendChild(node);
+        //!!!FORRETURN VÉGE
+    }
+
+    function MyBootBoxAlert(message, title)
+    {
+        //console.log('MyBootBoxAlert message = "' + message + '"; title = "' + title + '"');
+        bootbox.dialog({
+            message: message,
+            title: title,
+            buttons: {
+                OK: {
+                    label: 'OK',
+                    className: 'btn-secondary',
+                    callback: function() {
+                        //console.log('MyBootBoxAlert OK pushed');
+                    }
+                },
+            }
+        });
+    }
+
+    function DeleteMulti(inputname, deletevalue)
+    {
+        //console.log('DeleteMulti PING: inputname="' + inputname + '", deletevalue="' + deletevalue + '"');
+        var inputid = '#' + inputname;
+        var oldvalue = $(inputid).val();
+        var replacevalue = deletevalue + ',';
+        var newvalue = oldvalue.replace(replacevalue,'');
+        console.log('DeleteMulti: inputid="' + inputid + '", oldvalue="' + oldvalue + '", replacevalue="' + replacevalue + '", newvalue="' + newvalue + '"');
+        $(inputid).val(newvalue);
+        GetMulti(inputname, newvalue);
+    }
+
+    function MultiListDeleteItem(_url, inputname, deletevalue)
+    {
+        var inputid = '#' + inputname;
+        var oldvalue = $(inputid).val();
+        var newvalue = deletevalue == '@(selectAllValue)' ? '' : oldvalue.replace(deletevalue + ',','');
+        //console.log('MultiListDeleteItem: inputid="' + inputid + '", oldvalue="' + oldvalue + '", deletevalue="' + deletevalue + '", newvalue="' + newvalue + '"');
+        $(inputid).val(newvalue);
+        MultiListShowSelectedItems(_url, inputname, newvalue);
+    }
+
+    function MultiListShowSelectedItems(_url, inputname, inputvalue) {
+        //console.log('MultiListShowSelectedItems: inputname inputvalue', inputname, inputvalue);
+        var $slct = $('#' + inputname + 'Multi');
+        var $targ = $('#' + inputname);
+
+        $.ajax({
+            url: _url,
+            type: "GET",
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                //console.log('MultiListShowSelectedItems: ajax success: data', data);
+                var str = '';
+                var ivalue = '';
+                if (inputvalue.startsWith('@(selectAllValue),')) {   //ha selectAll az első, akkor csak egy elemet kell mutatni
+                    var inp = "'" + inputname + "'";
+                    var vl = "'" + "@(selectAllValue)" + "'";
+                    var uurl = "'" + _url + "'";
+                    str += '<div class="multicontainer">';
+                    str += '<div>' + '@(Model.Form.SelectAllItem)' + '</div>'
+                    str += '<div onclick="MultiListDeleteItem(' + uurl + ', ' + inp + ', ' + vl + ')">X</div>';
+                    str += '</div>';
+                    inputvalue = '@(selectAllValue),';
+                    for (var x = 0; x < data.length; x++) { //viszont az inputba kell az össze többi kódja
+                        inputvalue += data[x].Value + ',';
+                    }
+                }else {
+                    for (var x = 0; x < data.length; x++) {
+                        //console.log('inputvalue=' + inputvalue + '; data[x].Value=' + data[x].Value);
+                        var inputarray = inputvalue.split(',');
+                        if (inputarray.includes(data[x].Value)) {
+                            var inp = "'" + inputname + "'";
+                            var vl = "'" + data[x].Value + "'";
+                            var uurl = "'" + _url + "'";
+                            str += '<div class="multicontainer">';
+                            str += '<div>' + data[x].Text + '</div>'
+                            str += '<div onclick="MultiListDeleteItem(' + uurl + ', ' + inp + ', ' + vl + ')">X</div>';
+                            str += '</div>';
+                        }
+                    }
+                }
+                console.log('MultiListShowSelectedItems: ajax success: inputname inputvalue', inputname, inputvalue);
+                $('#'+inputname).val(inputvalue);
+                $slct.html(str).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    function SetDATListDefaultValue(_url, inputname, inputvalue) {
+        console.log('SetDATListDefaultValue: inputname inputvalue _url', inputname, inputvalue, _url);
+        var $slct = $('#' + inputname + 'SelectedName');
+        var $targ = $('#' + inputname);
+        DoActionTimout += 300;
+
+        $.ajax({
+            url: _url,
+            type: "GET",
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                console.log('SetDATListDefaultValue: ajax success: response data', data);
+                var str = '';
+                var ivalue = '';
+                for (var x = 0; x < data.length; x++) {
+                    if (data[x].Value == inputvalue) {
+                        $slct.val(data[x].Text);
+                        break;
+                    }
+                }
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    function ClearInputFields()
+    {
+        var url = '@Html.Raw(Url.Action("Execute", "WebForm", new { area = "WebForm", xml = Model.XmlConnectionString, formName = Model.Form.Name, viewmode = Model.ViewMode.ToString() }))';
+        console.log('ClearInputFields url="' + url + '"');
+        @if (String.IsNullOrEmpty(Model.BootBoxId))
+        {
+            <text>window.location.href = url;</text>
+        }
+        else
+        {
+            <text>
+        var boxid = '@(Model.BootBoxId)';
+        var $dlg = $('#' + boxid);
+        var width = $dlg.find('.modal-dialog').width();
+        console.log('width $dlg', width, $dlg);
+        vrhct.bootbox.hide(boxid);
+        $dlg.html('');
+        vrhct.bootbox.show( url, { styles: [{ name: 'max-width', value: width + 'px' }] } );
+        </text>
+        }
+    }
+
+    function FileClickOn(inputname) {
+        console.log('FolderIcon Click', inputname);
+        $('#' + inputname).click();
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        console.log('WebForm._Inputs.DOMContentLoaded: DOM fully loaded and parsed sessionStorage["SubmitPushed"] = ', sessionStorage[subpush]);
+
+    });// document.addEventListener VÉGE
+
+    // Amikor submit-ot kap a form, akkor ezt meghívja.
+    function wfafOnSubmit(){
+        sessionStorage[subpush] = 'true';
+        console.log('wfafOnSubmit sessionStorage["SubmitPushed"] = ' + sessionStorage[subpush]);
+        console.log('wfafOnSubmit LastName.Value = ' + $('#LastName').val());
+        //console.log('wfafOnSubmit STARTTo.Value = ' + $('#STARTTo').val());
+    } // wfafOnSubmit function END
+
+    $(function () {
+        var thisfn = 'Inputs.cshtml document.ready event: ';
+        console.log(thisfn + 'PING');
+
+        @foreach (var item in Model.Form.Inputs.Where(x => x.InputType == Vrh.WebForm.InputType.EnumList
+                                                        || x.InputType == Vrh.WebForm.InputType.DATList
+                                                        || x.InputType == Vrh.WebForm.InputType.SQLList
+                                                        || x.InputType == Vrh.WebForm.InputType.XMLList
+                                                     )
+                 )
+        {
+            ListType listtype = ListType.Single;
+            string[] fltr = { "", "", "" };
+            string geturl = "";
+            if (item.InputType == Vrh.WebForm.InputType.EnumList)
+            {
+                listtype = item.EnumList.Type;
+            }
+            else if (item.InputType == Vrh.WebForm.InputType.DATList)
+            {
+                listtype = item.DATList.Type;
+                fltr[0] = item.DATList.Filter1;
+                fltr[1] = item.DATList.Filter2;
+                fltr[2] = item.DATList.Filter3;
+
+                geturl = item.DATList.Url.GetUrl();
+            }
+            else if (item.InputType == Vrh.WebForm.InputType.SQLList)
+            {
+                listtype = item.SQLList.Type;
+                fltr[0] = item.SQLList.Filter1;
+                fltr[1] = item.SQLList.Filter2;
+                fltr[2] = item.SQLList.Filter3;
+            }
+            else if (item.InputType == Vrh.WebForm.InputType.XMLList)
+            {
+                listtype = item.XMLList.Type;
+            }
+
+            if (geturl == "")
+            {
+                geturl = Url.Action("GetSelectList", "WebForm", new {
+                    area = "WebForm",
+                    xml = Model.XmlConnectionString,
+                    sform = Model.Form.Name,
+                    inputname = item.Name,
+                });
+                geturl += "&query=@filter";
+                geturl += String.IsNullOrEmpty(fltr[0]) ? "" : "&filter1=@filter1";
+                geturl += String.IsNullOrEmpty(fltr[1]) ? "" : "&filter2=@filter2";
+                geturl += String.IsNullOrEmpty(fltr[2]) ? "" : "&filter3=@filter3";
+            }
+
+            var geturlraw = Html.Raw(Url.Content(geturl));
+            System.Diagnostics.Debug.WriteLine("_Inputs.cshtml-ready: geturl={0}, geturlraw={1}", geturl, geturlraw);
+
+            string listid = item.Name + "SelectedName";
+            string targetid = item.Name;
+            if (listtype == ListType.Single || listtype == ListType.SingleListOnly)
+            {
+                <text>MyAutoCompInit('@(listid)', '@(targetid)', '@(geturlraw)', '@fltr[0]', '@fltr[1]', '@fltr[2]', false);</text>
+                if (item.InputType == Vrh.WebForm.InputType.DATList && !String.IsNullOrEmpty(item.Value))
+                {   //DATList és van DefaultValue, akkor meg kell hívni a listakészítő akciót, hogy megkapjuk a kiválasztott értéket
+                    <text>var _url = UrlParser('@(geturlraw)', '', '@fltr[0]', '@fltr[1]', '@fltr[2]');</text>
+                    <text>SetDATListDefaultValue(_url, '@(targetid)', $('#@(targetid)').val());</text>
+                }
+            }
+            else if (listtype == ListType.Multi || listtype == ListType.MultiListOnly)
+            {
+                <text>MyAutoCompInit('@(listid)', '@(targetid)', '@(geturlraw)', '@fltr[0]', '@fltr[1]', '@fltr[2]', true);</text>
+            }
+
+        }//foreach (var item in Model.Form.Inputs) ciklus vége
+
+        $('.webformfilename').change(function () {
+            var thisfn = 'Inputs.cshtml .webformfilename.change event: ';
+            var inputid = this.id;
+            var textsel = '#' + inputid + 'text';
+            console.log(thisfn + ' textsel, $(this).val(), this.files' , textsel, $(this).val(), this.files);
+            if ($(this).val().length == 0) {
+                $(textsel).val("");
+            } else {
+                $(textsel).val($(this).val().replace('C:\\fakepath\\', ''));
+            }
+            console.log(thisfn + ' $(textsel).val(""), $(this).val()', $(textsel).val(), $(this).val());
+        });
+
+        if (ignoredChars.length > 0) {
+            //console.log(thisfn, 'Van figyelmen kívül hagyandó karakter! ignoredChars', ignoredChars);
+            $('input[type!=button]').on('keydown', function (event) {
+                var thisfn = 'Inputs.cshtml input.keydown event: ';
+                console.log(thisfn, 'key, keyCode, wich', event.key, event.keyCode, event.which);
+                //console.time('keyCode check');
+                if (ignoredChars.includes(event.which)) {
+                    console.log(thisfn, 'Ignored char:', event.key, event.keyCode, event.which);
+                    event.preventDefault();
+                } 
+                //console.timeEnd('keyCode check');
+            });
+        }
+
+        var submitPushed = 'false';
+        if (sessionStorage[subpush]) {
+            console.log('van sessionStorage[subpush] = ' + sessionStorage[subpush]) ;
+            submitPushed = sessionStorage[subpush];
+        }
+
+        @if (Model.PostErrorMessage == String.Empty)
+        {
+            <text>console.log('submitPushed = ' + submitPushed);</text>
+            <text>if (submitPushed == 'true') setTimeout(function(){ DoAction(); }, DoActionTimout);</text>
+        }
+        else
+        {
+            <text>console.log('van PostErrorMessage');</text>
+            <text>MyBootBoxAlert("@Html.Raw(Model.PostErrorMessage)",'@Html.Raw(Model.Form.ReturnMessageNOKHeader)');</text>
+        }
+        sessionStorage[subpush] = 'false';
+
+
+        @if (Model.ViewMode != ViewModes.Mobile)
+        {
+            <text>
+        console.log(thisfn + 'set datetimepicker fields');
+        //var dtp_icons = {
+        //    time: 'fas fa-clock fa-lg',
+        //    date: 'fas fa-calendar fa-lg',
+        //    up: 'fas fa-chevron-up fa-lg',
+        //    down: 'fas fa-chevron-down fa-lg',
+        //    previous: 'fas fa-chevron-left fa-lg',
+        //    next: 'fas fa-chevron-right fa-lg',
+        //    today: 'fas fa-crosshairs fa-lg',
+        //    clear: 'fas fa-trash-alt fa-lg',
+        //    close: 'fas fa-times fa-lg'   // egy X tkp.
+        //};
+        var dtp_tooltips;
+        if (curlangForPicker === 'hu') {
+            dtp_tooltips = {
+                today: 'Most',
+                clear: 'Beállítás törlése',
+                close: 'Választó bezárása',
+                selectMonth: 'Hónap kiválasztása',
+                prevMonth: 'Előző hónap',
+                nextMonth: 'Következő hónap',
+                selectYear: 'Év kiválasztása',
+                prevYear: 'Előző év',
+                nextYear: 'Következő év',
+                selectDecade: 'Évtized kiválasztása',
+                prevDecade: 'Előző évtized',
+                nextDecade: 'Következő évtized',
+                prevCentury: 'Előző évszázad',
+                nextCentury: 'Következő évszázad',
+                incrementHour: 'Óra növelése',
+                pickHour: 'Óra kiválasztása',
+                decrementHour: 'Óra csökkentése',
+                incrementMinute: 'Perc növelése',
+                pickMinute: 'Perc kiválasztása',
+                decrementMinute: 'Perc csökkentése',
+                incrementSecond: 'Másodperc növelése',
+                pickSecond: 'Másodperc kiválasztása',
+                decrementSecond: 'Másodperc csökkentése',
+                togglePeriod: 'Váltás 12 és 24 órás mód között',
+                selectTime: 'Váltás naptár és idő között'
+            };
+        }
+        else {
+            dtp_tooltips = {
+                today: 'Go to today',
+                clear: 'Clear selection',
+                close: 'Close the picker',
+                selectMonth: 'Select Month',
+                prevMonth: 'Previous Month',
+                nextMonth: 'Next Month',
+                selectYear: 'Select Year',
+                prevYear: 'Previous Year',
+                nextYear: 'Next Year',
+                selectDecade: 'Select Decade',
+                prevDecade: 'Previous Decade',
+                nextDecade: 'Next Decade',
+                prevCentury: 'Previous Century',
+                nextCentury: 'Next Century',
+                pickHour: 'Pick Hour',
+                incrementHour: 'Increment Hour',
+                decrementHour: 'Decrement Hour',
+                pickMinute: 'Pick Minute',
+                incrementMinute: 'Increment Minute',
+                decrementMinute: 'Decrement Minute',
+                pickSecond: 'Pick Second',
+                incrementSecond: 'Increment Second',
+                decrementSecond: 'Decrement Second',
+                togglePeriod: 'Toggle Period',
+                selectTime: 'Select Time'
+            };
+        }
+
+        $('#picker_for_time').datetimepicker({
+            locale: curlangForPicker,
+            tooltips: dtp_tooltips,
+            format: 'HH:mm:ss',
+        });
+
+        $('#picker_for_date').datetimepicker({
+            locale: curlangForPicker,
+            tooltips: dtp_tooltips,
+            format: 'L',
+            showTodayButton: true,
+        });
+
+        $('#picker_for_datetime').datetimepicker({
+            locale: curlangForPicker,
+            tooltips: dtp_tooltips,
+            showTodayButton: true,
+            //debug: true,
+        });
+
+        </text>
+        }//if (Model.ViewMode != ViewModes.Mobile) END
+
+
+        setTimeout(function myfunction() {
+            var $focus = $('form').find('input:visible:not([readonly]):first');
+            console.log('fókusz állítás', $focus);
+            $focus.focus();
+        },300)
+    });// $(document).ready VÉGE
+
+    /// Megkeresi a query-t a listában.
+    /// Ha talál pont olyat, akkor azt adja értékül a targid-nek.
+    /// Ha nem talál, akkor üres string-et ('') állít be.
+    /// data egy .NET List<SelectListItem> típus
+    function QueryExistInList(targid, query, data)
+    {
+        console.log('QueryExistInList ', targid, query, data);
+        if (query){
+            var lcq = query.toLowerCase();
+            //console.log('lcq',lcq);
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text.toLowerCase() == lcq){
+                    $(targid).val(data[i].Value);
+                    return;
+                }
+            }
+        }
+        $(targid).val('');
+        return;
+    }
+
+    function UrlParser(url, query, filterid1, filterid2, filterid3) {
+        //console.log('_Inputs.cshtml UrlParser: url query filterid1 filterid2 filterid3', url, query, filterid1, filterid2, filterid3);
+        var _url = url;
+
+        var inpval = '';
+        if (filterid1) {
+            inpval = $('#' + filterid1).val();
+            if (inpval == null) inpval = '';
+        }
+        while (_url.includes('@@filter1')) {
+            _url = _url.replace('@@filter1',inpval);
+        }
+
+        inpval = '';
+        if (filterid2) {
+            inpval = $('#' + filterid2).val();
+            if (inpval == null) inpval = '';
+        }
+        while (_url.includes('@@filter2')) {
+            _url = _url.replace('@@filter2',inpval);
+        }
+
+        inpval = '';
+        if (filterid3) {
+            var inpval = $('#' + filterid3).val();
+            if (inpval == null) inpval = '';
+        }
+        while (_url.includes('@@filter3')) {
+            _url = _url.replace('@@filter3',inpval);
+        }
+
+        inpval = '';
+        if (query) {
+            inpval = query;
+            if (inpval == null) inpval = '';
+        }
+        while (_url.includes('@@filter')) {
+            _url = _url.replace('@@filter',inpval);
+        }
+
+        //console.log('_Inputs.cshtml UrlParser: _url', _url);
+        return _url;
+    }
+
+    function MyAutoCompInit(listid, targetid, url, filterid1, filterid2, filterid3, ismultilist) {
+        var _listid = '#' + listid;
+        var _targetid = '#' + targetid;
+        if(ismultilist === undefined) ismultilist = false;
+        console.log('Autocomplete handler: Init: listid="' + listid + '", targetid="' + targetid + '", ismultilist=' + ismultilist);
+        $(_listid).autocomplete({
+            source: function (request, response) {
+                console.log('Autocomplete handler: Source event: query="' + request.term + '", targetid="' + targetid + '", currentvalue=', $(_targetid).val());
+                var _url = UrlParser(url, request.term, filterid1, filterid2, filterid3);
+                $.ajax({
+                    url: _url,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log('Autocomplete handler: Source event: response data=', data);
+                        if(!ismultilist){
+                            QueryExistInList(_targetid, request.term, data);
+                            response($.map(data, function (item) {
+                                return { label: item.Text, value: item.Text, id: item.Value }
+                            }));
+                        }
+                        else {
+                            var adata = new Array();
+                            var inputvalue = $(_targetid).val();
+                            var inputarray = inputvalue.split(',');
+                            console.log('Autocomplete handler: Source event: multi: data', data);
+                            for (var i = 0; i < data.length; i++) {
+                                if (!inputarray.includes(data[i].Value)) {
+                                    adata.push({ Text: data[i].Text, Value: data[i].Value });
+                                }
+                            }
+                            console.log('Autocomplete handler: Source event: multi: inputvalue; adata and data length, adata', inputvalue, adata.length, data.length, adata);
+                            if (adata.length < data.length || inputvalue == '@(selectAllValue),' ) { //vagyis van már legalább 1 kiválasztott elem, akkor betesszük a DeselectAll-t.
+                                adata.splice(0, 0, { Text: '@Html.Raw(Model.Form.DeselectAll)', Value: '@(deselectAllValue.ToString())' });
+                            }
+                            if (data.length > 0) {  //ha van eleme a keresésnek,
+                                if (!inputvalue.startsWith('@(selectAllValue),')) {
+                                    adata.splice(0, 0, { Text: '@Html.Raw(Model.Form.SelectAll)', Value: '@(selectAllValue.ToString())' });
+                                }
+                            }
+                            response($.map(adata, function (item) {
+                                return { label: item.Text, value: item.Text, id: item.Value }
+                            }));
+                        }
+                    }
+                });
+            },
+            change: function (event, ui) {
+                //console.log('MyAutoCompInit.change.event: multi, id', ismultilist, ui.item.id);
+                //if (!ui.item) {
+                //    if (!ismultilist) {
+                //        $(_targetid).val(-1);
+                //    }
+                //}
+                //else {
+                //    if (ismultilist) {
+                //        var mvalue = $(_targetid).val();
+                //        var original = mvalue;
+                //        mvalue += ui.item.id + ',';
+                //        //console.log('change multi: new=' + mvalue + '; original=' + original);
+                //        GetMulti(targetid, mvalue);
+                //        //return false;
+                //    }
+                //    else {
+                //        $(_targetid).val(ui.item.id);
+                //    }
+                //}
+            },
+            select: function (event, ui) {
+                console.log('Autocomplete handler: Select event: multi, id, ui', ismultilist, ui.item.id, ui);
+                if (ismultilist) {
+                    var mvalue = $(_targetid).val();
+                    var original = mvalue;
+                    var selAllItem = '@(selectAllValue),';
+                    if (ui.item.id == '@(selectAllValue)' ){
+                        mvalue = selAllItem;
+                    }else {
+                        if (ui.item.id == '@(deselectAllValue)' ) {
+                            mvalue = '';
+                        }else {
+                            mvalue = mvalue.replace(selAllItem,'');
+                            mvalue += ui.item.id + ',';
+                        }
+                    }
+                    //GetMulti(targetid, mvalue);
+                    var _url = UrlParser(url,'',filterid1,filterid2,filterid3);
+                    MultiListShowSelectedItems(_url, targetid, mvalue);
+                    this.value = '';
+                    return false;
+                }
+                else {
+                    $(_targetid).val(ui.item.id);
+                }
+            },
+            autoFocus: true,
+            open: function () {
+                //$(this).autocomplete('widget').css('z-index', 99999);
+                //$('.ui-autocomplete').css('height', 'auto');
+                //var $input = $(this);
+                //inputTop = $input.offset().top;
+                //inputHeight = $input.height();
+                //autocompleteHeight = $(this).autocomplete('widget').height();//$('.ui-autocomplete').height(),
+                //windowHeight = $(window).height();
+
+                //if ((inputHeight + inputTop + autocompleteHeight) > windowHeight) {
+                //    $('.ui-autocomplete').css('height', (windowHeight - inputHeight - inputTop - 20) + 'px');
+                // }
+            },
+            minLength: 0, //hány karakter esetén nyiljon meg, 0 = akkor is megnyilik, ha nincs karakter beütve
+        });
+
+        if (ismultilist) {
+            var _url = UrlParser(url,'',filterid1,filterid2,filterid3);
+            MultiListShowSelectedItems(_url, targetid, $(_targetid).val() );
+        }
+
+    }//MyAutoCompInit vége
+</script>

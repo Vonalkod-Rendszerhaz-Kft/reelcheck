@@ -1,0 +1,291 @@
+﻿@using System;
+@using System.Text.RegularExpressions;
+@using Vrh.Web.Common.Lib;
+
+@model FileMangerViewModel
+
+@{
+    int columnNumber = 1;
+    string percent = "auto";
+    bool isColumnsWidthAuto = (Model.Definition.Format.Columns == Global.FORMAT_COLUMN_AUTO);
+    if (!isColumnsWidthAuto)
+    {
+        if (!Int32.TryParse(Model.Definition.Format.Columns, out columnNumber))
+        {
+            columnNumber = 1;
+        }
+        percent = (100 / columnNumber).ToString() + "%";
+    }
+
+    string areaName = "FileManager";
+    string controllerName = areaName;
+}
+
+<style>
+    div.col {
+        float: left;
+        width: @(percent);
+        height: @(Model.Definition.Format.RowHeight.ToString())px;
+        /* border: 1px solid black;*/
+    }
+
+    .helpText {
+        color: #FFCC33;
+        font-size:small;
+    }
+
+    .titleText{
+        font-size:xx-large;
+    }
+
+    .upload {
+        float: right;
+    }
+
+    .upload-input {
+        display: none !important;
+    }
+
+    div.col>a, div.card-body>a {
+        color: white;
+    }
+</style>
+
+<script>
+    var currentDirectory = '@Model.CurrentDir.Replace(WebCommon.SIGN_BACKSLASH, WebCommon.SIGN_BACKSLASH + WebCommon.SIGN_BACKSLASH)';
+    var usedXmlConnString = '@Model.XmlConnectionString';
+    var usedId = '@Html.Raw(Model.Definition.Id)';
+    var usedLCID = '@Html.Raw(Model.Definition.LCID)';
+    var fileTypeError = '@Html.Raw(Model.Trans(typeof(WordCodes.FileManager.Messages.FileTypeError)))';
+    var fileOverWriteFalse = '@Html.Raw(Model.Trans(typeof(WordCodes.FileManager.Messages.FileOverWriteFalse)))';
+    var fileAlreadyOverWriteQ = '@Html.Raw(Model.Trans(typeof(WordCodes.FileManager.Messages.FileAlreadyOverWriteQ)))';
+    var uploadFile;
+    var listMaxWidth = 0;
+
+    function UploadFileClick() {
+        $('#file-input').click();
+    }
+
+    function UploadFile() {
+        var formdata = new FormData();
+        var fileInput = document.getElementById('file-input');
+        formdata.append(fileInput.files[0].name, fileInput.files[0]);
+        formdata.append('@Global.QParams.Xml', usedXmlConnString);
+        formdata.append('@Global.QParams.Id', usedId);
+        formdata.append('@Global.QParams.LCID', usedLCID);
+        formdata.append('@Global.QParams.Folder', currentDirectory);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '@Url.Action("UploadFile", controllerName, new { Area = areaName })');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var result = JSON.parse(xhr.response);
+                    bootbox.alert(result.message, function() {
+                        if (result.success) {
+                            location.reload();
+                        }
+                    });
+                } else {
+                    bootbox.alert(xhr.response);
+                }
+            }
+        }
+    }
+
+    function ValidateFile() {
+        'use strict';
+
+        var thisfn = 'Index.cshtml-ValidateFile: ';
+        var fileName = document.getElementById('file-input').value;
+        console.log(thisfn, fileName);
+        if (fileName.includes('\\')) {
+            var splitted = fileName.split('\\');
+            fileName = splitted[splitted.length - 1];
+        }
+        console.log(thisfn, fileName);
+        $.ajax({
+            type: 'POST',
+            data: { xml: usedXmlConnString, id: usedId, LCID: usedLCID, fileName: fileName, folder: currentDirectory },
+            url: '@Url.Action("ValidateFile", controllerName, new { Area = areaName })',
+            success: function (response) {
+                if (response.maskOk) {
+                    if (response.fileIsAlready) {
+                        if (response.overwrite == 'true') {
+                            UploadFile();
+                        } else if (response.overwrite == 'false') {
+                            bootbox.alert(fileOverWriteFalse);
+                        } else if (response.overwrite == '?') {
+                            bootbox.confirm(fileAlreadyOverWriteQ, function (result) {
+                                if (result) {
+                                    UploadFile();
+                                }
+                            });
+                        }
+                    } else {
+                        UploadFile();
+                    }
+
+                } else {
+                    bootbox.alert(fileTypeError);
+                }
+            },
+            error: function () {
+                bootbox.alert("Ajax error!");
+            }
+        });
+    }
+
+    var openFile = function (event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function () {
+            uploadFile = reader.result;
+            ValidateFile();
+        };
+        reader.readAsArrayBuffer(input.files[0]);
+    };
+
+    function setColumnsWidthAuto() {
+        'use strict';
+        //var thisfn = 'FileManager.Index.cshtml-setColumnsWidthAuto(): ';
+        //console.log(thisfn + 'PING');
+
+        var panelBody = document.getElementsByClassName('card-body');
+        //console.log(panelBody);
+        var panelBodyWidth = panelBody[0].clientWidth;
+
+        if (listMaxWidth == 0) {
+            var cols = document.getElementsByClassName('col');
+            //console.log(cols);
+            for (var i = 0; i < cols.length; i++) {
+                //console.log(cols[i].width,cols[i].clientWidth,cols[i].offsetWidth);
+                if (listMaxWidth < cols[i].offsetWidth) listMaxWidth = cols[i].offsetWidth;
+            }
+        }
+        var wpercent = 100 / Math.floor(panelBodyWidth / (listMaxWidth + 8)) + "%";
+        //console.log(thisfn + 'panelBodyWidth=' + panelBodyWidth + ', listMaxWidth=' + listMaxWidth + ', wpercent=' + wpercent);
+        $('.col').each(function (index) {
+            $(this).css("width",wpercent);
+        });
+    }
+
+    $(document).ready(function () {
+        var thisfn = 'FileManager.Index.cshtml: ';
+        console.log(thisfn + '$(document).ready PING');
+
+        @if (isColumnsWidthAuto)
+        {
+            <text>
+            setColumnsWidthAuto();
+            $(window).resize(function() {
+                setColumnsWidthAuto();
+            });
+            </text>
+
+        }
+    });// $(document).ready VÉGE
+</script>
+
+<div class="card card-primary">
+    <div class="card-header">
+        @if (Model.Definition.Enable.Upload)
+        {
+            <input id="file-input" class="upload-input" type="file" onchange="openFile(event)" />
+            <button id="upload-file" class="btn btn-success upload" type="button" onclick="UploadFileClick();">@Model.Trans(typeof(WordCodes.FileManager.Titles.Upload))</button>
+        }
+        <h1 class="card-title titleText">@(Model.Definition.Format.Title)</h1>
+        @foreach (var line in Model.Definition.Help.Split(new string[] { "\\n" }, StringSplitOptions.None))
+        {
+            <small class="helpText">@(line)</small>
+        }
+        <div id="updateDialog"></div>
+    </div>
+    <div class="card-body">
+        <p>@(String.IsNullOrWhiteSpace(@Model.CurrentDir.TrimStart(WebCommon.SIGN_BACKSLASH[0])) ? "    " : @Model.CurrentDir.TrimStart(WebCommon.SIGN_BACKSLASH[0]))</p>
+        @if (!String.IsNullOrWhiteSpace(Model.CurrentDir.Trim(WebCommon.SIGN_BACKSLASH[0])))
+        {
+            var routeValues = new RouteValueDictionary() {
+            { Global.QParams.Xml, Model.XmlConnectionString },
+            { Global.QParams.Id, Model.Definition.Id },
+            { Global.QParams.LCID, Model.LCID },
+            { Global.QParams.Folder, Model.PreviousDirPath }
+        };
+            string text = Model.Trans(typeof(WordCodes.FileManager.Titles.Back));
+            <a href="@Url.Action("Index", controllerName, routeValues)" title="@text">
+                <i class="fas fa-arrow-up"></i>
+                <text>@text</text>
+            </a>
+        }
+
+        <div>
+            @if (Model.Directories.Any())
+            {
+                string dirOpenText = Model.Trans(typeof(WordCodes.FileManager.Titles.Open));
+                var routeValues = new RouteValueDictionary() {
+                    { Global.QParams.Xml, Model.XmlConnectionString },
+                    { Global.QParams.Id, Model.Definition.Id },
+                    { Global.QParams.LCID, Model.LCID },
+                    { Global.QParams.Folder, "" } };
+                foreach (var dir in Model.Directories)
+                {
+                    routeValues[Global.QParams.Folder] = Model.CurrentDir + @dir.Name + WebCommon.SIGN_BACKSLASH;
+                    <div class="col">
+                        @if (Model.Definition.Enable.Subdirectories)
+                        {
+                            <a href="@Url.Action("Index", controllerName, routeValues)" title="@dirOpenText">
+                                <b>@(dir.Name)</b>
+                                <i class="fas fa-folder-open"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <b>@(dir.Name)</b>
+                        }
+                    </div>
+                }
+            }
+            @if (Model.Files.Any())
+            {
+                string fileOpenText = Model.Trans(typeof(WordCodes.FileManager.Titles.Open));
+                string fileDownloadText = Model.Trans(typeof(WordCodes.FileManager.Titles.Download));
+                string fileDeleteText = Model.Trans(typeof(WordCodes.FileManager.Titles.Delete));
+                string fileDeleteConfirmation = Model.Trans(typeof(WordCodes.FileManager.Messages.FileDeleteConfirmation));
+
+                var routeValues = new RouteValueDictionary() {
+                    { Global.QParams.Xml, Model.XmlConnectionString },
+                    { Global.QParams.Id, Model.Definition.Id },
+                    { Global.QParams.LCID, Model.LCID },
+                    { Global.QParams.Folder, Model.CurrentDir }
+                };
+                foreach (var file in @Model.Files)
+                {
+                    routeValues[Global.QParams.File] = file.Name;
+                    <div class="col">
+                        @file.Name
+                        @if (Model.Definition.Enable.Open)
+                        {
+                            <a href="@Url.Action("OpenFile",controllerName,routeValues)" title="@(fileOpenText)">
+                                <i class="fas fa-file"></i>
+                            </a>
+                        }
+                        @if (Model.Definition.Enable.Download)
+                        {
+                            <a href="@Url.Action("DownloadFile",controllerName,routeValues)" title="@(fileDownloadText)">
+                                <i class="fas fa-cloud-download-alt"></i>
+                            </a>
+                        }
+                        @if (Model.Definition.Enable.Delete)
+                        {
+                            string confirm = String.Format(fileDeleteConfirmation, file.Name).Replace("'", "\"");
+                            <a href="@Url.Action("DeleteFile",controllerName,routeValues)" title="@(fileDeleteText)" onclick="return confirm('@(confirm)');">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,236 @@
+﻿@using System.Reflection;
+@using VRH.Common;
+
+@using Vrh.Web.ServiceControl.Areas.ServiceControl.Models;
+
+@model ServiceControlViewModel
+@{
+    AjaxOptions ajaxOp = new AjaxOptions {
+        UpdateTargetId = Constants.Ids.LISTVIEW,
+        HttpMethod = "get",
+        OnBegin = "disableButtons",
+        OnSuccess = "enableRefreshButton" };
+}
+
+<style>
+    .disabled-actionButton {
+        background-color: gray;
+        color: white;
+    }
+
+    .servicelist-grid th, td {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+</style>
+
+@functions{
+    Type GetType(string typeName)
+    {
+        Assembly assembly = typeof(WordCodes).Assembly;
+        Type t = assembly.GetType(typeName);
+        return t;
+    }
+
+    string GetManagedReturnValue()
+    {
+        if (Model == null || Model.ManagedReturnValue == null || !(Model.ManagedReturnValue is ReturnInfoJSON))
+            return "";
+
+        var m = Model.ManagedReturnValue as ReturnInfoJSON;
+
+        return String.Format("{{\"ReturnValue\" : \"{0}\", \"ReturnMessage\": \"{1}\"}}", m.ReturnValue.ToString(), m.ReturnMessage.Replace("\n", " ").Replace("\"", "\\'"));
+    }
+}
+
+<div id="@(Constants.Ids.LISTVIEW)">
+    @if (Model != null)
+    {
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <table class="table table-bordered" border="1">
+                            <tr>
+                                <td>
+                                    ReturnCode
+                                </td>
+                                <td id="modal-table-code">
+                                    10
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    ReturnMessage
+                                </td>
+                                <td id="modal-table-message">
+                                    Return message from TestSQLtextMINI(ParCode=1000,ParName=~\App_Data\OneScripter\SERVICESCRIPTS\,ParDate=2016-05-16)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="modalHide()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body pt-1">
+            @if (!String.IsNullOrWhiteSpace(Model.ExceptionMessage))
+            {
+                @Html.Label("Hiba üzenet", Model.ExceptionMessage)
+            }
+
+            @if (Model.CommonActions.Any())
+            {
+                <div class="row ml-1 mb-1">
+                    @foreach (var action in Model.CommonActions)
+                    {
+                        string commonActionName = Model.Translation(action.Button.Text);
+                        <span class="p-1">
+                            @if (action.Url.Area == "*")
+                            {
+                                <a class="btn btn-action" style="@action.Button.Style" href="@action.Url.Controller" target="_blank">@commonActionName</a>
+                            }
+                            else if (action.ManageReturnValue)
+                            {
+                                Object routeval = new { area = Constants.AREA, actionS = action.Name, xml = Model.XmlConnectionString };
+                                Object htmlAttr = new { @class = "btn btn-action", style = action.Button.Style };
+                                @Ajax.ActionLink(commonActionName, Constants.Actions.COMMONSERVICEACTION, Constants.CTRL_SRVC, routeval, ajaxOp, htmlAttr)
+                            }
+                            else
+                            {
+                                string queryString = "?";
+
+                                foreach (var s in action.ScriptParameters)
+                                {
+                                    queryString += String.Format("{0}={1}&", s.Key, s.Value);
+                                }
+                                foreach (var s in action.ScripterParameters)
+                                {
+                                    queryString += String.Format("{0}={1}&", s.Key, s.Value);
+                                }
+
+                                queryString = queryString.TrimEnd('&');
+
+                                string url = Url.Action(action.Url.Action, action.Url.Controller, new { area = action.Url.Area }) + (queryString == "?" ? "" : queryString);
+
+                                <a class="btn btn-action" style="@action.Button.Style" href="@url" target="_blank">@commonActionName</a>
+                            }
+                        </span>
+                    }
+                </div>
+            }
+            <h2>@Html.Raw(String.Format("{0}({1}):", Model.Translation(typeof(WordCodes.ServiceControl.IndexView.ServicesTitle)), Model.ServiceList == null ? "0" : Model.ServiceList.Count.ToString()))</h2>
+            @if (Model.ServiceList != null)
+            {
+                <table class="servicelist-grid">
+                    <tr>
+                        <th>@Html.Raw(Model.Translation(typeof(WordCodes.ServiceControl.IndexView.Header.Name)))</th>
+                        <th>@Html.Raw(Model.Translation(typeof(WordCodes.ServiceControl.IndexView.Header.Installed)))</th>
+                        <th>@Html.Raw(Model.Translation(typeof(WordCodes.ServiceControl.IndexView.Header.Status)))</th>
+                    </tr>
+                    @foreach (var item in Model.ServiceList)
+                    {
+                        <tr>
+                            <td style="color:@item.StatusColor">@item.DisplayName</td>
+                            <td>@Html.CheckBox("installed", item.IsInstalled, new { @disabled = "disabled" })</td>
+                            <td style="color:@item.StatusColor">@item.Status</td>
+                            @if (!String.IsNullOrEmpty(item.Status))
+                            {
+                                foreach (var action in item.Actions)
+                                {
+                                    string classDef = String.Concat("btn btn-action "
+                                        , action.Name.ToLower() == "start" && item.IsRunning ? " disabled" : ""
+                                        , action.Name.ToLower() == "stop" && item.IsStopped ? " disabled" : ""
+                                        , action.Name.ToLower() == "restart" && item.IsStopped ? " disabled" : ""
+                                    );
+                                    string styleString = classDef.EndsWith("btn-action ") ? action.Style : "background-color:gray; color:white";
+                                    Object htmlAttr = new { @class = classDef, style = styleString };
+                                    <td>
+                                        @if (action.ManageReturnValue)
+                                        {
+                                            if (action.Url == null)
+                                            {
+                                                Object routeval = new { area = Constants.AREA, serviceid = @item.Id, actionS = action.Name, xml = Model.XmlConnectionString };
+                                                @Ajax.ActionLink(action.DisplayName, Constants.Actions.SERVICEACTION, Constants.CTRL_SRVC, routeval, ajaxOp, htmlAttr)
+                                            }
+                                            else
+                                            {
+                                                <a class="@classDef" style="@styleString" href="@action.Url" target="_blank">@action.DisplayName</a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (action.Url == null && action.Area == null)
+                                            {
+                                                Object routeval = new { area = Constants.AREA, serviceid = @item.Id, actionS = action.Name, xml = Model.XmlConnectionString };
+                                                @Ajax.ActionLink(action.DisplayName, Constants.Actions.SERVICEACTION, Constants.CTRL_SRVC, routeval, ajaxOp, htmlAttr)
+                                            }
+                                            else if (action.Url == null)
+                                            {
+                                                string queryString = "?";
+
+                                                foreach (var s in action.ScriptParameters)
+                                                {
+                                                    queryString += String.Format("{0}={1}&", s.Key, s.Value);
+                                                }
+                                                foreach (var s in action.ScripterParameters)
+                                                {
+                                                    queryString += String.Format("{0}={1}&", s.Key, s.Value);
+                                                }
+
+                                                queryString = queryString.TrimEnd('&');
+
+                                                string url = Url.Action(action.ControllerAction, action.Controller, new { area = action.Area }) + (queryString == "?" ? "" : queryString);
+
+                                                <a class="@classDef" style="@styleString" href="@url" target="_blank">@action.DisplayName</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="@classDef" style="@styleString" href="@action.Url" target="_blank">@action.DisplayName</a>
+                                            }
+                                        }
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                </table>
+            }
+            <div id="serviceWatcher">
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $(document).ready(function () {
+
+        var retVal = '@Html.Raw(@GetManagedReturnValue())';
+        if (retVal != '') {
+            var j = JSON.parse(retVal);
+            $("#modal-table-code").text(j.ReturnValue);
+            $('#modal-table-message').text(j.ReturnMessage);
+            $('#myModal').modal({"backdrop": "static","keyboard": true,"show": true});
+        }
+    });
+
+
+    function disableButtons() {
+        $('a.btn-action').addClass('disabled'); // Disables visually
+        $('a.btn-action').attr('disabled', 'disabled'); // Disables visually
+        elements = document.getElementsByClassName('btn-action');
+        for (var i = 0; i < elements.length; i++) {
+            if (!elements[i].className.includes('refreshButton')) {
+                elements[i].style.backgroundColor = "gray";
+            }
+        }
+    }
+
+
+    function modalHide()
+    {
+        $('#myModal').modal('hide');
+    }
+</script>

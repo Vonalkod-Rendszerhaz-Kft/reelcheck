@@ -1,0 +1,11 @@
+﻿<TrendDiagram>
+	<Options RefreshInterval="5" AreaContainerHeight="500" AreaPadding="0" CycleLabelColor="white" ToolTip="On" SelectionArea="On"/>
+	<Phases>
+		<Phase Name="PeriodOverproduction" Source="Period" Type="Overproduction" TopHeight="110" Color="yellow" Opacity="50" LineWidth="0" Legend="true"/>
+		<Phase Name="PeriodProduction" Source="Period" Type="Production" TopHeight="110" Color="white" Opacity=" 50" LineWidth="0" Legend="false"/>
+		<Phase Name="Cycle" Source="Cycle" Type="" Color="green" Opacity="50" LineWidth="3" LineColor="#013220" Legend="false"/>
+		<Phase Name="PeriodBreaktime" Source="Period" Type="Breaktime" TopHeight="110" Color="yellow" Opacity="100" LineWidth="0" Legend="true"/>
+		<Phase Name="PeriodDowntime" Source="Period" Type="Downtime" TopHeight="110" Color="white" Opacity="100" LineWidth="0" Legend="true"/>
+		<Phase Name="PeriodSuspended" Source="Period" Type="Suspended" TopHeight="110" Color="grey" Opacity="100" LineWidth="0" Legend="true"/>
+	</Phases>
+</TrendDiagram>

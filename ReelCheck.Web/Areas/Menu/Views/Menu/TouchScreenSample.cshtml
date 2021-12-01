@@ -1,0 +1,235 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+
+<style>
+    .log4pro-menupage-ItemKit {
+        margin: .1rem 0rem .1rem 0rem;
+    }
+
+        .log4pro-menupage-ItemKit > a {
+            color: #c8c8c8;
+            background-color: transparent;
+            /*background-color: #2E3338;*/
+        }
+
+            .log4pro-menupage-ItemKit > a.active {
+                color: yellow;
+                background-color: transparent;
+                border: 2px solid yellow;
+                /*background-color: #2E3338;*/
+            }
+
+        .log4pro-menupage-ItemKit a:hover {
+            color: white;
+            /*background-color: #2E3338;*/
+            background: #2E3338;
+        }
+
+    .log4pro-menupage-GroupKit {
+        margin: .1rem 0rem .1rem 0rem;
+    }
+
+        .log4pro-menupage-GroupKit > a {
+            color: #FF9413;
+            background-color: #2E3338;
+        }
+
+            .log4pro-menupage-GroupKit > a.active {
+                color: cyan;
+                background-color: transparent;
+                border: 2px solid cyan;
+                /*background-color: #2E3338;*/
+            }
+
+            .log4pro-menupage-GroupKit > a:hover {
+                color: #FFB000;
+                background-color: #272b30 !important;
+            }
+
+    #touchscreen-menucontainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 20;
+        border-right: 1px solid orange;
+    }
+
+    #touchscreen-menubutton {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 21;
+        opacity: .3;
+        font-size: x-large;
+        margin: 0;
+        border: 1px solid orange;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+</style>
+<button class="bg-light" id="touchscreen-menubutton">
+    <i class="fa fa-angle-double-right fa-lg"></i>
+</button>
+<div id="touchscreen-menucontainer" class="bg-dark" style="display:none;">
+    <div class="navbar log4proicons mx-0">
+        <a class="p-2 fa fa-angle-double-left fa-lg" id="menuhideicon" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.MenuHide)))"></a>
+        <a class="p-2 fa fa-expand fa-lg" id="fullscreenicon"></a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="p-2 fa fa-sign-out-alt fa-lg" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.Logout)))"></a>
+            @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: new { area = "UserAdministration" }, htmlAttributes: new { @class = "username", title = "Manage" })
+        }
+        else
+        {
+            <a class="p-2 fa fa-sign-in-alt fa-lg" title="@(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.Login)))"></a>
+        }
+    </div>
+    <div id="accordion" class="mx-2">
+
+        <div class="log4pro-menupage-ItemKit" style="margin-left:0rem;"><a href="http://www.index.hu" target="_">Sima menüpont A</a></div>
+
+        <div style="margin-left:0rem;">
+            <div id="headingOne" class="log4pro-menupage-GroupKit">
+                <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Menü pont almenüvel #1
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 1</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 2</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 3</a></div>
+
+                <div style="margin-left:1rem;">
+                    <div id="headingOne-aaa" class="log4pro-menupage-GroupKit">
+                        <a href="#" data-toggle="collapse" data-target="#collapseOne-aaa" aria-expanded="true" aria-controls="collapseOne-aaa">
+                            Menü pont almenüvel #11
+                        </a>
+                    </div>
+                    <div id="collapseOne-aaa" class="collapse" aria-labelledby="headingOne-aaa" data-parent="#collapseOne">
+                        <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 1</a></div>
+                        <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 2</a></div>
+                        <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 3</a></div>
+                    </div>
+                </div>
+
+                <div style="margin-left:1rem;">
+                    <div id="headingOne-bbb" class="log4pro-menupage-GroupKit">
+                        <a href="#" data-toggle="collapse" data-target="#collapseOne-bbb" aria-expanded="true" aria-controls="collapseOne-bbb">
+                            Menü pont almenüvel #12
+                        </a>
+                    </div>
+                    <div id="collapseOne-bbb" class="collapse show" aria-labelledby="headingOne-bbb" data-parent="#collapseOne">
+                        <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 1</a></div>
+                        <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 2</a></div>
+                        <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 3</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="log4pro-menupage-ItemKit" style="margin-left:0rem;"><a href="#">Sima menüpont B</a></div>
+
+
+        <div style="margin-left:0rem;">
+            <div id="headingTwo" class="log4pro-menupage-GroupKit">
+                <a class="collapsed" href="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Menü pont almenüvel #2
+                </a>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 1</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 2</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 3</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 4</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 5</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 6</a></div>
+            </div>
+        </div>
+
+        <div style="margin-left:0rem;">
+            <div id="headingThree" class="log4pro-menupage-GroupKit">
+                <a class="collapsed" href="" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Menü pont almenüvel #3
+                </a>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 1 sf sdf sdf sdf sdf sdf sd fsdf </a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 2  sdf sdsf sdf sdfsdfsd fdf sdf sd </a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 3 s sdf sdf sdf sdf sdf sd f</a></div>
+            </div>
+        </div>
+
+        <div class="log4pro-menupage-ItemKit" style="margin-left:0rem;"><a href="#">Sima menüpont C</a></div>
+    </div> <!-- id="accordion" -->
+    <div class="fixed-bottom row py-0 px-4" id="desktopfooter" title="copyright">
+        <img src="/Images/log4pro_cube.png" class="ml-0 mr-1" />
+        <b class="d-block mr-2 align-self-center">Log4Pro</b>
+        @*<i class="d-none d-sm-block">copyright</i>*@
+        @*<b>Log4Pro</b> <i>&copy; 2018 Vrh.Web.Menu test application </i>*@
+    </div>
+</div> <!-- id="touchscreen-menucontainer" -->
+<script>
+    var touchmenu = {
+        $body: '',
+        $button: '',
+        $container: '',
+        bodyPaddingLeft: 0,
+        lastMenuWidth: 0,
+    };
+    $(function () {
+        "use strict";
+
+        var thisfn = 'TouchScreen.cshtml: ready event: ';
+        console.log(thisfn + 'PING');
+
+        touchmenu.$body = $('#touchscreen-body');
+        touchmenu.$button = $('#touchscreen-menubutton');
+        touchmenu.$container = $('#touchscreen-menucontainer');
+        touchmenu.bodyPaddingLeft = parseInt(touchmenu.$body.css('padding-left').replace(/[\D+]/g, ''));
+        console.log(thisfn + 'bodyPaddingLeft', touchmenu.bodyPaddingLeft);
+
+        touchmenu.$button.on('click', function () {
+            touchmenu.$button.hide();
+            touchmenu.$container.show(100, setBodyLeft);
+            checkMenuWidthChange();
+        });
+
+        $('#menuhideicon').on('click', function () {
+            touchmenu.$container.hide(100, function () {
+                touchmenu.$body.css('padding-left', touchmenu.bodyPaddingLeft);
+                touchmenu.$button.show(1000);
+            });
+        });
+
+    });
+
+    function checkMenuWidthChange() {
+        if (touchmenu.$button.css('display') == 'none') {
+            var menuOuterWidth = touchmenu.$container.outerWidth();
+            if (menuOuterWidth != touchmenu.lastMenuWidth) {
+                setBodyLeft();
+                touchmenu.lastMenuWidth = menuOuterWidth;
+            }
+            setTimeout(checkMenuWidthChange, 200);
+        }
+    }
+
+    function setBodyLeft() {
+        var menuOuterWidth = touchmenu.$container.outerWidth();
+        var bodyPaddingLeft = menuOuterWidth + touchmenu.bodyPaddingLeft
+        console.log('TouchScreen.cshtml: setBodyLeft: menuOuterWidth bodyPaddingLeft', menuOuterWidth, bodyPaddingLeft);
+        touchmenu.$body.css('padding-left', bodyPaddingLeft);
+    }
+
+    //function menuButtonPositionSet() {
+    //    var thisfn = 'TouchScreen.cshtml: menuButtonPositionSet function: ';
+    //    var bodyHeight = touchhtml.clientHeight;
+    //    var buttonHeight = $toucbtn.outerHeight();
+    //    var buttonTop = (bodyHeight - buttonHeight) / 2;
+    //    console.log(thisfn + 'bodyHeight buttonHeight buttonTop', bodyHeight, buttonHeight, buttonTop);
+    //    $toucbtn.css('top', buttonTop);
+    //}
+
+</script>

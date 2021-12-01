@@ -1,0 +1,30 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Membership.Areas.UserAdministration.Models;
+
+@model WelcomeModel
+
+@{
+    ViewBag.Title = Model.AppSetting.ProductName;
+}
+<style>
+    .loginform h1 {
+        color: black;
+    }
+    .loginform label {
+        color: black;
+    }
+</style>
+<div class="row mt-2">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+        @{
+            Html.RenderAction("Login", "Account", new { area = "UserAdministration" });
+        }
+    </div>
+    <div class="col-auto col-sm-4 col-md-6 col-lg-7 col-xl-8"></div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+        @Html.Partial(Global.VIEW_LANGUAGESELECTION, new LanguageSelectionModel { TitleStyle = "color:black;" })
+    </div>
+    <div class="col-auto col-sm-4 col-md-6 col-lg-7 col-xl-8"></div>
+</div>

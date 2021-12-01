@@ -1,0 +1,153 @@
+﻿@model Matrix1DModel
+
+<style type="text/css" media="screen">
+    div#matrix1dbody {
+        position: fixed;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        left: 0;
+        width: 100vw;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+    div#matrix1derrorhead {
+        padding: 10px;
+        font-size: large;
+        font-weight: bold;
+        color: white;
+        background-color: black;
+    }
+
+    label {
+        color: white;
+        margin-left: 15px;
+    }
+</style>
+
+<div id="matrix1dbody">
+    @if (Model.ErrorList != null && Model.ErrorList.Count() > 0)
+    {
+        <div id="matrix1derrorhead">@Html.Raw(Model.ErrorTitle)</div>
+        <div style="background-color:gray;">
+        @foreach (var mess in Model.ErrorList)
+        {
+            <label>@Html.Raw(mess)</label><br />
+        }
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    /*##### SELECTORS' CASH #####*/
+    var m1dbody = document.getElementById('matrix1dbody');
+    /*##### SELECTORS' CASH END #####*/
+
+    /*##### GLOBAL VARIABLES #####*/
+    var IntervalID_@(Model.BlockName);
+    /*##### GLOBAL VARIABLES END #####*/
+
+    /*##### AJAX without jQuery #####*/
+    // jQuery.js még min állapotban is majd 100kb. Annak 5mp-enkénti elküldése percenként 1MB plusz adatküldés.
+    var Ajax = {
+        xhr : null,
+        request : function (url,method,data,success,failure){
+            if (!this.xhr){
+                this.xhr = window.ActiveX ? new ActiveXObject("Microsoft.XMLHTTP"): new XMLHttpRequest();
+            }
+            var self = this.xhr;
+
+            self.onreadystatechange = function () {
+                if (self.readyState === 4 && self.status === 200){
+                    // the request is complete, parse data and call callback
+                    var response = JSON.parse(self.responseText);
+                    success(response);
+                }else if (self.readyState === 4) { // something went wrong but complete
+                    failure();
+                }
+            };
+            this.xhr.open(method,url,true);
+            this.xhr.send(data);
+        },
+    };
+    /*##### AJAX without jQuery END #####*/
+
+    /*##### FUNCTIONS #####*/
+    @if (Model.AllowIntervention)
+    {
+        <text>
+    function OpenObject_@(Model.BlockName)(objectid)
+    {
+        //clearInterval(IntervalID_@(Model.BlockName));
+        var url = '@Url.Action("WorkPlaceList", "MonitoringIntervention", new { area = "MonitoringProfile" })' + '?DefaultObjectID=' + objectid;
+        console.log(url);
+        window.parent.location.href = url;
+    }
+    </text>
+    }
+
+    @if (Model.RefreshInterval>0)
+    {
+        <text>
+    function RefreshItem_@(Model.BlockName)()
+    {
+        clearInterval(IntervalID_@(Model.BlockName));
+
+        var dt = new Date();
+        var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+        console.log(time + ' refreshItem_@(Model.BlockName) ');
+        //WA20160823: Mostantól nem a teljes lapot frissítjük, hanem csak a táblázat belsejét
+        //var url = '@Html.Raw(Url.Action("Index", "Matrix1D", new { area = "WebMonitor", BlockName = Model.BlockName, WorkPlace = Model.WorkPlaceParameter, Refresh = Model.RefreshInterval }))';
+        //console.log(time + ' refreshItem_@(Model.BlockName) ' + url);
+        //location.href = url;
+        ajaxGetValues();
+    }
+    </text>
+    }
+
+    function ajaxGetValues() {
+        var url = '@Html.Raw(Url.Action("GetValues"
+                                          , "Matrix1D"
+                                          , new { area = "WebMonitor"
+                                                , BlockName = Model.BlockName
+                                                , WorkPlace = Model.WorkPlaceParameter
+                                                , Refresh = Model.RefreshInterval
+                                                , xml = Model.XmlConnectionString
+                                                , otherVarsJSON = Model.OtherVarsJSON
+                                          }
+                                           ))';
+        var data = null;
+        console.log('ajaxGetValues url = ' + url);
+
+        Ajax.request(url,'GET',data,function(responseData){
+            console.log('Ajax Success!', responseData);
+            if (responseData.ErrorMessage == '') {
+                m1dbody.innerHTML = responseData.Html;
+            } else {
+                console.log('Hiba a "@(Model.BlockName)" nevű block frissítése közben!');
+                m1dbody.innerHTML = responseData.ErrorMessage;
+            }
+            @if (Model.RefreshInterval>0)
+            {
+                <text>IntervalID_@(Model.BlockName) = @(Model.SetIntervalFunctionString);</text>
+            }
+        },function(){
+            console.log('Ajax Failure!');
+            @if (Model.RefreshInterval>0)
+            {
+                <text>IntervalID_@(Model.BlockName) = @(Model.SetIntervalFunctionString);</text>
+            }
+        });
+    } @* ajaxGetValues()  VÉGE *@
+    /*##### FUNCTIONS END #####*/
+
+    /*##### EVENTS #####*/
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log( 'Matrix1D.@(Model.BlockName).ready' );
+        ajaxGetValues();
+    });
+    /*##### EVENTS END #####*/
+</script>

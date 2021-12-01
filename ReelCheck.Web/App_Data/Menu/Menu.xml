@@ -1,0 +1,867 @@
+﻿<?xml version="1.0" encoding="utf-8"?> 
+<Menu>
+	<XmlParser>
+		<XmlVar Name="NOBODY">
+			<Conditions>
+				<Condition Type="equal" Test="@ACCESS@" With="LIMITED">NOBODY</Condition>
+				<Condition Type="else"></Condition>
+			</Conditions>
+		</XmlVar>
+
+		<XmlVar Name="STYLE_DIALOG_MENU">max-width:90vmax;margin 100; padding 10;</XmlVar>
+		<XmlVar Name="STYLE_DIALOG_RETURNINFO">max-width:50vmax;font-size:larger;color:white;</XmlVar>
+		<XmlVar Name="STYLE_DIALOG_ENTRYM">max-width:70vmax;font-size:larger;color:white;</XmlVar>
+		<XmlVar Name="STYLE_DIALOG_ENTRYXL">max-width:100vmax;font-size:larger;color:white;</XmlVar>
+
+		<XmlVar Name="AutoCloseWaitFor">3</XmlVar>
+		<XmlVar Name="AutoCloseDialog">30</XmlVar>
+		
+		<XmlVar Name="MENUCREATEROLES">true</XmlVar>
+		<XmlVar Name="MENUROLEPREFIX"></XmlVar>
+		<XmlVar Name="MENUCREATEWORDCODES">true</XmlVar>
+		<XmlVar Name="MENUWORDCODEPREFIX">Menu.Xml</XmlVar>
+		
+		<XmlVar Name="MENUGROUPBEHAVIOR">Accordion</XmlVar>
+		<XmlVar Name="BUTTONPANELBEHAVIOR">OpenRight</XmlVar>
+		
+		<XmlVar Name="MENUPAGESTYLE_ContainerStyle">border:0vmax;border-color:red;margin:0vmax;padding:0vmax;border-radius:0.5vmax;</XmlVar>
+		<XmlVar Name="MENUPAGESTYLE_BodyStyle">margin:0;padding:.3vmax;</XmlVar>
+		<XmlVar Name="MENUPAGESTYLE_TitleAreaStyle">background-color:red;margin:0;padding:.3vmax;line-height:1vmax;font-size:.1vmax;border:none;border-radius:.5vmax;</XmlVar>
+		<XmlVar Name="MENUPAGESTYLE_TitleStyleMax">font-size:5vmax;margin:0;</XmlVar>
+		<XmlVar Name="MENUPAGESTYLE_TitleStyleMid">font-size:4vmax;margin:0;</XmlVar>
+
+		<XmlVar Name="MENUITEM_MonitorScreens" LCID="hu-HU">Monitor képernyők</XmlVar>
+		<XmlVar Name="MENUITEM_MonitorScreens" LCID="en-US">Monitor screens</XmlVar>
+		<XmlVar Name="MENUGROUP_Interventions" LCID="hu-HU">Beavatkozások</XmlVar>
+		<XmlVar Name="MENUGROUP_Interventions" LCID="en-US">Interventions</XmlVar>
+		<XmlVar Name="MENUGROUP_InterventionsOther" LCID="hu-HU">Egyéb beavatkozások</XmlVar>
+		<XmlVar Name="MENUGROUP_InterventionsOther" LCID="en-US">Other interventions</XmlVar>
+		<XmlVar Name="MENUITEM_TrxData" LCID="hu-HU">ReelCheck tranzakciós adatok</XmlVar>
+		<XmlVar Name="MENUITEM_TrxData" LCID="en-US">ReelCheck transactional data</XmlVar>
+		<XmlVar Name="MENUGROUP_Operations" LCID="hu-HU">Műveletek, adatok</XmlVar>
+		<XmlVar Name="MENUGROUP_Operations" LCID="en-US">Operations, data</XmlVar>
+		<XmlVar Name="MENUITEM_About" LCID="hu-HU">Névjegy</XmlVar>
+		<XmlVar Name="MENUITEM_About" LCID="en-US">About</XmlVar>
+		<!--
+		<XmlVar Name="" LCID="hu-HU"></XmlVar>
+		<XmlVar Name="" LCID="en-US"></XmlVar>
+		<XmlVar Name="" LCID="hu-HU"></XmlVar>
+		<XmlVar Name="" LCID="en-US"></XmlVar>
+		-->
+		
+	</XmlParser>
+	<XmlParser Include="@XMLPARSERBUTTONDEFXML@"/>
+	<MainMenu>
+		<General ApplicationName="ReelCheck" ApplicationVersion="V1.0.0">
+			<WordCodePrefix CreateWordCode="@MENUCREATEWORDCODES@">@MENUWORDCODEPREFIX@</WordCodePrefix>
+			<RolePrefix CreateRole="@MENUCREATEROLES@">@MENUROLEPREFIX@</RolePrefix>
+			<StyleDefinitions ConfigFile="file=~/App_Data/Menu/Styles.xml"/>
+			<MenuBehavior AutoHide="10">HideStartup</MenuBehavior> 
+			<FullScreenAtStartUp>False</FullScreenAtStartUp> 
+			<Defaults>
+			  <MenuItem AutoClose="0"/>
+			  <MenuGroup InitialState="closed"/>
+			  <MenuPage AutoClose="0"/>
+			</Defaults>
+			<EntryPoints>
+				<EntryPoint Name="LABELD" MainMenuGroup="Main_LabelD" ViewMode="touch">
+					<MenuBehavior AutoHide="10" FlowOver="true">HideStartup</MenuBehavior> 
+					<Welcome IFrame="true">
+						<area>WebMonitor</area><controller>Matrix2D</controller><action>Index</action>
+						<inputparameter name="xml">@MATRIX2DXML@;element=Matrix2DDefinitions;</inputparameter>
+						<inputparameter name="BlockName">LABELDSTD</inputparameter>
+						<inputparameter name="WorkPlace">LABELD</inputparameter>
+					</Welcome>
+				</EntryPoint>
+        <EntryPoint Name="LABELK" MainMenuGroup="Main_LabelD" ViewMode="touch">
+          <MenuBehavior AutoHide="10" FlowOver="true">HideStartup</MenuBehavior>
+          <Welcome IFrame="true">
+            <area>WebMonitor</area>
+            <controller>Matrix2D</controller>
+            <action>Index</action>
+            <inputparameter name="xml">@MATRIX2DXML@;element=Matrix2DDefinitions;</inputparameter>
+            <inputparameter name="BlockName">LABELKSTD</inputparameter>
+            <inputparameter name="WorkPlace">LABELK</inputparameter>
+          </Welcome>
+        </EntryPoint>
+        <EntryPoint Name="LABELE" MainMenuGroup="Main_LabelE" ViewMode="touch">
+					<MenuBehavior AutoHide="10" FlowOver="true">HideStartup</MenuBehavior> 
+					<Welcome IFrame="true">
+						<area>WebMonitor</area><controller>Matrix2D</controller><action>Index</action>
+						<inputparameter name="xml">@MATRIX2DXML@;element=Matrix2DDefinitions;</inputparameter>
+						<inputparameter name="BlockName">LABELESTD</inputparameter>
+						<inputparameter name="WorkPlace">LABELE</inputparameter>
+					</Welcome>
+				</EntryPoint>
+				<EntryPoint MainMenuGroup="Main_Manage">
+					<MenuBehavior AutoHide="10" FlowOver="true">HideStartup</MenuBehavior> 
+				</EntryPoint>
+			</EntryPoints>
+		</General>
+		<MenuGroup Name="Main_LabelD" StyleKit="GroupKitTouch">
+			<MenuItem GroupName="LabelDInterventions" ResponseTarget="CurrentPage" IFrame="false"/>
+			<MenuItem GroupName="LabelDInterventionsOther" ResponseTarget="CurrentPage" IFrame="false"/>
+		</MenuGroup>
+    <MenuGroup Name="Main_LabelK" StyleKit="GroupKitTouch">
+      <MenuItem GroupName="LabelKInterventions" ResponseTarget="CurrentPage" IFrame="false"/>
+      <MenuItem GroupName="LabelKInterventionsOther" ResponseTarget="CurrentPage" IFrame="false"/>
+    </MenuGroup>
+    <MenuGroup Name="Main_LabelE" StyleKit="GroupKitTouch">
+			<MenuItem GroupName="LabelEInterventions" Label="@MENUGROUP_Interventions@" ResponseTarget="CurrentPage" IFrame="false"/>
+			<MenuItem GroupName="LabelEInterventionsOther" Label="@MENUGROUP_InterventionsOther@" ResponseTarget="CurrentPage" IFrame="false"/>
+		</MenuGroup>
+		<MenuGroup Name="Main_Manage" StyleKit="GroupKitDesktop">
+			<MenuItem LabelWordCode="MonitorScreens" StyleKit="HighlitedDesktop" Roles="?Administrator" ResponseTarget="CurrentPage" IFrame="False">
+				<area>WebMonitor</area><controller>WebMonitor</controller><action>Display</action>
+				<inputparameter name="blockname"></inputparameter>
+				<inputparameter name="SelectEnable_MonitorProfile">true</inputparameter>
+			</MenuItem>
+			<MenuItem GroupName="Administration"/>
+			<MenuItem GroupName="Operation"/>
+			<MenuItem GroupName="About"/>
+		</MenuGroup>
+		<MenuGroup Name="LabelDInterventions" Label="@MENUGROUP_Interventions@" Roles="Menu.MenuGroup.LabelDInterventions" InitialState="open" StyleKit="GroupKitTouch">
+			<MenuItem Label="@BUTTONTEXT_Reprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LabelDInterventions.Reprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Re-print</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_Noprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LabelDInterventions.Noprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">No-print</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSON@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelDInterventions.GSON" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSTART</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Login" StyleKit="ButtonKitRed" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>UserAdministration</area><controller>Account</controller><action>Login</action>
+				<inputparameter name="xml">config=UserAuthentication</inputparameter>
+				<inputparameter name="name">LABELD</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Logout" StyleKit="ButtonKitRed" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>UserAdministration</area><controller>Account</controller><action>Logout</action>
+				<inputparameter name="xml">config=UserAuthentication</inputparameter>
+				<inputparameter name="name">LABELD</inputparameter>
+			</MenuItem>
+		</MenuGroup>
+		<MenuGroup Name="LabelDInterventionsOther" Label="@MENUGROUP_InterventionsOther@" Roles="Menu.MenuGroup.LabelDInterventions" StyleKit="GroupKitTouch">
+			<MenuItem Label="@BUTTONTEXT_GSOFF@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelDInterventions.GSOFF" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSTOP</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSSETDUE@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelDInterventions.GSSETDUE" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSETDUE</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSDUESKIP@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelDInterventions.GSDUESKIP" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">GSDUESKIP</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Block" StyleKit="ButtonKitOrange" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Block</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Unblock" StyleKit="ButtonKitOrange" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Unblock</inputparameter>
+			</MenuItem>
+			<MenuItem Label="RC Login" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Login</inputparameter>
+				<inputparameter name="userName">@USERNAME@</inputparameter>
+			</MenuItem>
+			<MenuItem Label="RC Logout" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Logout</inputparameter>
+				<inputparameter name="userName">*</inputparameter>
+			</MenuItem>
+		</MenuGroup>
+    <MenuGroup Name="LABELKInterventions" Label="@MENUGROUP_Interventions@" Roles="Menu.MenuGroup.LABELKInterventions" InitialState="open" StyleKit="GroupKitTouch">
+      <MenuItem Label="@BUTTONTEXT_Reprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LABELKInterventions.Reprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Re-print</inputparameter>
+      </MenuItem>
+      <MenuItem Label="@BUTTONTEXT_Noprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LABELKInterventions.Noprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">No-print</inputparameter>
+      </MenuItem>
+      <MenuItem Label="@BUTTONTEXT_GSON@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LABELKInterventions.GSON" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">GSSTART</inputparameter>
+      </MenuItem>
+      <MenuItem Label="Login" StyleKit="ButtonKitRed" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+        <area>UserAdministration</area>
+        <controller>Account</controller>
+        <action>Login</action>
+        <inputparameter name="xml">config=UserAuthentication</inputparameter>
+        <inputparameter name="name">LABELK</inputparameter>
+      </MenuItem>
+      <MenuItem Label="Logout" StyleKit="ButtonKitRed" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+        <area>UserAdministration</area>
+        <controller>Account</controller>
+        <action>Logout</action>
+        <inputparameter name="xml">config=UserAuthentication</inputparameter>
+        <inputparameter name="name">LABELK</inputparameter>
+      </MenuItem>
+    </MenuGroup>
+    <MenuGroup Name="LABELKInterventionsOther" Label="@MENUGROUP_InterventionsOther@" Roles="Menu.MenuGroup.LABELKInterventions" StyleKit="GroupKitTouch">
+      <MenuItem Label="@BUTTONTEXT_GSOFF@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LABELKInterventions.GSOFF" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">GSSTOP</inputparameter>
+      </MenuItem>
+      <MenuItem Label="@BUTTONTEXT_GSSETDUE@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LABELKInterventions.GSSETDUE" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">GSSETDUE</inputparameter>
+      </MenuItem>
+      <MenuItem Label="@BUTTONTEXT_GSDUESKIP@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LABELKInterventions.GSDUESKIP" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">GSDUESKIP</inputparameter>
+      </MenuItem>
+      <MenuItem Label="Block" StyleKit="ButtonKitOrange" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Block</inputparameter>
+      </MenuItem>
+      <MenuItem Label="Unblock" StyleKit="ButtonKitOrange" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Unblock</inputparameter>
+      </MenuItem>
+      <MenuItem Label="RC Login" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Login</inputparameter>
+        <inputparameter name="userName">@USERNAME@</inputparameter>
+      </MenuItem>
+      <MenuItem Label="RC Logout" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Logout</inputparameter>
+        <inputparameter name="userName">*</inputparameter>
+      </MenuItem>
+    </MenuGroup>
+    <MenuGroup Name="LabelEInterventions" Label="@MENUGROUP_Interventions@" Roles="Menu.MenuGroup.LabelEInterventions" InitialState="open" StyleKit="GroupKitTouch">
+			<MenuItem Label="@BUTTONTEXT_Reprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LabelEInterventions.Reprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Re-print</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_Noprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LabelEInterventions.Noprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">No-print</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_HHMODEON_FVS@" StyleKit="ButtonKitYellow" Roles="Menu.MenuItem.LabelEInterventions.HHMODEON" ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>WebForm</area><controller>WebForm</controller><action>Execute</action>
+				<inputparameter name="fileName">@APPDATA@/WebForm/WebForms.xml</inputparameter>
+				<inputparameter name="formName">LABELE_HHMODE_BCLIST</inputparameter>
+				<inputparameter name="viewmode">desktop</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_HHMODEON_BCLIST@" StyleKit="ButtonKitYellow" Roles="Menu.MenuItem.LabelEInterventions.HHMODEON" ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>WebForm</area><controller>WebForm</controller><action>Execute</action>
+				<inputparameter name="fileName">@APPDATA@/WebForm/WebForms.xml</inputparameter>
+				<inputparameter name="formName">LABELE_HHMODE_BCLIST</inputparameter>
+				<inputparameter name="viewmode">desktop</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSON@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelEInterventions.GSON" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSTART</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Login" StyleKit="ButtonKitRed" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>UserAdministration</area><controller>Account</controller><action>Login</action>
+				<inputparameter name="xml">config=UserAuthentication</inputparameter>
+				<inputparameter name="name">LABELE</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Logout" StyleKit="ButtonKitRed" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>UserAdministration</area><controller>Account</controller><action>Logout</action>
+				<inputparameter name="xml">config=UserAuthentication</inputparameter>
+				<inputparameter name="name">LABELE</inputparameter>
+			</MenuItem>
+		</MenuGroup>
+		<MenuGroup Name="LabelEInterventionsOther" Label="@MENUGROUP_InterventionsOther@" Roles="Menu.MenuGroup.LabelEInterventions" StyleKit="GroupKitTouch">
+			<MenuItem Label="@BUTTONTEXT_HHMODEOFF@" StyleKit="ButtonKitYellow" Roles="Menu.MenuItem.LabelEInterventions.HHMODEOFF" ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYXL@" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSTOP</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSSETDUE@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelEInterventions.GSSETDUE" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSETDUE</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSDUESKIP@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelEInterventions.GSDUESKIP" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">GSDUESKIP</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Block" StyleKit="ButtonKitOrange" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Block</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Unblock" StyleKit="ButtonKitOrange" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Unblock</inputparameter>
+			</MenuItem>
+			<MenuItem Label="RC Login" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Login</inputparameter>
+				<inputparameter name="userName">@USERNAME@</inputparameter>
+			</MenuItem>
+			<MenuItem Label="RC Logout" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="5" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Logout</inputparameter>
+				<inputparameter name="userName">*</inputparameter>
+			</MenuItem>
+		</MenuGroup>
+
+		<MenuGroup Name="Operation" Label="@MENUGROUP_Operations@" Roles="Menu.MenuGroup.Operation" InitialState="closed" StyleKit="GroupKitDesktop">
+			<MenuItem Label="@MENUITEM_TrxData@" Roles="Menu.MenuItem.TrxData">
+				<area>MasterData</area><controller>Reel</controller><action>Index</action>
+				<inputparameter name="initview">1</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@LABELETEXT@ - @MENUGROUP_Interventions@" Roles="Menu.MenuGroup.LabelEInterventions" ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_MENU@" AutoClose="@AutoCloseDialog@">
+				<area>Menu</area><controller>MenuPage</controller><action>Display</action>
+				<inputparameter name="xml">@MENUXML@;element=Matrix2DInternalMenuLABELEInterventions</inputparameter>
+				<inputparameter name="URLTITLETEXT">@LABELETEXT@ - @MENUGROUP_Interventions@</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@LABELDTEXT@ - @MENUGROUP_Interventions@" Roles="Menu.MenuGroup.LabelDInterventions" ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_MENU@" AutoClose="@AutoCloseDialog@">
+				<area>Menu</area><controller>MenuPage</controller><action>Display</action>
+				<inputparameter name="xml">@MENUXML@;element=Matrix2DInternalMenuLABELDInterventions</inputparameter>
+				<inputparameter name="URLTITLETEXT">@LABELDTEXT@ - @MENUGROUP_Interventions@</inputparameter>
+			</MenuItem>
+      <MenuItem Label="@LABELKTEXT@ - @MENUGROUP_Interventions@" Roles="Menu.MenuGroup.LABELKInterventions" ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_MENU@" AutoClose="@AutoCloseDialog@">
+        <area>Menu</area>
+        <controller>MenuPage</controller>
+        <action>Display</action>
+        <inputparameter name="xml">@MENUXML@;element=Matrix2DInternalMenuLABELKInterventions</inputparameter>
+        <inputparameter name="URLTITLETEXT">@LABELKTEXT@ - @MENUGROUP_Interventions@</inputparameter>
+      </MenuItem>
+    </MenuGroup>
+		
+		<MenuGroup Name="Administration" LabelWordCode="Administration" Roles="*" StyleKit="GroupKitDesktop">
+			<MenuItem LabelWordCode="ChangeMyPassword" Roles="*">
+			  <area>UserAdministration</area><controller>Account</controller><action>Manage</action>
+			</MenuItem>
+			<MenuItem GroupName="Administration.Admin"/>
+			<MenuItem GroupName="Administration.Management"/>
+			<MenuItem MenuPage="file=@APPDATA@\Menu\Menu.xml;element=MenuPageFileManager" LabelWordCode="Download"/>
+			<MenuItem MenuPage="file=@APPDATA@\Menu\Menu.xml;element=MenuPageScripter" LabelWordCode="ServiceScripts"/>
+		</MenuGroup>
+		<MenuGroup Name="Administration.Admin" LabelWordCode="UsersAndRoles" Roles="Administrator" StyleKit="GroupKitDesktop">
+			<MenuItem LabelWordCode="Users" Roles="?Administrator">
+			  <area>UserAdministration</area><controller>UserAdministration</controller><action>Index</action>
+			</MenuItem>
+			<MenuItem LabelWordCode="UserSearch" Roles="?Administrator">
+			  <area>UserAdministration</area><controller>UserAdministration</controller><action>SearchUser</action>
+			</MenuItem>
+			<MenuItem LabelWordCode="UsersAndRoleGroups" Roles="Administrator">
+			  <area>UserAdministration</area><controller>UsersToUserRoleGroups</controller><action>Index</action>
+			</MenuItem>
+			<MenuItem LabelWordCode="RoleGroupsAndRoles" Roles="Administrator">
+			  <area>UserAdministration</area><controller>RolesToUserRoleGroups</controller><action>Index</action>
+			</MenuItem>
+			<MenuItem LabelWordCode="Roles" Roles="Administrator">
+			  <area>UserAdministration</area><controller>UserAdministration</controller><action>Roles</action>
+			</MenuItem>
+			<MenuItem Label="Felhasználó kezelés ÚJ" Roles="Administrator">
+			  <area>UserAdministration</area><controller>User</controller><action>Manager</action>
+				<inputparameter name="editMode">M</inputparameter>  <!-- Ez az alapértelmezés is ! -->
+			</MenuItem>
+			<MenuItem Label="Másodlagos bejelentkezések ÚJ" Roles="Administrator">
+			  <area>UserAdministration</area><controller>SecondaryUser</controller><action>Manager</action>
+				<inputparameter name="editMode">M</inputparameter>  <!-- Az Add, azaz "A" az alapértelmezés ! -->
+			</MenuItem>
+		</MenuGroup> <!-- Administration_Admin END -->
+		<MenuGroup Name="Administration.Management" LabelWordCode="SystemManagement" Roles="Administrator" StyleKit="GroupKitDesktop">
+			<MenuItem LabelWordCode="SystemComponents" Roles="Administrator" IFrame="false">
+			  <!--protocol>http</protocol><hostname>@LOCALHOSTIP@</hostname><appname>WebCommon</appname-->
+			  <area>ServiceControl</area><controller>ServiceControl</controller><action>Index</action>
+			  <inputparameter name="xml">file=@APPDATA@/ServiceControl/ServiceControlConfig.xml</inputparameter>
+			</MenuItem>
+			<MenuItem LabelWordCode="ConfigEditor" Roles="Administrator" IFrame="false">
+			  <!--protocol>http</protocol><hostname>@LOCALHOSTIP@</hostname><appname>WebCommon</appname-->
+			  <area>ConfigEditor</area><controller>ConfigEditor</controller><action>Index</action>
+			</MenuItem>
+			<MenuItem LabelWordCode="RedisManager" Roles="Administrator" IFrame="false">
+			  <!--protocol>http</protocol><hostname>@LOCALHOSTIP@</hostname><appname>WebCommon</appname-->
+			  <area>RedisManager</area><controller>Home</controller><action>Manager</action>
+			  <inputparameter name="xml">file=@APPDATA@/RedisManager/RedisManagerConfig.xml</inputparameter>
+			</MenuItem>
+			<MenuItem LabelWordCode="MultiLanguageManager" Roles="Administrator">
+			  <!--protocol>http</protocol><hostname>@LOCALHOSTIP@</hostname><appname>WebCommon</appname-->
+			  <area>MultiLanguageManager</area><controller>MultiLanguageManager</controller><action>Manager</action>
+			</MenuItem>
+			<MenuItem Label="--" />
+		</MenuGroup>
+		<MenuGroup Name="About" Label="?" StyleKit="GroupKitDesktop">
+			<MenuItem LabelWordCode="About" Roles="*">
+				<controller>AppHome</controller><action>About</action>
+			</MenuItem>
+		</MenuGroup>
+	</MainMenu>
+	<Matrix2DInternalMenuLABELDInterventions>
+		<XmlParser>
+			<XmlVar Name="TITLETEXT">
+				<Conditions>
+					<Condition Type="Equal" Test="@URLTITLETEXT@" With=""><Value>@BUTTONGROUP_Interventions@</Value></Condition>
+					<Condition Type="Else"><Value>@URLTITLETEXT@</Value></Condition>
+				</Conditions>
+			</XmlVar>
+		</XmlParser>
+		<General>
+			<Roles>Menu.MenuGroup.LABELDInterventions</Roles>
+			<WordCodePrefix CreateWordCode="@MENUCREATEWORDCODES@">@MENUWORDCODEPREFIX@</WordCodePrefix>
+			<RolePrefix CreateRole="@MENUCREATEROLES@">@MENUROLEPREFIX@</RolePrefix>
+			<Title WordCode="">@TITLETEXT@</Title>
+			<MenuGroupBehavior>@BUTTONPANELBEHAVIOR@</MenuGroupBehavior> 
+			<MainMenuGroup></MainMenuGroup>
+			<Appearance ContainerStyle="@MENUPAGESTYLE_ContainerStyle@" BodyStyle="@MENUPAGESTYLE_BodyStyle@" TitleAreaStyle="@MENUPAGESTYLE_TitleAreaStyle@" TitleStyle="@MENUPAGESTYLE_TitleStyleMid@"/>
+			<StyleDefinitions ConfigFile="file=~/App_Data/Menu/Styles.xml"/>
+			<Defaults>
+			  <MenuItem Roles=""/>
+			  <MenuGroup InitialState="closed"/>
+			  <MenuPage AutoClose="0"/>
+			</Defaults>
+		</General>
+		<MenuGroup Name="LABELDInterventions" Label="@BUTTONGROUP_Interventions@" InitialState="open" StyleKit="GroupKitTouchButton" Roles="?Administrator">
+			<MenuItem Label="@BUTTONTEXT_Reprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LabelDInterventions.Reprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Re-print</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_Noprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LabelDInterventions.Noprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">No-print</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSON@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelDInterventions.GSON" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSTART</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Login" StyleKit="ButtonKitRed" Roles="" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>UserAdministration</area><controller>Account</controller><action>Login</action>
+				<inputparameter name="xml">config=UserAuthentication</inputparameter>
+				<inputparameter name="name">LABELD</inputparameter>
+				<!--
+				<inputparameter name="afterlogin">@URLHEADReelCheck@/Intervention/LabelE/Run?interventionName=Login&amp;userName=@USERNAME@</inputparameter>
+				<inputparameter name="beforelogout">@URLHEADReelCheck@/Intervention/LabelD/Run?interventionName=Logout&amp;userName=@USERNAME@</inputparameter>
+				-->
+			</MenuItem>
+			<MenuItem Label="Logout" StyleKit="ButtonKitRed" Roles="" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>UserAdministration</area><controller>Account</controller><action>Logout</action>
+				<inputparameter name="xml">config=UserAuthentication</inputparameter>
+				<inputparameter name="name">LABELD</inputparameter>
+				<!--
+				<inputparameter name="beforelogout">@URLHEADReelCheck@/Intervention/LabelD/Run?interventionName=Logout&amp;userName=@USERNAME@</inputparameter>
+				-->
+			</MenuItem>
+		</MenuGroup>
+		<MenuGroup Name="LABELDInterventionsOther" Label="@BUTTONGROUP_InterventionsOther@" StyleKit="GroupKitTouchButton" Roles="?Administrator">
+			<MenuItem Label="@BUTTONTEXT_GSOFF@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelDInterventions.GSOFF" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSTOP</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSSETDUE@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelDInterventions.GSSETDUE" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSETDUE</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSDUESKIP@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelDInterventions.GSDUESKIP" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">GSDUESKIP</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Block" StyleKit="ButtonKitOrange" Roles="LabelDInterventions.BLOCK" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Block</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Unblock" StyleKit="ButtonKitOrange" Roles="LabelDInterventions.UNBLOCK" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Unblock</inputparameter>
+			</MenuItem>
+			<MenuItem Label="RC Login" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Login</inputparameter>
+			  <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+			</MenuItem>
+			<MenuItem Label="RC Logout" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelD</controller><action>Run</action>
+				<inputparameter name="interventionName">Logout</inputparameter>
+				<inputparameter name="userName">*</inputparameter>
+			</MenuItem>
+		</MenuGroup>
+	</Matrix2DInternalMenuLABELDInterventions>
+  <Matrix2DInternalMenuLABELKInterventions>
+    <XmlParser>
+      <XmlVar Name="TITLETEXT">
+        <Conditions>
+          <Condition Type="Equal" Test="@URLTITLETEXT@" With="">
+            <Value>@BUTTONGROUP_Interventions@</Value>
+          </Condition>
+          <Condition Type="Else">
+            <Value>@URLTITLETEXT@</Value>
+          </Condition>
+        </Conditions>
+      </XmlVar>
+    </XmlParser>
+    <General>
+      <Roles>Menu.MenuGroup.LABELKInterventions</Roles>
+      <WordCodePrefix CreateWordCode="@MENUCREATEWORDCODES@">@MENUWORDCODEPREFIX@</WordCodePrefix>
+      <RolePrefix CreateRole="@MENUCREATEROLES@">@MENUROLEPREFIX@</RolePrefix>
+      <Title WordCode="">@TITLETEXT@</Title>
+      <MenuGroupBehavior>@BUTTONPANELBEHAVIOR@</MenuGroupBehavior>
+      <MainMenuGroup></MainMenuGroup>
+      <Appearance ContainerStyle="@MENUPAGESTYLE_ContainerStyle@" BodyStyle="@MENUPAGESTYLE_BodyStyle@" TitleAreaStyle="@MENUPAGESTYLE_TitleAreaStyle@" TitleStyle="@MENUPAGESTYLE_TitleStyleMid@"/>
+      <StyleDefinitions ConfigFile="file=~/App_Data/Menu/Styles.xml"/>
+      <Defaults>
+        <MenuItem Roles=""/>
+        <MenuGroup InitialState="closed"/>
+        <MenuPage AutoClose="0"/>
+      </Defaults>
+    </General>
+    <MenuGroup Name="LABELKInterventions" Label="ddd@BUTTONGROUP_Interventions@" InitialState="open" StyleKit="GroupKitTouchButton" Roles="?Administrator">
+      <MenuItem Label="@BUTTONTEXT_Reprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LABELKInterventions.Reprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Re-print</inputparameter>
+      </MenuItem>
+      <MenuItem Label="@BUTTONTEXT_Noprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LABELKInterventions.Noprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">No-print</inputparameter>
+      </MenuItem>
+      <MenuItem Label="@BUTTONTEXT_GSON@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LABELKInterventions.GSON" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">GSSTART</inputparameter>
+      </MenuItem>
+      <MenuItem Label="Login" StyleKit="ButtonKitRed" Roles="" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+        <area>UserAdministration</area>
+        <controller>Account</controller>
+        <action>Login</action>
+        <inputparameter name="xml">config=UserAuthentication</inputparameter>
+        <inputparameter name="name">LABELK</inputparameter>
+        <!--
+				<inputparameter name="afterlogin">@URLHEADReelCheck@/Intervention/LabelE/Run?interventionName=Login&amp;userName=@USERNAME@</inputparameter>
+				<inputparameter name="beforelogout">@URLHEADReelCheck@/Intervention/LABELK/Run?interventionName=Logout&amp;userName=@USERNAME@</inputparameter>
+				-->
+      </MenuItem>
+      <MenuItem Label="Logout" StyleKit="ButtonKitRed" Roles="" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+        <area>UserAdministration</area>
+        <controller>Account</controller>
+        <action>Logout</action>
+        <inputparameter name="xml">config=UserAuthentication</inputparameter>
+        <inputparameter name="name">LABELK</inputparameter>
+        <!--
+				<inputparameter name="beforelogout">@URLHEADReelCheck@/Intervention/LABELK/Run?interventionName=Logout&amp;userName=@USERNAME@</inputparameter>
+				-->
+      </MenuItem>
+    </MenuGroup>
+    <MenuGroup Name="LABELKInterventionsOther" Label="ddd@BUTTONGROUP_InterventionsOther@" StyleKit="GroupKitTouchButton" Roles="?Administrator">
+      <MenuItem Label="@BUTTONTEXT_GSOFF@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LABELKInterventions.GSOFF" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">GSSTOP</inputparameter>
+      </MenuItem>
+      <MenuItem Label="@BUTTONTEXT_GSSETDUE@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LABELKInterventions.GSSETDUE" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">GSSETDUE</inputparameter>
+      </MenuItem>
+      <MenuItem Label="@BUTTONTEXT_GSDUESKIP@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LABELKInterventions.GSDUESKIP" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">GSDUESKIP</inputparameter>
+      </MenuItem>
+      <MenuItem Label="Block" StyleKit="ButtonKitOrange" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Block</inputparameter>
+      </MenuItem>
+      <MenuItem Label="Unblock" StyleKit="ButtonKitOrange" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Unblock</inputparameter>
+      </MenuItem>
+      <MenuItem Label="RC Login" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Login</inputparameter>
+        <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+      </MenuItem>
+      <MenuItem Label="RC Logout" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+        <area>Intervention</area>
+        <controller>LABELK</controller>
+        <action>Run</action>
+        <inputparameter name="interventionName">Logout</inputparameter>
+        <inputparameter name="userName">*</inputparameter>
+      </MenuItem>
+    </MenuGroup>
+  </Matrix2DInternalMenuLABELKInterventions>
+  <Matrix2DInternalMenuLABELEInterventions>
+		<XmlParser>
+			<XmlVar Name="TITLETEXT">
+				<Conditions>
+					<Condition Type="Equal" Test="@URLTITLETEXT@" With=""><Value>@BUTTONGROUP_Interventions@</Value></Condition>
+					<Condition Type="Else"><Value>@URLTITLETEXT@</Value></Condition>
+				</Conditions>
+			</XmlVar>
+		</XmlParser>
+		<General>
+			<Roles>Menu.MenuGroup.LABELEInterventions</Roles>
+			<WordCodePrefix CreateWordCode="@MENUCREATEWORDCODES@">@MENUWORDCODEPREFIX@</WordCodePrefix>
+			<RolePrefix CreateRole="@MENUCREATEROLES@"></RolePrefix>
+			<Title WordCode="">@TITLETEXT@</Title>
+			<MenuGroupBehavior>@BUTTONPANELBEHAVIOR@</MenuGroupBehavior> 
+			<MainMenuGroup>Root</MainMenuGroup>
+			<Appearance ContainerStyle="@MENUPAGESTYLE_ContainerStyle@" BodyStyle="@MENUPAGESTYLE_BodyStyle@" TitleAreaStyle="@MENUPAGESTYLE_TitleAreaStyle@" TitleStyle="@MENUPAGESTYLE_TitleStyleMid@"/>
+			<StyleDefinitions ConfigFile="file=~/App_Data/Menu/Styles.xml"/>
+			<Defaults>
+			  <MenuItem Roles=""/>
+			  <MenuGroup InitialState="closed"/>
+			  <MenuPage AutoClose="0"/>
+			</Defaults>
+		</General>
+		<MenuGroup Name="Root">
+		<MenuItem GroupName="LABELEInterventions"/>
+		<MenuItem GroupName="LABELEInterventionsOther"/>
+		</MenuGroup>
+		<MenuGroup Name="LABELEInterventions" Label="@BUTTONGROUP_Interventions@" InitialState="open" StyleKit="GroupKitTouchButton">
+			<MenuItem Label="@BUTTONTEXT_Reprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LabelEInterventions.Reprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Re-print</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_Noprint@" StyleKit="ButtonKitOrange" Roles="Menu.MenuItem.LabelEInterventions.Noprint" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">No-print</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_HHMODEON_FVS@" StyleKit="ButtonKitYellow" Roles="Menu.MenuItem.LabelEInterventions.HHMODEON" ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>WebForm</area><controller>WebForm</controller><action>Execute</action>
+				<inputparameter name="fileName">@APPDATA@/WebForm/WebForms.xml</inputparameter>
+				<inputparameter name="formName">LABELE_HHMODE_FVS</inputparameter>
+				<inputparameter name="viewmode">desktop</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_HHMODEON_BCLIST@" StyleKit="ButtonKitYellow" Roles="Menu.MenuItem.LabelEInterventions.HHMODEON" ResponseTarget="Dialog" DialogStyle="@STYLE_DIALOG_ENTRYM@" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>WebForm</area><controller>WebForm</controller><action>Execute</action>
+				<inputparameter name="fileName">@APPDATA@/WebForm/WebForms.xml</inputparameter>
+				<inputparameter name="formName">LABELE_HHMODE_BCLIST</inputparameter>
+				<inputparameter name="viewmode">desktop</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSON@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelEInterventions.GSON" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSTART</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Login" StyleKit="ButtonKitRed" Roles="" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>UserAdministration</area><controller>Account</controller><action>Login</action>
+				<inputparameter name="xml">config=UserAuthentication</inputparameter>
+				<inputparameter name="name">LABELE</inputparameter>
+				<!--
+				<inputparameter name="afterlogin">@URLHEADReelCheck@/Intervention/LabelE/Run?interventionName=Login&amp;userName=@USERNAME@</inputparameter>
+				<inputparameter name="beforelogout">@URLHEADReelCheck@/Intervention/LabelE/Run?interventionName=Logout&amp;userName=@USERNAME@</inputparameter>
+				-->
+			</MenuItem>
+			<MenuItem Label="Logout" StyleKit="ButtonKitRed" Roles="" ResponseTarget="Dialog" DialogStyle="max-width:1000px;" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>UserAdministration</area><controller>Account</controller><action>Logout</action>
+				<inputparameter name="xml">config=UserAuthentication</inputparameter>
+				<inputparameter name="name">LABELE</inputparameter>
+				<!--
+				<inputparameter name="beforelogout">@URLHEADReelCheck@/Intervention/LabelE/Run?interventionName=Logout&amp;userName=@USERNAME@</inputparameter>
+				-->
+			</MenuItem>
+		</MenuGroup>
+		<MenuGroup Name="LABELEInterventionsOther" Label="@BUTTONGROUP_InterventionsOther@" StyleKit="GroupKitTouchButton">
+			<MenuItem Label="@BUTTONTEXT_HHMODEOFF@" StyleKit="ButtonKitYellow" Roles="Menu.MenuItem.LabelEInterventions.HHMODEOFF" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseDialog@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">HHMODEOFF</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSOFF@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelEInterventions.GSOFF" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSTOP</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSSETDUE@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelEInterventions.GSSETDUE" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">GSSETDUE</inputparameter>
+			</MenuItem>
+			<MenuItem Label="@BUTTONTEXT_GSDUESKIP@" StyleKit="ButtonKitGrey" Roles="Menu.MenuItem.LabelEInterventions.GSDUESKIP" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">GSDUESKIP</inputparameter>
+			</MenuItem>
+			<MenuItem Label="eeeBlock" StyleKit="ButtonKitOrange" Roles="?Administrator" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Block</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Unblock" StyleKit="ButtonKitOrange" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Unblock</inputparameter>
+			</MenuItem>
+			<MenuItem Label="RC Login" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Login</inputparameter>
+				  <!--<inputparameter name="userName">@USERNAME@</inputparameter>-->
+			</MenuItem>
+			<MenuItem Label="RC Logout" StyleKit="ButtonKitYellow" Roles="" ResponseTarget="WaitFor" DialogStyle="@STYLE_DIALOG_RETURNINFO@" AutoClose="@AutoCloseWaitFor@" IFrame="False">
+				<area>Intervention</area><controller>LabelE</controller><action>Run</action>
+				<inputparameter name="interventionName">Logout</inputparameter>
+				<inputparameter name="userName">*</inputparameter>
+			</MenuItem>
+		</MenuGroup>
+	</Matrix2DInternalMenuLABELEInterventions>
+	<MenuPageFileManager>
+		<General>
+			<Roles>Menu.MenuGroup.FileManager</Roles>
+			<WordCodePrefix CreateWordCode="@MENUCREATEWORDCODES@">@MENUWORDCODEPREFIX@</WordCodePrefix>
+			<RolePrefix CreateRole="@MENUCREATEROLES@"></RolePrefix>
+			<Title WordCode="">File Manager2</Title>
+			<MainMenuGroup></MainMenuGroup>
+			<MenuGroupBehavior>@MENUGROUPBEHAVIOR@</MenuGroupBehavior> 
+			<StyleDefinitions ConfigFile="file=~/App_Data/Menu/Styles.xml"/>
+			<Defaults>
+			  <MenuItem Roles="" StyleKit="ItemKitDesktop"/>
+			  <MenuGroup InitialState="closed" StyleKit="GroupKitDesktop"/>
+			  <MenuPage AutoClose="0" StyleKit="GroupKitDesktop"/>
+			</Defaults>
+		</General>
+		<MenuGroup Name="Reports" Label="Riportok1">
+			<MenuItem Label="Elmentett riportok" LabelWordCode="FileManagerSavedReports" IFrame="false">
+				<!--@URLHEADWebcommon@/FileManager/FileManager/index?xml=@APPDATA@\FileManager\FileManager.xml;id=SavedReports-->
+			  <!--protocol>http</protocol><hostname>192.168.77.47</hostname><appname>WebCommon</appname-->
+			  <area>FileManager</area><controller>FileManager</controller><action>Index</action>
+			  <inputparameter name="id">SavedReports</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Felhasználói kézikönyvek" LabelWordCode="FileManagerUserGuides" IFrame="false">
+				<!--@URLHEADWebcommon@/FileManager/FileManager/index?xml=@APPDATA@\FileManager\FileManager.xml;id=UserGuides-->
+			  <!--protocol>http</protocol><hostname>192.168.77.47</hostname><appname>WebCommon</appname-->
+			  <area>FileManager</area><controller>FileManager</controller><action>Index</action>
+			  <inputparameter name="id">UserGuides</inputparameter>
+			</MenuItem>
+		</MenuGroup>
+		<MenuGroup Name="Reports" Label="Riportok2">
+			<MenuItem Label="Elmentett riportok" LabelWordCode="FileManagerSavedReports" IFrame="false">
+				<!--@URLHEADWebcommon@/FileManager/FileManager/index?xml=@APPDATA@\FileManager\FileManager.xml;id=SavedReports-->
+			  <!--protocol>http</protocol><hostname>192.168.77.47</hostname><appname>WebCommon</appname-->
+			  <area>FileManager</area><controller>FileManager</controller><action>Index</action>
+			  <!--<inputparameter name="xml">file=@APPDATA@\FileManager\FileManager.xml</inputparameter>-->
+			  <inputparameter name="id">SavedReports</inputparameter>
+			</MenuItem>
+			<MenuItem Label="Felhasználói kézikönyvek" LabelWordCode="FileManagerUserGuides" IFrame="false">
+				<!--@URLHEADWebcommon@/FileManager/FileManager/index?xml=@APPDATA@\FileManager\FileManager.xml;id=UserGuides-->
+			  <!--protocol>http</protocol><hostname>192.168.77.47</hostname><appname>WebCommon</appname-->
+			  <area>FileManager</area><controller>FileManager</controller><action>Index</action>
+			  <!--<inputparameter name="xml">file=@APPDATA@\FileManager\FileManager.xml</inputparameter>-->
+			  <inputparameter name="id">UserGuides</inputparameter>
+			</MenuItem>
+		</MenuGroup>
+	</MenuPageFileManager>
+	<MenuPageScripter>
+		<General>
+			<Roles>Menu.MenuGroup.ServiceScripts</Roles>
+			<WordCodePrefix CreateWordCode="@MENUCREATEWORDCODES@">@MENUWORDCODEPREFIX@</WordCodePrefix>
+			<RolePrefix CreateRole="@MENUCREATEROLES@"></RolePrefix>
+			<Title WordCode="">MenuPage minta menüpontok</Title>
+			<MainMenuGroup></MainMenuGroup>
+			<MenuGroupBehavior>@MENUGROUPBEHAVIOR@</MenuGroupBehavior> 
+			<StyleDefinitions ConfigFile="file=~/App_Data/Menu/Styles.xml"/>
+			<Defaults>
+			  <MenuItem Roles="" StyleKit="ItemKitDesktop"/>
+			  <MenuGroup InitialState="closed" StyleKit="GroupKitDesktop"/>
+			  <MenuPage StyleKit="GroupKitDesktop" AutoClose="0"/>
+			</Defaults>
+		</General>
+		<MenuGroup Name="MintaGroup1" Label="Test hívások">
+			<MenuItem Label="LearALM / WebMonitor">
+			  <protocol>http</protocol>
+			  <hostname>192.168.77.150</hostname>
+			  <appname>LearALM</appname>
+			  <area>WebMonitor</area><controller>WebMonitor</controller><action>Display</action>
+			  <inputparameter name="xmlfile">\\192.168.77.150\c$\ALM\wwwroot\App_Data\WebMonitor\WebMonitors.xml</inputparameter>
+			  <inputparameter name="BlockName">WRK09A</inputparameter>
+			  <inputparameter name="usergroup">group2</inputparameter>
+			</MenuItem>
+			<MenuItem Label="LearALM / Matrix2D">
+			  <protocol>http</protocol>
+			  <hostname>192.168.77.150</hostname>
+			  <appname>LearALM</appname>
+			  <area>WebMonitor</area><controller>Matrix2D</controller><action>Index</action>
+			  <inputparameter name="xmlfile">\\192.168.77.150\c$\ALM\wwwroot\App_Data\WebMonitor\WebMonitors.xml</inputparameter>
+			  <inputparameter name="BlockName">OVERHEADCPN</inputparameter>
+			  <inputparameter name="WorkPlace">AS04</inputparameter>
+			  <inputparameter name="refresh">10</inputparameter>
+			  <inputparameter name="usergroup">group2</inputparameter>
+			</MenuItem>
+			<MenuItem Label="www.index.hu" ResponseTarget="NewPage">
+			  <protocol>http</protocol>
+			  <hostname>www.index.hu</hostname>
+			  <appname></appname>
+			</MenuItem>
+			<MenuItem Label="Minta almenü 14">
+			  <protocol>http</protocol>
+			  <hostname>192.168.77.150</hostname>
+			  <appname>LearALM</appname>
+			  <area>WebMonitor</area><controller>Matrix2D</controller><action>Index</action>
+			  <inputparameter name="xmlfile">~\App_Data\WebMonitor\WebMonitors.xml</inputparameter>
+			  <inputparameter name="BlockName">OVERHEADCPN</inputparameter>
+			  <inputparameter name="WorkPlace">AS04</inputparameter>
+			  <inputparameter name="refresh">10</inputparameter>
+			  <inputparameter name="usergroup">group2</inputparameter>
+			</MenuItem>
+		</MenuGroup>
+		<MenuGroup Name="MintaGroup2" Label="Minta menü 2">
+			<MenuItem Label="Minta almenü 21">
+			</MenuItem>
+			<MenuItem Label="Minta almenü 22">
+			</MenuItem>
+			<MenuItem Label="Minta almenü 23">
+			</MenuItem>
+		</MenuGroup>
+		<MenuGroup Name="MintaGroup3" Label="Minta menü 3" InitialState="open">
+				<MenuItem Label="Minta almenü 31" roles="">
+					<area>MasterData</area><controller>HarnessTransaction</controller><action>Index</action>
+				</MenuItem>
+				<MenuItem Label="Minta almenü 32" roles="">
+					<area>MasterData</area><controller>Harness</controller><action>Index</action>
+				</MenuItem>
+			<MenuItem GroupName="MintaSubMenu1" />
+			<MenuItem GroupName="MintaSubMenu2" />
+		</MenuGroup>
+		<MenuGroup Name="MintaGroup4" Label="Minta menü 4" InitialState="closed" Roles="">
+				<MenuItem Label="Minta almenü 41" roles="">
+				</MenuItem>
+				<MenuItem Label="Minta almenü 42" roles="">
+				</MenuItem>
+				<MenuItem Label="Minta almenü 43" roles="">
+				</MenuItem>
+		</MenuGroup>
+		<MenuGroup Name="MintaSubMenu1" Label="Minta almenü 1">
+			<MenuItem Label="Minta almenü 11">
+			</MenuItem>
+			<MenuItem Label="Minta almenü 12">
+			</MenuItem>
+			<MenuItem Label="Minta almenü 13">
+			</MenuItem>
+		</MenuGroup>
+		<MenuGroup Name="MintaSubMenu2" Label="Minta almenü 2">
+			<MenuItem Label="Minta almenü 21">
+			</MenuItem>
+			<MenuItem Label="Minta almenü 22">
+			</MenuItem>
+			<MenuItem Label="Minta almenü 23">
+			</MenuItem>
+		</MenuGroup>
+	</MenuPageScripter>
+</Menu>

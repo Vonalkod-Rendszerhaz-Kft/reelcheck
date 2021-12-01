@@ -1,0 +1,109 @@
+﻿@using System.Web.Script.Serialization
+@using Vrh.Web.Membership.Areas.UAManyToMany.Models;
+
+@model UAManyToManyViewModel
+
+@if (Model != null)
+{
+    string areaName = "UAManyToMany";
+    string ctrlName = areaName;
+
+    <table class="mtmTable">
+        <thead>
+            <tr>
+                <th class="mtmHeader">
+                    @if (Session["MTM"] != null && Session["MTM"].GetType() == typeof(UAManyToManySessionModel))
+                    {
+                        if (Model.IsDefault)
+                        {
+                            @:@(((UAManyToManySessionModel)Session["MTM"]).DefaultSelectedListItemsHeader)
+                        }
+                        else
+                        {
+                            @:@(((UAManyToManySessionModel)Session["MTM"]).SelectedListItemsHeader)
+                        }
+                    }
+                </th>
+                <th class="mtmButtonsHeader"></th>
+                <th class="mtmHeader">
+                    @if (Session["MTM"] != null && Session["MTM"].GetType() == typeof(UAManyToManySessionModel))
+                    {
+                        if (Model.IsDefault)
+                        {
+                            @:@(((UAManyToManySessionModel)Session["MTM"]).DefaultAvailableListItemsHeader)
+                        }
+                        else
+                        {
+                            @:@(((UAManyToManySessionModel)Session["MTM"]).AvailableListItemsHeader)
+                        }
+                    }
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div id="list1" class="connectedSortable ui-sortable">
+                        @foreach (SelectListItem item in @Model.SelectedDropDownListItemListItems)
+                        {
+                            <div class="item" id="MTMValue:@item.Value">@item.Text</div>
+                        }
+                    </div>
+                </td>
+                <td class="mtmButtons">
+                    @if (!string.IsNullOrEmpty(Model.SelectedDropDownListItemId))
+                    {
+                        <input type="submit" value="<<" onclick="javascript:addAllItems();" />
+                        <br />
+                        <br />
+                        <br />
+                        <input type="submit" value="<" onclick="javascript:getSelectedItems(modelName, '#list2', ajaxAddUrl, isDefault);" />
+                        <br />
+                        <br />
+                        <br />
+                        <input type="submit" value=">" onclick="javascript:getSelectedItems(modelName, '#list1', ajaxRemoveUrl, isDefault);" />
+                        <br />
+                        <br />
+                        <br />
+                        <input type="submit" value=">>" onclick="javascript:removeAllItems();" />
+                    }
+                </td>
+                <td>
+                    <div id="list2" class="connectedSortable ui-sortable">
+                        @foreach (SelectListItem item in @Model.AvailableListItems)
+                        {
+                            <div class="item" id="MTMValue:@item.Value">@item.Text</div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        @{JavaScriptSerializer serializer = new JavaScriptSerializer();}
+        var list1ItemsArray = @Html.Raw(serializer.Serialize(Model.SelectedDropDownListItemListItems.Select(x => x.Value).ToArray()));
+        var list2ItemsArray = @Html.Raw(serializer.Serialize(Model.AvailableListItems.Select(x => x.Value).ToArray()));
+        var ajaxAddUrl = '@Url.Action("AddItems", ctrlName, new { area = areaName })';
+        var ajaxRemoveUrl = '@Url.Action("RemoveItems", ctrlName, new { area = areaName })';
+        var isDefault = @Model.IsDefault.ToString().ToLower();
+        var modelName = '@Model.Name';
+
+        pageload();
+        $(document).ready(function () {
+            //console.log('UAManyToMany._MultiSelectList.cshtml: ');
+            //pageload();
+
+            checkList1Divs(modelName, list1ItemsArray, ajaxAddUrl, isDefault);      //gyakorlatilag csak feliratkozás egy eseményre
+            checkList2Divs(modelName, list2ItemsArray, ajaxRemoveUrl, isDefault);   //gyakorlatilag csak feliratkozás egy eseményre
+        });
+
+        function addAllItems() {
+            ajaxCall(modelName, ajaxAddUrl, list2ItemsArray, isDefault);
+        }
+
+        function removeAllItems() {
+            ajaxCall(modelName, ajaxRemoveUrl, list1ItemsArray, isDefault);
+        }
+    </script>
+}

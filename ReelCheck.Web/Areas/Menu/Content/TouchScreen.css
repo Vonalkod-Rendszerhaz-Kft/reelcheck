@@ -1,0 +1,58 @@
+﻿/*
+    A Log4Pro TouchScreen móde beállításai.
+    ===============================================    
+    Források: Bootstrap 4 (BS), jQuery 3.0.0 (JM)
+
+    FONTOS!
+    0. A FORRÁSOKAT NE MÓDOSÍTSUK! Maradjanak frissíthetőek.
+    1. Csak ami a TouchScreen-hez kell, és a többi módban nem kell.
+*/
+/*
+Készült: 2018.04.04-06 Wittmann Antal
+Módosítva:
+*/
+
+
+/*****************************/
+/* CONTAINER from BS   START */
+/*****************************/
+.container-fluid.body-content {
+    margin-top: .7rem;
+    margin-bottom: .7rem;
+}
+/*****************************/
+/* CONTAINER from BS     END */
+/*****************************/
+
+/*****************************/
+/* TOUCHSCREEN         START */
+/*****************************/
+
+#touchscreen-menucontainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 20;
+    border-right: 1px solid orange;
+}
+
+#touchscreen-menubutton {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 21;
+    opacity: .2;
+    font-size: x-large;
+    margin: 0;
+    border: 1px solid orange;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+#touchscreen-menubutton:hover {
+    opacity: .5;
+}
+/*****************************/
+/* TOUCHSCREEN           END */
+/*****************************/
+

@@ -1,0 +1,47 @@
+﻿@*
+    -----------------------
+    WebForm - Error.cshtml
+    -----------------------
+*@
+
+@using Vrh.Web.Common.Lib
+
+@model List<string>
+
+@{
+    Layout = WebCommon.Layout;
+}
+<head>
+    <title>Error</title>
+    <style type="text/css" media="screen">
+        body {
+            height: 1in;
+        }
+
+        label {
+            color: lightgray;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h2>The errors occurred while processing form!</h2>
+        </div>
+        <div class="card-body">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var mess in Model)
+                {
+                    <label>@Html.Raw(mess)</label><br />
+                }
+            }
+        </div>
+    </div>
+</body>
+@*
+    -----------------------
+    WebForm - Error.cshtml
+    -----------------------
+*@

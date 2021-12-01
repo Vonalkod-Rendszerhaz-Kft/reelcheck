@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+
+@using System.Reflection;
+@using VRH.Log4Pro.MultiLanguageManager;
+@using Vrh.Web.Common.Lib
+
+@{
+    string thiscs = "_Layout.cshtml: ";
+    Assembly assembly = Assembly.GetExecutingAssembly();
+
+    CookieApplicationSettings cookieApplicationSettings;
+    if (ViewBag.CookieApplicationSettings == null)
+    {
+        System.Diagnostics.Debug.WriteLine($"{thiscs} ViewBag.CookieApplicationSettings NULL");
+        cookieApplicationSettings = new CookieApplicationSettings(assembly, Request);
+    }
+    else
+    {
+        cookieApplicationSettings = (CookieApplicationSettings)ViewBag.CookieApplicationSettings;
+    }
+    //System.Diagnostics.Debug.WriteLine($"{thiscs}: ViewMode={cookieApplicationSettings.ViewMode}, Name={cookieApplicationSettings.ProductName}, Version={cookieApplicationSettings.ProductVersion}");
+    System.Diagnostics.Debug.WriteLine($"{thiscs}: ViewMode={cookieApplicationSettings.ViewMode}, Config={cookieApplicationSettings.ConfigurationName}, EntryPoint={cookieApplicationSettings.EntryPointName}");
+
+    string lcid = MultiLanguageManager.RelevantLanguageCode;
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    @Styles.Render(Global.BUNDLES_STYLE)
+    @RenderSection("styles", required: false)
+
+    @Scripts.Render(Global.BUNDLES_SCRIPT)
+    @Scripts.Render("~/Areas/Menu/Scripts/Menu.js") @* ez a Layout megoldás része azért itt töltődik.*@
+    <script>
+        vrhmenu.UrlWelcome = '@Html.Raw(cookieApplicationSettings.WelcomeUrl)';
+        vrhmenu.IsUseAuthentication = @(Global.IsUseAuthentication.ToString().ToLower());
+        vrhmenu.cnst.TITLE_FULLSCREEN_ON = '@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.FullScreenOn), lcid))';
+        vrhmenu.cnst.TITLE_FULLSCREEN_OFF = '@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Titles.FullScreenOff), lcid))';
+
+        vrhmenu.ViewModes.Desktop = @((int)ViewModes.Desktop);    
+        vrhmenu.ViewModes.Mobile = @((int)ViewModes.Mobile);    
+        vrhmenu.ViewModes.Touch = @((int)ViewModes.Touch);
+        vrhmenu.ViewMode = @((int)cookieApplicationSettings.ViewMode);
+
+        vrhmenu.MenuBehaviors.HideAlways = @((int)MenuBehaviors.HideAlways);
+        vrhmenu.MenuBehaviors.HideStartUp = @((int)MenuBehaviors.HideStartUp);
+        vrhmenu.MenuBehaviors.VisibleAlways = @((int)MenuBehaviors.VisibleAlways);
+        vrhmenu.MenuBehaviors.VisibleStartUp = @((int)MenuBehaviors.VisibleStartUp);
+
+        vrhct.bootbox.DefaultOptions.cancelLabel = '@Html.Raw(MultiLanguageManager.GetTranslation(typeof(GeneralWordCodes.MLM.General.Words.Cancel), lcid))';
+        vrhct.bootbox.DefaultOptions.okLabel = '@Html.Raw(MultiLanguageManager.GetTranslation(typeof(GeneralWordCodes.MLM.General.Words.OK), lcid))';
+        vrhct.bootbox.DefaultOptions.saveLabel = '@Html.Raw(MultiLanguageManager.GetTranslation(typeof(GeneralWordCodes.MLM.General.Words.Save), lcid))';
+        vrhct.bootbox.DefaultOptions.noLabel = '@Html.Raw(MultiLanguageManager.GetTranslation(typeof(GeneralWordCodes.MLM.General.Words.No), lcid))';
+        vrhct.bootbox.DefaultOptions.yesLabel = '@Html.Raw(MultiLanguageManager.GetTranslation(typeof(GeneralWordCodes.MLM.General.Words.Yes), lcid))';
+        vrhct.bootbox.DefaultOptions.pleaseWaitMessage = '@Html.Raw(MultiLanguageManager.GetTranslation(typeof(GeneralWordCodes.MLM.General.Messages.PleaseWait), lcid))';
+        vrhct.bootbox.DefaultOptions.autoCloseMessage = '@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.Menu.Dialog.AutoClose), lcid))';
+    </script>
+</head>
+<body>
+    @if (cookieApplicationSettings.ViewMode == ViewModes.Mobile)
+    {
+        <div class="container-fluid body-content">
+            @RenderBody()
+        </div>
+    }
+    else if (cookieApplicationSettings.ViewMode == ViewModes.Touch)
+    {
+        /*********************************************** TOUCHSCREEN MODE **********************************************/
+        @Styles.Render("~/Areas/Menu/Content/TouchScreen.css")
+        @Scripts.Render("~/Areas/Menu/Scripts/TouchScreen.js")
+        Html.RenderAction("Display", "Menu", new { area = "Menu", cookieApplicationSettings = cookieApplicationSettings });
+        <div id="touchscreen-body" class="container-fluid body-content">
+            @RenderBody()
+        </div>
+        /*********************************************** TOUCHSCREEN MODE END ******************************************/
+    }
+    else
+    {
+        /*********************************************** DESKTOP MODE **********************************************/
+        @Styles.Render("~/Areas/Menu/Content/Desktop.css")
+        @Scripts.Render("~/Areas/Menu/Scripts/Desktop.js")
+        Html.RenderAction("Display", "Menu", new { area = "Menu", cookieApplicationSettings = cookieApplicationSettings });
+        <div class="container-fluid body-content">
+            @RenderBody()
+        </div>
+        <div class="navbar navbar-expand-sm navbar-dark bg-dark fixed-bottom py-0 px-2" id="desktopfooter" style="display:none">
+            <img src="~/Areas/Menu/Images/log4pro_cube.png" class="ml-0 mr-1" />
+            <b class="d-block float-left mr-2">Log4Pro</b>
+            <i class="d-none d-sm-block">@(cookieApplicationSettings.Copyright)</i>
+            @*<b>Log4Pro</b> <i>&copy; 2018 Vrh.Web.Menu test application </i>*@
+        </div>
+        /*********************************************** DESKTOP MODE END ******************************************/
+    }
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

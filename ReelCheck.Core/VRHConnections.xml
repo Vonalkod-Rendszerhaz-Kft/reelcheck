@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<connectionStrings>
+  <!--  
+  <connectionString ConfigEditRef="Database" name="Database">
+    <Element name="Data Source">192.168.77.47</Element>
+    <Element name="Initial Catalog">ReelCheck</Element>
+    <Element name="user id">sa</Element>
+    <Element name="password">vrh</Element>
+    <Element name="multipleactiveresultsets">True</Element>
+  </connectionString>
+  -->
+  <connectionString ConfigEditRef="Database" name="DbConnection">
+    <Element name="Data Source">.\SQLEXPRESS2008R2</Element>
+    <Element name="Initial Catalog">ReelCheck</Element>
+    <Element name="user id">sa</Element>
+    <Element name="password">sapw</Element>
+    <Element name="multipleactiveresultsets">True</Element>
+  </connectionString>
+</connectionStrings>

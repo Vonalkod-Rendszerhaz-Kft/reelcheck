@@ -1,0 +1,60 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+
+@{
+    ViewBag.Title = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.BindRoleGroupsAndRoles)));
+
+    IHtmlString newRoleTranslationText = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.NewRoleGroup)));
+    IHtmlString okTranslationText = Html.Raw(MultiLanguageManager.GetTranslation(typeof(GeneralWordCodes.MLM.General.Words.OK)));
+    IHtmlString cancelTranslationText = Html.Raw(MultiLanguageManager.GetTranslation(typeof(GeneralWordCodes.MLM.General.Words.Cancel)));
+    IHtmlString deleteRoleTranslationText = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.DeleteRoleGroup)));
+    IHtmlString deleteTranslationText = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.Common.Delete)));
+    IHtmlString closeTranslationText = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.Common.Close)));
+    IHtmlString renameRoleTranslationText = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.RenameRoleGroup)));
+    IHtmlString renameTranslationText = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.Common.Rename)));
+}
+
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="@(Url.Content(Constants.AREA_SCRIPTSPATH + "RolesToUserRoleGroupsDialog.js"))"></script>
+<script type="text/javascript">
+    rturgd.TitleNew = '@newRoleTranslationText';
+    rturgd.TitleDel = '@deleteRoleTranslationText';
+    rturgd.TitleRen = '@renameRoleTranslationText';
+    rturgd.TitleOK = '@okTranslationText';
+    rturgd.TitleCancel = '@cancelTranslationText';
+    rturgd.TitleClose = '@cancelTranslationText';
+    rturgd.FormNewId = 'NewUserRoleGroupNameForm';
+    rturgd.FormDelId = 'DeleteUserRoleGroupNameForm';
+    rturgd.FormRenId = 'EditUserRoleGroupNameForm';
+
+    var urlNewRoleGroup = '@Url.Action("NewUserRoleGroupForm", Constants.CONTROLLER_RTURG, new { area = Constants.AREA })';
+    var urlDeleteRoleGroup = '@Url.Action("DeleteUserRoleGroupForm", Constants.CONTROLLER_RTURG, new { area = Constants.AREA })';
+    var urlEditRoleGroup = '@Url.Action("EditUserRoleGroupForm", Constants.CONTROLLER_RTURG, new { area = Constants.AREA })';
+    function newDialog() {
+        openEditDialog(urlNewRoleGroup,  rturgd.TitleNew, rturgd.TitleOK, rturgd.TitleCancel, rturgd.FormNewId)
+    }
+    function deleteDialog() {
+        openEditDialog(urlDeleteRoleGroup, rturgd.TitleDel, rturgd.TitleDel, rturgd.TitleClose, rturgd.FormDelId)
+    }
+    function editDialog() {
+        openEditDialog(urlEditRoleGroup, rturgd.TitleRen, rturgd.TitleRen, rturgd.TitleClose, rturgd.FormRenId)
+    }
+
+    //$(function() {
+    //});
+</script>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">@ViewBag.Title</h2>
+    </div>
+    <div class="card-body">
+        <div class="row mb-1">
+            <input type="submit" class="btn btn-success mr-1" onclick="javascript:newDialog();" value="@newRoleTranslationText" />
+            <input type="submit" class="btn btn-danger mr-1 " onclick="javascript:deleteDialog();" value="@deleteRoleTranslationText" />
+            <input type="submit" class="btn btn-primary" onclick="javascript:editDialog();" value="@renameRoleTranslationText" />
+        </div>
+        <div class="row">
+            @Html.Partial("_RolesToUserRoleGroups", ViewData["id"] != null ? new ViewDataDictionary() { { "id", ViewData["id"] } } : null)
+        </div>
+    </div>
+</div>

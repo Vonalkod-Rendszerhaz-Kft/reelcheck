@@ -1,0 +1,27 @@
+﻿@model Vrh.Web.Membership.Areas.UserAdministration.Models.DeleteUserRoleGroupViewModel
+
+@if (Model != null)
+{
+    <div id="deleteDialog">
+        @using (Ajax.BeginForm("DeleteUserRoleGroup", Constants.CONTROLLER_RTURG, new { area = Constants.AREA },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "deleteDialog",
+        }, new { id = "DeleteUserRoleGroupNameForm" }))
+        {
+            <div class="form-group">
+                @Html.DropDownListFor(x => x.SelectedUserRoleGroupId, Model.UserRoleGroups, new { @class = "form-control", size = 10, autofocus = "" })
+                @*@Html.ValidationMessageFor(x => x.SelectedUserRoleGroupId)*@
+                @Html.ValidationSummary(false)
+            </div>
+        }
+    </div>
+    <script>
+        // ha a modal megjelenik, és van autofocus-os elem, akkor oda teszi a fókuszt.
+        $('.modal').on('shown.bs.modal', function () {
+            $(this).find('[autofocus]').focus();
+        });
+    </script>
+}

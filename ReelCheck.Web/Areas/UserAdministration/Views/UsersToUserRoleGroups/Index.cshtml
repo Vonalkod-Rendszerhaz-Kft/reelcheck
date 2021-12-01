@@ -1,0 +1,15 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+
+@{
+    ViewBag.Title = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.BindRoleGroupsAndUsers)));
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>"
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">@ViewBag.Title</h1>
+    </div>
+    <div class="card-body">
+        @Html.Partial("_UsersToUserRoleGroups")
+    </div>
+</div>

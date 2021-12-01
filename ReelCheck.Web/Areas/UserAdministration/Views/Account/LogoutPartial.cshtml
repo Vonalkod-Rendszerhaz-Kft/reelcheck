@@ -1,0 +1,26 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+
+@{
+    IHtmlString btnLogout = Html.Raw(MultiLanguageManager.GetTranslation(typeof(MVCMembershipWordCodes.MvcMembership.User.Logout)));
+    string formId = "logoutForm";
+    string formCtrl = "Account";
+
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = formId,
+        OnSuccess = "",
+    };
+}
+<div id="@(formId)">
+    @using (Ajax.BeginForm("LogoutPartial", formCtrl, new { area = Global.AREANAME }, ajaxOptions))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ActionLink(User.Identity.Name, "Manage", formCtrl, new { area = Global.AREANAME }, new { @class = "alert alert-dark", role = "alert" })
+        <button type="submit" class="btn btn-success">@(btnLogout)</button>
+
+        @Html.ValidationSummary(true)
+    }
+</div>

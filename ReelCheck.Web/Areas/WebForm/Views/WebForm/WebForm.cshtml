@@ -1,0 +1,159 @@
+﻿@model WebFormModel
+@{
+    HtmlString title = (HtmlString)Html.Raw(Model.ErrorList.Count == 0 ? Model.Form.Title : "The errors occurred while processing form!");
+    if (String.IsNullOrEmpty(Model.BootBoxId))
+    {
+        Layout = Model.ViewMode == ViewModes.Mobile ? Model.Form.LayoutMobile : Model.Form.Layout;
+        System.Diagnostics.Debug.WriteLine("ViewMode={0} Layout='{1}'", Model.ViewMode, Layout);
+    }
+}
+<head>
+    @if (Model.Form != null)
+    {
+        <link href="@Url.Content("~/Areas/WebForm/Content/autocomplete.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Areas/WebForm/Scripts/jquery-ui-1.12.1.min.js")" type="text/javascript"></script>
+        if (Model.ViewMode == ViewModes.Mobile)
+        {
+            @*http://demos.jquerymobile.com/1.4.5*@
+            @*http://www.w3schools.com/jquerymobile/default.asp*@
+            @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+            @*<link href="@Url.Content("~/Content/jquery.mobile-1.4.5.min.css")" rel="stylesheet" type="text/css" />
+                <script src="@Url.Content("~/Scripts/jquery.mobile-1.4.5.min.js")" type="text/javascript"></script>*@
+
+            <style>
+                .card-primary {
+                    padding-top: 86px;
+                }
+
+                .h1, .h2, .h3, h1, h2, h3 {
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                }
+            </style>
+        }
+        else
+        {
+            <script src="@Url.Content("~/Scripts/moment-with-locales.min.js")"></script>
+
+            <link href="@Url.Content("~/Areas/WebForm/Content/bootstrap-datetimepicker.min.css")" rel="stylesheet" type="text/css" />
+            <script src="@Url.Content("~/Areas/WebForm/Scripts/bootstrap-datetimepicker.min.js")"></script>
+        }
+
+        <link href="@Url.Content("~/Areas/WebForm/Content/VRHAutoComp.min.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Areas/WebForm/Scripts/VRHAutoComp.min.js")" type="text/javascript"></script>
+
+        <style>
+            #webformtable td {
+                padding-top: 1px;
+                padding-left: 5px;
+                padding-bottom: 1px;
+                padding-right: 5px;
+            }
+
+            .ui-helper-hidden-accessible {
+                display: none;
+            }
+
+            .ui-state-hover {
+                background: #428BCA !important;
+            }
+
+            input[type="submit"] {
+                margin-top: 2px;
+                margin-left: 6px;
+            }
+
+            input[type="button"] {
+                margin-top: 2px;
+                margin-right: 6px;
+            }
+
+
+            #returnvaluetable {
+                border: 2px solid;
+            }
+
+                #returnvaluetable td {
+                    border: 1px solid;
+                    vertical-align: top;
+                    padding: 2px;
+                }
+
+
+            .multitable {
+                width: 100%;
+            }
+
+            .multicontainer {
+                cursor: default;
+                background-color: lightgrey;
+                float: left;
+                padding: 2px;
+                margin: 2px;
+            }
+
+                .multicontainer div:first-child {
+                    color: black;
+                    float: left;
+                    font-size: 10px;
+                    padding: 0px;
+                    margin: 0px;
+                }
+
+                .multicontainer div:last-child {
+                    color: red;
+                    cursor: pointer;
+                    float: left;
+                    font-size: 10px;
+                    font-weight: bold;
+                    padding: 0px;
+                    margin: 0px 0px 0px 2px;
+                    width: 15px;
+                    text-align: center;
+                }
+        </style>
+
+        if (Model.ViewMode == ViewModes.Mobile)
+        {
+            <style>
+                .ui-menu .ui-menu-item {
+                    border: 1px solid lightgray;
+                    padding: 2px;
+                }
+
+                .ui-widget {
+                    font-size: 15px;
+                }
+            </style>
+        }
+    }
+</head>
+<body>
+    @*style="margin: 0px 5px 0px 5px;width:97%;"*@
+    <div class="card" data-role="page" data-theme="b">
+        <div class="card-header" data-role="content" data-content-theme="b" style="border: 1px solid black;">
+            @if (Model.ViewMode == ViewModes.Mobile)
+            {
+                <h3>@(title)</h3>
+            }
+            else
+            {
+                <h1>@(title)</h1>
+                <span style="color:#ffd800;">@Html.Raw(Model.Form.Help)</span>
+            }
+        </div>
+        <div class="card-body" id="webformpanel@(Model.BootBoxId??"")" data-role="none" style="border: 1px solid black;background-color: #2e3338;">
+            @if (Model.ErrorList.Count == 0)
+            {
+                @Html.Partial("Inputs")
+            }
+            else
+            {
+                foreach (var item in Model.ErrorList)
+                {
+                    <div style="color:white;">@Html.Raw(item)</div>
+                }
+            }
+        </div>
+    </div>
+</body>

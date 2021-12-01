@@ -1,0 +1,22 @@
+digraph {
+        label="LabelD: Id"
+		compound=true;
+		node [shape=Mrecord]
+		rankdir="TB"
+        Rest [label="Rest"];
+		Read [label="Read|entry / Label read:\n- Read label\n- Set IDCAMREADY I/O out to HIGH\n- Fire ReadEnd"];
+		BarcodeMatch [label="BarcodeMatch|entry / Label identification:\n- Check & extract readed data with RegexChecker\n- Fire EptyRead or NoRead or NoMatch or CallIdData"];
+		IdData [label="IdData|entry / Call IdData:\n- Call IdData http API for fail/pass status\n- Fire Fail or Pass or ReRead"];
+		CloseOperation [label="CloseOperation|entry / Close operation\nSet data to reel\nFire End"];
+		
+		Rest -> Read [style="solid", label="StartRead"];
+		Read -> BarcodeMatch [style="solid", label="ReadEnd"];
+		BarcodeMatch -> IdData [style="solid", label="CallIdData"];
+		BarcodeMatch -> CloseOperation [style="solid", label="EmptyRead"];
+		BarcodeMatch -> CloseOperation [style="solid", label="NoRead"];
+		BarcodeMatch -> CloseOperation [style="solid", label="NoMatch"];
+		IdData -> CloseOperation [style="solid", label="Fail"];
+		IdData -> CloseOperation [style="solid", label="Pass"];
+		IdData -> Read [style="solid", label="Reread"];
+		CloseOperation -> Rest [style="solid", label="End"];
+		}

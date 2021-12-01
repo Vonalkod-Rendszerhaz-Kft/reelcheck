@@ -1,0 +1,145 @@
+﻿<style>
+    .log4pro-menupage-ItemKit {
+        margin: .4rem 0rem .4rem 0rem;
+    }
+
+        .log4pro-menupage-ItemKit > a {
+            color: #c8c8c8;
+            background-color: transparent;
+            /*background-color: #2E3338;*/
+        }
+
+            .log4pro-menupage-ItemKit > a.active {
+                color: yellow;
+                background-color: transparent;
+                border: 2px solid yellow;
+                /*background-color: #2E3338;*/
+            }
+
+        .log4pro-menupage-ItemKit a:hover {
+            color: white;
+            /*background-color: #2E3338;*/
+            background: #2E3338;
+        }
+
+    .log4pro-menupage-GroupKit {
+        margin: .4rem 0rem .4rem 0rem;
+    }
+
+        .log4pro-menupage-GroupKit > a {
+            color: #FF9413;
+            background-color: #2E3338;
+        }
+
+            .log4pro-menupage-GroupKit > a.active {
+                color: cyan;
+                background-color: transparent;
+                border: 2px solid cyan;
+                /*background-color: #2E3338;*/
+            }
+
+            .log4pro-menupage-GroupKit > a:hover {
+                color: #FFB000;
+                background-color: #272b30 !important;
+            }
+
+    .menucontainer {
+        float: left;
+        padding: 0 1rem 0 1rem;
+    }
+</style>
+<div class="card card-primary">
+    <div class="card-header" style="display:none;">
+        <h2>Menü lap minta</h2>
+    </div>
+    <div class="card-body" style="display:none;">
+        <div class="menucontainer" data-column="1">
+            <div id="mainmenu" class="column1">
+                <div class="log4pro-menupage-ItemKit"><a  id="heading1" href="#">Sima menüpont A</a></div>
+                <div class="log4pro-menupage-GroupKit"><a id="heading2" href="#">Menü pont almenüvel #1</a></div>
+                <div class="log4pro-menupage-ItemKit"><a  id="heading3" href="#">Sima menüpont B</a></div>
+                <div class="log4pro-menupage-GroupKit"><a id="heading4" href="#">Menü pont almenüvel #2</a></div>
+                <div class="log4pro-menupage-GroupKit"><a id="heading5" href="#">Menü pont almenüvel #3</a></div>
+                <div class="log4pro-menupage-ItemKit"><a id="heading6" href="#">Sima menüpont C</a></div>
+            </div>
+        </div>
+
+        <div class="menucontainer" data-column="2">
+            <div id="heading2-submenu" class="column2" style="display: none;">
+                <div class="log4pro-menupage-ItemKit"><a href="#">Sima menüpont 1</a></div>
+                <div class="log4pro-menupage-ItemKit"><a href="#">Sima menüpont 2</a></div>
+                <div class="log4pro-menupage-ItemKit"><a href="#">Sima menüpont 3</a></div>
+                <div class="log4pro-menupage-GroupKit"><a id="heading24" href="#">Menü pont almenüvel #3</a></div>
+                <div class="log4pro-menupage-GroupKit"><a id="heading25" href="#">Menü pont almenüvel #5</a></div>
+            </div>
+            <div id="heading4-submenu" class="column2" style="display: none;">
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 1</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 2</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 3</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 4</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 5</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 6</a></div>
+            </div>
+            <div id="heading5-submenu" class="column2" style="display: none;">
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 1</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 2</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:1rem;"><a href="#">Sima menüpont 3</a></div>
+            </div>
+        </div>
+
+        <div class="menucontainer" data-column="3">
+            <div id="heading24-submenu" class="column3" style="display: none;">
+                <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 1</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 2</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 3</a></div>
+            </div>
+            <div id="heading25-submenu" class="column3" style="display: none;">
+                <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 1</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 2</a></div>
+                <div class="log4pro-menupage-ItemKit" style="margin-left:2rem;"><a href="#">Sima menüpont 3</a></div>
+            </div>
+        </div>
+    </div> <!-- class="card-body" -->
+</div>
+<script>
+    var maxColumn = 3;
+    var duration = 500;
+    $(function () {
+        "use strict";
+
+        var thisfn = 'MenuPage.OpenRight: ready event: ';
+        console.log(thisfn + 'PING');
+
+        $('.card-header').show(400);
+        $('.card-body').show(400);
+
+        $('a').on("click", function (e) {
+            //e.stopPropagation();
+            var thisfn = 'MenuPage.OpenRight: <a> click event: ';
+            console.log(thisfn + 'PING', e, this);
+
+            var $this = $(this);
+            var $container = $this.parents('.menucontainer'); //kell, hogy megállapítsuk melyik oszlopban vagyunk
+            //kikapcsoljuk az aktuális oszlopban az active-ot, és betesszük az aktuálishoz
+            $container.find('a').removeClass('active');
+            $this.addClass('active');
+
+            var col = $container.data('column');    // column értékének kiszedése
+            console.log(thisfn + 'column', col);
+            for (var ix = col + 1; ix <= maxColumn; ix++) {
+                var $cont = $('.menucontainer[data-column=' + ix + ']');
+                $cont.find('a').removeClass('active');
+                $cont.children().hide();
+            }
+
+            var id = $this.attr('id')
+            console.log(thisfn + 'id=', id);
+            if (id) {   //ha van id, akkor ez egy almenü
+                var $almenu = $('#' + id + '-submenu');
+                $almenu.fadeIn(duration);
+            }
+
+        });
+
+    });
+</script>

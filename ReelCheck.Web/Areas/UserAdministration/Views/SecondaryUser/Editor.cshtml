@@ -1,0 +1,77 @@
+﻿@using Vrh.Web.Common.Lib;
+@using Vrh.Web.Membership.Areas.UserAdministration.Controllers
+
+@model SecondaryUserModel
+@{
+    string actionName = nameof(SecondaryUserController.Editor);
+    object routeValues = new
+    {
+        area = Constants.AREA
+    };
+    var ajaxOptions = new AjaxOptions()
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = MasterData.DialogBodyId(Model.BootboxId)
+    };
+    object htmlAttributes = new { id = Constants.Ids.Form.EDITOR };
+}
+
+@Html.Partial(Constants.VALIDATIONSUMMARY)
+
+@using (Ajax.BeginForm(actionName, Constants.CONTROLLER_SU, routeValues, ajaxOptions, htmlAttributes))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.BootboxId)
+    @Html.HiddenFor(x => x.EditMode)
+    @Html.HiddenFor(x => x.RequestedFunctionId)
+    @Html.HiddenFor(x => x.RequestedFunctionName)
+
+    @Html.HiddenFor(x => x.SecondaryUserId)
+
+    <div class="row">
+        <div class="col-5 form-group">
+            @Html.LabelFor(x => x.SecondaryFunctionId)
+            @Html.DropDownListFor(x => x.SecondaryFunctionId, Model.SecondaryFunctionList)
+            @Html.ValidationMessageFor(x => x.SecondaryFunctionId)
+        </div>
+        <div class="col-5 form-group">
+            @Html.LabelFor(x => x.UserID)
+            @Html.DropDownListFor(x => x.UserID, Model.UserList)
+            @Html.ValidationMessageFor(x => x.UserID)
+        </div>
+        <div class="col-2 form-group checkbox">
+            <label>
+                @Html.DisplayNameFor(x => x.SecondaryUserActive)
+                @Html.CheckBoxFor(x => x.SecondaryUserActive, new { @class = "form-control mt-2" })
+            </label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6 form-group">
+            @Html.LabelFor(x => x.SecondaryUserName)
+            @Html.TextBoxFor(x => x.SecondaryUserName)
+            @Html.ValidationMessageFor(x => x.SecondaryUserName)
+        </div>
+        <div class="col-6 form-group">
+            @Html.LabelFor(x => x.SecondaryUserPassword)
+            @Html.TextBoxFor(x => x.SecondaryUserPassword)
+            @Html.ValidationMessageFor(x => x.SecondaryUserPassword)
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    /*##### EVENTS #####*/
+    $(function () {
+        'use strict';
+
+        //var thisfn = 'MultiLanguageManager.Editor.cshtml: ready event: ';
+        //console.log(thisfn + 'PING');
+
+        vrhct.masterdata.addClass('#@(Model.BootboxId)','input[type=text],textarea,select');
+
+        //console.log(thisfn + 'END');
+    }); // $(document).ready END
+    /*##### EVENTS END #####*/
+</script>

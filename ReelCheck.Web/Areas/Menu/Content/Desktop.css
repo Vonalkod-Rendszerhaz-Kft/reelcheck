@@ -1,0 +1,176 @@
+﻿/*
+    A Log4Pro Desktop móde beállításai.
+    ===============================================    
+    Források: Bootstrap 4 (BS), jQuery 3.0.0 (JM)
+
+    FONTOS!
+    0. A FORRÁSOKAT NE MÓDOSÍTSUK! Maradjanak frissíthetőek.
+    1. Csak ami a Desktop-hoz kell, és a többi módban nem kell.
+*/
+/*
+Készült: 2018.03.27-28 Wittmann Antal
+Módosítva:
+*/
+
+
+/*****************************/
+/* CONTAINER from BS   START */
+/*****************************/
+.container-fluid.body-content {
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+}
+/*****************************/
+/* CONTAINER from BS     END */
+/*****************************/
+
+
+/****************************/
+/* DROPDOWN from BS   START */
+/****************************/
+.dropdown-item {
+    /*color: rgba(255,255,255,.75);*/
+    color: #ffffff;
+    opacity: .75;
+    /*color: #FF9413;  Log4Pro kocka bal oldali lapjának alsó része WA20180331 */
+}
+
+    .dropdown-item:hover, .dropdown-item:focus {
+        /*  eredeti beállítás */
+        /*color: #16181b;
+        background-color: #f8f9fa;*/
+        color: #fff; /*ez volt a második beállítás*/
+        /*color: #FFB000;  Log4Pro kocka felső bal oldali lapjának színe WA20180331 */
+        background-color: #272b30;
+    }
+
+    /* A nem engedélyezett pontok */
+    a.dropdown-item[disabled] {
+        color: darkgray;
+        opacity: .75;
+    }
+
+.dropdown-menu > .dropdown-menu {
+    margin-top: -.1rem;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu > a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover > a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+        .dropdown-submenu.pull-left > .dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+
+.dropdown-header {
+    color: #7a8288;
+}
+/****************************/
+/* DROPDOWN from BS     END */
+/****************************/
+
+/*legend {
+    color: #c8c8c8;
+    border-bottom: 1px solid #1c1e22;
+}*/
+
+/***************************/
+/* NAV from BS       START */
+/***************************/
+.nav-link {
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    color: #FF9413; /* Log4Pro kocka bal oldali lapjának alsó része WA20180331 */
+}
+
+    .nav-link:hover, .nav-link:focus {
+        /*background-color: #3e444c;*/
+        /*color: #fff !important;*/
+        color: #FFB000; /* Log4Pro kocka felső bal oldali lapjának színe WA20180331 */
+        background-color: #272b30 !important;
+    }
+
+/***************************/
+/* NAV from BS         END */
+/***************************/
+
+
+
+/***************************/
+/* NAVBAR from BS    START */
+/***************************/
+
+.navbar.fixed-top { /* Alkalmazás fejléc */
+    border-bottom: 2px solid orange;
+    -webkit-box-shadow: 0 -4px 7px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 7px 2px rgba(0, 0, 0, 0.3);
+    background-image: linear-gradient(#303539, #3a3f44 60%, #484e55);
+    max-height: 4rem;
+}
+
+.navbar.fixed-bottom { /* Alkalmazás lábléc */
+    border-top: 2px solid orange !important;
+    -webkit-box-shadow: 0 -4px 7px 2px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 -4px 7px 2px rgba(0, 0, 0, 0.3) !important;
+    background-image: linear-gradient(#484e55, #3a3f44 60%, #303539) !important;
+}
+
+.navbar-collapse {
+    padding-right: 10px !important;
+}
+
+.navbar .log4proicons > a:hover {
+    color: dimgray;
+}
+
+/***************************/
+/* NAVBAR from BS      END */
+/***************************/
+
+#desktophidebar {
+    background-color: orange;
+    height: 0.2rem;
+    position: fixed;
+    top: 0;
+    z-index: 1030;
+}

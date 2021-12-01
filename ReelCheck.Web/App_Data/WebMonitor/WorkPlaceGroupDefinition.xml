@@ -1,0 +1,67 @@
+﻿<WorkPlaceDefinitions>
+  <XmlParser>
+	<XmlVar Name="ASSLGROUP" LCID="en-US">Assembly line group</XmlVar>
+	<XmlVar Name="ASSL" LCID="en-US">Assembly lines</XmlVar>
+	<XmlVar Name="SAEGROUPS" LCID="en-US">Standalone equipment groups</XmlVar>
+	<XmlVar Name="SAE" LCID="en-US">Standalone equipments</XmlVar>
+
+	<XmlVar Name="ASSLGROUP" LCID="hu-HU">Szerelősor csoport</XmlVar>
+	<XmlVar Name="ASSL" LCID="hu-HU">Szerelősorok</XmlVar>
+	<XmlVar Name="SAEGROUPS" LCID="hu-HU">Önálló gyártóeszköz csoport</XmlVar>
+	<XmlVar Name="SAE" LCID="hu-HU">Önálló gyártóeszközök</XmlVar>
+  </XmlParser>
+  <General>
+    <DefaultSelect Wpgname="###wpgname###" Wpkeylist="###wpgkeylist###" ConnectionString="@ALMDBCONNECTIONSTRING@" Keycolumn="__KEY" Displaycolumn="__NAME" />
+    <DefaultWorkPlaceGroup ListIncludeIdMask="WORK_%" ListExcludeNameMask="NOTUSED" />
+  </General>
+  <Selects>
+    <Select Name="selNAMES">
+		SELECT [Name]+' ('+[Key]+')' AS __NAME, [Key] AS __KEY FROM [dbo].[ProductionLines] WHERE [Key] IN (###wpgkeylist###)
+			ORDER BY SUBSTRING([Description],NULLIF(CHARINDEX('ORDR', [Description]),0),7) ASC
+	</Select>
+    <Select Name="selKEYS_GRP">
+		SELECT [Key] AS __KEY 
+			FROM [dbo].[ProductionLines] 
+			WHERE [Active] = 1 AND ([Key] NOT LIKE '%TST%' AND [Key] NOT LIKE '%TEST%') AND [Description] LIKE '%###wpgname###%'
+			ORDER BY SUBSTRING([Description],NULLIF(CHARINDEX('ORDR', [Description]),0),7) ASC
+	</Select>
+    <Select Name="selKEYS_ALLTEST">
+		SELECT [Key] AS __KEY FROM [dbo].[ProductionLines] WHERE [Active] = 1 AND ([Key] LIKE '%TST%' OR [Key] LIKE '%TEST%')
+	</Select>
+    <Select Name="selKEYS_SAEGX">
+		SELECT WP.[WorkPlaceName] AS __KEY
+		  FROM [LearALM].[dbo].[WorkPlaces] AS WP 
+		  JOIN [LearALM].[dbo].[ProductionLines] AS PL ON WP.[ProductionLineId] = PL.[Id]
+		  WHERE PL.[Active] = 1 AND PL.[Description] LIKE '%SAEG%'
+		  ORDER BY [WorkPlaceName]
+	</Select>
+    <Select Name="selKEYS_SAEGXN">
+		SELECT WP.[WorkPlaceName] + ' ('+PL.[Name]+';'+PL.[Key]+')' AS __NAME,WP.[WorkPlaceName] AS __KEY
+		  FROM [LearALM].[dbo].[WorkPlaces] AS WP 
+		  JOIN [LearALM].[dbo].[ProductionLines] AS PL ON WP.[ProductionLineId] = PL.[Id]
+		  WHERE PL.[Active] = 1 AND PL.[Description] LIKE '%SAEG%'
+		  ORDER BY [WorkPlaceName]
+	</Select>
+  </Selects>
+  <WorkPlaceGroups>
+    <WorkPlaceGroup Num="0" Id="WORK_GRP1" Name="NOTUSED" Displayname="@ASSLGROUP@ NOTUSED" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="0" Id="WORK_GRP2" Name="NOTUSED" Displayname="@ASSLGROUP@ NOTUSED" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="0" Id="WORK_GRP3" Name="NOTUSED" Displayname="@ASSLGROUP@ NOTUSED" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="0" Id="WORK_GRP4" Name="NOTUSED" Displayname="@ASSLGROUP@ NOTUSED" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="0" Id="WORK_GRP5" Name="NOTUSED" Displayname="@ASSLGROUP@ NOTUSED" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="0" Id="WORK_GRP6" Name="NOTUSED" Displayname="@ASSLGROUP@ NOTUSED" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="0" Id="WORK_GRP7" Name="NOTUSED" Displayname="@ASSLGROUP@ NOTUSED" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="0" Id="WORK_GRP8" Name="NOTUSED" Displayname="@ASSLGROUP@ NOTUSED" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="1" Id="WORK_GRP9" Name="C34X" Displayname="@ASSLGROUP@ C34X" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="1" Id="WORK_GRP10" Name="C519" Displayname="@ASSLGROUP@ C519" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+
+    <WorkPlaceGroup Num="1" Id="WORK_SAEG" Name="SAEG" Displayname="@SAEGROUPS@" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="1" Id="WORK_SAEGX" Name="SAEGX" Displayname="@SAE@" Type="select" Itemdisplayselect="selKEYS_SAEGXN">selKEYS_SAEGX</WorkPlaceGroup>
+    <WorkPlaceGroup Num="1" Id="WORK_ASSL" Name="ASSL" Displayname="@ASSL@" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="1" Id="WORK_ALLTEST" Name="ALLTEST" Displayname="TEST @ASSL@" Type="select" Itemdisplayselect="selNAMES">selKEYS_ALLTEST</WorkPlaceGroup>
+    <WorkPlaceGroup Num="1" Id="WORK_HALL1" Name="HALL1" Displayname="HALL#1 @ASSL@" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="1" Id="WORK_HALL2" Name="HALL2" Displayname="HALL#2 @ASSL@" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="1" Id="WORK_HALL3" Name="HALL3" Displayname="HALL#3 @ASSL@" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+    <WorkPlaceGroup Num="1" Id="WORK_HALL4" Name="HALL4" Displayname="HALL#4 @ASSL@" Type="select" Itemdisplayselect="selNAMES">selKEYS_GRP</WorkPlaceGroup>
+  </WorkPlaceGroups>
+</WorkPlaceDefinitions>

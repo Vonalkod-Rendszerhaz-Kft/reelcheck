@@ -1,0 +1,280 @@
+﻿/*
+    A Log4Pro alapbeállításait tartalmazó stílusok.
+    ===============================================    
+    Források: Bootstrap 4 (BS), jQuery 3.0.0 (JQ)
+
+    FONTOS!
+    0. A FORRÁSOKAT NE MÓDOSÍTSUK! Maradjanak frissíthetőek.
+    1. Csak a forrásokból származó komponensek kerüljenek bele.
+    2. Ha valami egyedi általános teljes alkalmazásra vonatkozó komponens
+       kerül bele, akkor azt a végére tegyük, megjelölve elkülönítve
+    3. Speciális egyedi beállításokat a cél komponens stílus (CSS) fájlbába kell betenni.
+       Például a DataTable megoldásra vonatkozó dolgokhoz készítsünk másik css-t.
+       Ez vonatkozik a beépülő komponensek (NuGet)-re is, az hozza magával a saját stílus lapját.
+    4. Tegyünk oda kommentet, ha nem egyértelmű mire vonatkozik.
+    5. Komponensre vonatkozó selector megnevezése szerint lehetőleg ABC rendbe tegyük be a beállításokat.
+*/
+
+
+/***************************/
+/* body              START */
+/***************************/
+body {
+    font-size: 1rem;
+    color: #c8c8c8;
+    background-color: lightgrey;
+}
+
+    /* 
+        Modális ablakok valamiért padding-right: 17px-et állítanak be nyitáskor,
+        amitől a háttérben mindig beljebb ugrik az egész kép. Ez kikapcsolja ezt.
+    */    
+    body.modal-open {
+        overflow: inherit;
+        padding-right: 0 !important;
+    }
+
+/***************************/
+/* body                END */
+/***************************/
+
+
+/***************************/
+/* card from BS      START */
+/***************************/
+.card {
+    background-color: #2e3338;
+}
+
+.card-header {
+    color: #ffffff;
+    background-color: #7a8288;
+    border-color: rgba(0, 0, 0, 0.6);
+}
+
+.card-footer {
+    background-color: #3e444c;
+    border-top: 1px solid rgba(0, 0, 0, 0.6);
+}
+/***************************/
+/* card from BS        END */
+/***************************/
+
+
+/***************************/
+/* close from BS     START */
+/*                         */
+/* A dialog bezárás x-je   */
+/***************************/
+.close {
+    color: crimson;
+    opacity: 0.8;
+}
+
+    .close:hover,
+    .close:focus {
+        color: red;
+        opacity: 0.8;
+    }
+/***************************/
+/* close from BS       END */
+/***************************/
+
+
+/*******************************/
+/* .fa from Font Awesome START */
+/*******************************/
+.fa, .fas {
+    line-height: normal;
+}
+/* WA2018.10.21_ 5.4.1-es verzióban kijavították, már nem kell ! */
+/*.fa::before, .fas::before{
+	vertical-align: middle;
+}*/
+/*******************************/
+/* .fa from Font Awesome START */
+/*******************************/
+
+
+
+/***************************/
+/* form-control      START */
+/***************************/
+.form-control:disabled, .form-control[readonly] {
+    background-color: #eeeeee;
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus,
+.form-group > select:focus {
+    /*border-color: rgba(126, 239, 104, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);*/
+    border-color: rgba(255, 176, 0, 0.8);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.075) inset, 0 0 20px rgba(255, 176, 0, 0.6);
+    outline: 0 none;
+}
+textarea:focus {    /* !! textarea-nál kellett az important, másképp nem érényesült !! */
+    border-color: rgba(255, 176, 0, 0.8) !important;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.075) inset, 0 0 20px rgba(255, 176, 0, 0.6) !important;
+    outline: 0 none !important;
+}
+/***************************/
+/* form-control        END */
+/***************************/
+/***************************/
+/* html              START */
+/***************************/
+html {
+    font-size: 14px;
+}
+/***************************/
+/* html                END */
+/***************************/
+
+
+/***************************/
+/* modal             START */
+/***************************/
+.modal {
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #2e3338;
+    border-radius: 1rem;
+    /*background-clip: padding-box;*/
+    -webkit-box-shadow: 0 0 15px rgba(200,200,200,.5);
+    -moz-box-shadow: 0 0 15px rgba(200,200,200,.5);
+    box-shadow: 0 0 15px rgba(200,200,200,.5);
+}
+
+.modal-header {
+    border-bottom: 1px solid #1c1e22;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    padding: 20px;
+    margin-top: 15px;
+    border-top: 1px solid #1c1e22;
+}
+/***************************/
+/* modal               END */
+/***************************/
+
+
+/***************************/
+/* text              START */
+/***************************/
+.text-primary,
+.text-primary:hover {
+    color: #7a8288;
+}
+
+.text-success,
+.text-success:hover {
+    color: #62c462;
+}
+
+.text-danger,
+.text-danger:hover {
+    color: #ee5f5b;
+}
+
+.text-warning,
+.text-warning:hover {
+    color: #f89406;
+}
+
+.text-info,
+.text-info:hover {
+    color: #5bc0de;
+}
+
+.text-hide {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+/***************************/
+/* text                END */
+/***************************/
+
+
+
+/***************************************/
+/* Validation: Formatting errors START */
+/***************************************/
+/* Html.ValdationSummary */
+.validation-summary-errors {
+    border-left: 2px solid red;
+    border-right: 2px solid red;
+    border-radius: .4rem;
+    color: white;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+    .validation-summary-errors > ul {
+        list-style: none;
+        padding-left: .1rem;
+    }
+
+/* Html.ValidationMessage */
+.field-validation-error {
+    display: block;
+    color: white;
+    font-weight: bold;
+    border-left: 2px solid red;
+    border-right: 2px solid red;
+    border-radius: .2rem;
+    padding: .1rem;
+}
+
+/* <input> megjelenése hiba esetén */
+/*.input-validation-error {       
+    color: red;
+    font-weight: bold;
+    background-color: pink;
+}*/
+/***************************************/
+/* Validation: Formatting errors   END */
+/***************************************/
+
+
+
+/**************************************************************/
+/* !!! Ez addig kell ide míg ki nem javítják a bootbox-ban    */
+/* a title és closeButton kirajzolásának sorrendjét !!! START */
+/**************************************************************/
+.bootbox .modal-header h4 {
+    order: 0;
+}
+
+.bootbox .modal-header button {
+    order: 1;
+}
+/**************************************************************/
+/* !!! Ez addig kell ide míg ki nem javítják a bootbox-ban    */
+/* a title és closeButton kirajzolásának sorrendjét !!!   END */
+/**************************************************************/

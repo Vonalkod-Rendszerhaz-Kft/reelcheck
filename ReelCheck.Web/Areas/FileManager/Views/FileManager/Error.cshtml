@@ -1,0 +1,42 @@
+﻿@*
+    ---------------------------------------------
+    FileManager - Error.cshtml
+    ---------------------------------------------
+*@
+
+@model List<string>
+
+<head>
+    <title>@Html.Raw(ViewBag.Title)</title>
+    <style type="text/css" media="screen">
+        body {
+            height: 1in;
+        }
+
+        label {
+            color: lightgray;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card card-primary">
+        <div class="card-header">
+            <h2>@Html.Raw(String.IsNullOrWhiteSpace(ViewBag.Head) ? ViewBag.Title : ViewBag.Head)</h2>
+        </div>
+        <div class="card-body">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var mess in Model)
+                {
+                    <label>@Html.Raw(mess)</label>
+                }
+            }
+        </div>
+    </div>
+</body>
+@*
+    ---------------------------------------------
+    FileManager - Error.cshtml
+    ---------------------------------------------
+*@

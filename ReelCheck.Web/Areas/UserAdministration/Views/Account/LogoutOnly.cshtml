@@ -1,0 +1,51 @@
+﻿@using Vrh.Web.Membership;
+
+@model LoginLogoutModel
+@{
+    string logoutmessage = "logoutmessage";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <h1>@(Model.Trans(typeof(WordCodes.MvcMembership.User.Logout)))</h1>
+        <div class="alert alert-dark"><strong>@(User.Identity.Name)</strong></div>
+        <h6 id="@(logoutmessage)"></h6>
+    </div>
+}
+else
+{
+    <div>
+        <h1>@(Model.Trans(typeof(WordCodes.MvcMembership.User.Logout)))</h1>
+        <h3>@(Model.Trans(typeof(WordCodes.MvcMembership.Messages.NoUserLoggedIn)))</h3>
+    </div>
+}
+
+@Scripts.Render(Constants.AREA_SCRIPTSPATH + "LogoutOnly.js")
+<script>
+    /**
+     * A LogoutOnlyScript (LogoutOnly.js) számára küldendő értékek prototípusa
+     * Ezeket a kódban állandóként (constansként) érdemes kezelni.
+     */
+    function ExportToLogoutOnly() {
+        'use strict';
+
+        this.BootboxId = '@(Model.BootboxId)';
+        this.IsUserAuthenticated = @(User.Identity.IsAuthenticated.ToString().ToLower());
+
+        this.Id = {
+            Message: '#@(logoutmessage)',
+        };
+        this.Logout = {
+            UrlBeforeLogout: '@Html.Raw(String.IsNullOrWhiteSpace(Model.Membership.LoginBase.BeforeLogout) ? "" : Url.Content(Model.Membership.LoginBase.BeforeLogout))',
+            IsReloadLogout: @(Model.Membership.LoginBase.IsReloadLogout.ToString().ToLower()),
+        };
+        this.Url = {
+            LogoutJSON: '@Url.Action(Constants.Actions.LOGOUTJSON, Constants.CONTROLLER_ACCOUNT, new { area = Constants.AREA})',
+        };
+    } // ExportToLogInOut function END
+
+    /*##### GLOBALS #####*/
+    var lgtnl = new LogoutOnlyScripts(new ExportToLogoutOnly());
+    /*##### GLOBALS END #####*/
+</script>

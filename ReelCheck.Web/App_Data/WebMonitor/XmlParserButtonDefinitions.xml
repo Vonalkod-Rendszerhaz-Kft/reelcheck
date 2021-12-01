@@ -1,0 +1,85 @@
+<ROOT>
+	<XmlParser>
+		<XmlVar Name="LABELETEXT" LCID="en-US">Semi-automatic ReelCheck</XmlVar>
+		<XmlVar Name="LABELETEXT" LCID="hu-HU">Félautomata ReelCheck</XmlVar>
+		<XmlVar Name="LABELDTEXT" LCID="en-US">Automatic ReelCheck (LABELD)</XmlVar>
+		<XmlVar Name="LABELDTEXT" LCID="hu-HU">Autómata ReelCheck (LABELD)</XmlVar>
+    <XmlVar Name="LABELKTEXT" LCID="en-US">Automatic ReelCheck (LABELK)</XmlVar>
+    <XmlVar Name="LABELKTEXT" LCID="hu-HU">Autómata ReelCheck (LABELK)</XmlVar>
+
+    <XmlVar Name="BUTTONHELP_REPRINT" LCID="hu-HU">Utolsó címke újranyomtatása</XmlVar>
+		<XmlVar Name="BUTTONHELP_REPRINT" LCID="en-US">Reprint last printed label</XmlVar>
+		<XmlVar Name="BUTTONHELP_NOPRINT" LCID="hu-HU">Címkenyomtatás kihagyása</XmlVar>
+		<XmlVar Name="BUTTONHELP_NOPRINT" LCID="en-US">Skip label printing</XmlVar>
+		<XmlVar Name="BUTTONHELP_LOGIN" LCID="hu-HU">Bejelentkezés a ReelCheck munkaállomásra</XmlVar>
+		<XmlVar Name="BUTTONHELP_LOGIN" LCID="en-US">Login to ReelCheck station</XmlVar>
+		<XmlVar Name="BUTTONHELP_LOGOUT" LCID="hu-HU">Kijelentkezés a ReelCheck munkaállomásról</XmlVar>
+		<XmlVar Name="BUTTONHELP_LOGOUT" LCID="en-US">Logout from ReelCheck station</XmlVar>
+		<XmlVar Name="BUTTONHELP_BLOCK" LCID="hu-HU">ReelCheck munkaállomás blokkolása</XmlVar>
+		<XmlVar Name="BUTTONHELP_BLOCK" LCID="en-US">Block ReelCheck station</XmlVar>
+		<XmlVar Name="BUTTONHELP_UNBLOCK" LCID="hu-HU">ReelCheck munkaállomás blokkolás feloldása</XmlVar>
+		<XmlVar Name="BUTTONHELP_UNBLOCK" LCID="en-US">Unblock ReelCheck station</XmlVar>
+		<XmlVar Name="BUTTONHELP_GSON" LCID="hu-HU">Aranyminta tesztsorozat bekapcsolása</XmlVar>
+		<XmlVar Name="BUTTONHELP_GSON" LCID="en-US">Golden sample test mode ON</XmlVar>
+		<XmlVar Name="BUTTONHELP_GSOFF" LCID="hu-HU">Aranyminta tesztsorozat kikapcsolása</XmlVar>
+		<XmlVar Name="BUTTONHELP_GSOFF" LCID="en-US">Golden sample test mode OFF</XmlVar>
+		<XmlVar Name="BUTTONHELP_HHMODEON" LCID="hu-HU">Kézi vonalkódolvasás bekapcsolása</XmlVar>
+		<XmlVar Name="BUTTONHELP_HHMODEON" LCID="en-US">Handhald scanning mode ON</XmlVar>
+		<XmlVar Name="BUTTONHELP_HHMODEON_FVS" LCID="hu-HU">Kézi FVS vonalkódolvasás bekapcsolása</XmlVar>
+		<XmlVar Name="BUTTONHELP_HHMODEON_FVS" LCID="en-US">Handhald FVS scanning mode ON</XmlVar>
+		<XmlVar Name="BUTTONHELP_HHMODEON_BCLIST" LCID="hu-HU">Kézi BCLIST vonalkódolvasás bekapcsolása</XmlVar>
+		<XmlVar Name="BUTTONHELP_HHMODEON_BCLIST" LCID="en-US">Handhald BCLIST scanning mode ON</XmlVar>
+		<XmlVar Name="BUTTONHELP_HHMODEOFF" LCID="hu-HU">Kézi vonalkódolvasás  kikapcsolása</XmlVar>
+		<XmlVar Name="BUTTONHELP_HHMODEOFF" LCID="en-US">Handhald scanning mode OFF</XmlVar>
+
+		<XmlVar Name="BUTTONGROUP_Interventions" LCID="hu-HU">Beavatkozások</XmlVar>
+		<XmlVar Name="BUTTONGROUP_Interventions" LCID="en-US">Interventions</XmlVar>
+		<XmlVar Name="BUTTONGROUP_InterventionsOther" LCID="hu-HU">Egyéb beavatkozások</XmlVar>
+		<XmlVar Name="BUTTONGROUP_InterventionsOther" LCID="en-US">Other interventions</XmlVar>
+
+		<XmlVar Name="BUTTONTEXT_BLOCK" LCID="hu-HU">Blokkolás</XmlVar>
+		<XmlVar Name="BUTTONTEXT_BLOCK" LCID="en-US">Block station</XmlVar>
+		<XmlVar Name="BUTTONTEXT_UNBLOCK" LCID="hu-HU">Blokkolás feloldása</XmlVar>
+		<XmlVar Name="BUTTONTEXT_UNBLOCK" LCID="en-US">Unblock station</XmlVar>
+		<XmlVar Name="BUTTONTEXT_Reprint" LCID="hu-HU">Újra nyomtatás</XmlVar>
+		<XmlVar Name="BUTTONTEXT_Reprint" LCID="en-US">Re-print</XmlVar>
+		<XmlVar Name="BUTTONTEXT_Noprint" LCID="hu-HU">Nyomtatás kimarad</XmlVar>
+		<XmlVar Name="BUTTONTEXT_Noprint" LCID="en-US">Skip-print</XmlVar>
+		<XmlVar Name="BUTTONTEXT_HHMODEON" LCID="hu-HU">Kézi olvasás INDÍT</XmlVar>
+		<XmlVar Name="BUTTONTEXT_HHMODEON" LCID="en-US">Manual scan START</XmlVar>
+		<XmlVar Name="BUTTONTEXT_HHMODEON_FVS" LCID="hu-HU">Kézi FVS olvasás INDÍT</XmlVar>
+		<XmlVar Name="BUTTONTEXT_HHMODEON_FVS" LCID="en-US">Manual FVS scan START</XmlVar>
+		<XmlVar Name="BUTTONTEXT_HHMODEON_BCLIST" LCID="hu-HU">Kézi BCLIST olvasás INDÍT</XmlVar>
+		<XmlVar Name="BUTTONTEXT_HHMODEON_BCLIST" LCID="en-US">Manual BCLIST scan START</XmlVar>
+		<XmlVar Name="BUTTONTEXT_HHMODEOFF" LCID="hu-HU">Kézi vonalkód bevitel LEÁLLÍT</XmlVar>
+		<XmlVar Name="BUTTONTEXT_HHMODEOFF" LCID="en-US">Manual scan STOP</XmlVar>
+		<XmlVar Name="BUTTONTEXT_GSON" LCID="hu-HU">Aranyminta teszt INDÍT</XmlVar>
+		<XmlVar Name="BUTTONTEXT_GSON" LCID="en-US">GoldenSample test START</XmlVar>
+		<XmlVar Name="BUTTONTEXT_GSOFF" LCID="hu-HU">Aranyminta teszt LEÁLL</XmlVar>
+		<XmlVar Name="BUTTONTEXT_GSOFF" LCID="en-US">GoldenSample test STOP</XmlVar>
+		<XmlVar Name="BUTTONTEXT_GSSETDUE" LCID="hu-HU">Aranyminta teszt esedékes BE</XmlVar>
+		<XmlVar Name="BUTTONTEXT_GSSETDUE" LCID="en-US">GoldenSample test set due ON</XmlVar>
+		<XmlVar Name="BUTTONTEXT_GSDUESKIP" LCID="hu-HU">Aranyminta teszt esedékes KI</XmlVar>
+		<XmlVar Name="BUTTONTEXT_GSDUESKIP" LCID="en-US">GoldenSample test set due OFF</XmlVar>
+		<XmlVar Name="BUTTONTEXT_MonitorNormal" LCID="hu-HU">Monitor - normál</XmlVar>
+		<XmlVar Name="BUTTONTEXT_MonitorNormal" LCID="en-US">Monitor - normal</XmlVar>
+		<XmlVar Name="BUTTONTEXT_MonitorIV" LCID="hu-HU">Monitor - beavatkozásokkal</XmlVar>
+		<XmlVar Name="BUTTONTEXT_MonitorIV" LCID="en-US">Monitor - with interventions</XmlVar>
+		<XmlVar Name="BUTTONTEXT_RCLOGIN" LCID="hu-HU">RC Login</XmlVar>
+		<XmlVar Name="BUTTONTEXT_RCLOGIN" LCID="en-US">RC Login</XmlVar>
+		<XmlVar Name="BUTTONTEXT_RCLOGOUT" LCID="hu-HU">RC Logout</XmlVar>
+		<XmlVar Name="BUTTONTEXT_RCLOGOUT" LCID="en-US">RC Logout</XmlVar>
+		<XmlVar Name="BUTTONTEXT_LOGIN" LCID="hu-HU">Login</XmlVar>
+		<XmlVar Name="BUTTONTEXT_LOGIN" LCID="en-US">Login</XmlVar>
+		<XmlVar Name="BUTTONTEXT_LOGOUT" LCID="hu-HU">Logout</XmlVar>
+		<XmlVar Name="BUTTONTEXT_LOGOUT" LCID="en-US">Logout</XmlVar>
+		<XmlVar Name="BUTTONTEXT_BACK" LCID="hu-HU">Vissza</XmlVar>
+		<XmlVar Name="BUTTONTEXT_BACK" LCID="en-US">Back</XmlVar>
+		<XmlVar Name="BUTTONTEXT_FORWARD" LCID="hu-HU">Több</XmlVar>
+		<XmlVar Name="BUTTONTEXT_FORWARD" LCID="en-US">More</XmlVar>
+		<XmlVar Name="BUTTONTEXT_ON" LCID="hu-HU">START</XmlVar>
+		<XmlVar Name="BUTTONTEXT_ON" LCID="en-US">START</XmlVar>
+		<XmlVar Name="BUTTONTEXT_OFF" LCID="hu-HU">STOP</XmlVar>
+		<XmlVar Name="BUTTONTEXT_OFF" LCID="en-US">STOP</XmlVar>
+	</XmlParser>
+</ROOT>

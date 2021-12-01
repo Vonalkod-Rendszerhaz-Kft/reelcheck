@@ -1,0 +1,26 @@
+﻿@* LoginPage.cshtml *@
+
+@model LoginPageModel
+
+<style>
+    .loginform h1 {
+        color: whitesmoke;
+    }
+    .loginform label {
+        color: whitesmoke;
+    }
+</style>
+
+<div class="card">
+    <div class="card-body bg-dark">
+        <div class="row">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                @{
+                    Html.RenderAction(Constants.Actions.LOGIN, Constants.CONTROLLER_ACCOUNT, Model.RouteValues);
+                }
+            </div>
+            <div class="col-auto col-sm-4 col-md-6 col-lg-7 col-xl-8"></div>
+        </div>
+    </div>
+</div>
+

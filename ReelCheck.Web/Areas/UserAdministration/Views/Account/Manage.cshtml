@@ -1,0 +1,48 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+
+
+@model Vrh.Web.Membership.Areas.UserAdministration.Models.LocalPasswordModel
+
+@{
+    ViewBag.Title = Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.ManageAccount)));
+}
+
+@*
+    <hgroup class="title">
+        <h1>@ViewBag.Title</h1>
+    </hgroup>
+
+    <p class="message-success">@ViewBag.StatusMessage</p>
+
+    <p>@Html.Raw(MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.User.UserLoggedInAs))): <strong>@User.Identity.Name</strong></p>
+*@
+
+
+@if (ViewBag.HasLocalPassword)
+{
+    @Html.Partial("_ChangePasswordPartial")
+}
+else
+{ 
+    @Html.Partial("_SetPasswordPartial")
+}
+@*
+<section id="externalLogins">
+    @Html.Action("RemoveExternalLogins", "Account", new { area = "UserAdministration" })
+
+    <h3>Add an external login</h3>
+    @Html.Action("ExternalLoginsList", "Account", new { area = "UserAdministration", ReturnUrl = ViewBag.ReturnUrl })
+</section>
+*@
+@section Scripts {
+    @if (ViewBag.StatusMessage != null &&
+        !string.IsNullOrWhiteSpace(ViewBag.StatusMessage.ToString()))
+    {
+       <script type="text/javascript">
+           bootbox.alert('@Html.Raw(ViewBag.StatusMessage.ToString())');
+       </script>
+    }
+@*
+    @Scripts.Render("~/bundles/jqueryval")
+*@
+}

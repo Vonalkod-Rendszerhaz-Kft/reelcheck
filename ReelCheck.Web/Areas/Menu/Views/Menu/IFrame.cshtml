@@ -1,0 +1,111 @@
+﻿<style>
+    div#framecontainer {
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+        box-sizing: border-box;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        z-index: 6;
+    }
+
+    div#spinner {
+        position: relative;
+        z-index: 5;
+        display: none;
+    }
+
+    iframe#menuiframe {
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        left: 0;
+        width: 100%;
+        top: 0;
+        height: 100%;
+        right: auto;
+        bottom: auto;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+<div id="framecontainer">
+</div>
+<div id="spinner" class="fas fa-spinner fa-10x fa-spin"></div>
+<script>
+    /*##### GLOBALS #####*/
+    var $fixedtop;
+    var $fixedbottom;
+    var $framecontainer;
+    var $spinner;
+    /*##### GLOBALS END #####*/
+
+    /*##### EVENTS #####*/
+    $(document).ready(function () {
+        'use strict';
+
+        var thisfn = 'IFrame.cshtml ready event: ';
+        //var ua = window.navigator.userAgent;
+        console.log(thisfn + 'PING vrhmenu', vrhmenu);
+
+        $fixedtop = $('.navbar.fixed-top');
+        $fixedbottom = $('.navbar.fixed-bottom');
+        $framecontainer = $('div#framecontainer');
+        $spinner = $('div#spinner');
+
+        $(window).resize(function () {
+            iframeResize();
+        });
+        vrhmenu.MenuSwapEventFunction = iframeResize;  // menüváltozáskor is hívja meg a resize-t
+
+        $framecontainer.html('<iframe id="menuiframe" src="@(ViewBag.FrameURL)" />');
+    }); // $(document).ready END
+    /*##### EVENTS END #####*/
+
+    /*##### FUNCTIONS #####*/
+    function iframeResize() {
+        var thisfn = 'IFrame.cshtml iframeResize function: ';
+        console.log(thisfn + 'PING');
+
+        var left = parseFloat($('.container-fluid').css('padding-left').replace(/[^0-9.]/g, '')) - 15;    //a 'container-fluid' 'padding-left'-je
+        var top = 0;
+        var width = '100%';
+        if (vrhmenu.ViewMode === vrhmenu.ViewModes.Touch) {
+            width = $(window).innerWidth() - left;
+            console.log(thisfn + 'left, top, width', left, top, width);
+            $framecontainer.css('left', left).css('top', top).css('width', width);
+        }
+        else if (vrhmenu.ViewMode === vrhmenu.ViewModes.Mobile) {
+            console.log(thisfn + 'left, top, width', left, top, width);
+            $framecontainer.css('left', left).css('top', top).css('width', width);
+        }
+        else {
+            var bottomHeight = 0;
+            if ($fixedtop.is(':visible')) {
+                //top = $('body').css('padding-top');
+                top = $fixedtop.height() + 4; // A +4 az árnyék miatt
+                bottomHeight = $fixedbottom.height() + 4; // A +4 az árnyék miatt
+            }
+            else {
+                top = $('#desktophidebar').height();
+            }
+            var height = $(window).innerHeight() - top - bottomHeight;
+            console.log(thisfn + 'left, top, width, height', left, top, width, height);
+            $framecontainer.css('left', left).css('top', top).css('width', width).css('height', height);
+        }
+        $spinner
+            .css('top', ($framecontainer.height() - $spinner.height()) / 2)
+            .css('left', ($framecontainer.width() - $spinner.width()) / 2)
+            .css('display', 'inline-block');
+
+        //console.log(thisfn + 'left, width, top, bottom', left, width, top, bottom);
+        //$framecontainer.css('left', left).css('width', width).css('top', top).css('bottom', bottom);
+        //console.log(thisfn + 'left, top, width', left, top, width);
+        //$framecontainer.css('left', left).css('top', top).css('width', width).css('bottom', bottom);
+    }
+    /*##### FUNCTIONS END #####*/
+</script>

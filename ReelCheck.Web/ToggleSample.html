@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle sample</title>
+    <link rel="stylesheet" href="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Content/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Areas/MasterData/Content/bootstrap-toggle.min.css" />
+</head>
+<body>
+    <div id="my-dialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Modal header</h3>
+                </div>
+                <div class="modal-body bg-dark p-3">
+                    <input id="tglb" type="checkbox" onchange="javascript: console.log('Toggle change this=',this);" />
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal">Close</a>
+                    <a href="#" class="btn btn-primary">Save changes</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Scripts/bootstrap.min.js"></script>
+    <script src="d:/Google Drive/!Dev/VRH/ReelCheck/ReelCheck.Web/Areas/MasterData/Scripts/bootstrap-toggle.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            console.log("document.ready event: PING");
+            $('#my-dialog').modal('show');
+
+            $('#tglb').bootstrapToggle({
+                on: '1-es (on) állapot',
+                off: '2-es (off) állapot',
+                onstyle: 'warning',
+                offstyle: 'info',
+                width: '200px',
+            });
+        });
+    </script>
+</body>
+</html>

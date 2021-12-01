@@ -1,0 +1,29 @@
+﻿
+@model WelcomeModel
+
+@{
+    ViewBag.Title = Model.AppSetting.ProductName;
+}
+<style>
+    .loginform h1 {
+        color: black;
+    }
+
+    .loginform label {
+        color: black;
+    }
+</style>
+<div class="row mt-2 ml-3">
+    <div class="col-12 col-sm-9 col-md-7 col-lg-6 col-xl-5">
+        @{
+            Html.RenderAction("Login", "Account", new { area = "UserAdministration" });
+        }
+    </div>
+    <div class="col-auto col-sm-3 col-md-5 col-lg-6 col-xl-7"></div>
+</div>
+<div class="row ml-3">
+    <div class="col-12 col-sm-9 col-md-7 col-lg-6 col-xl-5">
+        @Html.Partial(Global.VIEW_LANGUAGESELECTION, new LanguageSelectionModel { TitleStyle = "color:black;" })
+    </div>
+    <div class="col-auto col-sm-3 col-md-5 col-lg-6 col-xl-7"></div>
+</div>

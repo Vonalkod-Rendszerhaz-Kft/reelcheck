@@ -1,0 +1,1 @@
+﻿status=PASS|mtsid=SHA00JW6GNH|address=S0705D08|c9023=0940008382519E180628793904000|description=IC-COMPARATOR,MICRO|partnumber=9400083|quantity=4000|msg=|bookid=12345|msl=MSL

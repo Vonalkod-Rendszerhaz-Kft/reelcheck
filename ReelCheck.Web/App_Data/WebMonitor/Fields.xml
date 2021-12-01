@@ -1,0 +1,572 @@
+<WebMonitorFields>
+	<XmlParser>
+		<XmlVar Name="REELCHECKMODE_GOLDENSAMPLE" LCID="hu-HU">Aranyminta teszt folyamatban...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_GOLDENSAMPLE" LCID="en-US">Golden Sample test in progress...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_HANDHELD" LCID="hu-HU">Kézi adatbeviteli mód aktív...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_HANDHELD" LCID="en-US">handheld scanning mode active...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_BLOCKED" LCID="hu-HU">Munkaállomás blokkolva...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_BLOCKED" LCID="en-US">Station blocked...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_NORMAL" LCID="hu-HU">Normál ellenőrzés mód...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_NORMAL" LCID="en-US">Normal operation mode...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_RESET" LCID="hu-HU">Kiürítés folyik...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_RESET" LCID="en-US">Resetting...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_WAITLOGIN" LCID="hu-HU">Loginra várakozik...</XmlVar>
+		<XmlVar Name="REELCHECKMODE_WAITLOGIN" LCID="en-US">Waiting for login...</XmlVar>
+		<XmlVar Name="MainStatus_AUTO" LCID="hu-HU">PLC automata üzemmódban...</XmlVar>
+		<XmlVar Name="MainStatus_AUTO" LCID="en-US">PLC in auto-mode...</XmlVar>
+		<XmlVar Name="MainStatus_MANUAL" LCID="hu-HU">PLC kézi üzemmódban..</XmlVar>
+		<XmlVar Name="MainStatus_MANUAL" LCID="en-US">PLC in manual mode</XmlVar>
+		<XmlVar Name="EXIT_E_STATUS_EMPTY" LCID="hu-HU">Nincs tekercs a gépben</XmlVar>
+		<XmlVar Name="EXIT_E_STATUS_EMPTY" LCID="en-US">No reel in station</XmlVar>
+		<XmlVar Name="EXIT_E_STATUS_FAIL" LCID="hu-HU">Tekercs feldolgozás sikertelen</XmlVar>
+		<XmlVar Name="EXIT_E_STATUS_FAIL" LCID="en-US">Reel processing failed</XmlVar>
+		<XmlVar Name="EXIT_E_STATUS_PASS" LCID="hu-HU">Tekercs feldolgozás sikeres</XmlVar>
+		<XmlVar Name="EXIT_E_STATUS_PASS" LCID="en-US">Reel processing successful</XmlVar>
+		<XmlVar Name="CHECK_E_Status_OPERATING" LCID="hu-HU">Címke ellenőrzés folyik...</XmlVar>
+		<XmlVar Name="CHECK_E_Status_OPERATING" LCID="en-US">Label check in progress...</XmlVar>
+		<XmlVar Name="PRINT_E_Status_OPERATING" LCID="hu-HU">Nyomtatás folyik...</XmlVar>
+		<XmlVar Name="PRINT_E_Status_OPERATING" LCID="en-US">Printing in progress...</XmlVar>
+		<XmlVar Name="PRINT_E_Status_WAITING" LCID="hu-HU">Applikátorra várakozik...</XmlVar>
+		<XmlVar Name="PRINT_E_Status_WAITING" LCID="en-US">Waiting for label applicator...</XmlVar>
+		<XmlVar Name="ID_E_Status_WAITING" LCID="hu-HU">Külső rendszer nyugtájára várakozik...</XmlVar>
+		<XmlVar Name="ID_E_Status_WAITING" LCID="en-US">Waiting for external system confirmation...</XmlVar>
+		<XmlVar Name="ID_E_Status_OPERATING" LCID="hu-HU">Címkeazonosítás folyik...</XmlVar>
+		<XmlVar Name="ID_E_Status_OPERATING" LCID="en-US">Identifying reel...</XmlVar>
+		<XmlVar Name="E_Status_OPERATING" LCID="hu-HU">Indításra várakozik...</XmlVar>
+		<XmlVar Name="E_Status_OPERATING" LCID="en-US">Waiting for start...</XmlVar>
+		<XmlVar Name="IDStatus_OPERATING" LCID="hu-HU">Dolgozik...</XmlVar>
+		<XmlVar Name="IDStatus_OPERATING" LCID="en-US">Operating...</XmlVar>
+		<XmlVar Name="IDStatus_READY" LCID="hu-HU">Indításra várakozik...</XmlVar>
+		<XmlVar Name="IDStatus_READY" LCID="en-US">Waiting for start...</XmlVar>
+		<XmlVar Name="IDStatus_WAITING" LCID="hu-HU">Külső rendszer nyugtájára várakozik...</XmlVar>
+		<XmlVar Name="IDStatus_WAITING" LCID="en-US">Waiting for external system confirmation...</XmlVar>
+		<XmlVar Name="PRINTStatus_OPERATING" LCID="hu-HU">Dolgozik...</XmlVar>
+		<XmlVar Name="PRINTStatus_OPERATING" LCID="en-US">Operating...</XmlVar>
+		<XmlVar Name="PRINTStatus_READY" LCID="hu-HU">Indításra várakozik...</XmlVar>
+		<XmlVar Name="PRINTStatus_READY" LCID="en-US">Waiting for start...</XmlVar>
+		<XmlVar Name="PRINTStatus_WAITING" LCID="hu-HU">Applikátorra várakozik...</XmlVar>
+		<XmlVar Name="PRINTStatus_WAITING" LCID="en-US">Waiting for label applicator...</XmlVar>
+		<XmlVar Name="CHECKStatus_OPERATING" LCID="hu-HU">Dolgozik...</XmlVar>
+		<XmlVar Name="CHECKStatus_OPERATING" LCID="en-US">Operating...</XmlVar>
+		<XmlVar Name="CHECKStatus_READY" LCID="hu-HU">Indításra várakozik...</XmlVar>
+		<XmlVar Name="CHECKStatus_READY" LCID="en-US">Waiting for start...</XmlVar>
+		<XmlVar Name="SectorStatus_WAITFORSTART" LCID="hu-HU">Indításra várakozik...</XmlVar>
+		<XmlVar Name="SectorStatus_WAITFORSTART" LCID="en-US">Waiting for start...</XmlVar>
+		<XmlVar Name="SectorStatus_WAITFORSTICKING" LCID="hu-HU">Címkézésre várakozik</XmlVar>
+		<XmlVar Name="SectorStatus_WAITFORSTICKING" LCID="en-US">Waiting for label applicator</XmlVar>
+		<XmlVar Name="STATUS_EMPTY" LCID="hu-HU">Üres</XmlVar>
+		<XmlVar Name="STATUS_EMPTY" LCID="en-US">Empty</XmlVar>
+		<XmlVar Name="STATUS_FAIL" LCID="hu-HU">Sikertelen</XmlVar>
+		<XmlVar Name="STATUS_FAIL" LCID="en-US">Failed</XmlVar>
+		<XmlVar Name="STATUS_GSPASS" LCID="hu-HU">Aranyminta OK</XmlVar>
+		<XmlVar Name="STATUS_GSPASS" LCID="en-US">GoldenSample OK</XmlVar>
+		<XmlVar Name="STATUS_GSFAIL" LCID="hu-HU">AM hiba</XmlVar>
+		<XmlVar Name="STATUS_GSFAIL" LCID="en-US">GS failed</XmlVar>
+		<XmlVar Name="STATUS_PASS" LCID="hu-HU">Sikeres</XmlVar>
+		<XmlVar Name="STATUS_PASS" LCID="en-US">Success</XmlVar>
+		<XmlVar Name="STATUS_PASSBOOKOK" LCID="hu-HU">Könyvelve</XmlVar>
+		<XmlVar Name="STATUS_PASSBOOKOK" LCID="en-US">Booked</XmlVar>
+		<XmlVar Name="STATUS_PASSBOOKNOK" LCID="hu-HU">Nincs könyvelve</XmlVar>
+		<XmlVar Name="STATUS_PASSBOOKNOK" LCID="en-US">Not booked</XmlVar>
+		<XmlVar Name="STATUS_NOREAD" LCID="hu-HU">Nem olvas</XmlVar>
+		<XmlVar Name="STATUS_NOREAD" LCID="en-US">No read</XmlVar>
+		<XmlVar Name="STATUS_DATAERR" LCID="hu-HU">Adathiba</XmlVar>
+		<XmlVar Name="STATUS_DATAERR" LCID="en-US">Data error</XmlVar>
+		<XmlVar Name="STATUS_SKIP" LCID="hu-HU">Kihagyva</XmlVar>
+		<XmlVar Name="STATUS_SKIP" LCID="en-US">Skipped</XmlVar>
+		<XmlVar Name="STATUS_INPROGRESS" LCID="hu-HU">Folyamatban...</XmlVar>
+		<XmlVar Name="STATUS_INPROGRESS" LCID="en-US">In progress...</XmlVar>
+		<XmlVar Name="STATUS_NONE" LCID="hu-HU">N/A</XmlVar>
+		<XmlVar Name="STATUS_NONE" LCID="en-US">N/A</XmlVar>
+		<XmlVar Name="STATUS_NOACK" LCID="hu-HU">Nincs nyugta...</XmlVar>
+		<XmlVar Name="STATUS_NOACK" LCID="en-US">No ack received...</XmlVar>
+		<XmlVar Name="STATUS_REFUSE" LCID="hu-HU">Visszautasítva...</XmlVar>
+		<XmlVar Name="STATUS_REFUSE" LCID="en-US">Refused...</XmlVar>
+		<XmlVar Name="GOLDENSAMPLEMODEDUE" LCID="hu-HU">Aranyminta teszt esedékes:\n...ideje: {1}\n...módja: {2}\nUtolsó teszt...:\n...ideje: {3},\n...eredménye: {4},\n...óta végzett ellenőrzések: {5}.</XmlVar>
+		<XmlVar Name="GOLDENSAMPLEMODEDUE" LCID="en-US">Golden Sample test is due:\n...since {1}\n...mode: {2}.\nLast test...:\n...time: {3},\n...result: {4},\n...checks since: {5}.</XmlVar>
+		<XmlVar Name="GOLDENSAMPLEMODENOTDUE" LCID="hu-HU">Utolsó aranyminta teszt...\n...ideje {3}\n...eredménye: {4}.\nAz utolsó sikeres teszt óta végzett ellenőrzések száma: {5}.</XmlVar>
+		<XmlVar Name="GOLDENSAMPLEMODENOTDUE" LCID="en-US">Last Golden Sample test:\n...time {3}\n...result {4}.\nChecks since last successful test: {5}.</XmlVar>
+		<XmlVar Name="GSREEL_TRUE" LCID="hu-HU">Aranyminta</XmlVar>
+		<XmlVar Name="GSREEL_TRUE" LCID="en-US">Golden sample</XmlVar>
+		<XmlVar Name="SPECIALMODES_GOLDENSAMPLEMODEACTIVE" LCID="hu-HU">Aranyminta teszt folyamatban.\n\nTesztsorozat indult:\n{1}\n\nElvégzett tesztek száma:\n{2}</XmlVar>
+		<XmlVar Name="SPECIALMODES_GOLDENSAMPLEMODEACTIVE" LCID="en-US">Golden Sample mode active.\n\nStarted:\n{1}\n\nCompleted cycles:\n{2}</XmlVar>
+		<XmlVar Name="SPECIALMODES_HHMODEON" LCID="hu-HU">Kézi adatbeviteli mód bekapcsolva:\n\nBevitt adatok:\n{3}</XmlVar>
+		<XmlVar Name="SPECIALMODES_HHMODEON" LCID="en-US">Handheld mode active.\n\nInput data:\n{3}</XmlVar>
+	</XmlParser>
+	<XmlParser Include="@XMLPARSERBUTTONDEFXML@"/>
+	<Fields>
+		<Field Name="DUMMY" Content="#$DUMMY" TextStyle="TextStyle_NoText"/>
+		<Field Name="NOW" Content="#$DT" FormatString="{0:yyyy.MM.dd HH:mm:ss}"/>
+		<Field Name="WINUSERNAME" Content="#$USERNAME" FormatString="[{0}]"/>
+		<Field Name="WINUSERNAMEWITHLABEL" Content="#$USERNAME" FormatString="ReelCheck webapp user: [{0}]"/>
+		<Field Name="WINUSERROLES" Content="#$USERROLES" FormatString="[{0}]"/>
+		<Field Name="TESTWORDCODE" Content="WORDCODE" Conversion="WordCode" FormatString="@LCID@: {0}"/>
+		<Field Name="TESTTEXTMASK1" Content="TEXTMASK1" Conversion="TextMask" FormatString="@LCID@: {0}"/>
+		<Field Name="TESTTEXTMASK2" Content="TEXTMASK2" Conversion="TextMask" FormatString="@LCID@: {0}"/>
+
+		<Field Name="BUTTON_REPRINT" Content="#$DUMMY,SECT1.STATUS_PRN_PRINT,SECT2.STATUS_PRN_PRINT" Help="@BUTTONHELP_REPRINT@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="Equal" With="WS.STATION" Value="LABELD">
+					<Conditions>
+						<Condition Type="NotEqual" With="SECT2.STATUS_PRN_PRINT" Value="INPROGRESS"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.Reprint" Override="@BUTTONTEXT_Reprint@" CellStyle="CellStyle_BUTTONSTYLEorange"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.Reprint" Override="@BUTTONTEXT_Reprint@" CellStyle="CellStyle_BUTTONSTYLEorange"/>
+					</Conditions>
+				</Condition>
+				<Condition Type="Equal" With="WS.STATION" Value="LABELE">
+					<Conditions>
+						<Condition Type="NotEqual" With="SECT1.STATUS_PRN_PRINT" Value="INPROGRESS"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.Reprint" Override="@BUTTONTEXT_Reprint@" CellStyle="CellStyle_BUTTONSTYLEorange"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.Reprint" Override="@BUTTONTEXT_Reprint@" CellStyle="CellStyle_BUTTONSTYLEorange"/>
+					</Conditions>
+				</Condition>
+				<Condition Type="Equal" With="WS.STATION" Value="LABELK">
+					<Conditions>
+						<Condition Type="Contains" With="#$USERROLES" Value="" Override="@BUTTONTEXT_Reprint@" CellStyle="CellStyle_BUTTONSTYLEorange"/>
+						<Condition Type="NotEqual" With="SECT2.STATUS_PRN_PRINT" Value="INPROGRESS"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_NOPRINT" Content="#$DUMMY" Help="@BUTTONHELP_NOPRINT@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="Equal" With="WS.STATION" Value="LABELD">
+					<Conditions>
+						<Condition Type="NotEqual" With="SECT2.STATUS_PRN_PRINT" Value="INPROGRESS"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.Noprint" Override="@BUTTONTEXT_Noprint@" CellStyle="CellStyle_BUTTONSTYLEorange"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.Noprint" Override="@BUTTONTEXT_Noprint@" CellStyle="CellStyle_BUTTONSTYLEorange"/>
+					</Conditions>
+				</Condition>
+				<Condition Type="Equal" With="WS.STATION" Value="LABELE">
+					<Conditions>
+						<Condition Type="NotEqual" With="SECT1.STATUS_PRN_PRINT" Value="INPROGRESS"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.Noprint" Override="@BUTTONTEXT_Noprint@" CellStyle="CellStyle_BUTTONSTYLEorange"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.Noprint" Override="@BUTTONTEXT_Noprint@" CellStyle="CellStyle_BUTTONSTYLEorange"/>
+					</Conditions>
+				</Condition>
+				<Condition Type="Equal" With="WS.STATION" Value="LABELK">
+					<Conditions>
+						<Condition Type="NotEqual" With="SECT2.STATUS_PRN_PRINT" Value="INPROGRESS"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="" Override="@BUTTONTEXT_Noprint@" CellStyle="CellStyle_BUTTONSTYLEred"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_RCLOGIN" Content="#$DUMMY" Help="@BUTTONHELP_RCLOGIN@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="WS.REELCHECKMODE" Value="WAITLOGIN"/>
+				<Condition Type="Contains" With="#$USERROLES" Value="" Override="@BUTTONTEXT_RCLOGIN@" CellStyle="CellStyle_BUTTONSTYLEyellow"/>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_RCLOGOUT" Content="#$DUMMY" Help="@BUTTONHELP_RCLOGOUT@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="Equal" With="WS.REELCHECKMODE" Value="WAITLOGIN"/>
+				<Condition Type="Contains" With="#$USERROLES" Value="" Override="@BUTTONTEXT_RCLOGOUT@" CellStyle="CellStyle_BUTTONSTYLEyellow"/>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_BLOCK" Content="#$DUMMY" Help="@BUTTONHELP_BLOCK@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="#$USERNAME" Value="">
+					<Conditions>
+						<Condition Type="Equal" With="WS.OPERATIONBLOCKED" Value="TRUE"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.BLOCK" Override="@BUTTONTEXT_BLOCK@"  CellStyle="CellStyle_BUTTONSTYLEyellow"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.BLOCK" Override="@BUTTONTEXT_BLOCK@"  CellStyle="CellStyle_BUTTONSTYLEyellow"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_UNBLOCK" Content="#$DUMMY" Help="@BUTTONHELP_UNBLOCK@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="Equal" With="WS.OPERATIONBLOCKED" Value="FALSE"/>
+				<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.UNBLOCK" Override="@BUTTONTEXT_UNBLOCK@"  CellStyle="CellStyle_BUTTONSTYLEyellow"/>
+				<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.UNBLOCK" Override="@BUTTONTEXT_UNBLOCK@"  CellStyle="CellStyle_BUTTONSTYLEyellow"/>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_LOGIN" Content="#$DUMMY" Help="@BUTTONHELP_LOGIN@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="#$USERNAME" Value=""/>
+				<Condition Type="Contains" With="#$USERROLES" Value="" Override="@BUTTONTEXT_LOGIN@" CellStyle="CellStyle_BUTTONSTYLEred"/>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_LOGOUT" Content="#$DUMMY" Help="@BUTTONHELP_LOGOUT@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="Equal" With="#$USERNAME" Value=""/>
+				<Condition Type="Contains" With="#$USERROLES" Value="" Override="@BUTTONTEXT_LOGOUT@" CellStyle="CellStyle_BUTTONSTYLEred"/>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_GSON" Content="#$DUMMY" Help="@BUTTONHELP_GSON@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="#$USERNAME" Value="">
+					<Conditions>
+						<Condition Type="Equal" With="WS.REELCHECKMODE" Value="GOLDENSAMPLE"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.GSON" Override="@BUTTONTEXT_GSON@"  CellStyle="CellStyle_BUTTONSTYLEgrey"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.GSON" Override="@BUTTONTEXT_GSON@"  CellStyle="CellStyle_BUTTONSTYLEgrey"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_GSOFF" Content="#$DUMMY" Help="@BUTTONHELP_GSOFF@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="#$USERNAME" Value="">
+					<Conditions>
+						<Condition Type="NotEqual" With="WS.REELCHECKMODE" Value="GOLDENSAMPLE"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.GSOFF" Override="@BUTTONTEXT_GSOFF@"  CellStyle="CellStyle_BUTTONSTYLEdarkgrey"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.GSOFF" Override="@BUTTONTEXT_GSOFF@"  CellStyle="CellStyle_BUTTONSTYLEdarkgrey"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_GSSETDUE" Content="#$DUMMY" Help="@BUTTONHELP_GSSETDUE@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="#$USERNAME" Value="">
+					<Conditions>
+						<Condition Type="Equal" With="GS.DUE" Value="TRUE"/>
+						<Condition Type="Equal" With="WS.REELCHECKMODE" Value="GOLDENSAMPLE"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.GSSETDUE" Override="@BUTTONTEXT_GSSETDUE@" CellStyle="CellStyle_BUTTONSTYLEgrey"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.GSSETDUE" Override="@BUTTONTEXT_GSSETDUE@" CellStyle="CellStyle_BUTTONSTYLEgrey"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_GSDUESKIP" Content="#$DUMMY" Help="@BUTTONHELP_GSDUESKIP@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="#$USERNAME" Value="">
+					<Conditions>
+						<Condition Type="Equal" With="GS.DUE" Value="FALSE"/>
+						<Condition Type="Equal" With="WS.REELCHECKMODE" Value="GOLDENSAMPLE"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelDInterventions.GSDUESKIP" Override="@BUTTONTEXT_GSDUESKIP@" CellStyle="CellStyle_BUTTONSTYLEdarkgrey"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.GSDUESKIP" Override="@BUTTONTEXT_GSDUESKIP@" CellStyle="CellStyle_BUTTONSTYLEdarkgrey"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_HHMODEON_FVS" Content="#$DUMMY" Help="@BUTTONHELP_HHMODEON_FVS@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="#$USERNAME" Value="">
+					<Conditions>
+						<Condition Type="Equal" With="WS.REELCHECKMODE" Value="HANDHELD"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.HHMODEON" Override="@BUTTONTEXT_HHMODEON_FVS@" CellStyle="CellStyle_BUTTONSTYLEyellow"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_HHMODEON_BCLIST" Content="#$DUMMY" Help="@BUTTONHELP_HHMODEON_BCLIST@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="#$USERNAME" Value="">
+					<Conditions>
+						<Condition Type="Equal" With="WS.REELCHECKMODE" Value="HANDHELD"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.HHMODEON" Override="@BUTTONTEXT_HHMODEON_BCLIST@" CellStyle="CellStyle_BUTTONSTYLEyellow"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+		<Field Name="BUTTON_HHMODEOFF" Content="#$DUMMY" Help="@BUTTONHELP_HHMODEOFF@" Override=" " CellStyle="CellStyle_NoCell">
+			<Conditions>
+				<Condition Type="NotEqual" With="#$USERNAME" Value="">
+					<Conditions>
+						<Condition Type="NotEqual" With="WS.REELCHECKMODE" Value="HANDHELD"/>
+						<Condition Type="Contains" With="#$USERROLES" Value="LabelEInterventions.HHMODEOFF" Override="@BUTTONTEXT_HHMODEOFF@" CellStyle="CellStyle_BUTTONSTYLEyellow"/>
+					</Conditions>
+				</Condition>
+			</Conditions>
+		</Field>
+
+		<Field Array="i=1-4" Name="F_SECT@i@.STATUS_ID_READ" 	 Content="SECT@i@.STATUS_ID_READ" >
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_READ" Value="EMPTY" Override="@STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_READ" Value="NOREAD" Override="@STATUS_NOREAD@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_READ" Value="DATAERR" Override="@STATUS_DATAERR@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_READ" Value="FAIL" Override="@STATUS_FAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_READ" Value="SKIP" Override="@STATUS_SKIP@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_READ" Value="PASS" Override="@STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_READ" Value="INPROGRESS" Override="@STATUS_INPROGRESS@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_READ" Value="NONE" Override="@STATUS_NONE@" />
+				<Condition Type="Else" CellStyle="CellStyle_Default"  FormatString="{0}"/>
+			</Conditions>
+		</Field>
+		<Field Array="i=1-4" Name="F_SECT@i@.STATUS_ID_RCCHECK"  Content="SECT@i@.STATUS_ID_RCCHECK" 		Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek.">
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_RCCHECK" Value="EMPTY" Override="@STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_RCCHECK" Value="NOREAD" Override="@STATUS_NOREAD@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_RCCHECK" Value="DATAERR" Override="@STATUS_DATAERR@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_RCCHECK" Value="FAIL" Override="@STATUS_FAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_RCCHECK" Value="SKIP" Override="@STATUS_SKIP@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_RCCHECK" Value="PASS" Override="@STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_RCCHECK" Value="INPROGRESS" Override="@STATUS_INPROGRESS@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_RCCHECK" Value="NONE" Override="@STATUS_NONE@" />
+				<Condition Type="Else" CellStyle="CellStyle_Default" FormatString="{0}"/>
+			</Conditions>
+		</Field>
+		<Field Array="i=1-4" Name="F_SECT@i@.STATUS_ID_EXTCHECK" Content="SECT@i@.STATUS_ID_EXTCHECK" 		Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek.">
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_EXTCHECK" Value="EMPTY" Override="@STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_EXTCHECK" Value="NOREAD" Override="@STATUS_NOREAD@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_EXTCHECK" Value="DATAERR" Override="@STATUS_DATAERR@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_EXTCHECK" Value="FAIL" Override="@STATUS_FAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_EXTCHECK" Value="SKIP" Override="@STATUS_SKIP@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_EXTCHECK" Value="PASS" Override="@STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_EXTCHECK" Value="INPROGRESS" Override="@STATUS_INPROGRESS@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_ID_EXTCHECK" Value="NONE" Override="@STATUS_NONE@" />
+				<Condition Type="Else" CellStyle="CellStyle_Default" FormatString="{0}"/>
+			</Conditions>
+		</Field>
+		<Field Array="i=1-4" Name="F_SECT@i@.STATUS_PRN_PRINT" 	 Content="SECT@i@.STATUS_PRN_PRINT" 		Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek.">
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_PRINT" Value="EMPTY" Override="@STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_PRINT" Value="NOREAD" Override="@STATUS_NOREAD@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_PRINT" Value="DATAERR" Override="@STATUS_DATAERR@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_PRINT" Value="FAIL" Override="@STATUS_FAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_PRINT" Value="SKIP" Override="@STATUS_SKIP@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_PRINT" Value="PASS" Override="@STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_PRINT" Value="INPROGRESS" Override="@STATUS_INPROGRESS@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_PRINT" Value="NONE" Override="@STATUS_NONE@" />
+				<Condition Type="Else" CellStyle="CellStyle_Default" FormatString="{0}"/>
+			</Conditions>
+		</Field>
+		<Field Array="i=1-4" Name="F_SECT@i@.STATUS_PRN_APPLY" 	 Content="SECT@i@.STATUS_PRN_APPLY" 		Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek.">
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_APPLY" Value="EMPTY" Override="@STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_APPLY" Value="NOREAD" Override="@STATUS_NOREAD@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_APPLY" Value="DATAERR" Override="@STATUS_DATAERR@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_APPLY" Value="FAIL" Override="@STATUS_FAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_APPLY" Value="SKIP" Override="@STATUS_SKIP@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_APPLY" Value="PASS" Override="@STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_APPLY" Value="INPROGRESS" Override="@STATUS_INPROGRESS@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_PRN_APPLY" Value="NONE" Override="@STATUS_NONE@" />
+				<Condition Type="Else" CellStyle="CellStyle_Default" FormatString="{0}"/>
+			</Conditions>
+		</Field>
+		<Field Array="i=1-4" Name="F_SECT@i@.STATUS_CHK_READ" 	 Content="SECT@i@.STATUS_CHK_READ" 			Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek.">
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_READ" Value="EMPTY" Override="@STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_READ" Value="NOREAD" Override="@STATUS_NOREAD@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_READ" Value="DATAERR" Override="@STATUS_DATAERR@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_READ" Value="FAIL" Override="@STATUS_FAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_READ" Value="SKIP" Override="@STATUS_SKIP@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_READ" Value="PASS" Override="@STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_READ" Value="INPROGRESS" Override="@STATUS_INPROGRESS@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_READ" Value="NONE" Override="@STATUS_NONE@" />
+				<Condition Type="Else" CellStyle="CellStyle_Default" FormatString="{0}"/>
+			</Conditions>
+		</Field>
+		<Field Array="i=1-4" Name="F_SECT@i@.STATUS_CHK_RCCHECK" Content="SECT@i@.STATUS_CHK_RCCHECK" 		Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek.">
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_RCCHECK" Value="EMPTY" Override="@STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_RCCHECK" Value="NOREAD" Override="@STATUS_NOREAD@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_RCCHECK" Value="DATAERR" Override="@STATUS_DATAERR@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_RCCHECK" Value="FAIL" Override="@STATUS_FAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_RCCHECK" Value="SKIP" Override="@STATUS_SKIP@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_RCCHECK" Value="PASS" Override="@STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_RCCHECK" Value="INPROGRESS" Override="@STATUS_INPROGRESS@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_RCCHECK" Value="NONE" Override="@STATUS_NONE@" />
+				<Condition Type="Else" CellStyle="CellStyle_Default" FormatString="{0}"/>
+			</Conditions>
+		</Field>
+		<Field Array="i=1-4" Name="F_SECT@i@.STATUS_CHK_BOOKING" Content="SECT@i@.STATUS_CHK_BOOKING" 		Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek.">
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_BOOKING" Value="EMPTY" Override="@STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_BOOKING" Value="NOREAD" Override="@STATUS_NOREAD@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_BOOKING" Value="DATAERR" Override="@STATUS_DATAERR@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_BOOKING" Value="FAIL" Override="@STATUS_FAIL@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_BOOKING" Value="SKIP" Override="@STATUS_SKIP@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_BOOKING" Value="PASS" Override="@STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_BOOKING" Value="INPROGRESS" Override="@STATUS_INPROGRESS@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_CHK_BOOKING" Value="NONE" Override="@STATUS_NONE@" />
+				<Condition Type="Else" CellStyle="CellStyle_Default" FormatString="{0}"/>
+			</Conditions>
+		</Field>
+		<Field Array="i=1-4" Name="F_SECT@i@.STATUS_EXIT" 		 Content="SECT@i@.STATUS_EXIT" 				Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek.">
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="EMPTY" Override="@STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="NOREAD" Override="@STATUS_NOREAD@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="DATAERR" Override="@STATUS_DATAERR@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="FAIL" Override="@STATUS_FAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="SKIP" Override="@STATUS_SKIP@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="PASS" Override="@STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="INPROGRESS" Override="@STATUS_INPROGRESS@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="GSPASS" Override="@STATUS_GSPASS@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="GSFAIL" Override="@STATUS_GSFAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT@i@.STATUS_EXIT" Value="NONE" Override="@STATUS_NONE@"/>
+				<Condition Type="Else" CellStyle="CellStyle_Default" FormatString="{0}"/>
+			</Conditions>
+		</Field>
+
+		<Field Array="i=1-4" Name="F_SECT@i@.LABELLOGO" 		 Content="SECT@i@.IVENDOR,SECT@i@.LABELID"  Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek.">
+			<Conditions>
+				<Condition Type="Contains" With="SECT@i@.LABELID" Value="ROHM" CellStyle="CellStyle_Image_ROHM" Override=""/>
+				<Condition Type="Contains" With="SECT@i@.LABELID" Value="LEAR" CellStyle="CellStyle_Image_LEAR" Override=""/>
+				<Condition Type="Contains" With="SECT@i@.LABELID" Value="KOA" CellStyle="CellStyle_Image_KOA" Override=""/>
+				<Condition Type="Else" Override="" CellStyle="CellStyle_Image_REEL"/>
+			</Conditions>
+		</Field>
+
+		<Field Array="i=1-4" Name="F_SECT@i@.ERRORMESSAGE" Content="SECT@i@.ERRORMESSAGE" Conversion="WordCode" FormatString="{0}" Help="Hibaüzenet">
+			<Conditions>
+				<Condition Type="Equal" With="SECT@i@.ERRORMESSAGE" Value="" Override="" CellStyle="CellStyle_Default"/>
+				<Condition Type="Equal" With="SECT@i@.ERRORMESSAGE" Value=" " Override="" CellStyle="CellStyle_Default"/>
+				<Condition Type="Equal" With="SECT@i@.ERRORMESSAGE" Value="NULL" Override="" CellStyle="CellStyle_Default"/>
+				<Condition Type="Else" Conversion="WordCode" FormatString="{0}" CellStyle="CellStyle_Border_%_VeryBad"/>
+			</Conditions>
+		</Field >
+		<Field Array="i=1-4" Name="F_SECT@i@.BCLIST" Content="SECT@i@.BCLIST" FormatString="{0}" Help="Az ID olvasótól az azonosítás fázisban beérkezett adatstringek."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.BCLISTID" Content="SECT@i@.BCLISTID" FormatString="{0}" Help="?????????????????????"/>
+		<Field Array="i=1-4" Name="F_SECT@i@.BCLISTCHECK" Content="SECT@i@.BCLISTCHECK" FormatString="{0}" Help="A CHECK olvasótól az ellenőrző fázisban beérkezett adatstringek."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.CFVS" Content="SECT@i@.CFVS" FormatString="{0:yyyy.MM.d hh\:mm\:ss}" Help="Az ellenőrzéskor visszaolvasott FVS kód."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.CMTSID" Content="SECT@i@.CMTSID" FormatString="{0:yyyy.MM.d hh\:mm\:ss}" Help="Az ellenőrzéskor visszaolvasott MTS kód."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.CYCLEENDTIMESTAMP" Content="SECT@i@.CYCLEENDTIMESTAMP" FormatString="{0:yyyy.MM.d hh\:mm\:ss}" Help="Az ellenőrzési ciklus végének az időbélyege."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.CYCLESTARTTIMESTAMP" Content="SECT@i@.CYCLESTARTTIMESTAMP" FormatString="{0:yyyy.MM.d hh\:mm\:ss}" Help="Az ellenőrzési ciklus kezdetének az időbélyege."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.IDDATA" Content="SECT@i@.IDDATA" FormatString="{0}" Help="A CFVS rendszernek elküldött üzenet."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.IDDATAACK" Content="SECT@i@.IDDATAACK" FormatString="{0}" Help="A CFVS rendszertől érkező válasz üzenet."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.IFVS" Content="SECT@i@.IFVS" FormatString="{0}" Help="A ciklusban felismert belső FVS kód."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.ILOT" Content="SECT@i@.ILOT" FormatString="{0}" Help="A ciklusban felismert belső LOT szám."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.ILOTDATE" Content="SECT@i@.ILOTDATE" FormatString="{0}" Help="A ciklusban felismert belső LOT számban levő dátum."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.ILOTSN" Content="SECT@i@.ILOTSN" FormatString="{0}" Help="A ciklusban felismert belső LOT számban levő napi sorszám."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.IMTSID" Content="SECT@i@.IMTSID" FormatString="{0}" Help="A ciklusban felismert belső MTS azonosító."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.IPN" Content="SECT@i@.IPN" FormatString="{0}" Help="A ciklusban felismert belső cikkszám."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.IQTY" Content="SECT@i@.IQTY" FormatString="{0}" Help="A ciklusban felismert mennyiség."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.IVENDOR" Content="SECT@i@.IVENDOR" FormatString="{0}" Help="A ciklusban felismert belső beszállító azonosító."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.LABELID" Content="SECT@i@.LABELID" FormatString="{0}" Help="A ciklusban felismert címke azonosítója."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.SFVS" Content="SECT@i@.SFVS" FormatString="{0}" Help="A ciklusban felismert beszállítói FVS/c9023 kód."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.SLOT" Content="SECT@i@.SLOT" FormatString="{0}" Help="A ciklusban felismert beszállítói LOT szám."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.SPN" Content="SECT@i@.SPN" FormatString="{0}" Help="A ciklusban felismert beszállítói cikkszám."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.SQTY" Content="SECT@i@.SQTY" FormatString="{0}" Help="A ciklusban felismert beszállítói mennyiség."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.SRSRN" Content="SECT@i@.SRSRN" FormatString="{0}" Help="A ciklusban felismert beszállítói egyedi tekercs azonosító."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.SVENDOR" Content="SECT@i@.SVENDOR" FormatString="{0}" Help="A ciklusban felismert külső beszállítói azonosító."/>
+		<Field Array="i=1-4" Name="F_SECT@i@.BACKGROUNDSYSTEMMESSAGE" Content="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Conversion="WordCode" FormatString="{0}" Help="Háttérrendszer üzenete a tekercshez">
+			<Conditions>
+				<Condition Type="Equal" With="SECT@i@.STATUS_EXIT" Value="FAIL" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value="" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value=" " Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value="NULL" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Else" Conversion="WordCode" FormatString="{0}" CellStyle="CellStyle_Border_%_Acceptable"/>
+			</Conditions>
+		</Field >
+		<Field Array="i=1-4" Name="F_SECT@i@.BUTTON_MSGOK" Content="#$DUMMY" Help="Üzenet jóváhagyása..." Override=" " CellStyle="CellStyle_BUTTONSTYLEgreen">
+			<Conditions>
+				<Condition Type="Equal" With="SECT@i@.STATUS_EXIT" Value="FAIL" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value="" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value=" " Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value="NULL" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Else" Value="" Override="OK" CellStyle="CellStyle_BUTTONSTYLEgreen"/>
+			</Conditions>
+		</Field>
+		<Field Array="i=1-4" Name="F_SECT@i@.BACKGROUNDSYSTEMMESSAGE_SEMIAUTOMATIC" Content="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Conversion="WordCode" FormatString="{0}" Help="Háttérrendszer üzenete a tekercshez">
+			<Conditions>
+				<Condition Type="Equal" With="SECT@i@.STATUS_EXIT" Value="FAIL" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="WS.OPERATIONBLOCKED" Value="FALSE" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value="" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value=" " Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value="NULL" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Else" Conversion="WordCode" FormatString="{0}" CellStyle="CellStyle_Border_%_Acceptable"/>
+			</Conditions>
+		</Field >
+		<Field Array="i=1-4" Name="F_SECT@i@.BUTTON_MSGOK_SEMIAUTOMATIC" Content="#$DUMMY" Help="Üzenet jóváhagyása..." Override=" " CellStyle="CellStyle_BUTTONSTYLEgreen">
+			<Conditions>
+				<Condition Type="Equal" With="SECT@i@.STATUS_EXIT" Value="FAIL" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="WS.OPERATIONBLOCKED" Value="FALSE" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value="" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value=" " Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Equal" With="SECT@i@.BACKGROUNDSYSTEMMESSAGE" Value="NULL" Override="" CellStyle="CellStyle_NoCell"/>
+				<Condition Type="Else" Value="" Override="OK" CellStyle="CellStyle_BUTTONSTYLEgreen"/>
+			</Conditions>
+		</Field>
+		<Field Name="F_WSE.STATUS" Content="WS.IDSTATUS,WS.PRINTSTATUS,WS.CHECKSTATUS" FormatString="{0}" CellStyle="CellStyle_Default">
+			<Conditions>
+				<Condition Type="Contains" With="WS.USERNAME" Value="UserName" Override="" CellStyle=""/>
+				<Condition Type="Contains" With="SECT1.STATUS_EXIT" Value="EMPTY" Override="@EXIT_E_STATUS_EMPTY@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Contains" With="SECT1.STATUS_EXIT" Value="FAIL" Override="@EXIT_E_STATUS_FAIL@" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="SECT1.STATUS_EXIT" Value="PASS" Override="@EXIT_E_STATUS_PASS@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="WS.CHECKSTATUS" Value="OPERATING" Override="@CHECK_E_Status_OPERATING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="WS.PRINTSTATUS" Value="WAITING" Override="@PRINT_E_Status_WATING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="WS.PRINTSTATUS" Value="OPERATING" Override="@PRINT_E_Status_OPERATING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="WS.IDSTATUS" Value="OPERATING" Override="@ID_E_Status_OPERATING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="WS.IDSTATUS" Value="WAITING" Override="@ID_E_Status_WAITING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Else" CellStyle="CellStyle_Default" Override="@SectorStatus_WAITFORSTART@"/>
+			</Conditions>
+		</Field>
+		<Field Name="F_WS.MAINSTATUS" Content="WS.MAINSTATUS" FormatString="{0}" CellStyle="CellStyle_Default">
+			<Conditions>
+				<Condition Type="Contains" With="WS.MAINSTATUS" Value="AUTO" Override="@MainStatus_AUTO@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="WS.MAINSTATUS" Value="MANUAL" Override="@MainStatus_MANUAL@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Else" CellStyle="CellStyle_Default" Override=""/>
+			</Conditions>
+		</Field>
+		<Field Name="F_WS.IDSTATUS" Content="WS.IDSTATUS" FormatString="{0}" CellStyle="CellStyle_Default">
+			<Conditions>
+				<Condition Type="Contains" With="WS.USERNAME" Value="UserName" Override="" CellStyle=""/>
+				<Condition Type="Contains" With="WS.IDSTATUS" Value="OPERATING" Override="@IDStatus_OPERATING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="WS.IDSTATUS" Value="WAITING" Override="@IDStatus_WAITING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="WS.IDSTATUS" Value="READY" Override="@IDStatus_READY@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Else" CellStyle="CellStyle_Default"/>
+			</Conditions>
+		</Field>
+		<Field Name="F_WS.PRINTSTATUS" Content="WS.PRINTSTATUS" FormatString="{0}" CellStyle="CellStyle_Default">
+			<Conditions>
+				<Condition Type="Contains" With="WS.USERNAME" Value="UserName" Override="" CellStyle=""/>
+				<Condition Type="Contains" With="WS.PRINTSTATUS" Value="OPERATING" Override="@PRINTStatus_OPERATING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="WS.PRINTSTATUS" Value="WAITING" Override="@PRINTStatus_WAITING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="WS.PRINTSTATUS" Value="READY" Override="@PRINTStatus_READY@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Else" CellStyle="CellStyle_Default"/>
+			</Conditions>
+		</Field>
+		<Field Name="F_WS.CHECKSTATUS" Content="WS.CHECKSTATUS" FormatString="{0}">
+			<Conditions>
+				<Condition Type="Contains" With="WS.USERNAME" Value="UserName" Override="" CellStyle=""/>
+				<Condition Type="Contains" With="WS.CHECKSTATUS" Value="OPERATING" Override="@CHECKStatus_OPERATING@" CellStyle="CellStyle_GreyInverse"/>
+				<Condition Type="Contains" With="WS.CHECKSTATUS" Value="READY" Override="@CHECKStatus_READY@" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Else" CellStyle="CellStyle_Default"/>
+			</Conditions>
+		</Field>
+		<!--<Field Name="F_WS.USERNAME" Content="WS.USERNAME" FormatString="@USERLabel@:\n[{0}]"/>-->
+		<Field Name="F_WS.USERNAME" Content="WS.USERNAME" FormatString="[{0}]"/>
+		<Field Name="F_WS.REELCHECKMODE" Content="WS.REELCHECKMODE,WS.MANUALDATA,WS.OPERATIONBLOCKED,WS.BLOCKREASONCODE" FormatString="{0}">
+			<Conditions>
+				<Condition Type="Equal" With="WS.OPERATIONBLOCKED" Value="TRUE" FormatString="@REELCHECKMODE_BLOCKED@ ({3})" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Contains" With="WS.REELCHECKMODE" Value="WAITLOGIN" FormatString="@REELCHECKMODE_WAITLOGIN@ ({0})" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="WS.REELCHECKMODE" Value="NORMAL" FormatString="@REELCHECKMODE_NORMAL@ ({0})" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="WS.REELCHECKMODE" Value="GOLDENSAMPLE" FormatString="@REELCHECKMODE_GOLDENSAMPLE@ ({0})" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="WS.REELCHECKMODE" Value="HANDHELD" FormatString="@REELCHECKMODE_HANDHELD@ ({0})" CellStyle="CellStyle_GreenInverse"/>
+				<Condition Type="Contains" With="WS.REELCHECKMODE" Value="RESET" FormatString="@REELCHECKMODE_RESET@ ({0})" CellStyle="CellStyle_RedInverse"/>
+				<Condition Type="Else" CellStyle="CellStyle_Default"/>
+			</Conditions>
+		</Field>
+		<!--<Field Name="F_WS.STATION" Content="WS.STATION,WS.PROCESS" FormatString="@STATIONLabel@:\n[{0}]\n@PROCESSLabel@:\n[{1}]"/>-->
+		<Field Name="F_WS.STATION" Content="WS.STATION,WS.PROCESS" FormatString="[{0}] / [{1}]"/>
+
+		<Field Name="F_WS.MANUALDATA" Content="WS.MANUALDATA" FormatString="{0}"/>
+		<Field Name="F_WS.UIMESSAGE1" Content="WS.UIMESSAGE1" FormatString="{0}" Conversion="WordCode"/>
+		<Field Name="F_WS.UIMESSAGE2" Content="WS.UIMESSAGE2" FormatString="{0}" Conversion="WordCode"/>
+		<Field Name="F_WS.UIMESSAGE3" Content="WS.UIMESSAGE3" FormatString="{0}" Conversion="WordCode"/>
+		<Field Name="F_WS.UIMESSAGE4" Content="WS.UIMESSAGE4" FormatString="{0}" Conversion="WordCode"/>
+		<Field Name="F_WS.UIMESSAGE5" Content="WS.UIMESSAGE5" FormatString="{0}" Conversion="WordCode"/>
+
+		<Field Name="F_SPECIALMODES" Content="WS.REELCHECKMODE,GS.STARTTIME,GS.GSCYCLES,WS.MANUALDATA" FormatString="">
+			<Conditions>
+				<Condition Type="Equal" With="WS.REELCHECKMODE" Value="WAITLOGIN" Override="" CellStyle="CellStyle_DefaultInverse"/>
+				<Condition Type="Equal" With="WS.MAINSTATUS" Value="MANUAL" Override="@MainStatus_MANUAL@" CellStyle="CellStyle_DefaultInverse"/>
+				<Condition Type="Equal" With="WS.REELCHECKMODE" Value="RESET" Override="" CellStyle="CellStyle_DefaultInverse"/>
+				<Condition Type="Equal" With="WS.REELCHECKMODE" Value="GOLDENSAMPLE" FormatString="@SPECIALMODES_GOLDENSAMPLEMODEACTIVE@" CellStyle="CellStyle_DefaultInverse"/>
+				<Condition Type="Equal" With="WS.REELCHECKMODE" Value="HANDHELD" FormatString="@SPECIALMODES_HHMODEON@" CellStyle="CellStyle_DefaultInverse"/>
+			</Conditions>
+		</Field>
+		<Field Name="F_GS.DUE" Content="GS.DUE,GS.DUETIME,GS.DUEMODE,GS.LASTSTART,GS.LASTRESULT,GS.CYCLESFROMLAST" FormatString="">
+			<Conditions>
+				<Condition Type="Equal" With="GS.DUE" Value="TRUE" FormatString="@GOLDENSAMPLEMODEDUE@" CellStyle="CellStyle_YellowInverse"/>
+				<Condition Type="Equal" With="GS.DUE" Value="FALSE" FormatString="@GOLDENSAMPLEMODENOTDUE@" CellStyle="CellStyle_Default"/>
+			</Conditions>
+		</Field>
+
+		<Field Name="DAILYSTAT_USERNAME" Content="USERNAME" FormatString="USERNAME: {0}"/>
+		<Field Name="DAILYSTAT_STATION_ID" Content="STATION_ID2" FormatString="STATION_ID2: {0}"/>
+		<Field Name="DAILYSTAT_RESULT" Content="RESULT" FormatString="RESULT: {0}"/>
+		<Field Name="DAILYSTAT_TIMESTAMP_START" Content="TIMESTAMP_START" FormatString="TIMESTAMP_START: {0}"/>
+		<Field Name="DAILYSTAT_TS" Content="TS" FormatString="TS: {0}"/>
+		<Field Name="DAILYSTAT_ID" Content="IDD" FormatString="IDD: {0}"/>
+		<Field Name="DAILYSTAT_TESTSTRING" Content="TESTSTRING" FormatString="TESTSTRING: {0}"/>
+		<Field Name="DAILYSTAT_TESTINT" Content="TESTINT" FormatString="TESTINT: {0}"/>
+		<Field Name="DAILYSTAT_TESTDOUBLE" Content="TESTDOUBLE" FormatString="TESTDOUBLE: {0}"/>
+		<Field Name="DAILYSTAT_TESTDATE" Content="TESTDATE" FormatString="TESTDATE: {0}"/>
+		<Field Name="DAILYSTAT_TESTBOOLFALSE" Content="TESTBOOLFALSE" FormatString="TESTBOOL FALSE: {0}"/>
+		<Field Name="DAILYSTAT_TESTBOOLTRUE" Content="TESTBOOLTRUE" FormatString="TESTBOOL TRUE: {0}"/>
+	</Fields>
+</WebMonitorFields>

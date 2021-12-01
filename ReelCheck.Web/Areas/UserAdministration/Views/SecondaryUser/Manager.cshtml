@@ -1,0 +1,156 @@
+﻿@*
+    -------------------------------------
+    SecondaryUser - Manager.cshtml
+    -------------------------------------
+*@
+
+@using VRH.Log4Pro.MultiLanguageManager
+@using Vrh.Web.Common.Lib
+@using Vrh.Web.Membership.Areas.UserAdministration.Controllers
+
+@model SecondaryUserModel
+
+@{
+    ViewBag.Title = Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.SecondaryUsers)));
+
+    int[] tableToolsExportColumnIndexes = new int[] { 0, 1, 2, 3, 4 };
+}
+@Styles.Render(Constants.BUNDLES_STYLE_FOR_SECONDARYUSER)
+@Scripts.Render(Constants.BUNDLES_SCRIPT_FOR_SECONDARYUSER)
+
+<div class="card mb-4">
+    <div class="card-header" style="padding-bottom:0.1rem;">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <div class="col-sm-12 col-md-5 d-md-flex justify-content-md-end">
+                @if (Model.EditMode == EditModes.Manage)
+                {
+                    <button type="button" class="btn btn-link mb-1 text-warning" id="@(Constants.Ids.Button.EDISF)" onclick="vrhsls.SecondaryFunctionManage()">
+                        @(Model.Trans(typeof(WordCodes.MvcMembership.Labels.Button.FunctionManage)))
+                    </button>
+                }
+                @if (Model.EditMode != EditModes.Select)
+                {
+                    <button type="button" class="btn btn-success mb-1" id="@(Constants.Ids.Button.ADDSL)" onclick="vrhsls.Edit(@(Constants.ID_NOVALID))">
+                        @(Model.Trans(typeof(WordCodes.MvcMembership.Labels.Button.SecondaryUserAdd)))
+                    </button>
+                }
+            </div>
+        </div><!--class="row"-->
+    </div><!--class="card-header"-->
+    <div class="card-body px-0">
+        <div class="table-responsive">
+            <table id="@(Constants.Ids.SL_TABLE)" class="table table-sm table-striped table-bordered table-dark table-hover" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.Labels.Function)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.Labels.PrimaryName)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.Labels.SecondaryName)))</th>
+                        <th>@(Model.Trans(typeof(WordCodes.MvcMembership.Labels.SecondaryPassword)))</th>
+                        <th class="text-center">@(Model.Trans(typeof(WordCodes.MvcMembership.Labels.Active)))</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+    @*Ide kell tenni a drop-down szűrő listákat, és majd a javascript beteszi*@
+    <div hidden>
+        @Html.DropDownList(Constants.Ids.Input.FILTERFUNCTION, Model.SecondaryFunctionList)
+    </div>
+    <div hidden>
+        @Html.DropDownList(Constants.Ids.Input.FILTERUSER, Model.UserList)
+    </div>
+    <div hidden>
+        @Html.DropDownList(Constants.Ids.Input.FILTERACTIVE, Model.ActiveList)
+    </div>
+</div>
+@*<iframe id="myFrame" style="display:none"></iframe>*@ @*Nem fog ez kelleni, nemtom miért volt itt.*@
+@*
+    -------------------------------------
+    SecondaryUser - Manager.cshtml
+    -------------------------------------
+*@
+@section Scripts {
+    <script type="text/javascript">
+@if (!ViewData.ModelState.IsValid && !string.IsNullOrEmpty(Html.ValidationSummaryMessage(true)))
+{
+        <text>
+        bootbox.alert({
+            size: 'large',
+            message: '@Html.Raw(Html.ValidationSummaryMessage(true).Trim().Replace(System.Environment.NewLine, WebCommon.HTML_NEWLINE).Replace("\n", WebCommon.HTML_NEWLINE).Replace("\r", WebCommon.HTML_NEWLINE))'
+        });
+        </text>
+}
+        /**
+        * A SecondaryUserScript (SecondaryUser.js) számára küldendő értékek.
+        * Ezeket a kódban állandóként (constansként) érdemes kezelni.
+        */
+        var vrhsls = new SecondaryUserScript({
+            Confirmations: {
+                SecondaryUserDelete: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Messages.Confirmations.SecondaryUserDelete)))',
+            },
+            Data: {
+                FunctionName: '@(nameof(SecondaryUserCols.FunctionName))',
+                PrimaryName: '@(nameof(SecondaryUserCols.UserName))',
+                SecondaryName: '@(nameof(SecondaryUserCols.Name))',
+                SecondaryPassword: '@(nameof(SecondaryUserCols.Password))',
+                Active: '@(nameof(SecondaryUserCols.Active))'
+            },
+            EditMode: {
+                Current: '@Model.EditMode',
+                Select: '@EditModes.Select',
+                Add: '@EditModes.Add',
+                Delete: '@EditModes.Delete',
+                Manage: '@EditModes.Manage',
+            },
+            Ids: {
+                Form: {
+                    Editor: '@(Constants.Ids.Form.EDITOR)'
+                },
+                Input: {
+                    FilterFunction: '@(Constants.Ids.Input.FILTERFUNCTION)',
+                    FilterUser: '@(Constants.Ids.Input.FILTERUSER)',
+                    FilterActive: '@(Constants.Ids.Input.FILTERACTIVE)',
+                },
+                Table: '@(Constants.Ids.SL_TABLE)',
+            },
+            Labels: {
+                Cancel: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Cancel)))',
+                OK: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.OK)))',
+                No: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.No)))',
+                Yes: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Words.Yes)))',
+                Button: {
+                    FunctionManage: '@(Model.Trans(typeof(WordCodes.MvcMembership.Labels.Button.FunctionManage)))'
+                },
+            },
+            LCID: '@(Model.LCID)',
+            Messages: {
+                Wait: '@(Model.Trans(typeof(GeneralWordCodes.MLM.General.Messages.PleaseWait)))',
+            },
+            Titles: {
+                Confirmation: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Confirmation)))',
+                OperationProgress: '@Html.Raw(Model.Trans(typeof(GeneralWordCodes.MLM.General.Titles.Progress)))',
+                SecondaryUserAdd: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.SecondaryUserAdd)))',
+                SecondaryUserEdit: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.SecondaryUserEdit)))',
+                SecondaryUserDelete: '@Html.Raw(Model.Trans(typeof(WordCodes.MvcMembership.Titles.SecondaryUserDelete)))',
+            },
+            Url: {
+                Editor: '@Url.Action(nameof(SecondaryUserController.Editor), Constants.CONTROLLER_SU, new { area = Constants.AREA, editMode = Model.EditMode, function = Model.RequestedFunctionName })',
+                Delete: '@Url.Action(nameof(SecondaryUserController.Delete), Constants.CONTROLLER_SU, new { area = Constants.AREA, editMode = Model.EditMode })',
+                GetData: '@Url.Action("GetData", Constants.CONTROLLER_SU, new { area = Constants.AREA, editMode = Model.EditMode })',
+                Manage: '@Url.Action(nameof(SecondaryUserController.SecondaryFunction), Constants.CONTROLLER_SU, new { area = Constants.AREA, editMode = Model.EditMode })',
+            }
+        });
+    </script>
+}
+@*
+    -------------------------------------
+    SecondaryUser - Manager.cshtml
+    -------------------------------------
+*@
+

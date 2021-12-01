@@ -1,0 +1,18 @@
+﻿@using VRH.Log4Pro.MultiLanguageManager;
+
+@model Vrh.Web.Membership.Areas.UAManyToMany.Models.UAManyToManyViewModel
+
+@if (Model != null)
+{
+    string areaName = ViewContext.RouteData.DataTokens["area"].ToString();
+    string cssFile = @Url.Content(String.Concat("~/Areas/", areaName, "/Content/UAManyToMany.css"));
+    string jsFile = @Url.Content(String.Concat("~/Areas/", areaName, "/Scripts/UAManyToMany.js"));
+    <link type="text/css" href="@(cssFile)" rel="Stylesheet" />
+    <script>
+        var messagePleaseWait = '@MultiLanguageManager.GetTranslation(typeof(WordCodes.MvcMembership.ManyToMany.PleaseWait))';
+    </script>
+    <script src="@(jsFile)" type="text/javascript"></script>
+    <div id="MTMMain">
+        @Html.Partial("_Main", Model)
+    </div>
+}
